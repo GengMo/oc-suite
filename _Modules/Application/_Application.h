@@ -18,9 +18,7 @@
  *  7. 应用初始化器       _app_init
  *  8. 应用反初始化器      _app_uinit
  *  9. 应用模块器        _app_module
- *  10. 应用评分        _app_versioner
- *  11. 应用规则        即将废弃
- *  11. 应用 用户       _app_user
+ *  10. 应用 用户       _app_user
  *
  *  简单例子：
  *  1. AppDelegate 实现了 app_uinitializer 的 delegate
@@ -37,9 +35,9 @@
 
 #import "_AppContext.h"
 #import "_AppModule.h"
-#import "_AppRule.h"
 #import "_AppAppearance.h"
 #import "_AppConfig.h"
+#import "_AppEasycoding.h"
 
 // ----------------------------------
 // Macro

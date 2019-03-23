@@ -1,6 +1,6 @@
 
 #import <_Foundation/_Foundation.h>
-#import "_AppRater.h"
+//#import "_AppRater.h"
 
 // ----------------------------------
 // Macro
@@ -42,9 +42,6 @@
 @prop_strong(NSString *, wechatAppId)
 @prop_strong(NSString *, wechatScheme)
 
-// 评分配置
-@prop_singleton(_AppRater, rater)
-
 // 推送配置
 @prop_strong(NSString *, pushKey)
 @prop_strong(NSString *, pushChannel) // 需要监听的频道
@@ -56,7 +53,9 @@
 @prop_strong(NSString *, appIdentifier)
 @prop_readonly(NSString *, appDescription)
 
-@prop_assign(int32_t , appVersionSerial) // 用于版本比对的整形数字, 存放在info.plist中，key is :CFApplicationVersionSerial
-@prop_strong(NSString *, appVersion) // 版本格式：主版本号.次版本号.修订号，版本号规则如下（面向SDK、应用开发）：1. 主版本号（不兼容的API修改、重要模块功能新增）2. 次版本号（向下兼容的功能新增、个别模块功能扩容） 3. 修订号（向下兼容的问题修正、个别模块功能bug修复）
+//@prop_assign(int32_t , appVersionSerial) // 用于版本比对的整形数字, 存放在info.plist中，key is :CFApplicationVersionSerial
+// 评分配置
+//@prop_singleton(_AppRater, rater)
+//@prop_strong(NSString *, appVersion) // 版本格式：主版本号.次版本号.修订号，版本号规则如下（面向SDK、应用开发）：1. 主版本号（不兼容的API修改、重要模块功能新增）2. 次版本号（向下兼容的功能新增、个别模块功能扩容） 3. 修订号（向下兼容的问题修正、个别模块功能bug修复）
 
 @end

@@ -2,9 +2,8 @@
 #import <_Building/_Building.h>
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-#import "_validator.h"
-#import "_AppAppearance.h"
-#import "_AppEasycoding.h"
+#import "_Validator.h"
+#import "_Application.h"
 #import "LocationViewController.h"
 #import "AddressInputHintViewController.h"
 #import "LocationService.h"
@@ -293,14 +292,14 @@ static CGFloat AutoLocationViewWidthConstant = 0;
 
 // 自定义精度的圆圈
 // 高德 sdk：http://lbs.amap.com/api/ios-sdk/guide/draw-on-map/draw-plane/
-- (MAOverlayView *)mapView:(MAMapView *)mapView viewForOverlay:(id<MAOverlay>)overlay {
+- (MAOverlayRenderer *)mapView:(MAMapView *)mapView viewForOverlay:(id<MAOverlay>)overlay {
     if ([overlay isKindOfClass:[MACircle class]]) {
         LOG(@"Coordinate = (%f, %f), rect=(%f, %f, %f, %f)", overlay.coordinate.latitude, overlay.coordinate.longitude,
             overlay.boundingMapRect.origin.x, overlay.boundingMapRect.origin.y, overlay.boundingMapRect.size.width, overlay.boundingMapRect.size.height);
         
-        MACircleView *accuracyCircleView = [[MACircleView alloc] initWithCircle:(MACircle *)overlay];
+        MACircleRenderer *accuracyCircleView = [[MACircleRenderer alloc] initWithCircle:(MACircle *)overlay];
         accuracyCircleView.miterLimit = 0.001;
-        accuracyCircleView.width = PIXEL_8;
+//        accuracyCircleView.width = PIXEL_8;
         accuracyCircleView.lineWidth = 1.f;
         accuracyCircleView.strokeColor = [UIColor colorWithRed:42./255. green:95./255. blue:191./255. alpha:1.0];
         accuracyCircleView.fillColor = [UIColor colorWithRed:42./255. green:95./255. blue:191./255. alpha:0.2];

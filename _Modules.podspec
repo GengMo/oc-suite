@@ -86,6 +86,7 @@ Pod::Spec.new do |s|
       }
       map.dependency 'AMap3DMap'
       map.dependency 'AMapSearch'
+      map.dependency 'AMapLocation'
     end
 
     services.subspec 'Time' do |time|

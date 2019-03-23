@@ -170,12 +170,12 @@
 - (void)openGDAppForSearchRouteWithStartLocation:(CLLocationCoordinate2D)startLocation
                              destinationLocation:(CLLocationCoordinate2D)destinationLocation
                                  destinationName:(NSString*)destinationName {
-    MARouteConfig * config = [[MARouteConfig alloc] init];
+    AMapRouteConfig * config = [[AMapRouteConfig alloc] init];
     config.startCoordinate = startLocation;
     config.destinationCoordinate = destinationLocation;
     config.appScheme = [_Device sharedInstance].urlSchema;
     config.appName = app_display_name;
-    config.routeType = MARouteSearchTypeDriving;
+    config.routeType = AMapRouteSearchTypeDriving;
     //若未调起高德地图App,跳转到高德H5应用
     NSString* url = [NSString stringWithFormat:@"http://m.amap.com/navi/?start=%f,%f&dest=%f,%f&destName=%@&naviBy=car&key=%@",startLocation.longitude,startLocation.latitude,destinationLocation.longitude,destinationLocation.latitude,destinationName,GDMapH5APIKey];
     

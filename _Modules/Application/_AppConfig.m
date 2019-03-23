@@ -5,7 +5,7 @@
 
 @def_singleton( _AppConfig )
 
-@def_prop_singleton( _AppRater, rater )
+//@def_prop_singleton( _AppRater, rater )
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -15,14 +15,14 @@
         //
         _platformName       = @"ios";
         _appName            = app_display_name;
-        _appVersion         = app_version;
+//        _appVersion         = app_version;
         
         NSString *bundleId = app_bundle_id;
         NSArray *bundleStrs = [bundleId componentsSeparatedByString:@"."];
         _appIdentifier = [bundleStrs safeStringAtIndex:2];
         
-        NSString *appVersionSerialString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFApplicationVersionSerial"];
-        _appVersionSerial = [appVersionSerialString intValue];
+//        NSString *appVersionSerialString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFApplicationVersionSerial"];
+//        _appVersionSerial = [appVersionSerialString intValue];
     }
     
     return self;

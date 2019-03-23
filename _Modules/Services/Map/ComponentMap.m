@@ -34,12 +34,11 @@
         });
     }
     
-//    [AMapLocationServices]
-    [MAMapServices sharedServices].apiKey = self.config.apiKey;
-    [AMapSearchServices sharedServices].apiKey = self.config.apiKey;
-    [AMapLocationServices sharedServices].apiKey = self.config.apiKey;
+    [AMapServices sharedServices].apiKey = self.config.apiKey;
+//    [AMapSearchServices sharedServices].apiKey = self.config.apiKey;
+//    [AMapLocationServices sharedServices].apiKey = self.config.apiKey;
     
-    LOG(@"GaoDe map version: %@", [[MAMapServices sharedServices] SDKVersion]);
+    LOG(@"GaoDe map version: %@", AMapFoundationVersion);
 }
 
 @end
