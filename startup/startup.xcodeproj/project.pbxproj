@@ -1320,20 +1320,6 @@
 				"${PODS_ROOT}/../../_Components/LocalImageBrowser/Resources/Done.png",
 				"${PODS_ROOT}/../../_Components/LocalImageBrowser/Resources/Done@2x.png",
 				"${PODS_ROOT}/../../_Modules/Application/_AppRater.bundle",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/ios_barber@3x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/ios_user@3x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeBottomLeft@2x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeBottomLeft@3x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeBottomRight@2x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeBottomRight@3x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeLine@2x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeLine@3x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeTopLeft@2x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeTopLeft@3x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeTopRight@2x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/QRCodeTopRight@3x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/qrcode_dot@2x.png",
-				"${PODS_ROOT}/../../_Modules/Components/QRCodeReader/Resources/qrcode_dot@3x.png",
 				"${PODS_ROOT}/../../_Modules/Components/WebBrowser/web.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/_Modules/Map.bundle",
 				"${PODS_ROOT}/../../_Modules/Services/Vendor/GDMap3/AMap.bundle",
@@ -1365,20 +1351,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Done.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Done@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/_AppRater.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ios_barber@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ios_user@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeBottomLeft@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeBottomLeft@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeBottomRight@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeBottomRight@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeLine@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeLine@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeTopLeft@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeTopLeft@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeTopRight@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRCodeTopRight@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qrcode_dot@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/qrcode_dot@3x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/web.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Map.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
@@ -1620,24 +1592,12 @@
 				DEVELOPMENT_TEAM = 3262CKW45Y;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/module/service/vendor/AliSDK",
-					"$(PROJECT_DIR)/module/service/vendor/GDMap3",
-					"$(PROJECT_DIR)/module/service/vendor/tencent",
-					"$(PROJECT_DIR)/module/tool/vendor/WebP",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = startup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/module/service/vendor/JPush-iOS-SDK-2.1.7/lib",
-					"$(PROJECT_DIR)/module/service/vendor/libWeiboSDK",
-					"$(PROJECT_DIR)/module/service/vendor/UnionPaySDK_3.1.3/libs",
-					"$(PROJECT_DIR)/module/service/vendor/WeChatSDK1.6.2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = fallenink.startup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1653,24 +1613,12 @@
 				DEVELOPMENT_TEAM = 3262CKW45Y;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/module/service/vendor/AliSDK",
-					"$(PROJECT_DIR)/module/service/vendor/GDMap3",
-					"$(PROJECT_DIR)/module/service/vendor/tencent",
-					"$(PROJECT_DIR)/module/tool/vendor/WebP",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = startup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/module/service/vendor/JPush-iOS-SDK-2.1.7/lib",
-					"$(PROJECT_DIR)/module/service/vendor/libWeiboSDK",
-					"$(PROJECT_DIR)/module/service/vendor/UnionPaySDK_3.1.3/libs",
-					"$(PROJECT_DIR)/module/service/vendor/WeChatSDK1.6.2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = fallenink.startup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

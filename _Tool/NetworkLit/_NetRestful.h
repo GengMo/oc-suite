@@ -5,7 +5,8 @@
 
 typedef NSDictionary * (^ _NetHeaderAppendBlock)(NSString *apiname);
 typedef NSDictionary * (^ _NetParameterAppendBlock)(NSString *apiname);
-
+typedef void * (^ _NetShowHudBlock)(void);
+typedef void * (^ _NetDismissHudBlock)(void);
 
 // MARK: -
 
@@ -20,6 +21,8 @@ typedef NSDictionary * (^ _NetParameterAppendBlock)(NSString *apiname);
 
 @property (nonatomic, strong) _NetHeaderAppendBlock headerAppendHandler;
 @property (nonatomic, strong) _NetParameterAppendBlock parameterAppendHandler;
+@property (nonatomic, strong) _NetShowHudBlock showHudHandler;
+@property (nonatomic, strong) _NetDismissHudBlock dismissHudHandler;
 
 // MARK: - Restful api
 
@@ -35,13 +38,9 @@ typedef NSDictionary * (^ _NetParameterAppendBlock)(NSString *apiname);
      failure:(void (^)(NSError *error))failureHandler;
 
 - (NSDictionary *)defaultHeader;
-- (NSDictionary *)appendingHeader;
 
 - (NSDictionary *)appendParametersOnApi:(NSString *)api;
 - (NSError *)checkResponseIfHaveError:(NSDictionary *)response;
 - (NSDictionary *)filteredResponse:(NSDictionary *)originResponse;
-
-- (void)showHud;
-- (void)dismissHud;
 
 @end

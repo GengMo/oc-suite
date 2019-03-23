@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "_precompile.h"
+#import "_Precompile.h"
 #import "UITableViewCell+Extension.h"
 
 #pragma mark -

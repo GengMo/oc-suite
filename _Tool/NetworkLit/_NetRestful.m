@@ -187,11 +187,11 @@
 // MARK: -
 
 - (void)showHud {
-    
+    if (self.showHudHandler) self.showHudHandler();
 }
 
 - (void)dismissHud {
-    
+    if (self.dismissHudHandler) self.dismissHudHandler();
 }
 
 @end
