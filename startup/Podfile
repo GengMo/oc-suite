@@ -77,6 +77,9 @@ target 'startup' do
     pod 'AFNetworking', '~> 3.0'
     pod 'GTMBase64'
     
+    # pod 'SDAutoLayout'
+#    pod 'SDCycleScrollView'
+
     # pod 'RealReachability' # 非网络连接状态，而是网络到达状态，比如：Wi-Fi 并 能否连接到www.baidu.com
     
     # pod 'TransitionKit', '~> 2.0.0' # 状态机
@@ -94,6 +97,7 @@ target 'startup' do
     pod 'UMengUShare/Social/Sina'#,            '6.4.1'
     pod 'UMengUShare/Social/WeChat'#,            '6.4.1'
     pod 'UMengUShare/Social/QQ'#,            '6.4.1'
+    
     
     ######################################
     # UI 组件
