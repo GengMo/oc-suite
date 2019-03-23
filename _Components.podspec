@@ -147,6 +147,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'RefreshView' do |refreshView|
     refreshView.source_files = "_Components/RefreshView/**/*.{h,m}"
+    refreshView.resources = "_Components/RefreshView/**/*.bundle"
   end
 
   s.subspec 'SegmentControl' do |segmentControl|
