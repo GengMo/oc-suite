@@ -3,11 +3,20 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'startup' do
 
     ######################################
-    # 主框架
+    # 基础层
     ######################################
     
     pod '_Foundation', :path => '../' # pod '_Foundation', :git => 'https://github.com/fallending/oc-suite.git'
+    
+    ######################################
+    # 视图层
+    ######################################
+    
     pod '_Building', :path => '../'
+  
+    ######################################
+    # 工具层
+    ######################################
   
     pod '_Tool/NetworkLit', :path => '../'
     pod '_Tool/Network/Reachability', :path => '../'
@@ -19,6 +28,27 @@ target 'startup' do
     pod '_Tool/Date', :path => '../'
     pod '_Tool/KeyValueObserving', :path => '../'
     pod '_Tool/Chronograph', :path => '../'
+    
+    ######################################
+    # 模块化
+    ######################################
+    
+    pod '_Modules/Application', :path => '../'
+    
+    pod '_Modules/Components/QRCodeReader', :path => '../'
+    pod '_Modules/Components/WebBrowser', :path => '../'
+    
+    pod '_Modules/Services/Assets', :path => '../'
+    pod '_Modules/Services/Growth', :path => '../'
+    pod '_Modules/Services/Location', :path => '../'
+    pod '_Modules/Services/Map', :path => '../'
+    pod '_Modules/Services/APNS', :path => '../'
+    
+#    pod '_Modules/Services/Vendor', :path => '../'
+
+    ######################################
+    # UI 组件
+    ######################################
     
     pod '_Components/ActionSheetView', :path => '../'                   # 底部弹出选择器
     pod '_Components/AlertView', :path => '../'                         # 弹框
@@ -53,19 +83,6 @@ target 'startup' do
     pod '_Components/UserGuideView', :path => '../'
     pod '_Components/WaterFallView', :path => '../'
     
-    pod '_Modules/Application', :path => '../'
-
-    pod '_Modules/Components/QRCodeReader', :path => '../'
-    pod '_Modules/Components/WebBrowser', :path => '../'
-    
-    pod '_Modules/Services/Assets', :path => '../'
-    pod '_Modules/Services/Growth', :path => '../'
-    pod '_Modules/Services/Location', :path => '../'
-    pod '_Modules/Services/Map', :path => '../'
-    pod '_Modules/Services/APNS', :path => '../'
-    
-    pod '_Modules/Services/Vendor', :path => '../'
-
     ######################################
     # 其他依赖
     ######################################
@@ -77,30 +94,57 @@ target 'startup' do
     pod 'AFNetworking', '~> 3.0'
     pod 'GTMBase64'
     
-    # pod 'SDAutoLayout'
-#    pod 'SDCycleScrollView'
-
     # pod 'RealReachability' # 非网络连接状态，而是网络到达状态，比如：Wi-Fi 并 能否连接到www.baidu.com
-    
     # pod 'TransitionKit', '~> 2.0.0' # 状态机
-    
     # pod 'Objective-Chain'
-    
     # pod 'JHChainableAnimations', '~> 3.0.1' # While use 'ChainableAnimations' in Swift
-
     # pod 'RegexKitLite' # 正则表达式
 
-    # 友盟
+    # 友盟 https://www.jianshu.com/p/1fcc6cb49cff
+    pod 'UMengUShare/UI'
     pod 'UMengUShare/Core', '6.4.8'
     pod 'UMengAnalytics-NO-IDFA', '4.1.5'
     pod 'UMengFeedback', '~> 2.3.4'
-    pod 'UMengUShare/Social/Sina'#,            '6.4.1'
-    pod 'UMengUShare/Social/WeChat'#,            '6.4.1'
-    pod 'UMengUShare/Social/QQ'#,            '6.4.1'
     
+    pod 'UMengUShare/Social/Sina'
+    pod 'UMengUShare/Social/WeChat'
+    pod 'UMengUShare/Social/QQ'
+    pod 'UMengUShare/Social/AlipayShare'  # 集成支付宝
+    pod 'UMengUShare/Social/DingDing' # 集成钉钉
+    
+    # pod ‘UMengUShare/Social/ReducedSina' # 精简版 1M
+    # pod ‘UMengUShare/Social/ReducedWeChat' # 精简版 0.2M
+    # pod ‘UMengUShare/Social/ReducedQQ' # 精简版 0.5zM
+    
+    pod 'UMengUShare/Social/Email'  # 集成邮件
+    pod 'UMengUShare/Social/SMS'  # 集成短信
+    pod 'UMengUShare/Plugin/IDFA' # 加入IDFA获取
+    
+    pod 'UMengUShare/Social/Facebook' # 集成Facebook/Messenger
+    pod 'UMengUShare/Social/Twitter'  # 集成Twitter
+    pod 'UMengUShare/Social/Douban' # 集成豆瓣
+    pod 'UMengUShare/Social/Renren' # 集成人人
+    pod 'UMengUShare/Social/TencentWeibo' # 集成腾讯微博
+    pod 'UMengUShare/Social/LaiWang'  # 集成来往(点点虫)
+    pod 'UMengUShare/Social/YiXin'  # 集成易信
+    pod 'UMengUShare/Social/Linkedin' # 集成领英
+    pod 'UMengUShare/Social/Flickr' # 集成Flickr
+    pod 'UMengUShare/Social/Kakao'  # 集成Kakao
+    pod 'UMengUShare/Social/Tumblr' # 集成Tumblr
+    pod 'UMengUShare/Social/Pinterest'  # 集成Pinterest
+    pod 'UMengUShare/Social/Instagram'  # 集成Instagram
+    pod 'UMengUShare/Social/Line' # 集成Line
+    pod 'UMengUShare/Social/WhatsApp' # 集成WhatsApp
+    pod 'UMengUShare/Social/YouDao' # 集成有道云笔记
+    pod 'UMengUShare/Social/EverNote' # 集成印象笔记
+    pod 'UMengUShare/Social/GooglePlus' # 集成Google+
+    pod 'UMengUShare/Social/Pocket' # 集成Pocket
+    pod 'UMengUShare/Social/DropBox'  # 集成DropBox
+    pod 'UMengUShare/Social/VKontakte'  # 集成VKontakte
+
     
     ######################################
-    # UI 组件
+    # 其他 UI 组件
     ######################################
     
     # 抽屉
@@ -109,5 +153,8 @@ target 'startup' do
     # 类似网易新闻、今日头条、虎扑看球等app做的一个顶部菜单栏，每栏中有独立的控制器，可自己定制。
     # pod 'NinaPagerView'
     # pod 'MXSegmentedPager'
+    
+    # pod 'SDAutoLayout'
+    # pod 'SDCycleScrollView'
 
 end
