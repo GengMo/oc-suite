@@ -59,7 +59,6 @@ Pod::Spec.new do |s|
 
   s.subspec 'Midwares' do |midwares|
     midwares.source_files = "_Modules/Midwares/**/*.{h,m}"
-    # midwares.resources = "_Modules/Application/_AppRater.bundle"
   end
 
   s.subspec 'Services' do |services|
@@ -93,22 +92,18 @@ Pod::Spec.new do |s|
       time.source_files = "_Modules/Services/Time/**/*.{h,m}"
     end
 
-    # services.subspec 'Vendor' do |vendor|
-      # vendor.public_header_files = "_Modules/Services/Vendor/JPush-iOS-SDK-2.1.7/lib/**/*.h"
-      # vendor.resources = "_Modules/Services/Vendor/GDMap3/*.bundle"
-      # vendor.vendored_frameworks = '_Modules/Services/Vendor/GDMap3/*.framework', 
-      # vendor.vendored_libraries = '_Modules/Services/Vendor/JPush-iOS-SDK-2.1.7/lib/*.a'
-      # vendor.resource_bundles = {
-      #   'Vendor' => ['Vendor/Assets/**/*.png']
-      # }
+    services.subspec 'Rate' do |rate|
+      rate.source_files = "_Modules/Services/Rate/**/*.{h,m}"
+      rate.resources = "_Modules/Services/Rate/**/*.bundle"
+    end
 
-      # 系统framework
-      # vendor.frameworks = 'CoreMotion', 'AssetsLibrary', 'AVFoundation', 'WebKit', 'Contacts', 'ContactsUI', 'CoreLocation', 'AddressBook', 'AddressBookUI', 'CoreBluetooth', 'MobileCoreServices', 'AudioToolbox', 'UserNotifications', 'MessageUI'
-      # 系统lib
-      # vendor.ios.libraries = 'sqlite3.0'
-      # 第三方依赖
-      # vendor.dependency 'TTTAttributedLabel', '~> 2.0.0'
+    services.subspec 'Version' do |version|
+      version.source_files = "_Modules/Services/Version/**/*.{h,m}"
+    end
 
-    # end
+    services.subspec 'Pay' do |pay|
+      pay.source_files = '_Modules/Services/Pay/**/*.{h,m}'
+      pay.dependency 'UnionPay'
+    end
   end
 end
