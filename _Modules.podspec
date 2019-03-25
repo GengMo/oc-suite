@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "_Modules"
-  s.version      = "0.3.0"
+  s.version      = "0.3.2"
   s.summary      = "iOS 开发包 之 模块库 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 模块库 [Objective-C]
@@ -105,6 +105,11 @@ Pod::Spec.new do |s|
     services.subspec 'Pay' do |pay|
       pay.source_files = '_Modules/Services/Pay/**/*.{h,m}'
       pay.dependency 'UnionPay'
+    end
+
+    services.subspec 'Login' do |login|
+      login.source_files = '_Modules/Services/Login/**/*.{h,m}'
+      # pay.dependency 'UnionPay'
     end
   end
 end
