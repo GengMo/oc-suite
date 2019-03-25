@@ -7,16 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
-
   s.name         = "_Modules"
-  s.version      = "0.3.2"
+  s.version      = "0.4.0"
   s.summary      = "iOS 开发包 之 模块库 [Objective-C]"
   s.description  = <<-DESC
                    iOS 开发包 之 模块库 [Objective-C]
@@ -28,12 +20,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.source       = { :git => 'https://github.com/fallending/oc-suite.git', :tag => s.version.to_s }
 
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the location from where the source should be retrieved.
-  #  Supports git, hg, bzr, svn and HTTP.
-  #
-
   s.subspec 'Application' do |application|
     application.source_files = "_Modules/Application/**/*.{h,m}"
     application.resources = "_Modules/Application/_AppRater.bundle"
@@ -42,7 +28,7 @@ Pod::Spec.new do |s|
   s.subspec 'Components' do |components|
     components.subspec 'QRCodeReader' do |qrCodeReader|
       qrCodeReader.source_files = "_Modules/Components/QRCodeReader/**/*.{h,m}"
-      qrCodeReader.resources = "_Modules/Components/QRCodeReader/Resources/*.png"
+      qrCodeReader.resources = "_Modules/Components/QRCodeReader/Resource/*.png"
     end
 
     components.subspec 'WebBrowser' do |webBrowser|
@@ -53,6 +39,34 @@ Pod::Spec.new do |s|
     components.subspec 'ALSTransaction' do |alsTransaction|
       alsTransaction.source_files = "_Modules/Components/ALSTransaction/**/*.{h,m}"
       alsTransaction.resources = "_Modules/Components/ALSTransaction/Resource/*.bundle"
+    end
+
+    components.subspec 'Map' do |map|
+      map.source_files = "_Modules/Components/Map/**/*.{h,m}"
+      # map.resources = "_Modules/Components/Map/Resources/*.png"
+      map.resource_bundles = {
+        'MapImages' => ['_Modules/Components/Map/Resource/**/*.png'],
+        'MapXibs' => ['_Modules/Components/Map/View/*.xib']
+      }
+      map.dependency '_Modules/Services/Map'
+    end
+
+    components.subspec 'Pay' do |pay|
+      pay.source_files = "_Modules/Components/Pay/**/*.{h,m}"
+      pay.resource_bundles = {
+        'PayImages' => ['_Modules/Components/Pay/Resource/**/*.png'],
+        'PayXibs' => ['_Modules/Components/Pay/View/*.xib']
+      }
+      pay.dependency '_Modules/Services/Pay'
+    end
+
+    components.subspec 'Login' do |login|
+      login.source_files = "_Modules/Components/Login/**/*.{h,m}"
+      login.resource_bundles = {
+        'LoginImages' => ['_Modules/Components/Login/Resource/**/*.png'],
+        'LoginXibs' => ['_Modules/Components/Login/View/*.xib']
+      }
+      login.dependency '_Modules/Services/Pay'
     end
 
   end
@@ -81,9 +95,6 @@ Pod::Spec.new do |s|
 
     services.subspec 'Map' do |map|
       map.source_files = "_Modules/Services/Map/**/*.{h,m}"
-      map.resource_bundles = {
-        'Map' => ['_Modules/Services/Map/Resources/**/*.png']
-      }
       map.dependency 'AMap3DMap'
       map.dependency 'AMapSearch'
       map.dependency 'AMapLocation'

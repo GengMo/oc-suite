@@ -222,7 +222,8 @@
             
             // 回调
             if ([self.beginRefreshingTaget respondsToSelector:self.beginRefreshingAction]) {
-                objc_msgSend(self.beginRefreshingTaget, self.beginRefreshingAction, self);
+                int (* objc_msgSend_typed)(id, SEL, int) = (int (*)(id, SEL, int)) objc_msgSend;
+                objc_msgSend_typed(self.beginRefreshingTaget, self.beginRefreshingAction, self);
             }
             
             if (self.beginRefreshingCallback) {
