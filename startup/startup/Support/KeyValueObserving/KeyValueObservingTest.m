@@ -6,7 +6,7 @@
 //  Copyright © 2018 7. All rights reserved.
 //
 
-#import <_Tool/KeyValueObserving.h>
+//#import <_Tool/KeyValueObserving.h>
 #import <_Foundation/_Foundation.h>
 #import "KeyValueObservingTest.h"
 
@@ -47,11 +47,11 @@ DESCRIBE( Usage )
 //                 LOG(@"obj(%@), key(%@), old(%@), new(%@)", obj, key, oldValue, newValue);
 //             }];
     
-    [self observe:_person
-              for:@"name"
-             with:^(id obj, NSString *key, id oldValue, id newValue) {
-                 LOG(@"obj(%@), key(%@), old(%@), new(%@)", obj, key, oldValue, newValue);
-             }];
+//    [self observe:_person
+//              for:@"name"
+//             with:^(id obj, NSString *key, id oldValue, id newValue) {
+//                 LOG(@"obj(%@), key(%@), old(%@), new(%@)", obj, key, oldValue, newValue);
+//             }];
     
 //    [_person observeForKeyPath:@"age" block:^(id obj, id oldVal, id newVal) {
 //        LOG(@"obj(%@), old(%@), new(%@)", obj, oldVal, newVal);
