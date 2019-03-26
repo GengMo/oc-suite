@@ -32,6 +32,6 @@
 // ----------------------------------
 
 @namespace( logger, _Logger )
-@namespace( debugger, _Debugger )
+//@namespace( debugger, _Debugger )
 @namespace( device, _Device )
 

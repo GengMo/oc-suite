@@ -1,5 +1,5 @@
 
-#import <_Modules/ComponentMap.h>
+#import <_Modules/MapService.h>
 #import <_Modules/APNService.h>
 #import <_Modules/LocationService.h>
 
