@@ -14,11 +14,11 @@
 #import <AMapSearchKit/AMapSearchKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 
-@implementation ComponentMap
+@implementation MapService
 
-@def_singleton( ComponentMap )
+@def_singleton( MapService )
 
-@def_prop_instance(ComponentMapConfig, config)
+@def_prop_instance(MapConfig, config)
 
 - (void)initGDAPIKey { // 高德 MapKit configure.
     if ([self.config.apiKey length] == 0) {

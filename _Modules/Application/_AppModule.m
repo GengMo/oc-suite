@@ -76,9 +76,9 @@
     // Gao de
     if (! is_empty(app_config.mapApiKey))
     {
-        [ComponentMap sharedInstance].config.apiKey = app_config.mapApiKey;
+        [MapService sharedInstance].config.apiKey = app_config.mapApiKey;
         
-        [[ComponentMap sharedInstance] initGDAPIKey];
+        [[MapService sharedInstance] initGDAPIKey];
         
         [service.location powerOn];
     }

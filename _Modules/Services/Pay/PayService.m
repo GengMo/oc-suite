@@ -6,8 +6,6 @@
 //
 //
 
-#import "_building_precompile.h"
-#import "_building_application.h"
 #import "PayService.h"
 
 @implementation PayService
@@ -62,7 +60,7 @@
 }
 
 - (void)notifyUnknown {
-    [self.class showAlertView:@"注意" message:@"未知错误" cancelButtonName:@"好"];
+//    [self.class showAlertView:@"注意" message:@"未知错误" cancelButtonName:@"好"];
 }
 
 #pragma mark - Declaration

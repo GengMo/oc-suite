@@ -1,40 +1,8 @@
-//
-//  PayService.h
-//  consumer
-//
-//  Created by fallen on 16/8/23.
-//
-//
+#import "_Service.h"
 
-#import "_service.h"
+@interface WechatLoginService : _Service
 
-/**
- * @knowledge
- 
- * 用adapter模式，做统一接口和第三方提供接口之间的转换
- */
-
-typedef NS_ENUM(NSInteger, PayServiceErrorCode) {
-    // mainly
-    PayServiceErrorCodeSucceed        = 0,
-    PayServiceErrorCodeFailure        = -10,
-    PayServiceErrorCodeCancel         = -20,
-    PayServiceErrorCodeUninstalled    = -30,
-    
-    // 前置错误（未实际调用api）
-    PayServiceErrorCodeInvalidData    = -40,
-    PayServiceErrorCodeSignature      = -50,
-};
-
-typedef enum : NSUInteger {
-    PayServiceType_Alipay = 1,
-    PayServiceType_Wechat = 2,
-    PayServiceType_Union  = 3,
-} PayServiceType;
-
-@interface PayService : _Service
-
-@singleton( PayService )
+@singleton( WechatLoginService )
 
 /**
  *  @desc 最近一次错误的实际原因（子类中）

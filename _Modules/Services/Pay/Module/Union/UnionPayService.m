@@ -8,9 +8,9 @@
 
 #import "UnionPayService.h"
 #import "UnionPayOrder.h"
-#import "UPPayPluginPro.h"
+#import <UnionPay/UPPaymentControl.h>
 
-@interface UnionPayService () <UPPayPluginDelegate>
+@interface UnionPayService ()
 
 /**
  *  银联结果状态返回用的是，常量字符串，你敢信？-_-#
@@ -40,10 +40,13 @@
      
      */
     
-    [UPPayPluginPro startPay:self.order.tn
-                        mode:self.order.tnMode
-              viewController:self.order.context
-                    delegate:self];
+//    [UPPaymentControl defaultControl].
+    
+    [[UPPaymentControl defaultControl]
+     startPay:self.order.tn
+     fromScheme:@""
+     mode:self.order.tnMode
+     viewController:self.order.context];
     
     return YES;
 }
@@ -68,11 +71,11 @@
 
 #pragma mark - UPPayPluginDelegate
 
-- (void)UPPayPluginResult:(NSString *)result {
-    [main_queue queueBlock:^{
-        [self process:result];
-    }];
-}
+//- (void)UPPayPluginResult:(NSString *)result {
+//    [main_queue queueBlock:^{
+//        [self process:result];
+//    }];
+//}
 
 @end
 

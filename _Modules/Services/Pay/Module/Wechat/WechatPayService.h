@@ -1,12 +1,4 @@
-//
-//  WechatPayService.h
-//  consumer
-//
-//  Created by fallen.ink on 9/20/16.
-//
-//
-
-#import "_greats.h"
+#import <_Foundation/_Foundation.h>
 #import "PayService.h"
 #import "WechatPayOrder.h"
 #import "WechatPayConfig.h"

@@ -92,7 +92,7 @@
             case WXErrCodeAuthDeny:
             case WXErrCodeUnsupport:
             {
-                [self handleError:[self errorForCode:response.errCode]];
+//                [self handleError:[self errorForCode:response.errCode]];
             }
                 break;
                 
