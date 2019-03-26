@@ -8,8 +8,8 @@
 
 //  高德地图SDK：http://lbs.amap.com/api/ios-sdk/summary
 
-#import "ComponentMap.h"
-#import "ComponentMapConfig.h"
+#import "MapService.h"
+#import "MapConfig.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>

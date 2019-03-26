@@ -1,17 +1,17 @@
 
 #import <_Foundation/_Foundation.h>
-#import "ComponentMapConfig.h"
+#import "MapConfig.h"
 #import "LocationViewController.h"
 #import "LocationIndicatorVC.h"
 #import "AddressInputHintViewController.h"
 
-@class ComponentMapConfig;
+@class MapConfig;
 
-@interface ComponentMap : NSObject
+@interface MapService : NSObject
 
-@singleton( ComponentMap )
+@singleton( MapService )
 
-@prop_instance( ComponentMapConfig, config)
+@prop_instance( MapConfig, config)
 
 - (void)initGDAPIKey;
 

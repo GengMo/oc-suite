@@ -6,8 +6,8 @@
 //  Copyright © 2016 OpenTeam. All rights reserved.
 //
 
-#import "ComponentMapConfig.h"
+#import "MapComponentConfig.h"
 
-@implementation ComponentMapConfig
+@implementation MapComponentConfig
 
 @end

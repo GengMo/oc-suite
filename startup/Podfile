@@ -35,9 +35,6 @@ target 'startup' do
     
     pod '_Modules/Application', :path => '../'
     
-    pod '_Modules/Components/QRCodeReader', :path => '../'
-    pod '_Modules/Components/WebBrowser', :path => '../'
-    
     pod '_Modules/Services/Assets', :path => '../'
     pod '_Modules/Services/Growth', :path => '../'
     pod '_Modules/Services/Location', :path => '../'
@@ -46,6 +43,10 @@ target 'startup' do
     pod '_Modules/Services/Pay', :path => '../'
     pod '_Modules/Services/Login', :path => '../'
 
+    pod '_Modules/Components/QRCodeReader', :path => '../'
+    pod '_Modules/Components/WebBrowser', :path => '../'
+    pod '_Modules/Components/Map', :path => '../'
+    
     ######################################
     # UI 组件
     ######################################
