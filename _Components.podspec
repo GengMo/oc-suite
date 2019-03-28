@@ -139,6 +139,11 @@ Pod::Spec.new do |s|
     progressHUD.resources = "_Components/ProgressHUD/**/*.bundle"
   end
 
+  s.subspec 'ProgressView' do |progressView|
+    progressView.source_files = "_Components/ProgressView/**/*.{h,m}"
+    # progressView.resources = "_Components/ProgressView/**/*.bundle"
+  end
+
   s.subspec 'PopViewController' do |popViewController|
     popViewController.source_files = "_Components/PopViewController/**/*.{h,m}"
   end

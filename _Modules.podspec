@@ -116,6 +116,7 @@ Pod::Spec.new do |s|
     services.subspec 'Pay' do |pay|
       pay.source_files = '_Modules/Services/Pay/**/*.{h,m}'
       pay.dependency 'UnionPay'
+      pay.dependency 'AlipaySDK-iOS'
     end
 
     services.subspec 'Login' do |login|
