@@ -40,7 +40,9 @@ target 'startup' do
     pod '_Modules/Services/Location', :path => '../'
     pod '_Modules/Services/Map', :path => '../'
     pod '_Modules/Services/APNS', :path => '../'
-    pod '_Modules/Services/Pay', :path => '../'
+    pod '_Modules/Services/Pay', :path => '../' # Need pod 'UnionPay', :path => '../_Vendors/UnionPay'
+    pod 'UnionPay', :path => '../_Vendors/UnionPay'
+    
     pod '_Modules/Services/Login', :path => '../'
 
     pod '_Modules/Components/QRCodeReader', :path => '../'
