@@ -24,6 +24,77 @@ Pod::Spec.new do |s|
     application.source_files = "_Modules/Application/**/*.{h,m}"
     application.resources = "_Modules/Application/_AppRater.bundle"
   end
+
+  s.subspec 'Core' do |core|
+
+    core.subspec 'Cache' do |cache|
+      cache.source_files = "_Modules/Core/Cache/**/*.{h,m}"
+    end
+
+    core.subspec 'Database' do |database|
+      database.source_files = "_Modules/Core/Database/**/*.{h,m}"
+    end
+
+    core.subspec 'Date' do |date|
+      date.source_files = "_Modules/Core/Date/**/*.{h,m}"
+    end
+
+    core.subspec 'Image' do |image|
+      image.source_files = "_Modules/Core/Image/**/*.{h,m}"
+    end
+
+    core.subspec 'Log' do |log|
+      log.source_files = "_Modules/Core/Log/**/*.{h,m}"
+    end
+
+    core.subspec 'MJExtension' do |mj|
+      mj.source_files = "_Modules/Core/MJExtension/**/*.{h,m}"
+    end
+
+    core.subspec 'Network' do |network|
+      network.subspec 'Reachability' do |reachability|
+        reachability.source_files = "_Modules/Core/Network/Reachability/*.{h,m}"
+      end
+
+      network.subspec 'XReachability' do |xReachability|
+        xReachability.source_files = "_Modules/Core/Network/XReachability/*.{h,m}"
+      end
+
+      network.subspec 'Core' do |core|
+        core.source_files = "_Modules/Core/Network/Core/**/*.{h,m}"
+      end
+
+      network.subspec 'Loader' do |loader|
+        loader.source_files = "_Modules/Core/Network/Loader/**/*.{h,m}"
+      end
+
+      network.subspec 'Cookie' do |cookie|
+        cookie.source_files = "_Modules/Core/Network/Cookie/*.{h,m}"
+      end
+
+      network.subspec 'Manager' do |manager|
+        manager.source_files = "_Modules/Core/Network/Manager/*.{h,m}"
+      end
+
+      network.subspec 'Extension' do |extension|
+        extension.source_files = "_Modules/Core/Network/Extension/*.{h,m}"
+      end
+
+      network.subspec 'Wrapper' do |wrapper|
+        wrapper.source_files = "_Modules/Core/Network/Wrapper/*.{h,m}"
+      end
+    end
+
+    core.subspec 'NetworkLit' do |networklit|
+      networklit.source_files = "_Modules/Core/NetworkLit/**/*.{h,m}"
+    end
+
+    core.subspec 'NoSQL' do |nosql|
+      nosql.source_files = "_Modules/Core/NoSQL/**/*.{h,m}"
+    end
+
+    
+  end
   
   s.subspec 'Components' do |components|
     components.subspec 'QRCode' do |qrcode|
@@ -137,6 +208,26 @@ Pod::Spec.new do |s|
     services.subspec 'Login' do |login|
       login.source_files = '_Modules/Services/Login/**/*.{h,m}'
       # pay.dependency 'UnionPay'
+    end
+
+    services.subspec 'Utility' do |utility|
+      utility.source_files = "_Modules/Services/Utility/**/*.{h,m,mm,c}"
+      utility.libraries = "c++"
+      utility.dependency "ZipArchive"
+    end
+  end
+
+  s.subspec 'Tool' do |tool|
+    tool.subspec 'Chronograph' do |chronograph|
+      chronograph.source_files = "_Modules/Tools/Chronograph/**/*.{h,m}"
+    end
+
+    tool.subspec 'CountDown' do |countDown|
+      countDown.source_files = "_Modules/Tools/CountDown/**/*.{h,m}"
+    end
+
+    tool.subspec 'HttpMock' do |httpmock|
+      httpmock.source_files = '_Modules/Tools/HttpMock/**/*.{h,m}'
     end
   end
 end
