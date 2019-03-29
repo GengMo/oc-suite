@@ -140,6 +140,8 @@ extern BOOL IS_IPHONE_DESIGN_X;
 
 #pragma mark -
 
+#define sharedDevice [_Device sharedInstance]
+
 @interface _Device : NSObject
 
 @singleton( _Device )

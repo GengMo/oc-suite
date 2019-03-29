@@ -7,7 +7,7 @@
 //
 
 #import <AlipaySDK/AlipaySDK.h>
-
+#import <_Foundation/_Foundation.h>
 #import "AliPayService.h"
 
 @implementation AliPayService
@@ -26,9 +26,9 @@
 - (BOOL)pay {
     //    NSError *error = nil;
     
-    NSString *appSchema = [greats.device urlSchemaWithName:@"alipay"];
+    NSString *appSchema = [sharedDevice urlSchemaWithName:@"alipay"];
     if (! appSchema) {
-        appSchema = [greats.device urlSchema];
+        appSchema = [sharedDevice  urlSchema];
         if (! appSchema) {
             self.errorCode = PayServiceErrorCodeInvalidData;
             self.errorDesc = @"订单数据无效";
