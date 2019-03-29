@@ -37,6 +37,7 @@ target 'startup' do
     
     pod '_Modules/Services/Assets', :path => '../'
     pod '_Modules/Services/Growth', :path => '../'
+    pod '_Modules/Services/Image', :path => '../'
     pod '_Modules/Services/Location', :path => '../'
     pod '_Modules/Services/Map', :path => '../'
     pod '_Modules/Services/APNS', :path => '../'
@@ -44,10 +45,12 @@ target 'startup' do
     pod 'UnionPay', :path => '../_Vendors/UnionPay'
     
     pod '_Modules/Services/Login', :path => '../'
+    pod '_Modules/Services/Share', :path => '../'
 
-    pod '_Modules/Components/QRCodeReader', :path => '../'
-    pod '_Modules/Components/WebBrowser', :path => '../'
+    pod '_Modules/Components/QRCode', :path => '../'
+    pod '_Modules/Components/Browser', :path => '../'
     pod '_Modules/Components/Map', :path => '../'
+    pod '_Modules/Components/Share', :path => '../'
     
     ######################################
     # UI 组件

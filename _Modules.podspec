@@ -26,19 +26,19 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'Components' do |components|
-    components.subspec 'QRCodeReader' do |qrCodeReader|
-      qrCodeReader.source_files = "_Modules/Components/QRCodeReader/**/*.{h,m}"
-      qrCodeReader.resources = "_Modules/Components/QRCodeReader/Resource/*.png"
+    components.subspec 'QRCode' do |qrcode|
+      qrcode.source_files = "_Modules/Components/QRCode/**/*.{h,m}"
+      qrcode.resources = "_Modules/Components/QRCode/Resource/*.png"
     end
 
-    components.subspec 'WebBrowser' do |webBrowser|
-      webBrowser.source_files = "_Modules/Components/WebBrowser/**/*.{h,m}"
-      webBrowser.resources = "_Modules/Components/WebBrowser/web.bundle"
+    components.subspec 'Browser' do |browser|
+      browser.source_files = "_Modules/Components/Browser/**/*.{h,m}"
+      browser.resources = "_Modules/Components/Browser/web.bundle"
     end
 
-    components.subspec 'ALSTransaction' do |alsTransaction|
-      alsTransaction.source_files = "_Modules/Components/ALSTransaction/**/*.{h,m}"
-      alsTransaction.resources = "_Modules/Components/ALSTransaction/Resource/*.bundle"
+    components.subspec 'Transaction' do |transaction|
+      transaction.source_files = "_Modules/Components/Transaction/**/*.{h,m}"
+      transaction.resources = "_Modules/Components/Transaction/Resource/*.bundle"
     end
 
     components.subspec 'Map' do |map|
@@ -69,6 +69,14 @@ Pod::Spec.new do |s|
       login.dependency '_Modules/Services/Pay'
     end
 
+    components.subspec 'Share' do |pay|
+      pay.source_files = "_Modules/Components/Share/**/*.{h,m}"
+      pay.resource_bundles = {
+        'ShareImages' => ['_Modules/Components/Share/Resource/**/*.png']
+      }
+      # pay.dependency '_Modules/Services/Pay'
+    end
+
   end
 
   s.subspec 'Midwares' do |midwares|
@@ -82,6 +90,10 @@ Pod::Spec.new do |s|
 
     services.subspec 'Growth' do |growth|
       growth.source_files = "_Modules/Services/Growth/**/*.{h,m}"
+    end
+
+    services.subspec 'Image' do |image|
+      image.source_files = "_Modules/Services/Image/**/*.{h,m}"
     end
 
     services.subspec 'Location' do |location|
@@ -109,6 +121,10 @@ Pod::Spec.new do |s|
       rate.resources = "_Modules/Services/Rate/**/*.bundle"
     end
 
+    services.subspec 'Share' do |share|
+      share.source_files = "_Modules/Services/Share/**/*.{h,m}"
+    end
+
     services.subspec 'Version' do |version|
       version.source_files = "_Modules/Services/Version/**/*.{h,m}"
     end
@@ -117,8 +133,6 @@ Pod::Spec.new do |s|
       pay.source_files = '_Modules/Services/Pay/**/*.{h,m}'
       pay.dependency 'AlipaySDK-iOS'
     end
-
-    
 
     services.subspec 'Login' do |login|
       login.source_files = '_Modules/Services/Login/**/*.{h,m}'

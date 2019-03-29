@@ -1,18 +1,9 @@
 
 #import <_Foundation/_Foundation.h>
-#import "ComponentMapConfig.h"
-#import "LocationViewController.h"
-#import "LocationIndicatorVC.h"
-#import "AddressInputHintViewController.h"
+#import "ShareViewController.h"
 
-@class ComponentMapConfig;
+@interface ShareComponent : NSObject
 
-@interface ComponentMap : NSObject
-
-@singleton( ComponentMap )
-
-@prop_instance( ComponentMapConfig, config)
-
-- (void)initGDAPIKey;
+@singleton( ShareComponent )
 
 @end

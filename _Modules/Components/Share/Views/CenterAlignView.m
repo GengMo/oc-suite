@@ -1,12 +1,5 @@
-//
-//  CenterAlignView.m
-// fallen.ink
-//
-//  Created by 王涛 on 15/12/7.
-//
-//
-
-#import "_building_precompile.h"
+#import <Masonry/Masonry.h>
+#import <_Foundation/_Foundation.h>
 #import "CenterAlignView.h"
 
 @interface CenterAlignView ()
