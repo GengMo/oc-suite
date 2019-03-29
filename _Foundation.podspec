@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = "_Foundation/*.{h,m}", "_Foundation/Core/**/*.{h,m,c}", "_Foundation/Macros/*.{h,m,c}", "_Foundation/Modular/**/*.{h,m}"
+  s.source_files = "_Foundation/*.{h,m}", "_Foundation/Core/**/*.{h,m,c}", "_Foundation/Macros/*.{h,m,c}", "_Foundation/Modular/**/*.{h,m}", "_Foundation/Protocol/**/*.{h,m}", "_Foundation/Structure/**/*.{h,m}"
   
   # 范本
   # https://stackoverflow.com/questions/27133993/why-isnt-my-cocoapods-post-install-hook-updating-my-preprocessor-macros
