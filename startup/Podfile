@@ -1,39 +1,28 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'startup' do
-
-    ######################################
     # 基础层
-    ######################################
-    
     pod '_Foundation', :path => '../' # pod '_Foundation', :git => 'https://github.com/fallending/oc-suite.git'
-    
-    ######################################
     # 视图层
-    ######################################
-    
     pod '_Building', :path => '../'
   
     ######################################
-    # 工具层
-    ######################################
-  
-    pod '_Tool/NetworkLit', :path => '../'
-    pod '_Tool/Network/Reachability', :path => '../'
-    pod '_Tool/Cache', :path => '../'
-    pod '_Tool/HttpMock', :path => '../'
-#    pod '_Tool/Database', :path => '../'
-#    pod '_Tool/NoSQL', :path => '../'
-#    pod '_Tool/Utility', :path => '../'
-    pod '_Tool/Date', :path => '../'
-#    pod '_Tool/KeyValueObserving', :path => '../'
-    pod '_Tool/Chronograph', :path => '../'
-    
-    ######################################
-    # 模块化
+    # 模块
     ######################################
     
     pod '_Modules/Application', :path => '../'
+    
+    pod '_Modules/Core/NetworkLit', :path => '../'
+    pod '_Modules/Core/Network/Reachability', :path => '../'
+    pod '_Modules/Core/Cache', :path => '../'
+    pod '_Modules/Core/Date', :path => '../'
+    #    pod '_Modules/Core/Database', :path => '../'
+    #    pod '_Modules/Core/NoSQL', :path => '../'
+    
+    #    pod '_Tool/Utility', :path => '../'
+    #    pod '_Tool/KeyValueObserving', :path => '../'
+    pod '_Modules/Tools/HttpMock', :path => '../'
+    pod '_Modules/Tools/Chronograph', :path => '../'
     
     pod '_Modules/Services/Assets', :path => '../'
     pod '_Modules/Services/Growth', :path => '../'
@@ -148,7 +137,6 @@ target 'startup' do
     pod 'UMengUShare/Social/Pocket' # 集成Pocket
     pod 'UMengUShare/Social/DropBox'  # 集成DropBox
     pod 'UMengUShare/Social/VKontakte'  # 集成VKontakte
-
     
     ######################################
     # 其他 UI 组件

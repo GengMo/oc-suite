@@ -217,16 +217,16 @@ Pod::Spec.new do |s|
     end
   end
 
-  s.subspec 'Tool' do |tool|
-    tool.subspec 'Chronograph' do |chronograph|
+  s.subspec 'Tools' do |tools|
+    tools.subspec 'Chronograph' do |chronograph|
       chronograph.source_files = "_Modules/Tools/Chronograph/**/*.{h,m}"
     end
 
-    tool.subspec 'CountDown' do |countDown|
+    tools.subspec 'CountDown' do |countDown|
       countDown.source_files = "_Modules/Tools/CountDown/**/*.{h,m}"
     end
 
-    tool.subspec 'HttpMock' do |httpmock|
+    tools.subspec 'HttpMock' do |httpmock|
       httpmock.source_files = '_Modules/Tools/HttpMock/**/*.{h,m}'
     end
   end
