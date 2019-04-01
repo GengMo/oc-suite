@@ -24,77 +24,6 @@ Pod::Spec.new do |s|
     application.source_files = "_Modules/Application/**/*.{h,m}"
     application.resources = "_Modules/Application/_AppRater.bundle"
   end
-
-  s.subspec 'Core' do |core|
-
-    core.subspec 'Cache' do |cache|
-      cache.source_files = "_Modules/Core/Cache/**/*.{h,m}"
-    end
-
-    core.subspec 'Database' do |database|
-      database.source_files = "_Modules/Core/Database/**/*.{h,m}"
-    end
-
-    core.subspec 'Date' do |date|
-      date.source_files = "_Modules/Core/Date/**/*.{h,m}"
-    end
-
-    core.subspec 'Image' do |image|
-      image.source_files = "_Modules/Core/Image/**/*.{h,m}"
-    end
-
-    core.subspec 'Log' do |log|
-      log.source_files = "_Modules/Core/Log/**/*.{h,m}"
-    end
-
-    core.subspec 'MJExtension' do |mj|
-      mj.source_files = "_Modules/Core/MJExtension/**/*.{h,m}"
-    end
-
-    core.subspec 'Network' do |network|
-      network.subspec 'Reachability' do |reachability|
-        reachability.source_files = "_Modules/Core/Network/Reachability/*.{h,m}"
-      end
-
-      network.subspec 'XReachability' do |xReachability|
-        xReachability.source_files = "_Modules/Core/Network/XReachability/*.{h,m}"
-      end
-
-      network.subspec 'Core' do |core|
-        core.source_files = "_Modules/Core/Network/Core/**/*.{h,m}"
-      end
-
-      network.subspec 'Loader' do |loader|
-        loader.source_files = "_Modules/Core/Network/Loader/**/*.{h,m}"
-      end
-
-      network.subspec 'Cookie' do |cookie|
-        cookie.source_files = "_Modules/Core/Network/Cookie/*.{h,m}"
-      end
-
-      network.subspec 'Manager' do |manager|
-        manager.source_files = "_Modules/Core/Network/Manager/*.{h,m}"
-      end
-
-      network.subspec 'Extension' do |extension|
-        extension.source_files = "_Modules/Core/Network/Extension/*.{h,m}"
-      end
-
-      network.subspec 'Wrapper' do |wrapper|
-        wrapper.source_files = "_Modules/Core/Network/Wrapper/*.{h,m}"
-      end
-    end
-
-    core.subspec 'NetworkLit' do |networklit|
-      networklit.source_files = "_Modules/Core/NetworkLit/**/*.{h,m}"
-    end
-
-    core.subspec 'NoSQL' do |nosql|
-      nosql.source_files = "_Modules/Core/NoSQL/**/*.{h,m}"
-    end
-
-    
-  end
   
   s.subspec 'Components' do |components|
     components.subspec 'QRCode' do |qrcode|
@@ -264,6 +193,72 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Tools' do |tools|
+    tools.subspec 'Cache' do |cache|
+      cache.source_files = "_Modules/Tools/Cache/**/*.{h,m}"
+    end
+
+    tools.subspec 'Database' do |database|
+      database.source_files = "_Modules/Tools/Database/**/*.{h,m}"
+    end
+
+    tools.subspec 'Date' do |date|
+      date.source_files = "_Modules/Tools/Date/**/*.{h,m}"
+    end
+
+    tools.subspec 'Image' do |image|
+      image.source_files = "_Modules/Tools/Image/**/*.{h,m}"
+    end
+
+    tools.subspec 'Log' do |log|
+      log.source_files = "_Modules/Tools/Log/**/*.{h,m}"
+    end
+
+    tools.subspec 'MJExtension' do |mj|
+      mj.source_files = "_Modules/Tools/MJExtension/**/*.{h,m}"
+    end
+
+    tools.subspec 'Network' do |network|
+      network.subspec 'Reachability' do |reachability|
+        reachability.source_files = "_Modules/Tools/Network/Reachability/*.{h,m}"
+      end
+
+      network.subspec 'XReachability' do |xReachability|
+        xReachability.source_files = "_Modules/Tools/Network/XReachability/*.{h,m}"
+      end
+
+      network.subspec 'Core' do |core|
+        core.source_files = "_Modules/Tools/Network/Core/**/*.{h,m}"
+      end
+
+      network.subspec 'Loader' do |loader|
+        loader.source_files = "_Modules/Tools/Network/Loader/**/*.{h,m}"
+      end
+
+      network.subspec 'Cookie' do |cookie|
+        cookie.source_files = "_Modules/Tools/Network/Cookie/*.{h,m}"
+      end
+
+      network.subspec 'Manager' do |manager|
+        manager.source_files = "_Modules/Tools/Network/Manager/*.{h,m}"
+      end
+
+      network.subspec 'Extension' do |extension|
+        extension.source_files = "_Modules/Tools/Network/Extension/*.{h,m}"
+      end
+
+      network.subspec 'Wrapper' do |wrapper|
+        wrapper.source_files = "_Modules/Tools/Network/Wrapper/*.{h,m}"
+      end
+    end
+
+    tools.subspec 'NetworkLit' do |networklit|
+      networklit.source_files = "_Modules/Tools/NetworkLit/**/*.{h,m}"
+    end
+
+    tools.subspec 'NoSQL' do |nosql|
+      nosql.source_files = "_Modules/Tools/NoSQL/**/*.{h,m}"
+    end
+
     tools.subspec 'Chronograph' do |chronograph|
       chronograph.source_files = "_Modules/Tools/Chronograph/**/*.{h,m}"
     end
