@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A515BD52251E9D400A56F8D /* WechatLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */; };
 		6AC7784C22427E680000F5B1 /* ImagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783422427E680000F5B1 /* ImagingViewController.m */; };
 		6AC7784D22427E680000F5B1 /* ImagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7783522427E680000F5B1 /* ImagingViewController.xib */; };
 		6AC7784E22427E680000F5B1 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783A22427E680000F5B1 /* NetworkingViewController.m */; };
@@ -224,6 +225,8 @@
 
 /* Begin PBXFileReference section */
 		187BC9D8B69BAE8514205CE2 /* Pods-startup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-startup.release.xcconfig"; path = "Pods/Target Support Files/Pods-startup/Pods-startup.release.xcconfig"; sourceTree = "<group>"; };
+		6A515BD32251E9D400A56F8D /* WechatLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WechatLoginViewController.h; sourceTree = "<group>"; };
+		6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WechatLoginViewController.m; sourceTree = "<group>"; };
 		6AC7783422427E680000F5B1 /* ImagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagingViewController.m; sourceTree = "<group>"; };
 		6AC7783522427E680000F5B1 /* ImagingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagingViewController.xib; sourceTree = "<group>"; };
 		6AC7783622427E680000F5B1 /* ImagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagingViewController.h; sourceTree = "<group>"; };
@@ -498,6 +501,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A515BD12251E9B200A56F8D /* 如何微信登录 */ = {
+			isa = PBXGroup;
+			children = (
+				6A515BD32251E9D400A56F8D /* WechatLoginViewController.h */,
+				6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */,
+			);
+			path = "如何微信登录";
+			sourceTree = "<group>";
+		};
 		6AAB430222406BEB00953283 /* Module */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +520,7 @@
 		6AC7783222427E680000F5B1 /* 例子 */ = {
 			isa = PBXGroup;
 			children = (
+				6A515BD12251E9B200A56F8D /* 如何微信登录 */,
 				6AC7783322427E680000F5B1 /* 如何显示网络图片 */,
 				6AC7783722427E680000F5B1 /* 如何数据请求与解析 */,
 				6AC7783D22427E680000F5B1 /* 如何写单例 */,
@@ -1473,6 +1486,7 @@
 				6AC7785622427E690000F5B1 /* ExampleViewController.m in Sources */,
 				863F2CA020946637005187A3 /* AppDelegate+Usage.m in Sources */,
 				6AC7785A22427FC00000F5B1 /* ApiClient.m in Sources */,
+				6A515BD52251E9D400A56F8D /* WechatLoginViewController.m in Sources */,
 				6AC7784C22427E680000F5B1 /* ImagingViewController.m in Sources */,
 				6AC7785222427E690000F5B1 /* LoggingViewController.m in Sources */,
 				862CB0DC1FF110ED0059E3A9 /* HRCgUtil.m in Sources */,

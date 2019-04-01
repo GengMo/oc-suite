@@ -1,13 +1,18 @@
 #import <_Foundation/_All.h>
+#import "SNServiceConfig.h"
 #import "WechatSNService.h"
 
 @interface SNService : _Service <_SNSProtocol>
 
 @singleton( SNService )
 
+@prop_strong( SNServiceConfig *, wechatConfig )
+
 @prop_strong( WechatSNService *, wechat )
 
 #pragma mark - Can be override
+
+- (void)config;
 
 /**
  *  分享成功

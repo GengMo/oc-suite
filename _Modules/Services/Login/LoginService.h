@@ -7,6 +7,6 @@
 
 @prop_singleton( WechatLoginService, wechat )
 
-- (void)config;
-
 @end
+
+@namespace( service, login, LoginService )

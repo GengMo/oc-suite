@@ -81,36 +81,20 @@
 
 @def_singleton( SNService )
 
-@def_prop_strong( id<_SNServiceConfigProtocol>, wechatConfig )
-
-@def_prop_strong( id<_ShareProtocol>, wechat )
+@def_prop_strong( WechatSNService *, wechat )
 
 #pragma mark -
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.wechatConfig = [SNServiceConfig new];
-        self.wechatConfig.supported = [WXApi isWXAppInstalled];
-        
         self.wechat = [WechatSNService new];
     }
     
     return self;
 }
 
-- (void)config {
-    if (self.wechatConfig.supported) {
-        ASSERT(self.wechatConfig.key)
-        ASSERT(self.wechatConfig.secret)
-        ASSERT(self.wechatConfig.redirect)
-        
-        [[UMSocialManager defaultManager]
-         setPlaform:UMSocialPlatformType_WechatSession
-         appKey:self.wechatConfig.key
-         appSecret:self.wechatConfig.secret
-         redirectURL:self.wechatConfig.redirect];
-    }
-    
+- (BOOL)configure {
+    return [self.wechat configure];
 }
 
 - (BOOL)handleOpenURL:(NSURL *)url {

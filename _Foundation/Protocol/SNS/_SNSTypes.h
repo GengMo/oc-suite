@@ -14,4 +14,10 @@ typedef enum : NSUInteger {
     _SharePlatformTencentQZone = 1 << 9,       // 0000 0010 0000 0000
 } _SharePlatformType;
 
-//typedef enum 
+//typedef enum
+
+typedef enum : NSUInteger {
+    _SNSLoginSuccessError = 1000,
+    _SNSLoginFailureError = 1001,
+    _SNSLoginCancelError = 1002,
+} _SNSErrorType;

@@ -89,6 +89,8 @@
 
 - (NSArray<NSString *> *)rangeStringsOfSubString:(NSString *)subString;
 
++ (NSString *)randomLength:(NSUInteger)len;
+
 @end
 
 #pragma mark - Attributed 

@@ -36,7 +36,7 @@ target 'startup' do
     pod '_Modules/Services/SNS', :path => '../'
 #    pod '_Modules/Services/Pay', :path => '../' # Need pod 'UnionPay', :path => '../_Vendors/UnionPay'
     pod 'UnionPay', :path => '../_Vendors/UnionPay'
-#    pod '_Modules/Services/Login', :path => '../'
+    pod '_Modules/Services/Login', :path => '../'
 #    pod '_Modules/Services/Share', :path => '../'
 #    pod '_Modules/Components/Share', :path => '../'
 

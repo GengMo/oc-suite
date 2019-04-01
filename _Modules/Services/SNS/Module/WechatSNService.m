@@ -1,18 +1,35 @@
-
+#import <UMengUShare/WXApi.h>
 #import "WechatSNService.h"
-#import <UMSocialCore/UMSocialManager.h>
-#import <UMSocialCore/UMSocialResponse.h>
 
-@interface WechatSNService ()
+// // https://www.jianshu.com/p/59e2acda0e7a
+
+@interface WechatSNService () <WXApiDelegate>
+
+@prop_strong( ObjectBlock, successHandler )
+@prop_strong( ErrorBlock, failureHandler )
+@prop_strong( NSString *, authState )
+
 
 @end
 
 @implementation WechatSNService
 
-//@synthesize platform;
+@def_prop_strong( SNServiceConfig *, config )
+
 @synthesize shareParam;
 
-// MARK: -
+@def_prop_strong( NSString *, key )
+@def_prop_strong( NSString *, secret )
+@def_prop_strong( NSString *, scheme )
+@def_prop_strong( NSString *, redirect )
+
+@def_prop_strong( ObjectBlock, successHandler )
+@def_prop_strong( ErrorBlock, failureHandler )
+@def_prop_strong( NSString *, authState )
+
+@def_error( successError, _SNSLoginSuccessError, @"微信登录成功")
+@def_error( failureError, _SNSLoginFailureError, @"微信登录失败")
+@def_error( cancelError, _SNSLoginCancelError, @"微信登录取消")
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -23,45 +40,84 @@
 }
 
 
+- (BOOL)configure {
+    ASSERT(self.key)
+    
+    return [WXApi registerApp:self.key];
+}
+
+
 // MARK: -
 
 - (void)shareWith:(id<_ShareParamProtocol>)param success:(ObjectBlock)successHandler failure:(ErrorBlock)failureHandler {
     
 }
 
-// https://www.jianshu.com/p/e69ccae01fc1
-// UMSocialPlatformType_Sina
-- (void)loginWithContext:(UIViewController *)context
-                 success:(ObjectBlock)successHandler
-                 failure:(ErrorBlock)failureHandler {
-    [[UMSocialManager defaultManager]
-     getUserInfoWithPlatform:UMSocialPlatformType_WechatSession
-     currentViewController:context
-     completion:^(id result, NSError *error) {
-         
-         if (error) {
-             invoke_nullable_block(failureHandler, error)
-         } else {
-             invoke_nullable_block(successHandler, result)
-         }
-//        UMSocialUserInfoResponse *resp = result;
-//
-//        // 第三方登录数据(为空表示平台未提供)
-//        // 授权数据
-//        NSLog(@" uid: %@", resp.uid);
-//        NSLog(@" openid: %@", resp.openid);
-//        NSLog(@" accessToken: %@", resp.accessToken);
-//        NSLog(@" refreshToken: %@", resp.refreshToken);
-//        NSLog(@" expiration: %@", resp.expiration);
-//
-//        // 用户数据
-//        NSLog(@" name: %@", resp.name);
-//        NSLog(@" iconurl: %@", resp.iconurl);
-//        NSLog(@" gender: %@", resp.unionGender);
-//
-//        // 第三方平台SDK原始数据
-//        NSLog(@" originalResponse: %@", resp.originalResponse);
-    }];
+- (void)loginWithContext:(UIViewController *)context success:(ObjectBlock)successHandler failure:(ErrorBlock)failureHandler {
+    ASSERT(successHandler)
+    ASSERT(failureHandler)
+    
+    self.successHandler = successHandler;
+    self.failureHandler = failureHandler;
+    
+    SendAuthReq* req = [[SendAuthReq alloc] init];
+    req.scope = @"snsapi_userinfo";
+    self.authState = req.state = [NSString randomLength:32];
+    [WXApi sendAuthReq:req viewController:context delegate:self];
+    
+}
+
+- (void)onResp:(BaseResp *)resp {
+    if([resp isKindOfClass:[SendAuthResp class]]) {
+        
+        SendAuthResp *authResp = (SendAuthResp *)resp;
+        
+        /* Prevent Cross Site Request Forgery */
+        if (![authResp.state isEqualToString:self.authState]) {
+            invoke_nullable_block(self.failureHandler, self.failureError)
+        } else {
+            switch (resp.errCode) {
+                case WXSuccess:
+                {
+                    NSLog(@"RESP:code:%@,state:%@\n", authResp.code, authResp.state);
+                    NSMutableDictionary *respDict = [@{} mutableCopy];
+                    
+                    respDict[@"code"] = authResp.code;
+                    
+                    invoke_nullable_block(self.successHandler, respDict)
+                }
+                    break;
+                case WXErrCodeAuthDeny:
+                {
+                    invoke_nullable_block(self.failureHandler, self.failureError)
+                }
+                    break;
+                case WXErrCodeUserCancel:
+                {
+                    invoke_nullable_block(self.failureHandler, self.cancelError)
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    self.successHandler = nil;
+    self.failureHandler = nil;
+}
+
+
+- (BOOL)handleOpenURL:(NSURL *)url {
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url options:(NSDictionary *)options {
+    return [self handleOpenURL:url];
+}
+
+- (BOOL)handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self handleOpenURL:url];
 }
 
 @end

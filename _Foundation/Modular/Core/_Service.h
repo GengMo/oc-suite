@@ -14,8 +14,12 @@
 
 @interface _Service : _Module
 
+- (BOOL)configure;
+
 /**
  *  @brief 是否可用，1. 依赖系统服务，而用户没有打开 2. 依赖外部服务，而用户没有安装
+ 
+ *  @note as supported
  */
 - (BOOL)available;
 

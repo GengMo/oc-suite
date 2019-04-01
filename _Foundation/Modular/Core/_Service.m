@@ -2,6 +2,10 @@
 
 @implementation _Service
 
+- (BOOL)configure {
+    return YES;
+}
+
 - (BOOL)available {
     return YES;
 }

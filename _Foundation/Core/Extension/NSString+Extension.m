@@ -634,6 +634,17 @@ int rreplace (char *buf, int size, regex_t *re, char *rp) {
     return nil;
 }
 
++ (NSString *)randomLength:(NSUInteger)len {
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (NSInteger i = 0; i < len; i++) {
+        [randomString appendFormat:@"%C", [letters characterAtIndex: arc4random_uniform((uint32_t)[letters length])]];
+    }
+    return randomString;
+    
+}
+
 @end
 
 #pragma mark - 
