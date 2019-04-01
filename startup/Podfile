@@ -16,27 +16,19 @@ target 'startup' do
     pod '_Modules/Tools/Network/Reachability', :path => '../'
     pod '_Modules/Tools/Cache', :path => '../'
     pod '_Modules/Tools/Date', :path => '../'
-    #    pod '_Modules/Tools/Image', :path => '../'
-    #    pod '_Modules/Tools/Database', :path => '../'
-    #    pod '_Modules/Tools/NoSQL', :path => '../'
-    
-    #    pod '_Modules/Tools/Utility', :path => '../'
-    #    pod '_Modules/Tools/KeyValueObserving', :path => '../'
+
     pod '_Modules/Tools/HttpMock', :path => '../'
     pod '_Modules/Tools/Chronograph', :path => '../'
     pod '_Modules/Tools/DyDelegate', :path => '../'
     
     pod '_Modules/Services/Assets', :path => '../'
     pod '_Modules/Services/Growth', :path => '../'
-#    pod '_Modules/Services/Image', :path => '../'
     pod '_Modules/Services/Location', :path => '../'
-#    pod '_Modules/Services/Map', :path => '../'
     pod '_Modules/Services/APNS', :path => '../'
     
     pod '_Modules/Services/SNS', :path => '../'
 #    pod '_Modules/Services/Pay', :path => '../' # Need pod 'UnionPay', :path => '../_Vendors/UnionPay'
     pod 'UnionPay', :path => '../_Vendors/UnionPay'
-#    pod '_Modules/Services/Login', :path => '../'
 #    pod '_Modules/Services/Share', :path => '../'
 #    pod '_Modules/Components/Share', :path => '../'
 
