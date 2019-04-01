@@ -14,7 +14,7 @@
 
 @implementation WechatSNService
 
-@def_prop_strong( SNServiceConfig *, config )
+@def_prop_instance( SNServiceConfig, config )
 
 @synthesize shareParam;
 

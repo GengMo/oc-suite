@@ -14,7 +14,7 @@ typedef enum {
 
 @interface WechatSNService : _Service <_ShareProtocol, _SNSLoginProtocol, _SNSProtocol>
 
-@prop_strong( SNServiceConfig *, config )
+@prop_instance( SNServiceConfig, config )
 
 @error( successError )
 @error( failureError )
