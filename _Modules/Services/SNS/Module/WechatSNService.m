@@ -18,11 +18,6 @@
 
 @synthesize shareParam;
 
-@def_prop_strong( NSString *, key )
-@def_prop_strong( NSString *, secret )
-@def_prop_strong( NSString *, scheme )
-@def_prop_strong( NSString *, redirect )
-
 @def_prop_strong( ObjectBlock, successHandler )
 @def_prop_strong( ErrorBlock, failureHandler )
 @def_prop_strong( NSString *, authState )
@@ -41,9 +36,9 @@
 
 
 - (BOOL)configure {
-    ASSERT(self.key)
+    ASSERT(self.config.key)
     
-    return [WXApi registerApp:self.key];
+    return [WXApi registerApp:self.config.key];
 }
 
 

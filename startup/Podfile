@@ -30,13 +30,13 @@ target 'startup' do
 #    pod '_Modules/Services/Pay', :path => '../' # Need pod 'UnionPay', :path => '../_Vendors/UnionPay'
     pod 'UnionPay', :path => '../_Vendors/UnionPay'
 #    pod '_Modules/Services/Share', :path => '../'
-#    pod '_Modules/Components/Share', :path => '../'
 
     pod '_Modules/Components/QRCode', :path => '../'
     pod '_Modules/Components/Browser', :path => '../'
     pod '_Modules/Components/Map', :path => '../'
 
 #    pod '_Modules/Components/Image', :path => '../'
+#    pod '_Modules/Components/Share', :path => '../'
 
     ######################################
     # UI 组件
@@ -64,7 +64,6 @@ target 'startup' do
     pod '_Components/PopupView', :path => '../'
     pod '_Components/PopViewController', :path => '../'
     pod '_Components/ProgressHUD', :path => '../'
-#    pod '_Components/ProgressView', :path => '../'
     pod '_Components/ProgressView', :path => '../'
 
 #    pod '_Components/QRCodeReaderView', :path => '../'

@@ -16,11 +16,6 @@ typedef enum {
 
 @prop_strong( SNServiceConfig *, config )
 
-@prop_strong( NSString *, key )
-@prop_strong( NSString *, secret )
-@prop_strong( NSString *, scheme )
-@prop_strong( NSString *, redirect )
-
 @error( successError )
 @error( failureError )
 @error( cancelError )

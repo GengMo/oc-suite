@@ -92,7 +92,7 @@
 }
 
 // 仅支持iOS9以上系统，iOS8及以下系统不会回调
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
     BOOL result = [service.sns handleOpenURL:url options:options];
     if (!result) {
         // 其他如支付等SDK的回调
