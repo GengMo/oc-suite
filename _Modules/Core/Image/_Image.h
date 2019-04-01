@@ -19,9 +19,6 @@
 
 #import "UIImageView+FaceDetect.h"
 
-// BEGIN of TODO: 需要化简
-#import "YYCache.h"
-
 #import "YYImage.h"
 #import "YYImageCoder.h"
 #import "YYFrameImage.h"

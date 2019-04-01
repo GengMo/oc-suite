@@ -16,6 +16,7 @@ target 'startup' do
     pod '_Modules/Core/Network/Reachability', :path => '../'
     pod '_Modules/Core/Cache', :path => '../'
     pod '_Modules/Core/Date', :path => '../'
+#    pod '_Modules/Core/Image', :path => '../'
     #    pod '_Modules/Core/Database', :path => '../'
     #    pod '_Modules/Core/NoSQL', :path => '../'
     
@@ -23,24 +24,28 @@ target 'startup' do
     #    pod '_Tool/KeyValueObserving', :path => '../'
     pod '_Modules/Tools/HttpMock', :path => '../'
     pod '_Modules/Tools/Chronograph', :path => '../'
+    pod '_Modules/Tools/DyDelegate', :path => '../'
     
     pod '_Modules/Services/Assets', :path => '../'
     pod '_Modules/Services/Growth', :path => '../'
-    pod '_Modules/Services/Image', :path => '../'
+#    pod '_Modules/Services/Image', :path => '../'
     pod '_Modules/Services/Location', :path => '../'
     pod '_Modules/Services/Map', :path => '../'
     pod '_Modules/Services/APNS', :path => '../'
-    pod '_Modules/Services/Pay', :path => '../' # Need pod 'UnionPay', :path => '../_Vendors/UnionPay'
-    pod 'UnionPay', :path => '../_Vendors/UnionPay'
     
-    pod '_Modules/Services/Login', :path => '../'
-    pod '_Modules/Services/Share', :path => '../'
+    pod '_Modules/Services/SNS', :path => '../'
+#    pod '_Modules/Services/Pay', :path => '../' # Need pod 'UnionPay', :path => '../_Vendors/UnionPay'
+    pod 'UnionPay', :path => '../_Vendors/UnionPay'
+#    pod '_Modules/Services/Login', :path => '../'
+#    pod '_Modules/Services/Share', :path => '../'
+#    pod '_Modules/Components/Share', :path => '../'
 
     pod '_Modules/Components/QRCode', :path => '../'
     pod '_Modules/Components/Browser', :path => '../'
     pod '_Modules/Components/Map', :path => '../'
-    pod '_Modules/Components/Share', :path => '../'
-    
+
+#    pod '_Modules/Components/Image', :path => '../'
+
     ######################################
     # UI 组件
     ######################################
@@ -67,7 +72,9 @@ target 'startup' do
     pod '_Components/PopupView', :path => '../'
     pod '_Components/PopViewController', :path => '../'
     pod '_Components/ProgressHUD', :path => '../'
+#    pod '_Components/ProgressView', :path => '../'
     pod '_Components/ProgressView', :path => '../'
+
 #    pod '_Components/QRCodeReaderView', :path => '../'
 
     pod '_Components/PopViewController', :path => '../'
@@ -95,48 +102,6 @@ target 'startup' do
     # pod 'Objective-Chain'
     # pod 'JHChainableAnimations', '~> 3.0.1' # While use 'ChainableAnimations' in Swift
     # pod 'RegexKitLite' # 正则表达式
-
-    # 友盟 https://www.jianshu.com/p/1fcc6cb49cff
-    pod 'UMengUShare/UI'
-    pod 'UMengUShare/Core', '6.4.8'
-    pod 'UMengAnalytics-NO-IDFA', '4.1.5'
-    pod 'UMengFeedback', '~> 2.3.4'
-    
-    pod 'UMengUShare/Social/Sina'
-    pod 'UMengUShare/Social/WeChat'
-    pod 'UMengUShare/Social/QQ'
-    pod 'UMengUShare/Social/AlipayShare'  # 集成支付宝
-    pod 'UMengUShare/Social/DingDing' # 集成钉钉
-    
-    # pod ‘UMengUShare/Social/ReducedSina' # 精简版 1M
-    # pod ‘UMengUShare/Social/ReducedWeChat' # 精简版 0.2M
-    # pod ‘UMengUShare/Social/ReducedQQ' # 精简版 0.5zM
-    
-    pod 'UMengUShare/Social/Email'  # 集成邮件
-    pod 'UMengUShare/Social/SMS'  # 集成短信
-    pod 'UMengUShare/Plugin/IDFA' # 加入IDFA获取
-    
-    pod 'UMengUShare/Social/Facebook' # 集成Facebook/Messenger
-    pod 'UMengUShare/Social/Twitter'  # 集成Twitter
-    pod 'UMengUShare/Social/Douban' # 集成豆瓣
-    pod 'UMengUShare/Social/Renren' # 集成人人
-    pod 'UMengUShare/Social/TencentWeibo' # 集成腾讯微博
-    pod 'UMengUShare/Social/LaiWang'  # 集成来往(点点虫)
-    pod 'UMengUShare/Social/YiXin'  # 集成易信
-    pod 'UMengUShare/Social/Linkedin' # 集成领英
-    pod 'UMengUShare/Social/Flickr' # 集成Flickr
-    pod 'UMengUShare/Social/Kakao'  # 集成Kakao
-    pod 'UMengUShare/Social/Tumblr' # 集成Tumblr
-    pod 'UMengUShare/Social/Pinterest'  # 集成Pinterest
-    pod 'UMengUShare/Social/Instagram'  # 集成Instagram
-    pod 'UMengUShare/Social/Line' # 集成Line
-    pod 'UMengUShare/Social/WhatsApp' # 集成WhatsApp
-    pod 'UMengUShare/Social/YouDao' # 集成有道云笔记
-    pod 'UMengUShare/Social/EverNote' # 集成印象笔记
-    pod 'UMengUShare/Social/GooglePlus' # 集成Google+
-    pod 'UMengUShare/Social/Pocket' # 集成Pocket
-    pod 'UMengUShare/Social/DropBox'  # 集成DropBox
-    pod 'UMengUShare/Social/VKontakte'  # 集成VKontakte
     
     ######################################
     # 其他 UI 组件

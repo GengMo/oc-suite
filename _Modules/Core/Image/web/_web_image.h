@@ -18,15 +18,12 @@
 #import "UIButton+YYWebImage.h"
 #import "CALayer+YYWebImage.h"
 #import "MKAnnotationView+YYWebImage.h"
+
 #import "YYImage.h"
 #import "YYFrameImage.h"
 #import "YYSpriteSheetImage.h"
 #import "YYImageCoder.h"
 #import "YYAnimatedImageView.h"
-#import "YYCache.h"
-#import "YYMemoryCache.h"
-#import "YYDiskCache.h"
-#import "YYKVStorage.h"
 
 /**
  Usage:

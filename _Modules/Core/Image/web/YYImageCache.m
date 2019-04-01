@@ -20,9 +20,9 @@
 #endif
 
 #if __has_include(<YYCache/YYCache.h>)
-#import <YYCache/YYCache.h>
+#import <_Modules/_Cache.h>
 #else
-#import "YYCache.h"
+#import "_Cache.h"
 #endif
 
 

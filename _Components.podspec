@@ -130,10 +130,6 @@ Pod::Spec.new do |s|
     popupView.source_files = "_Components/PopupView/**/*.{h,m}"
   end
 
-  s.subspec 'PopViewController' do |popViewController|
-    popViewController.source_files = "_Components/PopViewController/**/*.{h,m}"
-  end
-
   s.subspec 'ProgressHUD' do |progressHUD|
     progressHUD.source_files = "_Components/ProgressHUD/**/*.{h,m}"
     progressHUD.resources = "_Components/ProgressHUD/**/*.bundle"

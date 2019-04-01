@@ -26,6 +26,8 @@
  
  *  1.0.0版本，有位置要求：secondId, assistantId, channelId
  */
-+ (NSString*)convertUrl:(NSString *)originUrl withChannelId:(NSString *)channelId enabled:(BOOL)enabled;
++ (NSString *)convertUrl:(NSString *)originUrl withChannelId:(NSString *)channelId enabled:(BOOL)enabled;
 
++ (NSData *)compressThumbImage:(UIImage *)desImage;
+    
 @end

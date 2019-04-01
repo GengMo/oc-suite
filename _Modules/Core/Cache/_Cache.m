@@ -14,11 +14,8 @@ static NSString * const CacheSharedName = @"CacheShared";
 @implementation _Cache
 
 @def_singleton( _Cache )
-
 @def_prop_singleton( _CacheManager, manager )
-
 @def_prop_singleton( _MemoryCache, memoryCache )
-
 @def_prop_singleton( _DiskCache, diskCache )
 
 - (instancetype)init {
@@ -274,7 +271,10 @@ static NSString * const CacheSharedName = @"CacheShared";
         [self.diskCache fileURLForKey:key block:NULL];
     } else {
         object = [self.diskCache objectForKey:key];
-        [self.memoryCache setObject:object forKey:key];
+        
+        if (object) {
+            [self.memoryCache setObject:object forKey:key];
+        }
     }
     
     return object;

@@ -5,8 +5,7 @@
 extern Protocol *__dataSourceProtocol(Class cls);
 extern Protocol *__delegateProtocol(Class cls);
 
-static Class __dynamicDelegateClass(Class cls, NSString *suffix)
-{
+static Class __dynamicDelegateClass(Class cls, NSString *suffix) {
 	while (cls) {
 		NSString *className = [NSString stringWithFormat:@"A2Dynamic%@%@", NSStringFromClass(cls), suffix];
 		Class ddClass = NSClassFromString(className);
@@ -18,8 +17,7 @@ static Class __dynamicDelegateClass(Class cls, NSString *suffix)
 	return [_DynamicDelegate class];
 }
 
-static dispatch_queue_t __backgroundQueue(void)
-{
+static dispatch_queue_t __backgroundQueue(void) {
 	static dispatch_once_t onceToken;
 	static dispatch_queue_t backgroundQueue = nil;
 	dispatch_once(&onceToken, ^{
@@ -30,20 +28,19 @@ static dispatch_queue_t __backgroundQueue(void)
 
 @implementation NSObject (DynamicDelegate)
 
-- (id)bk_dynamicDataSource
-{
+- (id)bk_dynamicDataSource {
 	Protocol *protocol = __dataSourceProtocol([self class]);
 	Class class = __dynamicDelegateClass([self class], @"DataSource");
 	return [self bk_dynamicDelegateWithClass:class forProtocol:protocol];
 }
-- (id)bk_dynamicDelegate
-{
+
+- (id)bk_dynamicDelegate {
 	Protocol *protocol = __delegateProtocol([self class]);
 	Class class = __dynamicDelegateClass([self class], @"Delegate");
 	return [self bk_dynamicDelegateWithClass:class forProtocol:protocol];
 }
-- (id)bk_dynamicDelegateForProtocol:(Protocol *)protocol
-{
+
+- (id)bk_dynamicDelegateForProtocol:(Protocol *)protocol {
 	Class class = [_DynamicDelegate class];
 	NSString *protocolName = NSStringFromProtocol(protocol);
 	if ([protocolName hasSuffix:@"Delegate"]) {
@@ -54,8 +51,8 @@ static dispatch_queue_t __backgroundQueue(void)
 
 	return [self bk_dynamicDelegateWithClass:class forProtocol:protocol];
 }
-- (id)bk_dynamicDelegateWithClass:(Class)cls forProtocol:(Protocol *)protocol
-{
+
+- (id)bk_dynamicDelegateWithClass:(Class)cls forProtocol:(Protocol *)protocol {
 	/**
 	 * Storing the dynamic delegate as an associated object of the delegating
 	 * object not only allows us to later retrieve the delegate, but it also
@@ -71,8 +68,7 @@ static dispatch_queue_t __backgroundQueue(void)
 	dispatch_sync(__backgroundQueue(), ^{
 		dynamicDelegate = objc_getAssociatedObject(self, (__bridge const void *)protocol);
 
-		if (!dynamicDelegate)
-		{
+		if (!dynamicDelegate) {
 			dynamicDelegate = [[cls alloc] initWithProtocol:protocol];
 			objc_setAssociatedObject(self, (__bridge const void *)protocol, dynamicDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 		}

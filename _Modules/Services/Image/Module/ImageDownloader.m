@@ -7,7 +7,6 @@
 //
 
 #import "ImageDownloader.h"
-#import "_vendor_sdwebimage.h"
 
 static NSMutableArray* downloaderArray = nil;
 

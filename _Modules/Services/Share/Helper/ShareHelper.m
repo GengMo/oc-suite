@@ -1,11 +1,4 @@
-//
-//  ShareHelper.m
-//  consumer
-//
-//  Created by fallen on 16/10/24.
-//
-//
-
+#import <_Foundation/_Foundation.h>
 #import "ShareHelper.h"
 
 @interface ShareHelper ()
@@ -31,7 +24,7 @@
     return [self.class convertUrl:self.originUrl withChannelId:channelId enabled:YES];
 }
 
-+ (NSString*)convertUrl:(NSString *)originUrl withChannelId:(NSString *)channelId enabled:(BOOL)enabled {
++ (NSString *)convertUrl:(NSString *)originUrl withChannelId:(NSString *)channelId enabled:(BOOL)enabled {
     if (!enabled) {
         return originUrl;
     }
@@ -46,6 +39,37 @@
     }
     
     return url;
+}
+    
+
++ (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size{
+    UIGraphicsBeginImageContext(size);
+    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
+}
+    
++ (NSData *)compressThumbImage:(UIImage *)desImage {
+    NSData *thumbData = nil;
+    if (desImage) {
+        UIImage* thumbImg = [self scaleToSize:desImage size:CGSizeMake(150, 150)];
+        //缩略图数据大小不能超过32K
+        float compressRate = 1.0f;
+        thumbData = UIImageJPEGRepresentation(thumbImg, compressRate);
+        while(thumbData.length > 32*1024) {
+            compressRate = compressRate * 0.5;
+            thumbData = UIImageJPEGRepresentation(thumbImg, compressRate);
+            if(compressRate < 0.1)
+            break;
+        }
+    }
+    
+    LOG(@"微信缩略图大小%tu", thumbData.length);
+    
+    return thumbData;
 }
 
 @end

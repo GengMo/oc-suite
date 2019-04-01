@@ -196,6 +196,52 @@ Pod::Spec.new do |s|
       share.source_files = "_Modules/Services/Share/**/*.{h,m}"
     end
 
+    # Social Networking Services
+    services.subspec 'SNS' do |sns|
+      sns.source_files = "_Modules/Services/SNS/**/*.{h,m}"
+
+      # 友盟 https://www.jianshu.com/p/1fcc6cb49cff
+      sns.dependency 'UMengUShare/UI'
+      sns.dependency 'UMengUShare/Core', '6.4.8'
+      sns.dependency 'UMengAnalytics-NO-IDFA', '4.1.5'
+      sns.dependency 'UMengFeedback', '~> 2.3.4'
+      sns.dependency 'UMengUShare/Core', '6.4.8'
+
+      sns.dependency 'UMengUShare/Social/WeChat'
+      sns.dependency 'UMengUShare/Social/ReducedSina' # 精简版 1M
+      sns.dependency 'UMengUShare/Social/ReducedWeChat' # 精简版 0.2M
+      sns.dependency 'UMengUShare/Social/ReducedQQ' # 精简版 0.5zM
+      sns.dependency 'UMengUShare/Social/Sina'
+      sns.dependency 'UMengUShare/Social/WeChat'
+      sns.dependency 'UMengUShare/Social/QQ'
+      sns.dependency 'UMengUShare/Social/AlipayShare'  # 集成支付宝
+      sns.dependency 'UMengUShare/Social/DingDing' # 集成钉钉
+      sns.dependency 'UMengUShare/Social/Email'  # 集成邮件
+      sns.dependency 'UMengUShare/Social/SMS'  # 集成短信
+      sns.dependency 'UMengUShare/Plugin/IDFA' # 加入IDFA获取
+      sns.dependency 'UMengUShare/Social/Facebook' # 集成Facebook/Messenger
+      sns.dependency 'UMengUShare/Social/Twitter'  # 集成Twitter
+      sns.dependency 'UMengUShare/Social/Douban' # 集成豆瓣
+      sns.dependency 'UMengUShare/Social/Renren' # 集成人人
+      sns.dependency 'UMengUShare/Social/TencentWeibo' # 集成腾讯微博
+      sns.dependency 'UMengUShare/Social/LaiWang'  # 集成来往(点点虫)
+      sns.dependency 'UMengUShare/Social/YiXin'  # 集成易信
+      sns.dependency 'UMengUShare/Social/Linkedin' # 集成领英
+      sns.dependency 'UMengUShare/Social/Flickr' # 集成Flickr
+      sns.dependency 'UMengUShare/Social/Kakao'  # 集成Kakao
+      sns.dependency 'UMengUShare/Social/Tumblr' # 集成Tumblr
+      sns.dependency 'UMengUShare/Social/Pinterest'  # 集成Pinterest
+      sns.dependency 'UMengUShare/Social/Instagram'  # 集成Instagram
+      sns.dependency 'UMengUShare/Social/Line' # 集成Line
+      sns.dependency 'UMengUShare/Social/WhatsApp' # 集成WhatsApp
+      sns.dependency 'UMengUShare/Social/YouDao' # 集成有道云笔记
+      sns.dependency 'UMengUShare/Social/EverNote' # 集成印象笔记
+      sns.dependency 'UMengUShare/Social/GooglePlus' # 集成Google+
+      sns.dependency 'UMengUShare/Social/Pocket' # 集成Pocket
+      sns.dependency 'UMengUShare/Social/DropBox'  # 集成DropBox
+      sns.dependency 'UMengUShare/Social/VKontakte'  # 集成VKontakte
+    end
+
     services.subspec 'Version' do |version|
       version.source_files = "_Modules/Services/Version/**/*.{h,m}"
     end
@@ -228,6 +274,10 @@ Pod::Spec.new do |s|
 
     tools.subspec 'HttpMock' do |httpmock|
       httpmock.source_files = '_Modules/Tools/HttpMock/**/*.{h,m}'
+    end
+
+    tools.subspec 'DyDelegate' do |del|
+      del.source_files = '_Modules/Tools/DyDelegate/**/*.{h,m}'
     end
   end
 end
