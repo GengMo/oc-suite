@@ -8,7 +8,6 @@
 
 #import "WechatLoginViewController.h"
 #import <_Modules/SNService.h>
-#import <_Modules/LoginService.h>
 
 @interface WechatLoginViewController ()
 
@@ -19,12 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    service.sns.wechat.config.key = @"";
-    service.sns.wechat.config.secret = @"";
-    service.sns.wechat.config.redirect = @"";
-    
-    [service.sns configure];
     
     // 微信登录
     [service.sns.wechat

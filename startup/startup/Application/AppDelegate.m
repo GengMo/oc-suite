@@ -40,6 +40,16 @@
     
     //////////////////////////////
     
+    ////////////// 三方登录
+    
+    service.sns.wechat.config.key = @"";
+    service.sns.wechat.config.secret = @"";
+    service.sns.wechat.config.redirect = @"";
+    
+    [service.sns configure];
+    
+    //////////////
+    
     return YES;
 }
 
