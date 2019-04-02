@@ -6,6 +6,8 @@
 @synthesize secret;
 @synthesize scheme;
 @synthesize redirect;
+@synthesize scope;
+
 @synthesize supported;
 
 @end

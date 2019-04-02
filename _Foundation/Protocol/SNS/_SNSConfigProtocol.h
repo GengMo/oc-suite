@@ -11,6 +11,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *scheme; // url scheme
 @property (nonatomic, strong) NSString *redirect; // redirect url
 
+/**
+ *  @brief scope
+ *
+ *  @wechat snsapi_base, snsapi_userinfo
+ */
+@property (nonatomic, strong) NSString *scope;
+
 @property (nonatomic, assign) BOOL supported; //  使用方主动控制，是否支持。
 
 @end

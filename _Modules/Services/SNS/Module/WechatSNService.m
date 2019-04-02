@@ -55,9 +55,10 @@
     self.successHandler = successHandler;
     self.failureHandler = failureHandler;
     
-    SendAuthReq* req = [[SendAuthReq alloc] init];
-    req.scope = @"snsapi_userinfo";
+    SendAuthReq *req = [[SendAuthReq alloc] init];
+    req.scope = self.config.scope ? self.config.scope : @"snsapi_userinfo"; // @"snsapi_base"
     self.authState = req.state = [NSString randomLength:32];
+    
     [WXApi sendAuthReq:req viewController:context delegate:self];
     
 }

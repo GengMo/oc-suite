@@ -209,7 +209,10 @@ static void dictionaryApplyFunction (const void *key, const void *value, void *c
 - (id)objectForKey:(NSString *)key {
     _LinkedMapNode *node = [self _nodeForKey:key];
     
-    return node->_value;
+    if (node)
+        return node->_value;
+    else
+        return nil;
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost {
@@ -235,9 +238,13 @@ static void dictionaryApplyFunction (const void *key, const void *value, void *c
 - (id)removeObjectForKey:(NSString *)key {
     _LinkedMapNode *node = [self _nodeForKey:key];
     
-    [self _removeNode:node];
+    if (node) {
+        [self _removeNode:node];
+        
+        return node->_value;
+    }
     
-    return node->_value;
+    return nil;
 }
 
 - (void)removeAllObjects {
@@ -247,7 +254,10 @@ static void dictionaryApplyFunction (const void *key, const void *value, void *c
 - (id)removeObject {
     _LinkedMapNode *node = [self _removeTailNode];
     
-    return node->_value;
+    if (node)
+        return node->_value;
+    else
+        return nil;
 }
 
 - (void)enumerateKeysAndObjectsUsingBlock:(void (NS_NOESCAPE ^)(id key, id obj))block {

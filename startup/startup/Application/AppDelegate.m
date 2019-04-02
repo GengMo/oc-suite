@@ -13,6 +13,7 @@
 #import "_NetworkLit.h"
 // 登录、分享、支付
 #import <_Modules/SNService.h>
+#import <_Modules/_Cache.h>
 
 @interface AppDelegate ()
 
@@ -48,6 +49,9 @@
     
     [service.sns configure];
     
+    shared_cache[@"key"] = @"dddd";
+    NSString *value = shared_cache[@"key"];
+    INFO(@"the @key = %@", value);
     //////////////
     
     return YES;
