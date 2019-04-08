@@ -4,6 +4,12 @@
 static NSString * const DiskCachePrefix = @"com.fallenink.DiskCache";
 static NSString * const DiskCacheSharedName = @"DiskCacheShared";
 
+#define LOCK \
+    dispatch_semaphore_wait(self->_lockSemaphore, DISPATCH_TIME_FOREVER);
+
+#define UNLOCK \
+    dispatch_semaphore_signal(self->_lockSemaphore);
+
 @interface BackgroundTask : NSObject
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_4_0 && !TARGET_OS_WATCH
 @property (atomic, assign) UIBackgroundTaskIdentifier taskID;
@@ -100,7 +106,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     //we don't want to do anything without setting up the disk cache, but we also don't want to block init, it can take a while to initialize
     //this is only safe because we use a dispatch_semaphore as a lock. If we switch to an NSLock or posix locks, this will *no longer be safe*.
     
-    [self lock];
+    LOCK
     
     @weakify(self)
     dispatch_async(_asyncQueue, ^{
@@ -109,7 +115,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         [self createCacheDirectory];
         [self initializeDiskProperties];
         
-        [self unlock];
+        UNLOCK
     });
 }
 
@@ -391,16 +397,16 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
 }
 
 - (void)trimToAgeLimitRecursively {
-    [self lock];
+    LOCK
     NSTimeInterval ageLimit = _ageLimit;
-    [self unlock];
+    UNLOCK
     if (ageLimit == 0.0)
         return;
     
-    [self lock];
+    LOCK
     NSDate *date = [[NSDate alloc] initWithTimeIntervalSinceNow:-ageLimit];
     [self trimDiskToDate:date];
-    [self unlock];
+    UNLOCK
     
     @weakify(self);
     
@@ -421,9 +427,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         @strongify(self)
         
         if (block) {
-            [self lock];
+            LOCK
             block(self);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -452,9 +458,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         id <NSCoding> object = [self objectForKey:key fileURL:&fileURL];
         
         if (block) {
-            [self lock];
+            LOCK
             block(self, key, object, fileURL);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -469,9 +475,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         NSURL *fileURL = [self fileURLForKey:key];
         
         if (block) {
-            [self lock];
+            LOCK
             block(self, key, nil, fileURL);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -487,9 +493,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         [self setObject:object forKey:key fileURL:&fileURL];
         
         if (block) {
-            [self lock];
+            LOCK
             block(self, key, object, fileURL);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -505,9 +511,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         [self removeObjectForKey:key fileURL:&fileURL];
         
         if (block) {
-            [self lock];
+            LOCK
             block(self, key, nil, fileURL);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -522,9 +528,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         [self trimToSize:trimByteCount];
         
         if (block) {
-            [self lock];
+            LOCK
             block(self);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -539,9 +545,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         [self trimToDate:trimDate];
         
         if (block) {
-            [self lock];
+            LOCK
             block(self);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -556,9 +562,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         [self trimToSizeByDate:trimByteCount];
         
         if (block) {
-            [self lock];
+            LOCK
             block(self);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -573,9 +579,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         [self removeAllObjects];
         
         if (block) {
-            [self lock];
+            LOCK
             block(self);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -590,9 +596,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         [self enumerateObjectsWithBlock:block];
         
         if (completionBlock) {
-            [self lock];
+            LOCK
             completionBlock(self);
-            [self unlock];
+            UNLOCK
         }
     });
 }
@@ -601,9 +607,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
 
 - (void)synchronouslyLockFileAccessWhileExecutingBlock:(void(^)(_DiskCache *diskCache))block {
     if (block) {
-        [self lock];
+        LOCK
         block(self);
-        [self unlock];
+        UNLOCK
     }
 }
 
@@ -624,7 +630,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     id <NSCoding> object = nil;
     NSURL *fileURL = nil;
     
-    [self lock];
+    LOCK
     fileURL = [self encodedFileURLForKey:key];
     object = nil;
     
@@ -643,7 +649,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
             [self setFileModificationDate:now forURL:fileURL];
         }
     }
-    [self unlock];
+    UNLOCK
     
     if (outFileURL) {
         *outFileURL = fileURL;
@@ -666,7 +672,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     NSDate *now = [[NSDate alloc] init];
     NSURL *fileURL = nil;
     
-    [self lock];
+    LOCK
     fileURL = [self encodedFileURLForKey:key];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
@@ -676,7 +682,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     } else {
         fileURL = nil;
     }
-    [self unlock];
+    UNLOCK
     return fileURL;
 }
 
@@ -700,7 +706,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     
     NSURL *fileURL = nil;
     
-    [self lock];
+    LOCK
     fileURL = [self encodedFileURLForKey:key];
     
     if (self->_willAddObjectBlock)
@@ -739,7 +745,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     
     if (self->_didAddObjectBlock)
         self->_didAddObjectBlock(self, key, object, written ? fileURL : nil);
-    [self unlock];
+    UNLOCK
     
     if (outFileURL) {
         *outFileURL = fileURL;
@@ -760,10 +766,10 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     
     NSURL *fileURL = nil;
     
-    [self lock];
+    LOCK
     fileURL = [self encodedFileURLForKey:key];
     [self removeFileAndExecuteBlocksForKey:key];
-    [self unlock];
+    UNLOCK
     
     [task end];
     
@@ -780,9 +786,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     
     BackgroundTask *task = [BackgroundTask start];
     
-    [self lock];
+    LOCK
     [self trimDiskToSize:byteCount];
-    [self unlock];
+    UNLOCK
     
     [task end];
 }
@@ -798,9 +804,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     
     BackgroundTask *task = [BackgroundTask start];
     
-    [self lock];
+    LOCK
     [self trimDiskToDate:trimDate];
-    [self unlock];
+    UNLOCK
     
     [task end];
 }
@@ -813,9 +819,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     
     BackgroundTask *task = [BackgroundTask start];
     
-    [self lock];
+    LOCK
     [self trimDiskToSizeByDate:byteCount];
-    [self unlock];
+    UNLOCK
     
     [task end];
 }
@@ -823,7 +829,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
 - (void)removeAllObjects {
     BackgroundTask *task = [BackgroundTask start];
     
-    [self lock];
+    LOCK
     if (self->_willRemoveAllObjectsBlock)
         self->_willRemoveAllObjectsBlock(self);
     
@@ -838,7 +844,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     
     if (self->_didRemoveAllObjectsBlock)
         self->_didRemoveAllObjectsBlock(self);
-    [self unlock];
+    UNLOCK
     
     [task end];
 }
@@ -849,7 +855,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
     
     BackgroundTask *task = [BackgroundTask start];
     
-    [self lock];
+    LOCK
     NSDate *now = [NSDate date];
     NSArray *keysSortedByDate = [self->_dates keysSortedByValueUsingSelector:@selector(compare:)];
     
@@ -860,7 +866,7 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
             block(self, key, nil, fileURL);
         }
     }
-    [self unlock];
+    UNLOCK
     
     [task end];
 }
@@ -870,9 +876,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
 - (DiskCacheObjectBlock)willAddObjectBlock {
     DiskCacheObjectBlock block = nil;
     
-    [self lock];
+    LOCK
     block = _willAddObjectBlock;
-    [self unlock];
+    UNLOCK
     
     return block;
 }
@@ -886,18 +892,18 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
 
         if (!self)
             return;
-        [self lock];
+        LOCK
         self->_willAddObjectBlock = [block copy];
-        [self unlock];
+        UNLOCK
     });
 }
 
 - (DiskCacheObjectBlock)willRemoveObjectBlock {
     DiskCacheObjectBlock block = nil;
     
-    [self lock];
+    LOCK
     block = _willRemoveObjectBlock;
-    [self unlock];
+    UNLOCK
     
     return block;
 }
@@ -912,18 +918,18 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         if (!self)
             return;
         
-        [self lock];
+        LOCK
         self->_willRemoveObjectBlock = [block copy];
-        [self unlock];
+        UNLOCK
     });
 }
 
 - (DiskCacheBlock)willRemoveAllObjectsBlock {
     DiskCacheBlock block = nil;
     
-    [self lock];
+    LOCK
     block = _willRemoveAllObjectsBlock;
-    [self unlock];
+    UNLOCK
     
     return block;
 }
@@ -938,18 +944,18 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         if (!self)
             return;
         
-        [self lock];
+        LOCK
         self->_willRemoveAllObjectsBlock = [block copy];
-        [self unlock];
+        UNLOCK
     });
 }
 
 - (DiskCacheObjectBlock)didAddObjectBlock {
     DiskCacheObjectBlock block = nil;
     
-    [self lock];
+    LOCK
     block = _didAddObjectBlock;
-    [self unlock];
+    UNLOCK
     
     return block;
 }
@@ -964,18 +970,18 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         if (!self)
             return;
         
-        [self lock];
+        LOCK
         self->_didAddObjectBlock = [block copy];
-        [self unlock];
+        UNLOCK
     });
 }
 
 - (DiskCacheObjectBlock)didRemoveObjectBlock {
     DiskCacheObjectBlock block = nil;
     
-    [self lock];
+    LOCK
     block = _didRemoveObjectBlock;
-    [self unlock];
+    UNLOCK
     
     return block;
 }
@@ -990,18 +996,18 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         if (!self)
             return;
         
-        [self lock];
+        LOCK
         self->_didRemoveObjectBlock = [block copy];
-        [self unlock];
+        UNLOCK
     });
 }
 
 - (DiskCacheBlock)didRemoveAllObjectsBlock {
     DiskCacheBlock block = nil;
     
-    [self lock];
+    LOCK
     block = _didRemoveAllObjectsBlock;
-    [self unlock];
+    UNLOCK
     
     return block;
 }
@@ -1016,18 +1022,18 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         if (!self)
             return;
         
-        [self lock];
+        LOCK
         self->_didRemoveAllObjectsBlock = [block copy];
-        [self unlock];
+        UNLOCK
     });
 }
 
 - (NSUInteger)byteLimit {
     NSUInteger byteLimit;
     
-    [self lock];
+    LOCK
     byteLimit = _byteLimit;
-    [self unlock];
+    UNLOCK
     
     return byteLimit;
 }
@@ -1042,21 +1048,21 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         if (!self)
             return;
         
-        [self lock];
+        LOCK
         self->_byteLimit = byteLimit;
         
         if (byteLimit > 0)
             [self trimDiskToSizeByDate:byteLimit];
-        [self unlock];
+        UNLOCK
     });
 }
 
 - (NSTimeInterval)ageLimit {
     NSTimeInterval ageLimit;
     
-    [self lock];
+    LOCK
     ageLimit = _ageLimit;
-    [self unlock];
+    UNLOCK
     
     return ageLimit;
 }
@@ -1071,9 +1077,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         if (!self)
             return;
         
-        [self lock];
+        LOCK
         self->_ageLimit = ageLimit;
-        [self unlock];
+        UNLOCK
         
         [self trimToAgeLimitRecursively];
     });
@@ -1082,9 +1088,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
 - (BOOL)isTTLCache {
     BOOL isTTLCache;
     
-    [self lock];
+    LOCK
     isTTLCache = _ttlCache;
-    [self unlock];
+    UNLOCK
     
     return isTTLCache;
 }
@@ -1099,9 +1105,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         if (!self)
             return;
         
-        [self lock];
+        LOCK
         self->_ttlCache = ttlCache;
-        [self unlock];
+        UNLOCK
     });
 }
 
@@ -1109,9 +1115,9 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
 - (NSDataWritingOptions)writingProtectionOption {
     NSDataWritingOptions option;
     
-    [self lock];
+    LOCK
     option = _writingProtectionOption;
-    [self unlock];
+    UNLOCK
     
     return option;
 }
@@ -1128,20 +1134,12 @@ static NSString * const DiskCacheSharedName = @"DiskCacheShared";
         
         NSDataWritingOptions option = NSDataWritingFileProtectionMask & writingProtectionOption;
         
-        [self lock];
+        LOCK
         self->_writingProtectionOption = option;
-        [self unlock];
+        UNLOCK
     });
 }
 #endif
-
-- (void)lock {
-    dispatch_semaphore_wait(_lockSemaphore, DISPATCH_TIME_FOREVER);
-}
-
-- (void)unlock {
-    dispatch_semaphore_signal(_lockSemaphore);
-}
 
 #pragma mark - CacheObjectSubscripting
 

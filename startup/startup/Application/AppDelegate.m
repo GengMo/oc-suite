@@ -27,8 +27,6 @@
     
     MainViewController *mainView = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     
-//    self.window.rootViewController = [[BaseNavigationController alloc] initWithRootViewController:mainView];
-    
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:mainView];
     
     [self.window makeKeyAndVisible];
@@ -37,7 +35,7 @@
     
     [self usageOfReachability];
     
-    [[_UnitTest sharedInstance] run];
+//    [[_UnitTest sharedInstance] run];
     
     //////////////////////////////
     
@@ -48,6 +46,8 @@
     service.sns.wechat.config.redirect = @"";
     
     [service.sns configure];
+    
+    INFO(@"the @key8888 = %@", shared_cache[@"key"]);
     
     shared_cache[@"key"] = @"dddd";
     NSString *value = shared_cache[@"key"];

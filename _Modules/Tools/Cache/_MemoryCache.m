@@ -9,21 +9,11 @@
 #define LOCK \
     pthread_mutex_lock(&self->_lock);
 
+#define TRY_LOCK \
+    pthread_mutex_trylock(&self->_lock) == 0
+
 #define UNLOCK \
     pthread_mutex_unlock(&self->_lock);
-
-#define lockable( code ) \
-{ \
-    pthread_mutex_lock(&self->_lock); \
-    code \
-    pthread_mutex_unlock(&self->_lock); \
-}
-
-#define trylockable( code ) \
-if (pthread_mutex_trylock(&self->_lock) == 0) { \
-    code \
-    pthread_mutex_unlock(&self->_lock); \
-}
 
 NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 
@@ -111,75 +101,126 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 // MARK: - Setter & Getter
 
 - (NSUInteger)totalCount {
-    lockable( NSUInteger count = _lru->_totalCount; return count; )
+    LOCK
+    NSUInteger count = _lru->_totalCount;
+    UNLOCK
+    
+    return count;
 }
 
 - (NSUInteger)totalCost {
-    lockable( NSUInteger totalCost = _lru->_totalCost; return totalCost; )
+    LOCK
+    NSUInteger totalCost = _lru->_totalCost;
+    UNLOCK
+    return totalCost;
 }
 
 - (MemoryCacheObjectBlock)willAddObjectBlock {
-    lockable( MemoryCacheObjectBlock block = _willAddObjectBlock; return block; )
+    LOCK
+    MemoryCacheObjectBlock block = _willAddObjectBlock;
+    UNLOCK
+    return block;
 }
 
 - (void)setWillAddObjectBlock:(MemoryCacheObjectBlock)block {
-    lockable( _willAddObjectBlock = [block copy]; )
+    LOCK
+    _willAddObjectBlock = [block copy];
+    UNLOCK
 }
 
 - (MemoryCacheObjectBlock)willRemoveObjectBlock {
-    lockable( MemoryCacheObjectBlock block = _willRemoveObjectBlock; return block; )
+    
+    LOCK
+    MemoryCacheObjectBlock block = _willRemoveObjectBlock;
+    UNLOCK
+    
+    return block;
 }
 
 - (void)setWillRemoveObjectBlock:(MemoryCacheObjectBlock)block {
-    lockable( _willRemoveObjectBlock = [block copy]; )
+    LOCK
+    _willRemoveObjectBlock = [block copy];
+    UNLOCK
 }
 
 - (MemoryCacheBlock)willRemoveAllObjectsBlock {
-    lockable( MemoryCacheBlock block = _willRemoveAllObjectsBlock; return block; )
+    LOCK
+    MemoryCacheBlock block = _willRemoveAllObjectsBlock;
+    UNLOCK
+    
+    return block;
 }
 
 - (void)setWillRemoveAllObjectsBlock:(MemoryCacheBlock)block {
-    lockable( _willRemoveAllObjectsBlock = [block copy]; )
+    LOCK
+    _willRemoveAllObjectsBlock = [block copy];
+    UNLOCK
 }
 
 - (MemoryCacheObjectBlock)didAddObjectBlock {
-    lockable( MemoryCacheObjectBlock block = _didAddObjectBlock; return block; )
+    LOCK
+    MemoryCacheObjectBlock block = _didAddObjectBlock;
+    UNLOCK
+    return block;
 }
 
 - (void)setDidAddObjectBlock:(MemoryCacheObjectBlock)block {
-    lockable( _didAddObjectBlock = [block copy]; )
+    LOCK
+    _didAddObjectBlock = [block copy];
+    UNLOCK
 }
 
 - (MemoryCacheObjectBlock)didRemoveObjectBlock {
-    lockable( MemoryCacheObjectBlock block = _didRemoveObjectBlock; return block; )
+    LOCK
+    MemoryCacheObjectBlock block = _didRemoveObjectBlock;
+    UNLOCK
+    return block;
 }
 
 - (void)setDidRemoveObjectBlock:(MemoryCacheObjectBlock)block {
-    lockable( _didRemoveObjectBlock = [block copy]; )
+    LOCK
+    _didRemoveObjectBlock = [block copy];
+    UNLOCK
 }
 
 - (MemoryCacheBlock)didRemoveAllObjectsBlock {
-    lockable( MemoryCacheBlock block = _didRemoveAllObjectsBlock; return block; )
+    LOCK
+    MemoryCacheBlock block = _didRemoveAllObjectsBlock;
+    UNLOCK
+    return block;
 }
 
 - (void)setDidRemoveAllObjectsBlock:(MemoryCacheBlock)block {
-    lockable( _didRemoveAllObjectsBlock = [block copy]; )
+    LOCK
+    _didRemoveAllObjectsBlock = [block copy];
+    UNLOCK
 }
 
 - (MemoryCacheBlock)didReceiveMemoryWarningBlock {
-    lockable( MemoryCacheBlock block = _didReceiveMemoryWarningBlock; return block; )
+    LOCK
+    MemoryCacheBlock block = _didReceiveMemoryWarningBlock;
+    UNLOCK
+    return block;
 }
 
 - (void)setDidReceiveMemoryWarningBlock:(MemoryCacheBlock)block {
-    lockable( _didReceiveMemoryWarningBlock = [block copy]; )
+    LOCK
+    _didReceiveMemoryWarningBlock = [block copy];
+    UNLOCK
 }
 
 - (MemoryCacheBlock)didEnterBackgroundBlock {
-    lockable( MemoryCacheBlock block = _didEnterBackgroundBlock; return block; )
+    LOCK
+    MemoryCacheBlock block = _didEnterBackgroundBlock;
+    UNLOCK
+    
+    return block;
 }
 
 - (void)setDidEnterBackgroundBlock:(MemoryCacheBlock)block {
-    lockable( _didEnterBackgroundBlock = [block copy]; )
+    LOCK
+    _didEnterBackgroundBlock = [block copy];
+    UNLOCK
 }
 
 #pragma mark - Memory warning handling
@@ -207,9 +248,9 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
         }
         
         MemoryCacheBlock didReceiveMemoryWarningBlock = nil;
-        lockable(
+        LOCK
             didReceiveMemoryWarningBlock = self->_didReceiveMemoryWarningBlock;
-        )
+        UNLOCK
         
         if (didReceiveMemoryWarningBlock)
             didReceiveMemoryWarningBlock(self);
@@ -245,7 +286,7 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     MemoryCacheObjectBlock willRemoveObjectBlock = _willRemoveObjectBlock;
     MemoryCacheObjectBlock didRemoveObjectBlock = _didRemoveObjectBlock;
     
-    lockable(
+    LOCK
              id obj = [_lru objectForKey:key];
              
              if (willRemoveObjectBlock)
@@ -261,7 +302,7 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
                  */
                  [obj class]; //hold and release in queue
              });
-    )
+    UNLOCK
     
     if (didRemoveObjectBlock)
         didRemoveObjectBlock(self, key, nil);
@@ -370,7 +411,11 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     if (!key)
         return nil;
     
-    lockable( return [_lru objectForKey:key]; )
+    LOCK
+    id obj = [_lru objectForKey:key];
+    UNLOCK
+    
+    return obj;
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key {
@@ -392,24 +437,25 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
         willAddObjectBlock(self, key, object);
     
     // 加锁
-    lockable(
-             [_lru setObject:object forKey:key withCost:cost];
+//    lockable(
+    LOCK
+    [_lru setObject:object forKey:key withCost:cost];
+    
+    if ([_lru isObjectCostsOverflow:_costLimit]) { // 总量限制
+         dispatch_async(_concurrentQueue, ^{
+             [self trimToCost:self->_costLimit];
+         });
+    }
+    
+    if ([_lru isObjectCountsOverflow:_countLimit]) { // 总数限制
+         object = [_lru removeObject];
+         
+         dispatch_async(_concurrentQueue, ^{
+             [object class];
+         });
+    }
              
-             if ([_lru isObjectCostsOverflow:_costLimit]) { // 总量限制
-                 dispatch_async(_concurrentQueue, ^{
-                     [self trimToCost:self->_costLimit];
-                 });
-             }
-             
-             if ([_lru isObjectCountsOverflow:_countLimit]) { // 总数限制
-                 object = [_lru removeObject];
-                 
-                 dispatch_async(_concurrentQueue, ^{
-                     [object class];
-                 });
-             }
-             
-    )
+    UNLOCK
     
     if (didAddObjectBlock)
         didAddObjectBlock(self, key, object);
@@ -429,7 +475,9 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     if (willRemoveAllObjectsBlock)
         willRemoveAllObjectsBlock(self);
     
-    lockable( [_lru removeAllObjects]; )
+    LOCK
+    [_lru removeAllObjects];
+    UNLOCK
     
     if (didRemoveAllObjectsBlock)
         didRemoveAllObjectsBlock(self);
@@ -534,28 +582,30 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
 - (void)_trimToCost:(NSUInteger)costLimit {
     BOOL finish = NO;
 
-    lockable(
+    LOCK
          if (costLimit == 0) {
              [_lru removeAllObjects];
              finish = YES;
          } else if (![_lru isObjectCostsOverflow:costLimit]) {
              finish = YES;
          }
-    )
+    UNLOCK
     
     if (finish) return;
     
     NSMutableArray *holder = [NSMutableArray new];
     while (!finish) {
         
-        trylockable(
+        if (TRY_LOCK) {
             if (_lru->_totalCost > costLimit) {
                 id object = [_lru removeObject];
                 if (object) [holder addObject:object];
             } else {
                 finish = YES;
             }
-        ) else {
+            
+            UNLOCK
+        } else {
             usleep(10 * 1000); //10 ms
         }
     }
@@ -580,14 +630,15 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     
     NSMutableArray *holder = [NSMutableArray new];
     while (!finish) {
-        trylockable(
-                    if ([_lru isObjectCountsOverflow:countLimit]) {
+        if (TRY_LOCK) {
+            if ([_lru isObjectCountsOverflow:countLimit]) {
                 id object = [_lru removeObject];
                 if (object) [holder addObject:object];
             } else {
                 finish = YES;
             }
-        ) else {
+            UNLOCK
+        } else {
             usleep(10 * 1000); //10 ms
         }
     }
@@ -602,27 +653,28 @@ NSString * const MemoryCachePrefix = @"com.fallenink.MemoryCache";
     BOOL finish = NO;
     NSTimeInterval now = CACurrentMediaTime();
 
-    lockable(
+    LOCK
         if (ageLimit <= 0) {
             [_lru removeAllObjects];
             finish = YES;
         } else if (!_lru->_tail || (now - _lru->_tail->_time) <= ageLimit) {
             finish = YES;
         }
-    )
+    UNLOCK
     
     if (finish) return;
     
     NSMutableArray *holder = [NSMutableArray new];
     while (!finish) {
-        trylockable(
+        if (TRY_LOCK) {
             if (_lru->_tail && (now - _lru->_tail->_time) > ageLimit) {
                 id object = [_lru removeObject];
                 if (object) [holder addObject:object];
             } else {
                 finish = YES;
             }
-        ) else {
+            UNLOCK
+        } else {
             usleep(10 * 1000); //10 ms
         }
 
