@@ -6,6 +6,7 @@
 //  Copyright © 2017 7. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MainViewController.h"
 //#import "WebSampleVC.h"
 //#import "WebSampleVCByLabel.h"
@@ -14,8 +15,9 @@
 #import "AttributeLabelSampleVCLite.h"
 #import "RichTextEditorSampleVC.h"
 //#import "WebSampleVCByJQuery.h"
+#import <TZImagePickerController/TZImagePickerController.h>
 
-@interface MainViewController ()
+@interface MainViewController () <TZImagePickerControllerDelegate>
 
 @end
 
@@ -76,6 +78,19 @@
 //    WebSampleVCByJQuery *c = [WebSampleVCByJQuery new];
 //    
 //    [self.navigationController pushViewController:c animated:YES];
+}
+
+- (IBAction)onShowImagePicker:(id)sender {
+    // https://github.com/banchichen/TZImagePickerController
+    // https://github.com/banchichen/TZImagePreviewController
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    
+    // You can get the photos by block, the same as by delegate.
+    // 你可以通过block或者代理，来得到用户选择的照片.
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        INFO(@"picker one image")
+    }];
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
 @end

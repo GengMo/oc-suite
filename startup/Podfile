@@ -52,7 +52,7 @@ target 'startup' do
     pod '_Components/FiniteScrollView', :path => '../'
     pod '_Components/FlatActionSheetView', :path => '../'
 #    pod '_Components/ImageBrowserView', :path => '../'
-    pod '_Components/ImagePicker', :path => '../'
+#    pod '_Components/ImagePicker', :path => '../'
     pod '_Components/IndicatorView', :path => '../'
     pod '_Components/InfiniteScrollView', :path => '../'
     pod '_Components/KeyboardControl', :path => '../'
@@ -107,5 +107,7 @@ target 'startup' do
     
     # pod 'SDAutoLayout'
     # pod 'SDCycleScrollView'
+    
+    pod 'TZImagePickerController'
 
 end
