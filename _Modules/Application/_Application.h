@@ -167,6 +167,9 @@
 @prop_singleton( _AppModule,        module )
 @prop_singleton( _AppContext,       context )
 
+// 评分配置
+//@prop_singleton(_AppRater, rater)
+
 - (void)quit;
 
 @end
