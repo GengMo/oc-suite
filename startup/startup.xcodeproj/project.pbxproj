@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A4F58352264AEAB00B7B104 /* BadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F58332264AEAB00B7B104 /* BadgeViewController.m */; };
+		6A4F58362264AEAB00B7B104 /* BadgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4F58342264AEAB00B7B104 /* BadgeViewController.xib */; };
 		6A515BD52251E9D400A56F8D /* WechatLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */; };
 		6AC7784C22427E680000F5B1 /* ImagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783422427E680000F5B1 /* ImagingViewController.m */; };
 		6AC7784D22427E680000F5B1 /* ImagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7783522427E680000F5B1 /* ImagingViewController.xib */; };
@@ -225,6 +227,9 @@
 
 /* Begin PBXFileReference section */
 		187BC9D8B69BAE8514205CE2 /* Pods-startup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-startup.release.xcconfig"; path = "Pods/Target Support Files/Pods-startup/Pods-startup.release.xcconfig"; sourceTree = "<group>"; };
+		6A4F58322264AEAB00B7B104 /* BadgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BadgeViewController.h; sourceTree = "<group>"; };
+		6A4F58332264AEAB00B7B104 /* BadgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BadgeViewController.m; sourceTree = "<group>"; };
+		6A4F58342264AEAB00B7B104 /* BadgeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeViewController.xib; sourceTree = "<group>"; };
 		6A515BD32251E9D400A56F8D /* WechatLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WechatLoginViewController.h; sourceTree = "<group>"; };
 		6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WechatLoginViewController.m; sourceTree = "<group>"; };
 		6AC7783422427E680000F5B1 /* ImagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagingViewController.m; sourceTree = "<group>"; };
@@ -501,6 +506,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A4F58302264AE8A00B7B104 /* 如何使用红点视图 */ = {
+			isa = PBXGroup;
+			children = (
+				6A4F58322264AEAB00B7B104 /* BadgeViewController.h */,
+				6A4F58332264AEAB00B7B104 /* BadgeViewController.m */,
+				6A4F58342264AEAB00B7B104 /* BadgeViewController.xib */,
+			);
+			path = "如何使用红点视图";
+			sourceTree = "<group>";
+		};
 		6A515BD12251E9B200A56F8D /* 如何微信登录 */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +535,7 @@
 		6AC7783222427E680000F5B1 /* 例子 */ = {
 			isa = PBXGroup;
 			children = (
+				6A4F58302264AE8A00B7B104 /* 如何使用红点视图 */,
 				6A515BD12251E9B200A56F8D /* 如何微信登录 */,
 				6AC7783322427E680000F5B1 /* 如何显示网络图片 */,
 				6AC7783722427E680000F5B1 /* 如何数据请求与解析 */,
@@ -1273,6 +1289,7 @@
 				862CB0D61FF110ED0059E3A9 /* ZSSRichTextEditor.js in Resources */,
 				862CB0A61FF110EC0059E3A9 /* ZSSitalic@2x.png in Resources */,
 				862CB0AF1FF110ED0059E3A9 /* ZSSoutdent.png in Resources */,
+				6A4F58362264AEAB00B7B104 /* BadgeViewController.xib in Resources */,
 				862CB08F1FF110EC0059E3A9 /* ZSSh1.png in Resources */,
 				862CB0B11FF110ED0059E3A9 /* ZSSparagraph.png in Resources */,
 				862CB0B61FF110ED0059E3A9 /* ZSSquicklink@2x.png in Resources */,
@@ -1479,6 +1496,7 @@
 				862CAFED1FF102390059E3A9 /* AttributeLabelSampleVCLite.m in Sources */,
 				862CB0E01FF110ED0059E3A9 /* HRColorUtil.m in Sources */,
 				862CB0D71FF110ED0059E3A9 /* CYRLayoutManager.m in Sources */,
+				6A4F58352264AEAB00B7B104 /* BadgeViewController.m in Sources */,
 				6AC7785022427E680000F5B1 /* ExampleRequest.m in Sources */,
 				862CB0D91FF110ED0059E3A9 /* CYRTextView.m in Sources */,
 				6AC7785422427E690000F5B1 /* CacheViewController.m in Sources */,

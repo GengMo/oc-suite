@@ -16,6 +16,7 @@
 #import "RichTextEditorSampleVC.h"
 //#import "WebSampleVCByJQuery.h"
 #import <TZImagePickerController/TZImagePickerController.h>
+#import "BadgeViewController.h"
 
 @interface MainViewController () <TZImagePickerControllerDelegate>
 
@@ -84,6 +85,8 @@
     // https://github.com/banchichen/TZImagePickerController
     // https://github.com/banchichen/TZImagePreviewController
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    imagePickerVc.allowCrop = YES;
+    imagePickerVc.needCircleCrop = YES; // 圆形裁剪框
     
     // You can get the photos by block, the same as by delegate.
     // 你可以通过block或者代理，来得到用户选择的照片.
