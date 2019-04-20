@@ -36,6 +36,19 @@
         
         return header;
     };
+    
+    weakly(self)
+    self.net.responseFilterHandler = ^NSError *(NSDictionary *response) {
+        NSNumber *errorCode = response[@"code"];
+        NSString *errorMessage = response[@"message"];
+    
+        if (errorCode.integerValue == 13) {
+            // 单点登录错误
+            return [NSError errorWithDomain:classnameof_Class(_.class) code:errorCode.integerValue userInfo:@{@"message":errorMessage}];
+        }
+        
+        return nil;
+    };
 }
 
 /*

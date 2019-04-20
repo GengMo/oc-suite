@@ -177,6 +177,14 @@
 //        return [NSError errorWithDomain:classnameof_Class(self.class) code:errorCode.integerValue userInfo:@{@"error_message":errorMessage}];
 //    }
     
+    if (self.responseFilterHandler) {
+        NSError *err = nil;
+        
+        if (!!(err = self.responseFilterHandler(response))) {
+            return err;
+        }
+    }
+    
     return nil;
 }
 

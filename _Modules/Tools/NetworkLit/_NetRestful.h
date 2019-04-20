@@ -5,6 +5,7 @@
 
 typedef NSDictionary * (^ _NetHeaderAppendBlock)(NSString *apiname);
 typedef NSDictionary * (^ _NetParameterAppendBlock)(NSString *apiname);
+typedef NSError * (^ _NetResponseFilterBlock)(NSDictionary *response);
 typedef void * (^ _NetShowHudBlock)(void);
 typedef void * (^ _NetDismissHudBlock)(void);
 
@@ -21,6 +22,7 @@ typedef void * (^ _NetDismissHudBlock)(void);
 
 @property (nonatomic, strong) _NetHeaderAppendBlock headerAppendHandler;
 @property (nonatomic, strong) _NetParameterAppendBlock parameterAppendHandler;
+@property (nonatomic, strong) _NetResponseFilterBlock responseFilterHandler;
 @property (nonatomic, strong) _NetShowHudBlock showHudHandler;
 @property (nonatomic, strong) _NetDismissHudBlock dismissHudHandler;
 
@@ -39,8 +41,8 @@ typedef void * (^ _NetDismissHudBlock)(void);
 
 - (NSDictionary *)defaultHeader;
 
-- (NSDictionary *)appendParametersOnApi:(NSString *)api;
-- (NSError *)checkResponseIfHaveError:(NSDictionary *)response;
-- (NSDictionary *)filteredResponse:(NSDictionary *)originResponse;
+//- (NSDictionary *)appendParametersOnApi:(NSString *)api;
+//- (NSError *)checkResponseIfHaveError:(NSDictionary *)response;
+//- (NSDictionary *)filteredResponse:(NSDictionary *)originResponse;
 
 @end

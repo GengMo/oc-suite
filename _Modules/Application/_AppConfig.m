@@ -30,6 +30,25 @@
 
 // 后台请求统一添加appplatform, appname, appversion三个字段，方便线上问题紧急修复（带URL域名）
 // 后台请求统一添加guid（唯一标示符），方便后台分析日志（带URL域名）
+
+// 可参考：https://blog.csdn.net/weixin_40876113/article/details/80770094
+// 崩溃日志收集
+
+// platform     - 应用平台 ios/android
+
+// devicename   - 设备名称
+// devicemodel  - 设备模型
+// sysname      - 系统名称
+// sysver       - 系统版本
+// guid         - 设备ID
+// resolution   - 屏幕分辨率
+// nettype      - 网络类型
+
+// appid        - app bundle id
+// appver       - 应用版本
+
+// user信息      - 数据库中抽取
+
 - (NSString *)appDescription {
     static NSString *const apppltFirstSubStr = @"?appplatform=";
     static NSString *const appnameFirstSubStr = @"?appname=";
