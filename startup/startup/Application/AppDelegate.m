@@ -53,6 +53,7 @@
     NSString *value = shared_cache[@"key"];
     INFO(@"the @key = %@", value);
     //////////////
+//    [UIImage imageWithData:nil]
     
     return YES;
 }

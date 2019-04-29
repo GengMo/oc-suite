@@ -26,6 +26,7 @@
 @def_prop_dynamic( BOOL,				active );
 @def_prop_dynamic( BOOL,				inactive );
 @def_prop_dynamic( BOOL,				background );
+@def_prop_dynamic( BOOL,                freshman );
 
 @def_prop_strong( Block,			whenEnterBackground );
 @def_prop_strong( Block,			whenEnterForeground );
@@ -33,6 +34,29 @@
 @def_prop_singleton( _AppConfig,        config )
 @def_prop_singleton( _AppModule,        module )
 @def_prop_singleton( _AppContext,       context )
+
+// MARK: -
+
+- (BOOL)active {
+    return YES;
+}
+
+- (BOOL)inactive {
+    return YES;
+}
+
+- (BOOL)background {
+    return YES;
+}
+
+- (BOOL)freshman {
+    BOOL has = [[[NSUserDefaults standardUserDefaults] objectForKey:app_version] boolValue];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:app_version];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    return has;
+}
 
 #pragma mark - 生命周期
 

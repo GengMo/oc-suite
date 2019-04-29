@@ -81,6 +81,5 @@
 #import "NSString+Extension.h"
 #import "NSTimer+Extension.h"
 #import "UIApplication+Extension.h"
-#import "UIDevice+Extension.h"
 
 

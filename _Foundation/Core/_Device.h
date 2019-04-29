@@ -2,15 +2,13 @@
 #import "_Singleton.h"
 #import "_Property.h"
 
-EXTERN_C BOOL isFirstLaunched (void);
-
-#define is_first_launched isFirstLaunched()
-
 #pragma mark -
 
 // 更新时间：2017/10/18
-// [史上最全的iOS各种设备信息获取总结(iPhone8/iPhone X 已更新)](http://www.jianshu.com/p/b23016bb97af)
-typedef NS_ENUM(NSUInteger, Hardware) {
+// http://www.jianshu.com/p/b23016bb97af
+// 更新时间：2019/04/29
+// https://www.jianshu.com/p/f2d83ddb09fe
+typedef enum : NSUInteger {
     NOT_AVAILABLE,
     
     IPHONE_2G,
@@ -18,15 +16,11 @@ typedef NS_ENUM(NSUInteger, Hardware) {
     IPHONE_3GS,
     
     IPHONE_4,
-    IPHONE_4_CDMA,
     IPHONE_4S,
     
     IPHONE_5,
-    IPHONE_5_CDMA_GSM,
     IPHONE_5C,
-    IPHONE_5C_CDMA_GSM,
     IPHONE_5S,
-    IPHONE_5S_CDMA_GSM,
     
     IPHONE_6,
     IPHONE_6_PLUS,
@@ -40,6 +34,8 @@ typedef NS_ENUM(NSUInteger, Hardware) {
     IPHONE_8_PLUS,
     
     IPHONE_X,
+    IPHONE_XS,
+    IPHONE_XR,
     
     IPOD_TOUCH_1G,
     IPOD_TOUCH_2G,
@@ -49,42 +45,33 @@ typedef NS_ENUM(NSUInteger, Hardware) {
     
     IPAD,
     IPAD_2,
-    IPAD_2_WIFI,
-    IPAD_2_CDMA,
     IPAD_3,
-    IPAD_3G,
-    IPAD_3_WIFI,
-    IPAD_3_WIFI_CDMA,
     IPAD_4,
-    IPAD_4_WIFI,
-    IPAD_4_GSM_CDMA,
     
     IPAD_MINI,
-    IPAD_MINI_WIFI,
-    IPAD_MINI_WIFI_CDMA,
-    IPAD_MINI_RETINA_WIFI,
-    IPAD_MINI_RETINA_WIFI_CDMA,
-    IPAD_MINI_3_WIFI,
-    IPAD_MINI_3_WIFI_CELLULAR,
-    IPAD_MINI_RETINA_WIFI_CELLULAR_CN,
+    IPAD_MINI_RETINA,
+    IPAD_MINI_3,
+    IPAD_AIR,
+    IPAD_AIR_2,
     
-    IPAD_AIR_WIFI,
-    IPAD_AIR_WIFI_GSM,
-    IPAD_AIR_WIFI_CDMA,
-    IPAD_AIR_2_WIFI,
-    IPAD_AIR_2_WIFI_CELLULAR,
+    IPAD_PRO_9,
+    IPAD_PRO_12,
     
     SIMULATOR
-};
+} HardwareType;
 
-typedef enum {
-    OperationSystem_Unknown = 0,
-    OperationSystem_Mac,
-    OperationSystem_iOS
-} OperationSystem;
+typedef enum : NSUInteger {
+    /* The passcode status was unknown */
+    PasscodeStatusUnknown   = 0,
+    /* The passcode is enabled */
+    PasscodeStatusEnabled   = 1,
+    /* The passcode is disabled */
+    PasscodeStatusDisabled  = 2
+} PasscodeStatus;
 
 #pragma mark - 
 
+// 即将废弃，用表达式，不再枚举！！
 extern BOOL IOS8; // 准确的iOS8， 非iOS7，非iOS9
 extern BOOL IOS9;
 extern BOOL IOS10;
@@ -117,6 +104,7 @@ extern BOOL IS_SCREEN_58_INCH; // 458 ppi, Safe design area: 750x1468 @2x
 
 // Device model
 // 参考：http://www.jianshu.com/p/b23016bb97af
+// 即将废弃！
 extern BOOL IS_IPHONE_4;
 extern BOOL IS_IPHONE_4S;
 extern BOOL IS_IPHONE_5;
@@ -149,7 +137,7 @@ extern BOOL IS_IPHONE_DESIGN_X;
 @prop_readonly( NSString *,         now );
 
 @prop_readonly( NSString *,			osVersion );
-@prop_readonly( OperationSystem,	osType );
+//@prop_readonly( OperationSystem,    osType );
 @prop_readonly( NSString *,			bundleVersion );
 @prop_readonly( NSString *,			bundleShortVersion );
 @prop_readonly( NSInteger,          bundleBuild );
@@ -157,30 +145,13 @@ extern BOOL IS_IPHONE_DESIGN_X;
 @prop_readonly( NSString *,			urlSchema );
 @prop_readonly( NSString *,			deviceModel );
 
-@prop_readonly( BOOL,				isJailBroken );
-@prop_readonly( BOOL,				runningOnPhone );
-@prop_readonly( BOOL,				runningOnPad );
-@prop_readonly( BOOL,				requiresPhoneOS );
-
-@prop_readonly( BOOL,				isScreenPhone );
-@prop_readonly( BOOL,				isScreen320x480 );      // history
-@prop_readonly( BOOL,				isScreen640x960 );      // ip4s
-@prop_readonly( BOOL,				isScreen640x1136 );     // ip5, ip5s, ip6 Zoom mode
-@prop_readonly( BOOL,				isScreen750x1334 );     // ip6
-@prop_readonly( BOOL,				isScreen1242x2208 );    // ip6p
-@prop_readonly( BOOL,				isScreen1125x2001 );    // ip6p Zoom mode
-
-@prop_readonly( BOOL,				isScreenPad );
-@prop_readonly( BOOL,				isScreen768x1024 );     // only ipad1, ipad2, ipad mini1
-@prop_readonly( BOOL,				isScreen1536x2048 );
-
 @prop_readonly( CGSize,				screenSize );
 
-@prop_readonly( double,             totalMemory ); // 获取设备物理内存(单位：MB)
-@prop_readonly( double,				availableMemory ); // 获取当前设备可用内存(单位：MB）
-@prop_readonly( double,				usedMemory ); // 获取当前任务所占用的内存（单位：MB）
+@prop_readonly( double,             totalMemory );              // 获取设备物理内存(单位：MB)
+@prop_readonly( double,				availableMemory );          // 获取当前设备可用内存(单位：MB）
+@prop_readonly( double,				usedMemory );               // 获取当前任务所占用的内存（单位：MB）
 
-@prop_readonly( double,				availableDisk ); // 获取当前设备可用磁盘空间(单位：MB）
+@prop_readonly( double,				availableDisk );            // 获取当前设备可用磁盘空间(单位：MB）
 
 @prop_readonly( NSString *,         appSize );
 
@@ -208,6 +179,27 @@ extern BOOL IS_IPHONE_DESIGN_X;
 @prop_readonly( NSString *,         deviceInfo )
 @prop_readonly( NSString *,         deviceVersion )
 
+@prop_readonly( HardwareType,       hardware )
+@prop_readonly( NSString *,         hardwareAsString )
+@prop_readonly( NSString *,         hardwareDescription )
+
+@prop_readonly( NSString *,         systemName )
+@prop_readonly( CGFloat,            batteryLevel )
+@prop_readonly( NSString *,         macAddress )
+@prop_readonly( NSUInteger,         cpuFrequency )              // CPU 主频
+@prop_readonly( NSUInteger,         busFrequency )              // BUS 主频
+@prop_readonly( NSUInteger,         ramSize )              // 内存大小
+@prop_readonly( NSUInteger,         cpuNumber )     // the current device CPU number
+@prop_readonly( NSString *,         systemVersion )          // iOS系统的版本号
+@prop_readonly( BOOL,               hasCamera )                 // 当前系统是否有摄像头
+@prop_readonly( NSUInteger,         totalMemoryBytes )          // 手机内存总量, 返回的是字节数
+@prop_readonly( NSUInteger,         freeMemoryBytes )          // 手机可用内存, 返回的是字节数
+@prop_readonly( long long,          freeDiskSpaceBytes )          // 手机硬盘空闲空间, 返回的是字节数
+@prop_readonly( long long,          totalDiskSpaceBytes )          // 手机硬盘总空间, 返回的是字节数
+
+@prop_readonly( BOOL,               passcodeStatusSupported ) // Determines if the device supports the `passcodeStatus` check. Passcode check is only supported on iOS 8.
+@prop_readonly( PasscodeStatus,     passcodeStatus ) // Checks and returns the devices current passcode status. If `passcodeStatusSupported` returns NO then `LNPasscodeStatusUnknown` will be returned.
+
 - (NSString *)urlSchemaWithName:(NSString *)name;
 
 - (BOOL)isOsVersionOrEarlier:(NSString *)ver;
@@ -233,44 +225,6 @@ extern BOOL IS_IPHONE_DESIGN_X;
  */
 - (BOOL)call:(NSString *)phone;
 
-/** This method retruns the hardware type */
-+ (NSString *)hardwareString;
-
-/** This method returns the Hardware enum depending upon harware string */
-+ (Hardware)hardware;
-
-/** This method returns the readable description of hardware string */
-+ (NSString *)hardwareDescription;
-
-/** This method returns the readable simple description of hardware string */
-+ (NSString *)hardwareSimpleDescription;
-
-/**
- This method returns the hardware number not actual but logically.
- e.g. if the hardware string is 5,1 then hardware number would be 5.1
- */
-+ (float)hardwareNumber:(Hardware)hardware;
-
-/** This method returns the resolution for still image that can be received
- from back camera of the current device. Resolution returned for image oriented landscape right. **/
-+ (CGSize)backCameraStillImageResolutionInPixels;
-
-
-/** Iphones adapter.**/
-+ (void)adaptPhone4s:(Block)phone4sBlock
-             phone5s:(Block)phone5sBlock
-              phone6:(Block)phone6Block
-             phone6p:(Block)phone6pBlock;
-
-/** Ipads adapter. 1024*768 2048*1536 **/
-+ (void)adapterPad1024:(Block)pad1024Block
-               pad2048:(Block)pad2048Block;
-
-// iPhone x
-+ (void)iPhoneXWith:(Block)handler;
-+ (void)iPhoneXWith:(Block)handlerX otherwise:(Block)handlerOther;
-
-// iOS 11 以上，但非 iPhone x
-+ (void)iOS11_NotiPhoneXWith:(Block)handler;
-
 @end
+
+#define shared_device [_Device sharedInstance]

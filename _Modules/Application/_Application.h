@@ -158,6 +158,7 @@
 @prop_readonly( BOOL,				active )
 @prop_readonly( BOOL,				inactive )
 @prop_readonly( BOOL,				background )
+@prop_readonly( BOOL,               freshman )
 
 // If u wanna using block replaced notification
 @prop_strong( Block,			whenEnterBackground )
