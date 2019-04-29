@@ -1,4 +1,6 @@
 
+#import <libkern/OSAtomic.h>
+
 #import "_Application.h"
 #import "XHLaunchAd.h"
 #import "APNService.h"
@@ -56,6 +58,15 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     return has;
+}
+
+static volatile int32_t __numberOfActiveNetworkConnectionsxxx;
+- (void)beginNetworkActivity {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = OSAtomicAdd32(1, &__numberOfActiveNetworkConnectionsxxx) > 0;
+}
+
+- (void)endNetworkActivity {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = OSAtomicAdd32(-1, &__numberOfActiveNetworkConnectionsxxx) > 0;
 }
 
 #pragma mark - 生命周期

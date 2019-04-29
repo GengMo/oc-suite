@@ -1,9 +1,15 @@
-//  https://github.com/JackRostron/UIApplication-Permissions
+//
+//  _System.h
+//  _Foundation
+//
+//  Created by fallen.ink on 2019/4/30.
+//
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-#pragma mark - Permission
+NS_ASSUME_NONNULL_BEGIN
 
 typedef enum {
     PermissionTypeBluetoothLE,
@@ -25,7 +31,7 @@ typedef enum {
     PermissionAccessMissingFramework, //Developer didn't import the required framework to the project
 } PermissionAccess;
 
-@interface UIApplication (Permission)
+@interface _System : NSObject
 
 //Check permission of service. Cannot check microphone or motion without asking user for permission
 - (PermissionAccess)hasAccessToBluetoothLE;
@@ -49,28 +55,10 @@ typedef enum {
 //Needs investigating - unsure whether it can be implemented because of required delegate callbacks
 //-(void)requestAccessToBluetoothLEWithSuccess:(void(^)())accessGranted;
 
-@end
-
-#pragma mark - NetworkActivityIndicator
-
-@interface UIApplication (JKNetworkActivityIndicator)
-
-/// Tell the application that network activity has begun. The network activity indicator will then be shown.
-/// Display the network activity indicator to provide feedback when your application accesses the network for more than a couple of seconds. If the operation finishes sooner than that, you don’t have to show the network activity indicator, because the indicator would be likely to disappear before users notice its presence.
-- (void)beginNetworkActivity;
-
-/// Tell the application that a session of network activity has begun. The network activity indicator will remain showing or hide automatically depending the presence of other ongoing network activity in the app.
-- (void)endNetworkActivity;
-
-@end
-
-
-#pragma mark - KeyboardFrame
-
-@interface UIApplication (KeyboardFrame)
-
 @property (nonatomic, readonly) CGRect keyboardFrame;
 
 @end
 
+#define shared_system [_System sharedInstance]
 
+NS_ASSUME_NONNULL_END

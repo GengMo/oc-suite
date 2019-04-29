@@ -1,3 +1,10 @@
+//
+//  _System.m
+//  _Foundation
+//
+//  Created by fallen.ink on 2019/4/30.
+//
+
 #import <objc/runtime.h>
 #import <AddressBook/AddressBook.h>
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -9,9 +16,7 @@
 #import <UIKit/UIKit.h>
 #import <libkern/OSAtomic.h>
 
-#import "UIApplication+Extension.h"
-
-#pragma mark - Permission
+#import "_System.h"
 
 typedef void (^LocationSuccessCallback)(void);
 typedef void (^LocationFailureCallback)(void);
@@ -20,7 +25,7 @@ static char PermissionsLocationManagerPropertyKey;
 static char PermissionsLocationBlockSuccessPropertyKey;
 static char PermissionsLocationBlockFailurePropertyKey;
 
-@interface UIApplication () <CLLocationManagerDelegate>
+@interface _System () <CLLocationManagerDelegate>
 
 @property (nonatomic, retain) CLLocationManager *permissionsLocationManager;
 @property (nonatomic, copy) LocationSuccessCallback locationSuccessCallbackProperty;
@@ -28,9 +33,8 @@ static char PermissionsLocationBlockFailurePropertyKey;
 
 @end
 
-@implementation UIApplication (Permission)
+@implementation _System
 
-#pragma mark - Check permissions
 - (PermissionAccess)hasAccessToBluetoothLE {
     switch ([[[CBCentralManager alloc] init] state]) {
         case CBCentralManagerStateUnsupported:
@@ -149,7 +153,6 @@ static char PermissionsLocationBlockFailurePropertyKey;
     }
     return PermissionAccessUnknown;
 }
-
 
 #pragma mark - Request permissions
 - (void)requestAccessToCalendarWithSuccess:(void(^)(void))accessGranted andFailure:(void(^)(void))accessDenied {
@@ -277,30 +280,7 @@ static char PermissionsLocationBlockFailurePropertyKey;
     }
 }
 
-@end
-
-#pragma mark - NetworkActivityIndicator
-
-@implementation UIApplication (NetworkActivityIndicator)
-
-static volatile int32_t __numberOfActiveNetworkConnectionsxxx;
-
 #pragma mark Public API
-
-- (void)beginNetworkActivity {
-    self.networkActivityIndicatorVisible = OSAtomicAdd32(1, &__numberOfActiveNetworkConnectionsxxx) > 0;
-}
-
-- (void)endNetworkActivity {
-    self.networkActivityIndicatorVisible = OSAtomicAdd32(-1, &__numberOfActiveNetworkConnectionsxxx) > 0;
-}
-
-@end
-
-
-#pragma mark - KeyboardFrame
-
-@implementation UIApplication (KeyboardFrame)
 
 static CGRect __keyboardFrame = (CGRect){ (CGPoint){ 0.0f, 0.0f }, (CGSize){ 0.0f, 0.0f } };
 
@@ -310,14 +290,16 @@ static CGRect __keyboardFrame = (CGRect){ (CGPoint){ 0.0f, 0.0f }, (CGSize){ 0.0
 
 + (void)load {
     [NSNotificationCenter.defaultCenter addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-         __keyboardFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        __keyboardFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     }];
     [NSNotificationCenter.defaultCenter addObserverForName:UIKeyboardDidChangeFrameNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-         __keyboardFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        __keyboardFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     }];
     
     [NSNotificationCenter.defaultCenter addObserverForName:UIKeyboardDidHideNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-         __keyboardFrame = CGRectZero;
+        __keyboardFrame = CGRectZero;
     }];
 }
+
 @end
+
