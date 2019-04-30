@@ -14,4 +14,6 @@
 
 - (void)usageOfCache;
 
+- (void)usageOfDeviceInfo;
+
 @end

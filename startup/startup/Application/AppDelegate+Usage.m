@@ -39,6 +39,20 @@
     cacheInst[@"key"] = @(10);
     
     LOG(@"cache[key] = %@", cacheInst[@"key"]);
+    
+    INFO(@"the @key8888 = %@", shared_cache[@"key"]);
+    
+    shared_cache[@"key"] = @"dddd";
+    NSString *value = shared_cache[@"key"];
+    INFO(@"the @key = %@", value);
+}
+
+- (void)usageOfDeviceInfo {
+    INFO(@"====== Device Info ======")
+    
+    INFO(@"Hardware description = %@", shared_device.hardwareDescription)
+    
+    INFO(@"=========================\n")
 }
 
 @end

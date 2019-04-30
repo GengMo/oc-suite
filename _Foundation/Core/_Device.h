@@ -202,13 +202,13 @@ extern BOOL IS_IPHONE_DESIGN_X;
 
 - (NSString *)urlSchemaWithName:(NSString *)name;
 
-- (BOOL)isOsVersionOrEarlier:(NSString *)ver;
-- (BOOL)isOsVersionOrLater:(NSString *)ver;
-- (BOOL)isOsVersionEqualTo:(NSString *)ver;
-
-- (BOOL)isScreenSizeSmallerThan:(CGSize)size;
-- (BOOL)isScreenSizeBiggerThan:(CGSize)size;
-- (BOOL)isScreenSizeEqualTo:(CGSize)size;
+//- (BOOL)isOsVersionOrEarlier:(NSString *)ver;
+//- (BOOL)isOsVersionOrLater:(NSString *)ver;
+//- (BOOL)isOsVersionEqualTo:(NSString *)ver;
+//
+//- (BOOL)isScreenSizeSmallerThan:(CGSize)size;
+//- (BOOL)isScreenSizeBiggerThan:(CGSize)size;
+//- (BOOL)isScreenSizeEqualTo:(CGSize)size;
 
 // 临时写在这里
 @prop_readonly( NSString *,            deviceUDID ); // Stored in keychain

@@ -111,15 +111,6 @@ NSString * const UIDevicePasscodeKeychainAccount = @"UIDevice-PasscodeStatus_Key
 @def_prop_readonly( NSString *,			urlSchema )
 @def_prop_readonly( NSString *,			deviceModel )
 
-//@def_prop_readonly( BOOL,                isScreenPhone )
-//@def_prop_readonly( BOOL,                isScreen320x480 )
-//@def_prop_readonly( BOOL,                isScreen640x960 )
-//@def_prop_readonly( BOOL,                isScreen640x1136 )
-//
-//@def_prop_readonly( BOOL,                isScreenPad )
-//@def_prop_readonly( BOOL,                isScreen768x1024 )
-//@def_prop_readonly( BOOL,                isScreen1536x2048 )
-
 @def_prop_readonly( CGSize,				screenSize )
 
 @def_prop_readonly( double,             totalMemory )
@@ -301,64 +292,64 @@ NSString * const UIDevicePasscodeKeychainAccount = @"UIDevice-PasscodeStatus_Key
     return [UIScreen mainScreen].currentMode.size;
 }
 
-- (BOOL)isScreenSizeEqualTo:(CGSize)size {
-    CGSize size2 = CGSizeMake( size.height, size.width );
-    CGSize screenSize = [UIScreen mainScreen].currentMode.size;
-    
-    if ( CGSizeEqualToSize(size, screenSize) || CGSizeEqualToSize(size2, screenSize) ) {
-        return YES;
-    }
-    
-    return NO;
-}
+//- (BOOL)isScreenSizeEqualTo:(CGSize)size {
+//    CGSize size2 = CGSizeMake( size.height, size.width );
+//    CGSize screenSize = [UIScreen mainScreen].currentMode.size;
+//
+//    if ( CGSizeEqualToSize(size, screenSize) || CGSizeEqualToSize(size2, screenSize) ) {
+//        return YES;
+//    }
+//
+//    return NO;
+//}
 
-- (BOOL)isScreenSizeSmallerThan:(CGSize)size {
-    CGSize size2 = CGSizeMake( size.height, size.width );
-    CGSize screenSize = [UIScreen mainScreen].currentMode.size;
-    
-    if ( (size.width > screenSize.width && size.height > screenSize.height) ||
-        (size2.width > screenSize.width && size2.height > screenSize.height) ) {
-        return YES;
-    }
-    
-    return NO;
-}
+//- (BOOL)isScreenSizeSmallerThan:(CGSize)size {
+//    CGSize size2 = CGSizeMake( size.height, size.width );
+//    CGSize screenSize = [UIScreen mainScreen].currentMode.size;
+//
+//    if ( (size.width > screenSize.width && size.height > screenSize.height) ||
+//        (size2.width > screenSize.width && size2.height > screenSize.height) ) {
+//        return YES;
+//    }
+//
+//    return NO;
+//}
 
-- (BOOL)isScreenSizeBiggerThan:(CGSize)size {
-    CGSize size2 = CGSizeMake( size.height, size.width );
-    CGSize screenSize = [UIScreen mainScreen].currentMode.size;
-    
-    if ( (size.width < screenSize.width && size.height < screenSize.height) ||
-        (size2.width < screenSize.width && size2.height < screenSize.height) ) {
-        return YES;
-    }
-    
-    return NO;
-}
+//- (BOOL)isScreenSizeBiggerThan:(CGSize)size {
+//    CGSize size2 = CGSizeMake( size.height, size.width );
+//    CGSize screenSize = [UIScreen mainScreen].currentMode.size;
+//
+//    if ( (size.width < screenSize.width && size.height < screenSize.height) ||
+//        (size2.width < screenSize.width && size2.height < screenSize.height) ) {
+//        return YES;
+//    }
+//
+//    return NO;
+//}
 
-- (BOOL)isOsVersionOrEarlier:(NSString *)ver {
-    if ( [[self osVersion] compare:ver] != NSOrderedDescending ) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-- (BOOL)isOsVersionOrLater:(NSString *)ver {
-    if ( [[self osVersion] compare:ver] != NSOrderedAscending ) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-- (BOOL)isOsVersionEqualTo:(NSString *)ver {
-    if ( NSOrderedSame == [[self osVersion] compare:ver] ) {
-        return YES;
-    } else {
-        return NO;
-    }	
-}
+//- (BOOL)isOsVersionOrEarlier:(NSString *)ver {
+//    if ( [[self osVersion] compare:ver] != NSOrderedDescending ) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+//}
+//
+//- (BOOL)isOsVersionOrLater:(NSString *)ver {
+//    if ( [[self osVersion] compare:ver] != NSOrderedAscending ) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+//}
+//
+//- (BOOL)isOsVersionEqualTo:(NSString *)ver {
+//    if ( NSOrderedSame == [[self osVersion] compare:ver] ) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+//}
 
 #pragma mark - memory
 
@@ -640,7 +631,7 @@ NSString * const UIDevicePasscodeKeychainAccount = @"UIDevice-PasscodeStatus_Key
 
 #pragma mark -
 
-+ (NSString*)hardwareAsString {
+- (NSString*)hardwareAsString {
     int name[] = {CTL_HW,HW_MACHINE};
     size_t size = 100;
     sysctl(name, 2, NULL, &size, NULL, 0); // getting size of answer
@@ -665,7 +656,7 @@ NSString * const UIDevicePasscodeKeychainAccount = @"UIDevice-PasscodeStatus_Key
  }
  */
 
-+ (HardwareType)hardware {
+- (HardwareType)hardware {
     NSString *hardware = [self hardwareAsString];
     if ([hardware isEqualToString:@"iPhone1,1"])    return IPHONE_2G;
     if ([hardware isEqualToString:@"iPhone1,2"])    return IPHONE_3G;
@@ -755,7 +746,7 @@ NSString * const UIDevicePasscodeKeychainAccount = @"UIDevice-PasscodeStatus_Key
     return NOT_AVAILABLE;
 }
 
-+ (NSString *)hardwareDescription {
+- (NSString *)hardwareDescription {
     NSString *hardware = [self hardwareAsString];
     if ([hardware isEqualToString:@"iPhone1,1"])    return @"iPhone 2G";
     if ([hardware isEqualToString:@"iPhone1,2"])    return @"iPhone 3G";
@@ -1137,26 +1128,26 @@ NSString * const UIDevicePasscodeKeychainAccount = @"UIDevice-PasscodeStatus_Key
 
 #pragma mark - Public method
 
-+ (void)iPhoneXWith:(Block)handler {
-    if (IS_IPHONE_DESIGN_X) {
-        if (handler) handler();
-    }
-}
+//+ (void)iPhoneXWith:(Block)handler {
+//    if (IS_IPHONE_DESIGN_X) {
+//        if (handler) handler();
+//    }
+//}
 
-+ (void)iPhoneXWith:(Block)handlerX otherwise:(Block)handlerOther {
-    if (IS_IPHONE_DESIGN_X) {
-        if (handlerX) handlerX();
-    } else {
-        if (handlerOther) handlerOther();
-    }
-}
-
-+ (void)iOS11_NotiPhoneXWith:(Block)handler {
-    if (@available(iOS 11.0, *)) {
-        if (IS_NOT_IPHONE_DESIGN_X) {
-            if (handler) handler();
-        }
-    }
-}
+//+ (void)iPhoneXWith:(Block)handlerX otherwise:(Block)handlerOther {
+//    if (IS_IPHONE_DESIGN_X) {
+//        if (handlerX) handlerX();
+//    } else {
+//        if (handlerOther) handlerOther();
+//    }
+//}
+//
+//+ (void)iOS11_NotiPhoneXWith:(Block)handler {
+//    if (@available(iOS 11.0, *)) {
+//        if (IS_NOT_IPHONE_DESIGN_X) {
+//            if (handler) handler();
+//        }
+//    }
+//}
 
 @end

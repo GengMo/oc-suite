@@ -47,13 +47,16 @@
     
     [service.sns configure];
     
-    INFO(@"the @key8888 = %@", shared_cache[@"key"]);
     
-    shared_cache[@"key"] = @"dddd";
-    NSString *value = shared_cache[@"key"];
-    INFO(@"the @key = %@", value);
+    ////////////// 使用说明
+    
+    [self usageOfReachability];
+    
+    [self usageOfCache];
+    
+    [self usageOfDeviceInfo];
+
     //////////////
-//    [UIImage imageWithData:nil]
     
     return YES;
 }
