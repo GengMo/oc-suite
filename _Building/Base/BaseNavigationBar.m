@@ -1,12 +1,4 @@
 //
-//  BaseNavigationBar.m
-//  consumer
-//
-//  Created by fallen.ink on 9/5/16.
-//
-//
-
-#import "_precompile.h"
 #import "BaseNavigationBar.h"
 
 @interface BaseNavigationBar ()
@@ -17,6 +9,63 @@
 
 
 @implementation BaseNavigationBar
+
+@def_prop_class( CGFloat,       preferredBarAlpha, setPreferredBarAlpha )
+@def_prop_class( UIColor *,     preferredBarTintColor, setPreferredBarTintColor )
+@def_prop_class( UIColor *,     preferredTintColor, setPreferredTintColor )
+@def_prop_class( UIColor *,     preferredForegroundColor, setPreferredForegroundColor )
+@def_prop_class( UIFont *,      preferredForegroundFont, setPreferredForegroundFont )
+
+@def_prop_assign( BOOL,         overrideOpacity )
+@def_prop_assign( BOOL,         displayColorLayer )
+- (void)setDisplayColorLayer:(BOOL)displayColorLayer {
+    self.colorLayer.hidden = !displayColorLayer;
+}
+
+// MARK: - Init
+
+- (void)initDefault {
+    self.class.preferredBarAlpha = 0.7f;
+    
+    if (self.class.preferredBarTintColor) self.barTintColor = self.class.preferredBarTintColor;
+    if (self.class.preferredTintColor) self.tintColor = self.class.preferredTintColor;
+    
+    UIFont *font = self.class.preferredForegroundFont;
+    if (!font) {
+        font = [UIFont boldSystemFontOfSize:20];
+    }
+    
+    UIColor *color = self.class.preferredForegroundColor;
+    if (!color) {
+        color = [UIColor whiteColor];
+    }
+    
+    NSDictionary *attr = @{ NSForegroundColorAttributeName : color, NSFontAttributeName : font };
+    [self setTitleTextAttributes: attr];
+}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        [self initDefault];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self initDefault];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self initDefault];
+    }
+    return self;
+}
+
+// MARK: - Setting
 
 static CGFloat const kDefaultColorLayerOpacity = 0.5f;
 static CGFloat const kSpaceToCoverStatusBars = 20.0f;
@@ -38,22 +87,8 @@ static CGFloat const kSpaceToCoverStatusBars = 20.0f;
         if(self.overrideOpacity) {
             CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha = 0.0;
             [barTintColor getRed:&red green:&green blue:&blue alpha:&alpha];
-            [super setBarTintColor:[UIColor colorWithRed:red green:green blue:blue alpha:kDefaultNavigationBarAlpha]];
+            [super setBarTintColor:[UIColor colorWithRed:red green:green blue:blue alpha:self.class.preferredBarAlpha]];
         }
-        
-        // This code isn't perfect and has been commented out for now. It seems like
-        // the additional color layer doesn't work well now that translucency is based
-        // primarily on the opacity of the navigation bar (and its respective layers).
-        // However, if you'd like to experiment, feel free to uncomment this out and
-        // give it a spin.
-        
-        // if (self.colorLayer == nil) {
-        //    self.colorLayer = [CALayer layer];
-        //    self.colorLayer.opacity = kDefaultColorLayerOpacity - 0.2f;
-        //    [self.layer addSublayer:self.colorLayer];
-        // }
-        
-        // self.colorLayer.backgroundColor = barTintColor.CGColor;
     }
     // iOS 7.0 benefits from the extra color layer.
     else {
@@ -69,6 +104,8 @@ static CGFloat const kSpaceToCoverStatusBars = 20.0f;
     }
 }
 
+// MARK: - Layout
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -77,10 +114,6 @@ static CGFloat const kSpaceToCoverStatusBars = 20.0f;
         
         [self.layer insertSublayer:self.colorLayer atIndex:1];
     }
-}
-
-- (void)displayColorLayer:(BOOL)display {
-    self.colorLayer.hidden = !display;
 }
 
 @end

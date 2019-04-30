@@ -583,7 +583,7 @@
 
 - (void)pushHtml:(NSURL *)url extraParams:(NSDictionary *)params {
     BaseWebViewController *viewController = [[BaseWebViewController alloc] initWithUrl:url param:params];
-    [self pushVC:viewController];
+    [self push:viewController];
 }
 
 @end

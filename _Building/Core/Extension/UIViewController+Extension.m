@@ -45,7 +45,7 @@ static CGFloat kNavigationBarDefaultHeight    = 0.f;
     self.navigationController.navigationBar.barTintColor = navBarColor;
 }
 
-- (UIColor*)navBarColor {
+- (UIColor *)navBarColor {
     return self.navigationController.navigationBar.barTintColor;
 }
 
@@ -60,16 +60,16 @@ static CGFloat kNavigationBarDefaultHeight    = 0.f;
         label.textColor = navTitleColor;
     }
     
-    NSArray* allButtons = [self.navigationItem.titleView allViewOfClass:[UIButton class]];
+    NSArray *allButtons = [self.navigationItem.titleView allViewOfClass:[UIButton class]];
     for (UIButton* tmpButton in allButtons) {
         [tmpButton setTitleColor:navTitleColor forState:UIControlStateNormal];
     }
 }
 
-- (UIColor*)navTitleColor {
-    UIColor* titleColor = [self.navigationController.navigationBar.titleTextAttributes objectForKey:NSForegroundColorAttributeName];
+- (UIColor *)navTitleColor {
+    UIColor *titleColor = [self.navigationController.navigationBar.titleTextAttributes objectForKey:NSForegroundColorAttributeName];
     if (titleColor == nil) {
-        UILabel* titleLabel = (UILabel*)[self.navigationItem.titleView firstSubviewOfClass:[UILabel class]];
+        UILabel *titleLabel = (UILabel*)[self.navigationItem.titleView firstSubviewOfClass:[UILabel class]];
         if (titleLabel) {
             titleColor = titleLabel.textColor;
         }

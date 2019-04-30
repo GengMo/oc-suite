@@ -1,6 +1,6 @@
 
 #import "_Foundation.h"
-#import "Masonry.h"
+//#import "Masonry.h"
 #import "UIView+Extension.h"
 #import "BaseViewController.h"
 #import "BaseViewController+Private.h"
@@ -10,90 +10,7 @@
 // class implementation
 // ----------------------------------
 
-#pragma mark - Template
-
-@implementation UIViewController ( Template )
-
-- (id)_initWithNib {
-    return [self initWithNibName:NSStringFromClass([self class]) bundle:nil];
-}
-
-+ (instancetype)controller {
-    return [self controllerWithNibName:NSStringFromClass([self class])];
-}
-
-+ (instancetype)controllerWithNibName:(NSString *)nibName {
-    return [[self alloc] initWithNibName:nibName bundle:nil];
-}
-
-- (void)initDefault {
-    
-}
-
-- (void)initViews {
-    
-}
-
-- (void)afterViews {
-    
-}
-
-- (void)updateViews {
-    
-}
-
-- (void)constraintViews {
-    
-}
-
-- (void)initNavigationBar {
-    
-}
-
-- (void)restoreNavigationBar {
-    
-}
-
-- (void)initData {
-    
-}
-
-- (void)initDataSource {
-    
-}
-
-- (void)initScrollView {
-    
-}
-
-- (void)initTableView {
-    
-}
-
-- (void)initCollectionView {
-    
-}
-
-- (void)initChildViewController {
-    
-}
-
-- (void)initViewStrategy {
-    
-}
-
-@end
-
-#pragma mark - External
-
-static NSString *backButtonImageName = @"buckbutton";
-
-#pragma mark - BaseViewController
-
-
 @interface BaseViewController ()
-
-@property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
 
 @property (nonatomic, copy) UIColor *originNavBarColor;
 @property (nonatomic, copy) UIColor *originNavTitleColor;
@@ -111,277 +28,37 @@ static NSString *backButtonImageName = @"buckbutton";
 @def_prop_class( UIStatusBarStyle, userPreferredStatusBarStyle, setUserPreferredStatusBarStyle )
 @def_prop_class( UIColor *, preferredViewBackgroundColor, setPreferredViewBackgroundColor )
 
-#pragma mark - Initialize
+@def_prop_class( NSString *,    backButtonImageName, setBackButtonImageName )
 
-- (instancetype)init {
-    if (self = [super init]) {
-        [self initDefault];
+@def_prop_assign( BOOL,         hideKeyboardWhenEndEditing )
+@def_prop_assign( BOOL,         statusBarHidden )
+
+@def_prop_assign( BOOL,         navbarHiddenWhenAppear )
+@def_prop_assign( BOOL,         navbarHiddenWhenDisappear )
+@def_prop_assign( BOOL,         navbarLeftButtonHiddenWhenAppear )
+
+@def_prop_strong( UIColor *,    navbarBackgroundColor )
+@def_prop_strong( UIColor *,    navbarNormalTitleColor )
+
+@def_prop_readonly( id,         topViewController )
+@def_prop_readonly( BOOL,       isVisible )
+@def_prop_readonly( BOOL,       isNavigationRootController )
+
+- (UIViewController *)topViewController {
+    UIViewController *viewController = [self topViewControllerOfViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (viewController.presentedViewController) {
+        viewController = [self topViewControllerOfViewController:viewController.presentedViewController];
     }
-    
-    return self;
+    return viewController;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self initDefault];
-    }
-    
-    return self;
-}
-
-- (NSMutableArray *)dataArr{
-    if (_dataArr == nil) {
-        _dataArr = [[NSMutableArray alloc]init];
-    }
-    return _dataArr;
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        [self initDefault];
-    }
-    
-    return self;
-}
-
-- (void)initDefault {
-    if (self.alreadyInitialized) {
-        return;
-    }
-    self.hideKeyboardWhenEndEditing = YES;
-    
-    [self hookSelector:@selector(viewDidLoad) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
-//        UIViewController *viewController = aspectInfo.instance;
-    } error:nil];
-    self.alreadyInitialized = YES;
-}
-
-- (void)uinitDefault {
-    [self unobserveAllNotifications];
-    
-    LOG(@"%@ quit", NSStringFromClass(self.class));
-}
-
-#pragma mark - Play with view model: overrided if needed
-
-- (instancetype)initWithViewModel:(id)viewModel {
-    if (self = [super init]) {
-        [self initDefault];
-    }
-    
-    return self;
-}
-
-#pragma mark - Life cycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    if (![self isNavigationRootController]) {
-        [self setNavLeftItemWithImage:backButtonImageName target:self action:@selector(onBack)];
-    }
-
-    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    
-    if ([self navigationBarLeftButtonHiddenWhenAppear]) {
-        [self clearNavLeftItem];
-    }
-    
-    self.view.backgroundColor = self.class.preferredViewBackgroundColor;
-    
-#if 0 // 切换tab的时候动画
-    [self injectSwipeToTabGesture];
-#endif
-    
-    [self aspect_doLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    SEL selector = @selector(navigationBarHiddenWhenAppear);
-    BOOL overrided = [self.class instanceMethodForSelector:selector] != [BaseViewController.class instanceMethodForSelector:selector];
-    if (![self isMemberOfClass:[BaseViewController class]]
-        && overrided) {
-        [self.navigationController setNavigationBarHidden:[self navigationBarHiddenWhenAppear] animated:animated];
-    }
-    
-    UIColor *preferNavBarColor = [self preferNavBarBackgroundColor];
-    if (preferNavBarColor) {
-        self.hasPreferNavBarColor = YES;
-        self.originNavBarColor = self.navBarColor;
-        self.navBarColor = preferNavBarColor;
-    }
-    
-    UIColor *preferNavBarNormalTitleColor = [self preferNavBarNormalTitleColor];
-    if (preferNavBarNormalTitleColor) {
-        self.hasPreferNavTitleColor = YES;
-        self.originNavTitleColor = self.navTitleColor;
-        self.navTitleColor = preferNavBarNormalTitleColor;
-        self.navLeftItemNormalTitleColor = preferNavBarNormalTitleColor;
-        self.navRightItemNormalTitleColor = preferNavBarNormalTitleColor;
-    }
-    
-    UIColor *preferNavItemHighlightedTitleColor = [self preferNavBarHighlightedTitleColor];
-    if (preferNavItemHighlightedTitleColor) {
-        self.navItemHighlightedTitleColor = preferNavItemHighlightedTitleColor;
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    //解决手势返回失效的问题
-    if (self.navigationController.viewControllers.count > 1) {
-        self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    }else{
-        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
-    
-    [self aspect_doAppear];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    if (![self isMemberOfClass:[BaseViewController class]] &&
-        is_method_overrided(self.class, BaseViewController.class, @selector(navigationBarHiddenWhenDisappear))) {
-        [self.navigationController setNavigationBarHidden:[self navigationBarHiddenWhenDisappear] animated:animated];
-    }
-    
-    if (self.hasPreferNavBarColor) {
-        self.navBarColor = self.originNavBarColor;
-    }
-    
-    if (self.hasPreferNavTitleColor) {
-        self.navTitleColor = self.originNavTitleColor;
-        self.navLeftItemNormalTitleColor = self.originNavBarColor;
-        self.navRightItemNormalTitleColor = self.originNavBarColor;
-    }
-}
-
-- (void)dealloc {
-    [self uinitDefault];
-    
-    [self aspect_doDealloc];
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    
-    /**
-     *  隐藏键盘
-     */
-    if (self.hideKeyboardWhenEndEditing) {
-        [self.view endEditing:YES];
-    }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)bindViewModel:(id)vm {
-    // do nothing
-}
-
-- (void)onBack {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark - Use aspect hook
-
-- (void)aspect_doLoad {
-    
-}
-
-- (void)aspect_doAppear {
-    
-}
-
-- (void)aspect_doDealloc {
-    
-}
-
-#pragma mark - Virtual methods
-
-- (void)applyViewConstraints {
-    // Do nothing...
-}
-
-- (void)updateVCviewsConstraints {
-    
-}
-
-- (void)updateViewConstraints {
-    [super updateViewConstraints];
-}
-
-#pragma mark - NavigationBar style
-
-- (BOOL)navigationBarHiddenWhenAppear {
-    return NO;
-}
-
-- (BOOL)navigationBarHiddenWhenDisappear {
-    return NO;
-}
-
-- (BOOL)navigationBarLeftButtonHiddenWhenAppear {
-    return NO;
-}
-
-- (UIColor *)preferNavBarBackgroundColor {
-    return [BaseViewController preferredNavigationBarColor];
-}
-
-- (UIColor *)preferNavBarNormalTitleColor {
-    return nil;
-}
-
-- (UIColor *)preferNavBarHighlightedTitleColor {
-    return nil;
-}
-
-#pragma mark - Status style
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return BaseViewController.userPreferredStatusBarStyle;
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return _statusBarHidden;
-}
-
-- (void)setStatusBarHidden:(BOOL)statusBarHidden {
-    _statusBarHidden = statusBarHidden;
-    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-        [self prefersStatusBarHidden];
-        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
-    }
-}
-
-#pragma mark - Utility
-
-+ (UIViewController *)topViewController {
-    UIViewController *resultVC = [self topViewControllerOfViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
-    while (resultVC.presentedViewController) {
-        resultVC = [self topViewControllerOfViewController:resultVC.presentedViewController];
-    }
-    return resultVC;
-}
-
-+ (UIViewController *)topViewControllerOfViewController:(UIViewController *)vc {
-    if ([vc isKindOfClass:[UINavigationController class]]) {
-        return [self topViewControllerOfViewController:[(UINavigationController *)vc topViewController]];
-    } else if ([vc isKindOfClass:[UITabBarController class]]) {
-        return [self topViewControllerOfViewController:[(UITabBarController *)vc selectedViewController]];
+- (UIViewController *)topViewControllerOfViewController:(UIViewController *)viewController {
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        return [self topViewControllerOfViewController:[(UINavigationController *)viewController topViewController]];
+    } else if ([viewController isKindOfClass:[UITabBarController class]]) {
+        return [self topViewControllerOfViewController:[(UITabBarController *)viewController selectedViewController]];
     } else {
-        return vc;
+        return viewController;
     }
     return nil;
 }
@@ -396,60 +73,210 @@ static NSString *backButtonImageName = @"buckbutton";
     return [self.navigationController.viewControllers.firstObject isEqual:self];
 }
 
-- (BOOL)isVisibleEx {
-    return (self.isViewLoaded && self.view.window);
+- (BOOL)isVisible { return (self.isViewLoaded && self.view.window); }
+
+#pragma mark - Initialize
+
+- (instancetype)init {
+    if (self = [super init]) {
+        [self initDefault];
+    }
+    return self;
 }
 
-- (BOOL)isPresent {
-    return ![self isPush];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self initDefault];
+    }
+    return self;
 }
 
-- (BOOL)isPush {
-    if (self.navigationController) { // 首先要有Navigation，如果自己定义独占，一定要记得重写这里
-        NSArray *viewcontrollers = self.navigationController.viewControllers;
-        if (viewcontrollers.count > 1) {
-            if ([viewcontrollers objectAtIndex:viewcontrollers.count-1] == self) {
-                return YES;
-            }
-        }
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [self initDefault];
+    }
+    return self;
+}
+
+- (id)initWithNib {
+    return [self initWithNibName:NSStringFromClass([self class]) bundle:nil];
+}
+
++ (instancetype)controller {
+    return [self controllerWithNibName:NSStringFromClass([self class])];
+}
+
++ (instancetype)controllerWithNibName:(NSString *)nibName {
+    return [[self alloc] initWithNibName:nibName bundle:nil];
+}
+
+- (void)initDefault {
+    if (self.alreadyInitialized) {
+        return;
+    }
+    self.alreadyInitialized = YES;
+    
+    [self hookSelector:@selector(viewDidLoad) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
+
+    } error:nil];
+    
+    self.hideKeyboardWhenEndEditing = YES;
+    self.statusBarHidden = NO;
+    self.navbarHiddenWhenAppear = NO;
+    self.navbarHiddenWhenDisappear = NO;
+    self.navbarLeftButtonHiddenWhenAppear = NO;
+    self.navbarNormalTitleColor = nil;
+    
+    self.navbarBackgroundColor = self.class.preferredNavigationBarColor;
+}
+
+// MARK: - MVVM
+
+- (instancetype)initWithViewModel:(id)viewModel {
+    if (self = [super init]) {
+        [self initDefault];
     }
     
-    return NO;
+    return self;
 }
 
-//显示系统自带的菊花
-- (void)showLoadingIndicator{
-    [self.loadingIndicator bringToFront];
-    self.loadingIndicator.hidden = NO;
-    [self.loadingIndicator startAnimating];
-}
+- (void)bindViewModel:(id)viewModel { }
 
-- (void)hideLoadingIndicator{
-    [self.loadingIndicator stopAnimating];
-    self.loadingIndicator.hidden = YES;
-}
+- (void)bindViewModel { }
 
+#pragma mark - Life cycle
 
-#pragma mark - DataBinder
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
-- (void)bindViewModel {
-    LOG(@"Warning: 该方法应该被覆盖！");
-}
-
-#pragma mark - Getter
-
-- (UIActivityIndicatorView*)loadingIndicator {
-    if (_loadingIndicator == nil) {
-        _loadingIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        [self.view addSubview:_loadingIndicator];
-        [_loadingIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.view);
-        }];
+    // 设置导航栏返回按钮
+    if (![self isNavigationRootController] &&
+        self.class.backButtonImageName) {
+        [self setNavLeftItemWithImage:self.class.backButtonImageName target:self action:@selector(onBack)];
     }
-    return _loadingIndicator;
+
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
+    
+    // 隐藏导航栏返回按钮
+    if (self.navbarLeftButtonHiddenWhenAppear) {
+        [self clearNavLeftItem];
+    }
+    
+    if (self.class.preferredViewBackgroundColor)
+        self.view.backgroundColor = self.class.preferredViewBackgroundColor;
+    
+#if 0 // 切换tab的时候动画
+    [self injectSwipeToTabGesture];
+#endif
 }
 
-#pragma mark - tabbed switch
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+//    SEL selector = @selector(navbarHiddenWhenAppear);
+//    BOOL overrided = [self.class instanceMethodForSelector:selector] != [BaseViewController.class instanceMethodForSelector:selector];
+    
+    if (self.navbarHiddenWhenAppear) {
+        [self.navigationController setNavigationBarHidden:self.navbarHiddenWhenAppear animated:animated];
+    }
+    
+    UIColor *preferNavBarColor = self.navbarBackgroundColor;
+    if (preferNavBarColor) {
+        self.hasPreferNavBarColor = YES;
+        self.originNavBarColor = self.navBarColor;
+        self.navBarColor = preferNavBarColor;
+    }
+    
+    UIColor *preferNavBarNormalTitleColor = self.navbarNormalTitleColor;
+    if (preferNavBarNormalTitleColor) {
+        self.hasPreferNavTitleColor = YES;
+        self.originNavTitleColor = self.navTitleColor;
+        
+        self.navTitleColor = preferNavBarNormalTitleColor;
+        self.navLeftItemNormalTitleColor = preferNavBarNormalTitleColor;
+        self.navRightItemNormalTitleColor = preferNavBarNormalTitleColor;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    // 解决手势返回失效的问题
+    if (self.navigationController.viewControllers.count > 1) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    } else {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.navbarHiddenWhenDisappear) {
+        [self.navigationController setNavigationBarHidden:self.navbarHiddenWhenDisappear animated:animated];
+    }
+    
+    if (self.hasPreferNavBarColor) {
+        self.navBarColor = self.originNavBarColor;
+    }
+    
+    if (self.hasPreferNavTitleColor) {
+        self.navTitleColor = self.originNavTitleColor;
+        self.navLeftItemNormalTitleColor = self.originNavBarColor;
+        self.navRightItemNormalTitleColor = self.originNavBarColor;
+    }
+}
+
+- (void)dealloc {
+    [self unobserveAllNotifications];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    
+    if (self.hideKeyboardWhenEndEditing) {
+        [self.view endEditing:YES];
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)onBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+// MARK: - Constraints
+
+- (void)applyViewConstraints { }
+
+- (void)updateViewConstraints { [super updateViewConstraints]; }
+
+#pragma mark - Status style
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.class.userPreferredStatusBarStyle;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.statusBarHidden;
+}
+
+- (void)setStatusBarHidden:(BOOL)statusBarHidden {
+    _statusBarHidden = statusBarHidden;
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    }
+}
+
+// MARK: - tabbed switch
 
 - (void)injectSwipeToTabGesture {
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(tappedRightButton:)];
@@ -501,61 +328,47 @@ static NSString *backButtonImageName = @"buckbutton";
 
 @end
 
-#pragma mark - Config
-
-@implementation BaseViewController ( Config )
-
-+ (void)setBackButtonImageName:(NSString *)imageName {
-    backButtonImageName = imageName;
-}
-
-+ (NSString *)backButtonImageName {
-    return backButtonImageName;
-}
-
-@end
-
 #pragma mark - Navigation control
 
 @implementation BaseViewController ( NavigationControl )
 
-- (void)pushVC:(UIViewController *)vc animate:(BOOL)animate {
-    [self.navigationController pushViewController:vc animated:animate];
+- (void)push:(UIViewController *)viewController animate:(BOOL)animate {
+    [self.navigationController pushViewController:viewController animated:animate];
 }
 
-- (void)pushVC:(UIViewController *)vc {
-    [self pushVC:vc animate:YES];
+- (void)push:(UIViewController *)viewController {
+    [self push:viewController animate:YES];
 }
 
-- (void)popVCAnimate:(BOOL)animate {
+- (void)pop:(BOOL)animate {
     [self.navigationController popViewControllerAnimated:animate];
 }
 
-- (void)popVC {
-    [self popVCAnimate:YES];
+- (void)pop {
+    [self pop:YES];
 }
 
-- (void)popToVC:(UIViewController *)vc animate:(BOOL)animate {
-    [self.navigationController popToViewController:vc animated:animate];
+- (void)popTo:(UIViewController *)viewController animate:(BOOL)animate {
+    [self.navigationController popToViewController:viewController animated:animate];
 }
 
-- (void)popToVC:(UIViewController *)vc {
-    [self popToVC:vc animate:YES];
+- (void)popTo:(UIViewController *)viewController {
+    [self popTo:viewController animate:YES];
 }
 
-- (void)popToRootAnimate:(BOOL)animate {
+- (void)popToRoot:(BOOL)animate {
     [self.navigationController popToRootViewControllerAnimated:animate];
 }
 
 - (void)popToRoot {
-    [self popToRootAnimate:YES];
+    [self popToRoot:YES];
 }
 
-- (void)presentVC:(UIViewController *)vc {
-    [self presentViewController:vc animated:YES completion:nil];
+- (void)present:(UIViewController *)viewController {
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
-- (void)dismissVC {
+- (void)dismiss {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

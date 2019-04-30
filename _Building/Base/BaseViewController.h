@@ -6,211 +6,50 @@
 //
 //
 
-#import "_Foundation.h"
+#import <_Foundation/_Foundation.h>
 
-// ----------------------------------
-// AOP 拦截器
+#pragma mark -
 
-// 销毁的后处理
-// 1. 移除所有通知
-// 2. 移除KVO
+@interface BaseViewController : UIViewController
 
-// ViewDidLoad统一样式处理
-// 1. 背景色
-// ----------------------------------
+@prop_class( UIColor *,     preferredNavigationBarColor )
+@prop_class( UIStatusBarStyle, userPreferredStatusBarStyle )
+@prop_class( UIColor *,     preferredViewBackgroundColor )
 
-// ----------------------------------
-// class declaration
-// ----------------------------------
+@prop_class( NSString *,    backButtonImageName )
 
-#pragma mark - Template
+@prop_assign( BOOL,         hideKeyboardWhenEndEditing )      // [YES]
+@prop_assign( BOOL,         statusBarHidden )                 // [NO]
 
-@interface UIViewController ( Template )
+@prop_assign( BOOL,         navbarHiddenWhenAppear )          // [NO] 应该在[super initDefault] 后设置
+@prop_assign( BOOL,         navbarHiddenWhenDisappear )       // [NO]
+@prop_assign( BOOL,         navbarLeftButtonHiddenWhenAppear )// [NO]
 
-- (id)_initWithNib;
+@prop_strong( UIColor *,    navbarBackgroundColor )           // [nil]
+@prop_strong( UIColor *,    navbarNormalTitleColor )          // [nil]
+
+@prop_readonly( id,         topViewController )
+@prop_readonly( BOOL,       isVisible )
+@prop_readonly( BOOL,       isNavigationRootController )
 
 + (instancetype)controller;
 + (instancetype)controllerWithNibName:(NSString *)nibName;
 
-#pragma mark - Views operations: overrided if needed
+- (id)initWithNib;
 
-- (void)initDefault;
-
-- (void)initViews; // 初始化视图
-
-- (void)afterViews; // 初始化视图后，做其他初始配置
-
-- (void)updateViews; // 网络回调后 更新视图
-
-- (void)constraintViews; // 给视图加约束
-
-- (void)initNavigationBar;
-
-- (void)restoreNavigationBar;
-
-- (void)initData;
-
-- (void)initDataSource;
-
-- (void)initScrollView;
-
-- (void)initTableView;
-
-- (void)initCollectionView;
-
-- (void)initChildViewController;
-
-/**
- *  当UIViewController有两种展示方式，则可以调用该策略view初始化
- */
-- (void)initViewStrategy;
-
-#pragma mark - Constraints operations: Need to be overrided
-
-// mark template
-
-#pragma mark - Initialize
-#pragma mark - Life cycle
-#pragma mark - Update
-#pragma mark - Action handler && Notification handler &&
-#pragma mark - ANY delegate
-#pragma mark - Property
-#pragma mark -
-
-@end
-
-#pragma mark -
-
-/**
- * Implemented by sub-classes of BaseViewController.
- */
-@protocol ReactiveViewProtocol <NSObject>
-
-@optional
-
-- (void)bindViewModel;
-
-- (void)bindViewModel:(id)vm;
-
-@end
-
-#pragma mark -
-
-@interface BaseViewController : UIViewController <ReactiveViewProtocol>
-
-@property (nonatomic, assign) NSInteger serviceState;
-
-@property (nonatomic,strong) NSMutableArray *dataArr;
-
-/**
- @knowledge
- 
- *  在UIViewController中收起键盘，除了调用相应控件的resignFirstResponder方法外，还有另外三种：
- 
- *  1. 重载UIVIewController中的touchesBegin方法，然后在里面执行[self.view endEditing:YES]
- 
- *  2. 直接执行[[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil]; 用于获取当前UIViewController比较困难的时候
- 
- *  直接执行[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
- */
-@property (nonatomic, assign) BOOL hideKeyboardWhenEndEditing;
-
-/**
- *  状态栏是否隐藏
- */
-@property (nonatomic, assign) BOOL statusBarHidden;
-
-#pragma mark - Play with view model: overrided if needed
+// MARK: - MVVM Templates
 
 - (instancetype)initWithViewModel:(id)viewModel;
 
-#pragma mark - Virtual method: Need to be overrided
+- (void)bindViewModel;
+- (void)bindViewModel:(id)viewModel;
 
-/**
- *  Make constraints by code! Masonry is suggest.
- 
- *  Call it at viewDidLoad 's end.
- */
-- (void)applyViewConstraints;
+// MARK: - Constraints
 
-/**
- *  Update Xib's constraints when needed.
- 
- *  Call it where needed.
- */
-- (void)updateVCviewsConstraints;
+- (void)applyViewConstraints; // 在viewDidLoad尾调用，推荐：Masonry, SBLayout
+- (void)updateViewConstraints; // 更新约束
 
-/**
- *  Just override api's method here.
- */
-- (void)updateViewConstraints;
-
-#pragma mark - NavigationBar style
-
-// 导航栏，默认，不隐藏
-// 警告：以下两个方法，要么都覆盖，要么都不覆盖
-- (BOOL)navigationBarHiddenWhenAppear;
-- (BOOL)navigationBarHiddenWhenDisappear;
-
-// 导航栏，左侧返回按钮，默认，不隐藏
-- (BOOL)navigationBarLeftButtonHiddenWhenAppear;
-
-// 修改当前导航栏背景色
-- (UIColor *)preferNavBarBackgroundColor;
-
-// 修改当前导航栏标题、左右按钮Normal状态标题颜色
-- (UIColor *)preferNavBarNormalTitleColor;
-
-// 修改左右按钮Highlighted标题颜色
-- (UIColor *)preferNavBarHighlightedTitleColor;
-
-// todo: 以上需要用属性或协议去替换
-
-// 以下是配置
-@prop_class( UIColor *, preferredNavigationBarColor )
-@prop_class( UIStatusBarStyle, userPreferredStatusBarStyle )
-@prop_class( UIColor *, preferredViewBackgroundColor )
-
-#pragma mark - Override methods
-
-- (void)onBack; // fallenink: 以后的形式都是，on＋动作
-
-#pragma mark - Utility
-
-+ (UIViewController *)topViewController;
-
-- (BOOL)isVisibleEx;
-
-/**
- *  下面两个方法不是很准确，且互斥的！单层navigation＋rootViewController，为isPresent
- *
- *  @return BOOL
- */
-- (BOOL)isPresent;
-- (BOOL)isPush;
-
-//显示系统自带的菊花
-- (void)showLoadingIndicator;
-- (void)hideLoadingIndicator;
-
-#pragma mark - Use aspect hook
-
-- (void)aspect_doLoad;
-- (void)aspect_doAppear;
-- (void)aspect_doDealloc;
-
-@end
-
-#pragma mark - Config
-
-@interface BaseViewController ( Config )
-
-/**
- *  Config back button image
- */
-+ (void)setBackButtonImageName:(NSString *)imageName;
-
-+ (NSString *)backButtonImageName;
+- (void)onBack;
 
 @end
 
@@ -218,25 +57,19 @@
 
 @interface BaseViewController ( NavigationControl )
 
-- (void)pushVC:(UIViewController *)vc animate:(BOOL)animate;
+- (void)push:(UIViewController *)viewController animate:(BOOL)animate;
+- (void)push:(UIViewController *)viewController;
 
-- (void)pushVC:(UIViewController *)vc;
+- (void)pop:(BOOL)animate;
+- (void)pop;
+- (void)popTo:(UIViewController *)viewController animate:(BOOL)animate;
+- (void)popTo:(UIViewController *)viewController;
 
-- (void)popVCAnimate:(BOOL)animate;
-
-- (void)popVC;
-
-- (void)popToVC:(UIViewController *)vc animate:(BOOL)animate;
-
-- (void)popToVC:(UIViewController *)vc;
-
-- (void)popToRootAnimate:(BOOL)animate;
-
+- (void)popToRoot:(BOOL)animate;
 - (void)popToRoot;
 
 /**
  *  转场动画
- 
  *  vc.modalTransitionStyle configuration
  *  typedef NS_ENUM(NSInteger, UIModalTransitionStyle) {
         UIModalTransitionStyleCoverVertical = 0,
@@ -245,8 +78,8 @@
         UIModalTransitionStylePartialCurl NS_ENUM_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED, 向上翻页效果
     };
  */
-- (void)presentVC:(UIViewController *)vc;
-- (void)dismissVC;
+- (void)present:(UIViewController *)viewController;
+- (void)dismiss;
 
 @end
 

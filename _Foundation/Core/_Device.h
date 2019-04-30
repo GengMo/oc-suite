@@ -126,10 +126,6 @@ extern BOOL IS_SIMULATOR;
 extern BOOL IS_IPHONE_DESIGN_X;
 #define IS_NOT_IPHONE_DESIGN_X  !IS_IPHONE_DESIGN_X
 
-#pragma mark -
-
-#define sharedDevice [_Device sharedInstance]
-
 @interface _Device : NSObject
 
 @singleton( _Device )
@@ -137,7 +133,6 @@ extern BOOL IS_IPHONE_DESIGN_X;
 @prop_readonly( NSString *,         now );
 
 @prop_readonly( NSString *,			osVersion );
-//@prop_readonly( OperationSystem,    osType );
 @prop_readonly( NSString *,			bundleVersion );
 @prop_readonly( NSString *,			bundleShortVersion );
 @prop_readonly( NSInteger,          bundleBuild );
@@ -201,14 +196,6 @@ extern BOOL IS_IPHONE_DESIGN_X;
 @prop_readonly( PasscodeStatus,     passcodeStatus ) // Checks and returns the devices current passcode status. If `passcodeStatusSupported` returns NO then `LNPasscodeStatusUnknown` will be returned.
 
 - (NSString *)urlSchemaWithName:(NSString *)name;
-
-//- (BOOL)isOsVersionOrEarlier:(NSString *)ver;
-//- (BOOL)isOsVersionOrLater:(NSString *)ver;
-//- (BOOL)isOsVersionEqualTo:(NSString *)ver;
-//
-//- (BOOL)isScreenSizeSmallerThan:(CGSize)size;
-//- (BOOL)isScreenSizeBiggerThan:(CGSize)size;
-//- (BOOL)isScreenSizeEqualTo:(CGSize)size;
 
 // 临时写在这里
 @prop_readonly( NSString *,            deviceUDID ); // Stored in keychain
