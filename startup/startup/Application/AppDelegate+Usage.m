@@ -55,4 +55,41 @@
     INFO(@"=========================\n")
 }
 
+- (NSUInteger)textLength_AChnAsTwoChars:(NSString *)text {
+    NSUInteger asciiLength = 0;
+    for (NSUInteger i = 0; i < text.length; i++) {
+        unichar uc = [text characterAtIndex: i];
+        asciiLength += isascii(uc) ? 1 : 2;
+    }
+    
+    NSUInteger unicodeLength = asciiLength;
+    return unicodeLength;
+}
+
+
+- (void)usageOfText {
+    INFO(@"======= Text Info =======")
+    
+    NSString *str = @"我520";
+    
+    INFO(@"%@ lenth = %@", str, @([self textLength_AChnAsTwoChars:str]))
+    
+    
+    INFO(@"=========================\n")
+}
+
+//static const void *JKTextFieldInputLimitMaxLength = &JKTextFieldInputLimitMaxLength;
+//- (NSInteger)maxLength {
+//    return (NSInteger)objc_getAssociatedObject(self, JKTextFieldInputLimitMaxLength);
+//}
+//- (void)setMaxLength:(NSInteger)maxLength {
+//    objc_setAssociatedObject(self, JKTextFieldInputLimitMaxLength, (__bridge id _Nullable)((void *)maxLength), OBJC_ASSOCIATION_ASSIGN);
+//}
+
+- (void)usageOfCategory {
+    self.maxLength = 100;
+    
+//    INFO(@"category maxLength = %@", self.maxLength)
+}
+
 @end

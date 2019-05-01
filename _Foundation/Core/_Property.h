@@ -124,7 +124,6 @@
 #define prop_weak( type, name )             property (nonatomic, weak) type name;
 #define prop_copy( type, name )             property (nonatomic, copy) type name;
 #define prop_unsafe( type, name )           property (nonatomic, unsafe_unretained) type name;
-#define prop_retype( type, name )           property type name;
 #define prop_class( type, name )            property (nonatomic, class) type name;
 
 #pragma mark -
@@ -145,13 +144,19 @@
         synthesize name = _##name; \
         + (NSString *)property_##name { return macro_string( macro_join(__VA_ARGS__) ); }
 
+#define def_prop_copy( type, name, ... ) \
+        synthesize name = _##name; \
+        + (NSString *)property_##name { return macro_string( macro_join(__VA_ARGS__) ); }
+
 #define def_prop_unsafe( type, name, ... ) \
         synthesize name = _##name; \
         + (NSString *)property_##name { return macro_string( macro_join(__VA_ARGS__) ); }
 
-#define def_prop_copy( type, name, ... ) \
-        synthesize name = _##name; \
-        + (NSString *)property_##name { return macro_string( macro_join(__VA_ARGS__) ); }
+#define def_prop_class( type, name, setName ) \
+        dynamic name; \
+        static type __##name; \
+        + (type)name { return __##name; } \
+        + (void)setName:(type)name { __##name = name; }
 
 #define def_prop_dynamic( type, name, ... ) \
         dynamic name; \
@@ -173,35 +178,19 @@
         def_prop_custom( type, name, setName, assign ) \
         + (NSString *)property_##name { return macro_string( macro_join(__VA_ARGS__) ); }
 
-#define def_prop_dynamic_pod( type, name, setName, pod_type ... ) \
-        dynamic name; \
-        - (type)name { return (type)[[self getAssociatedObjectForKey:#name] pod_type##Value]; } \
-        - (void)setName:(type)obj { [self assignAssociatedObject:@((pod_type)obj) forKey:#name]; } \
+#define def_prop_dynamic_assign( type, name, setName, ... ) \
+        def_prop_custom( type, name, setName, assign ) \
         + (NSString *)property_##name { return macro_string( macro_join(__VA_ARGS__) ); }
-
-// Use this add property to category!
 
 #define def_prop_custom( type, name, setName, attr ) \
         dynamic name; \
         - (type)name { return [self getAssociatedObjectForKey:#name]; } \
         - (void)setName:(type)obj { [self attr##AssociatedObject:obj forKey:#name]; }
 
-#define def_prop_cate_assign( type, name, setName ) \
-        def_prop_custom( type, name, setName, assign )
-
-#define def_prop_cate_strong( type, name, setName ) \
-        def_prop_custom( type, name, setName, retain )
-
-#define def_prop_custom_block( type, name, setName, attr, getter_code_block, setter_code_block) \
+#define def_prop_custom_block( type, name, setName, attr, getter, setter ) \
         dynamic name; \
-        - (type)name { if (getter_code_block) getter_code_block(); return [self getAssociatedObjectForKey:#name]; } \
-        - (void)setName:(type)obj { if (setter_code_block) setter_code_block();[self attr##AssociatedObject:obj forKey:#name]; }
-
-#define def_prop_class( type, name, setName ) \
-        dynamic name; \
-        static type __##name; \
-        + (type)name { return __##name; } \
-        + (void)setName:(type)name { __##name = name; }
+        - (type)name { if (getter) getter(); return [self getAssociatedObjectForKey:#name]; } \
+        - (void)setName:(type)obj { [self attr##AssociatedObject:obj forKey:#name];if (setter) setter(); }
 
 // ----------------------------------
 // MARK: Class code

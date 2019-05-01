@@ -5,8 +5,4 @@
 
 @prop_assign( BOOL,         autoHideBottomBar )         // [YES]
 
-#pragma mark - Style config
-
-- (void)configNavigationBar:(void (^)(UINavigationBar *bar))handler;
-
 @end

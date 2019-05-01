@@ -53,17 +53,6 @@
 
 - (BaseNavigationController *)withNavigationController {
     BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:self];
-    [nav configNavigationBar:^(UINavigationBar *bar) {
-        // 设置背景颜色
-        bar.barTintColor = color_with_rgb(15, 16, 19);
-        // 设置主题颜色
-        bar.tintColor = [UIColor whiteColor];
-        // 设置字体颜色
-        NSDictionary *attr = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
-                                NSFontAttributeName : [UIFont boldSystemFontOfSize:20]
-                                };
-        [bar setTitleTextAttributes:attr];
-    }];
 
     return nav;
 }

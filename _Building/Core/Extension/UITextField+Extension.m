@@ -49,17 +49,25 @@
 
 #pragma mark -
 
-static const void *JKTextFieldInputLimitMaxLength = &JKTextFieldInputLimitMaxLength;
-@implementation UITextField (JKInputLimit)
+@implementation UITextField ( InputLimit )
 
-- (NSInteger)maxLength {
-    return [objc_getAssociatedObject(self, JKTextFieldInputLimitMaxLength) integerValue];
+@def_prop_custom_block( NSNumber *, maxLength, setMaxLength, retain, ^{}, ^{[self addTarget:self action:@selector(textFieldTextDidChange) forControlEvents:UIControlEventEditingChanged];} )
+@def_prop_dynamic_strong( NSNumber *, chnDoubled, setChnDoubled )
+
+- (NSUInteger)textLength_AChnAsTwoChars:(NSString *)text {
+    NSUInteger asciiLength = 0;
+    for (NSUInteger i = 0; i < text.length; i++) {
+        unichar uc = [text characterAtIndex: i];
+        asciiLength += isascii(uc) ? 1 : 2;
+    }
+    
+    NSUInteger unicodeLength = asciiLength;
+    return unicodeLength;
 }
-- (void)setMaxLength:(NSInteger)maxLength {
-    objc_setAssociatedObject(self, JKTextFieldInputLimitMaxLength, @(maxLength), OBJC_ASSOCIATION_ASSIGN);
-    [self addTarget:self action:@selector(textFieldTextDidChange) forControlEvents:UIControlEventEditingChanged];
-}
+
 - (void)textFieldTextDidChange {
+    BOOL chnDoubled = [self.chnDoubled boolValue];
+    NSUInteger maxLength = [self.maxLength integerValue];
     NSString *toBeString = self.text;
     //获取高亮部分
     UITextRange *selectedRange = [self markedTextRange];
@@ -67,14 +75,15 @@ static const void *JKTextFieldInputLimitMaxLength = &JKTextFieldInputLimitMaxLen
     
     //没有高亮选择的字，则对已输入的文字进行字数统计和限制
     //在iOS7下,position对象总是不为nil
-    if ( (!position ||!selectedRange) && (self.maxLength > 0 && toBeString.length > self.maxLength)) {
-        NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:self.maxLength];
+    NSUInteger curLength = chnDoubled ? [self textLength_AChnAsTwoChars:toBeString] : toBeString.length;
+    if ( (!position ||!selectedRange) && (maxLength > 0 && curLength > maxLength)) {
+        NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:maxLength];
         if (rangeIndex.length == 1) {
-            self.text = [toBeString substringToIndex:self.maxLength];
+            self.text = [toBeString substringToIndex:maxLength];
         } else {
-            NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, self.maxLength)];
+            NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, maxLength)];
             NSInteger tmpLength;
-            if (rangeRange.length > self.maxLength) {
+            if (rangeRange.length > maxLength) {
                 tmpLength = rangeRange.length - rangeIndex.length;
             } else {
                 tmpLength = rangeRange.length;

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <_Foundation/_Foundation.h>
 
 #pragma mark -
 
@@ -20,7 +21,8 @@
 
 @interface UITextField ( InputLimit )
 
-@property (assign, nonatomic)  NSInteger maxLength;//if <=0, no limit
+@prop_dynamic( NSNumber *, maxLength ) // [Max] as NSUInteger
+@prop_dynamic( NSNumber *, chnDoubled ) // [NO] as BOOL, If YES, then length(@"我") = 2
 
 @end
 

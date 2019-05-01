@@ -10,6 +10,8 @@
 		6A4F58352264AEAB00B7B104 /* BadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F58332264AEAB00B7B104 /* BadgeViewController.m */; };
 		6A4F58362264AEAB00B7B104 /* BadgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4F58342264AEAB00B7B104 /* BadgeViewController.xib */; };
 		6A515BD52251E9D400A56F8D /* WechatLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */; };
+		6A682488227989B500A37CCF /* CircleProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A682486227989B500A37CCF /* CircleProgressViewController.m */; };
+		6A682489227989B500A37CCF /* CircleProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A682487227989B500A37CCF /* CircleProgressViewController.xib */; };
 		6AC7784C22427E680000F5B1 /* ImagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783422427E680000F5B1 /* ImagingViewController.m */; };
 		6AC7784D22427E680000F5B1 /* ImagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7783522427E680000F5B1 /* ImagingViewController.xib */; };
 		6AC7784E22427E680000F5B1 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783A22427E680000F5B1 /* NetworkingViewController.m */; };
@@ -232,6 +234,9 @@
 		6A4F58342264AEAB00B7B104 /* BadgeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeViewController.xib; sourceTree = "<group>"; };
 		6A515BD32251E9D400A56F8D /* WechatLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WechatLoginViewController.h; sourceTree = "<group>"; };
 		6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WechatLoginViewController.m; sourceTree = "<group>"; };
+		6A682485227989B500A37CCF /* CircleProgressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleProgressViewController.h; sourceTree = "<group>"; };
+		6A682486227989B500A37CCF /* CircleProgressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleProgressViewController.m; sourceTree = "<group>"; };
+		6A682487227989B500A37CCF /* CircleProgressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CircleProgressViewController.xib; sourceTree = "<group>"; };
 		6AC7783422427E680000F5B1 /* ImagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagingViewController.m; sourceTree = "<group>"; };
 		6AC7783522427E680000F5B1 /* ImagingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagingViewController.xib; sourceTree = "<group>"; };
 		6AC7783622427E680000F5B1 /* ImagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagingViewController.h; sourceTree = "<group>"; };
@@ -525,6 +530,16 @@
 			path = "如何微信登录";
 			sourceTree = "<group>";
 		};
+		6A6824832279898B00A37CCF /* 如何画圆形进度 */ = {
+			isa = PBXGroup;
+			children = (
+				6A682485227989B500A37CCF /* CircleProgressViewController.h */,
+				6A682486227989B500A37CCF /* CircleProgressViewController.m */,
+				6A682487227989B500A37CCF /* CircleProgressViewController.xib */,
+			);
+			path = "如何画圆形进度";
+			sourceTree = "<group>";
+		};
 		6AAB430222406BEB00953283 /* Module */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +550,7 @@
 		6AC7783222427E680000F5B1 /* 例子 */ = {
 			isa = PBXGroup;
 			children = (
+				6A6824832279898B00A37CCF /* 如何画圆形进度 */,
 				6A4F58302264AE8A00B7B104 /* 如何使用红点视图 */,
 				6A515BD12251E9B200A56F8D /* 如何微信登录 */,
 				6AC7783322427E680000F5B1 /* 如何显示网络图片 */,
@@ -1251,6 +1267,7 @@
 				862CB0911FF110EC0059E3A9 /* ZSSh2.png in Resources */,
 				862CB0D11FF110ED0059E3A9 /* 152.png in Resources */,
 				862CB0891FF110EC0059E3A9 /* ZSSclearstyle.png in Resources */,
+				6A682489227989B500A37CCF /* CircleProgressViewController.xib in Resources */,
 				862CB0C91FF110ED0059E3A9 /* ZSSunlink.png in Resources */,
 				862CB0C41FF110ED0059E3A9 /* ZSStextcolor@2x.png in Resources */,
 				862CB0A71FF110EC0059E3A9 /* ZSSkeyboard.png in Resources */,
@@ -1502,6 +1519,7 @@
 				6AC7785422427E690000F5B1 /* CacheViewController.m in Sources */,
 				862CAFE01FF0FCB80059E3A9 /* LabelXibViewController.m in Sources */,
 				6AC7785622427E690000F5B1 /* ExampleViewController.m in Sources */,
+				6A682488227989B500A37CCF /* CircleProgressViewController.m in Sources */,
 				863F2CA020946637005187A3 /* AppDelegate+Usage.m in Sources */,
 				6AC7785A22427FC00000F5B1 /* ApiClient.m in Sources */,
 				6A515BD52251E9D400A56F8D /* WechatLoginViewController.m in Sources */,
@@ -1665,7 +1683,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = startup/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = fallenink.startup;
@@ -1686,7 +1704,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = startup/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = fallenink.startup;

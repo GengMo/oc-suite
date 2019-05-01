@@ -16,4 +16,9 @@
 
 - (void)usageOfDeviceInfo;
 
+- (void)usageOfText;
+
+@property (assign, nonatomic)  NSInteger maxLength;
+- (void)usageOfCategory;
+
 @end
