@@ -1,14 +1,6 @@
-//
-//  ZXYCircleProgress.h
-//  ZXYProgressView
-//
-//  Created by Mars on 2017/11/28.
-//  Copyright © 2017年 赵向禹. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
-@interface ZXYCircleProgress : UIView
+@interface CircleProgressView : UIView
 
 /** 进度 */
 @property (nonatomic, assign) CGFloat progress;

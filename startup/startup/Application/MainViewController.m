@@ -17,6 +17,7 @@
 //#import "WebSampleVCByJQuery.h"
 #import <TZImagePickerController/TZImagePickerController.h>
 #import "BadgeViewController.h"
+#import "CircleProgressViewController.h"
 
 @interface MainViewController () <TZImagePickerControllerDelegate>
 
@@ -94,6 +95,10 @@
         INFO(@"picker one image")
     }];
     [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
+- (IBAction)onControlProgressView:(id)sender {
+    [self push:[CircleProgressViewController new]];
 }
 
 @end

@@ -87,7 +87,7 @@
 //}
 
 - (void)usageOfCategory {
-    self.maxLength = 100;
+//    self.maxLength = 100;
     
 //    INFO(@"category maxLength = %@", self.maxLength)
 }

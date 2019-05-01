@@ -1,15 +1,6 @@
-//
-//  ZXYCircleProgress.m
-//  ZXYProgressView
-//
-//  Created by Mars on 2017/11/28.
-//  Copyright © 2017年 赵向禹. All rights reserved.
-//
+#import "CircleProgressView.h"
 
-#import "ZXYCircleProgress.h"
-
-@interface ZXYCircleProgress ()
-{
+@interface CircleProgressView () {
 
 }
 
@@ -22,14 +13,17 @@
 
 @end
 
-@implementation ZXYCircleProgress
+@implementation CircleProgressView
 
 - (instancetype)initWithFrame:(CGRect)frame progress:(CGFloat)progress {
     if (self) {
         self = [super initWithFrame:frame];
+        
         self.backgroundColor = [UIColor clearColor];
-        [self setUI];
+        
         self.progress = progress;
+        
+        [self setUI];
     }
     return self;
 }

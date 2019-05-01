@@ -19,6 +19,7 @@ target 'startup' do
 
     pod '_Modules/Tools/HttpMock', :path => '../'
     pod '_Modules/Tools/Chronograph', :path => '../'
+    pod '_Modules/Tools/CountDown', :path => '../'
     pod '_Modules/Tools/DyDelegate', :path => '../'
     
     pod '_Modules/Services/Assets', :path => '../'
