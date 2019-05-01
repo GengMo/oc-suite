@@ -3,37 +3,54 @@
 
 @interface _CountDown ()
 
-@property (nonatomic, strong) dispatch_source_t timer;
-@prop_strong( dispatch_block_t, timerHandler )
+@prop_assign( NSTimeInterval, duration )
 
-@property (nonatomic, strong) void (^ currentBlock)(NSTimeInterval);
-@property (nonatomic, strong) void (^ completionBlock)(void);
+@prop_strong( dispatch_source_t, timer )
+@prop_strong( dispatch_block_t, timerHandler )
+@prop_strong( dispatch_queue_t, timerQueue )
+
+@prop_readonly( BOOL, paused )
+
+@prop_strong( _CountDownProgressBlock, currentBlock )
+@prop_strong( _CountDownCompletionBlock, completionBlock )
 
 @end
 
 @implementation _CountDown
 
+@def_prop_readonly( NSTimeInterval, collapsedTime )
+- (NSTimeInterval)collapsedTime { return _duration - _leftTime ; }
+
 @def_prop_readonly( NSTimeInterval, leftTime )
 @def_prop_readonly( BOOL, paused )
 
+@def_prop_assign( NSTimeInterval, interval )
+
+@def_prop_strong( dispatch_source_t, timer )
 @def_prop_strong( dispatch_block_t, timerHandler )
+@def_prop_strong( dispatch_queue_t, timerQueue )
+
+@def_prop_strong( _CountDownProgressBlock, currentBlock )
+@def_prop_strong( _CountDownCompletionBlock, completionBlock )
 
 // ----------------------------------
 // MARK: - Public methods
 // ----------------------------------
 
-- (instancetype)initWithInterval:(NSTimeInterval)timeLeft {
+- (instancetype)initWithDuration:(NSTimeInterval)duration {
     self = [super init];
     if (self) {
-        _leftTime = timeLeft;
+        _leftTime = _duration = duration;
+        
+        _interval = 1; // default by 1 Second
     }
     return self;
 }
 
-- (void)setLeftTime:(NSTimeInterval)leftTime {
+- (void)setDuration:(NSTimeInterval)duration {
     [self stop];
     
-    _leftTime = leftTime;
+    _leftTime = _duration = duration;
 }
 
 - (void)start:(void (^)(NSTimeInterval))currentBlock {
@@ -72,11 +89,11 @@
 - (void)stop {
     if (self.timer) {
         if (!dispatch_source_testcancel(self.timer)) {
-            dispatch_source_set_cancel_handler(self.timer, self.timerHandler);
-            //尚未取消，先关闭定时器
+            // 尚未取消，先关闭定时器
             dispatch_source_cancel(self.timer);
         }
         self.timer = nil;
+        self.timerHandler = nil;
     }
 }
 
@@ -92,7 +109,7 @@
 - (void)startCountDownTimer {
     __block NSTimeInterval time = self.leftTime;
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    self.timerQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
 //    Dispatch Source一共可以监听六类事件，分为11个类型：
 //    DISPATCH_SOURCE_TYPE_DATA_ADD：属于自定义事件，
@@ -108,15 +125,15 @@
 //    DISPATCH_SOURCE_TYPE_TIMER：定时器事件。
 //    DISPATCH_SOURCE_TYPE_MEMORYPRESSURE：内存压力事件。
     
-    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.timerQueue);
     
-    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, _interval * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
     
     @weakify(self)
     self.timerHandler = ^{
         @strongify(self)
         
-        time --;
+        time -= self->_interval;
         if (time <= 0) {
             [self stop];
             

@@ -30,10 +30,13 @@ typedef void(^DrawCircleProgressBlock)(void);
 /**
  *  set complete callback
  *
- *  @param lineWidth line width
  *  @param block     block
  *  @param duration  time
  */
 - (void)startAnimationDuration:(CGFloat)duration withBlock:(DrawCircleProgressBlock )block;
+
+- (void)pause;
+- (void)resume;
+- (void)stop;
 
 @end

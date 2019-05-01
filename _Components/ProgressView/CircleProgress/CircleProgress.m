@@ -92,6 +92,7 @@
 }
 
 #pragma mark -- CAAnimationDelegate
+
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     if (flag) {
@@ -99,11 +100,24 @@
     }
 }
 
-#pragma mark ---
+// MARK: -
+
 - (void)startAnimationDuration:(CGFloat)duration withBlock:(DrawCircleProgressBlock )block{
     self.myBlock = block;
     self.animationDuration = duration;
     [self.layer addSublayer:self.progressLayer];
+}
+
+- (void)pause {
+    
+}
+
+- (void)resume {
+    
+}
+
+- (void)stop {
+    
 }
 
 @end

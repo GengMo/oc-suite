@@ -1,29 +1,33 @@
 
 #import <_Foundation/_Foundation.h>
 
+typedef void(^ _CountDownProgressBlock)(NSTimeInterval timeLeft);
+typedef void(^ _CountDownCompletionBlock)(void);
 /**
  * @brief 倒计时
  */
 @interface _CountDown : NSObject
 
-@prop_readonly( NSTimeInterval, leftTime ) // Per Second
-@prop_readonly( BOOL, paused )
+@prop_readonly( NSTimeInterval, collapsedTime ) 
+@prop_readonly( NSTimeInterval, leftTime )  // As Second
+
+@prop_assign( NSTimeInterval, interval )    // [1] As Second
 
 /**
  * @brief 初始化倒计时器
  */
-- (instancetype)initWithInterval:(NSTimeInterval)timeLeft; // Per Second
+- (instancetype)initWithDuration:(NSTimeInterval)duration; // Per Second
 
 /**
  * @brief 设置剩余时间，需要手动重启
  */
-- (void)setLeftTime:(NSTimeInterval)leftTime;
+- (void)setDuration:(NSTimeInterval)duration;
 
 /**
  * @brief 开始倒计时
  */
-- (void)start:(void(^)(NSTimeInterval timeLeft))currentBlock;
-- (void)start:(void(^)(NSTimeInterval timeLeft))currentBlock completion:(void(^)(void))completion;
+- (void)start:(_CountDownProgressBlock)currentBlock;
+- (void)start:(_CountDownProgressBlock)currentBlock completion:(_CountDownCompletionBlock)completion;
 
 /**
  * @brief 暂停倒计时器
