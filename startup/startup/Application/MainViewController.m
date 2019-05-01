@@ -18,6 +18,7 @@
 #import <TZImagePickerController/TZImagePickerController.h>
 #import "BadgeViewController.h"
 #import "CircleProgressViewController.h"
+#import "WaveProgressViewController.h"
 
 @interface MainViewController () <TZImagePickerControllerDelegate>
 

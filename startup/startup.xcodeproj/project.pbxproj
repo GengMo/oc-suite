@@ -12,6 +12,8 @@
 		6A515BD52251E9D400A56F8D /* WechatLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */; };
 		6A682488227989B500A37CCF /* CircleProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A682486227989B500A37CCF /* CircleProgressViewController.m */; };
 		6A682489227989B500A37CCF /* CircleProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A682487227989B500A37CCF /* CircleProgressViewController.xib */; };
+		6A6824952279B61200A37CCF /* WaveProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6824932279B61200A37CCF /* WaveProgressViewController.m */; };
+		6A6824962279B61200A37CCF /* WaveProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6824942279B61200A37CCF /* WaveProgressViewController.xib */; };
 		6AC7784C22427E680000F5B1 /* ImagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783422427E680000F5B1 /* ImagingViewController.m */; };
 		6AC7784D22427E680000F5B1 /* ImagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7783522427E680000F5B1 /* ImagingViewController.xib */; };
 		6AC7784E22427E680000F5B1 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783A22427E680000F5B1 /* NetworkingViewController.m */; };
@@ -237,6 +239,9 @@
 		6A682485227989B500A37CCF /* CircleProgressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleProgressViewController.h; sourceTree = "<group>"; };
 		6A682486227989B500A37CCF /* CircleProgressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleProgressViewController.m; sourceTree = "<group>"; };
 		6A682487227989B500A37CCF /* CircleProgressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CircleProgressViewController.xib; sourceTree = "<group>"; };
+		6A6824922279B61200A37CCF /* WaveProgressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveProgressViewController.h; sourceTree = "<group>"; };
+		6A6824932279B61200A37CCF /* WaveProgressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaveProgressViewController.m; sourceTree = "<group>"; };
+		6A6824942279B61200A37CCF /* WaveProgressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaveProgressViewController.xib; sourceTree = "<group>"; };
 		6AC7783422427E680000F5B1 /* ImagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagingViewController.m; sourceTree = "<group>"; };
 		6AC7783522427E680000F5B1 /* ImagingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagingViewController.xib; sourceTree = "<group>"; };
 		6AC7783622427E680000F5B1 /* ImagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagingViewController.h; sourceTree = "<group>"; };
@@ -540,6 +545,16 @@
 			path = "如何画圆形进度";
 			sourceTree = "<group>";
 		};
+		6A6824902279B5F200A37CCF /* 如果画波浪形进度 */ = {
+			isa = PBXGroup;
+			children = (
+				6A6824922279B61200A37CCF /* WaveProgressViewController.h */,
+				6A6824932279B61200A37CCF /* WaveProgressViewController.m */,
+				6A6824942279B61200A37CCF /* WaveProgressViewController.xib */,
+			);
+			path = "如果画波浪形进度";
+			sourceTree = "<group>";
+		};
 		6AAB430222406BEB00953283 /* Module */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,6 +565,7 @@
 		6AC7783222427E680000F5B1 /* 例子 */ = {
 			isa = PBXGroup;
 			children = (
+				6A6824902279B5F200A37CCF /* 如果画波浪形进度 */,
 				6A6824832279898B00A37CCF /* 如何画圆形进度 */,
 				6A4F58302264AE8A00B7B104 /* 如何使用红点视图 */,
 				6A515BD12251E9B200A56F8D /* 如何微信登录 */,
@@ -1240,6 +1256,7 @@
 				862CB0A81FF110EC0059E3A9 /* ZSSkeyboard@2x.png in Resources */,
 				862CB0831FF110EC0059E3A9 /* ZSSbgcolor.png in Resources */,
 				862CB0CA1FF110ED0059E3A9 /* ZSSunlink@2x.png in Resources */,
+				6A6824962279B61200A37CCF /* WaveProgressViewController.xib in Resources */,
 				862CB0841FF110EC0059E3A9 /* ZSSbgcolor@2x.png in Resources */,
 				862CB0B41FF110ED0059E3A9 /* ZSSpicker@2x.png in Resources */,
 				862CB0991FF110EC0059E3A9 /* ZSSh6.png in Resources */,
@@ -1473,6 +1490,7 @@
 				862CB0DD1FF110ED0059E3A9 /* HRColorCursor.m in Sources */,
 				862CB07B1FF110EC0059E3A9 /* ZSSColorViewController.m in Sources */,
 				862CAFA01FF0F7850059E3A9 /* TYImageCache.m in Sources */,
+				6A6824952279B61200A37CCF /* WaveProgressViewController.m in Sources */,
 				862CAFE21FF0FCB80059E3A9 /* LinkTextViewController.m in Sources */,
 				862CB0E71FF1112D0059E3A9 /* RichTextEditorSampleVC.m in Sources */,
 				862CAFA11FF0F7850059E3A9 /* TYImageStorage.m in Sources */,
