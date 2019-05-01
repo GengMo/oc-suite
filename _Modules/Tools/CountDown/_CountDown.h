@@ -8,7 +8,7 @@ typedef void(^ _CountDownCompletionBlock)(void);
  */
 @interface _CountDown : NSObject
 
-@prop_readonly( NSTimeInterval, collapsedTime ) 
+@prop_readonly( NSTimeInterval, collapsedTime ) // As Second
 @prop_readonly( NSTimeInterval, leftTime )  // As Second
 
 @prop_assign( NSTimeInterval, interval )    // [1] As Second

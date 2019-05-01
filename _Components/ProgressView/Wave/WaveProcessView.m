@@ -1,3 +1,4 @@
+#import <_Foundation/_Foundation.h>
 #import "WaveProcessView.h"
 
 @implementation WaveProcessView {
@@ -15,6 +16,35 @@
     CGFloat b;
     
     BOOL increase;
+}
+
++ (id)createForZhangHengWithFrame:(CGRect)frame
+                          percent:(CGFloat)percent borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor foregroundColor:(UIColor *)foregroundColor backgroundColor:(UIColor *)backgroundColor;
+{
+    WaveProcessView *_customView = [[WaveProcessView alloc] initWithFrame:frame animated:NO];
+    _customView.percent = percent;
+    _customView.showPercent = NO;
+    _customView.showBgLineView = NO;
+    _customView.waveLength = frame.size.width;
+    _customView.amplitude = 3;
+    _customView.showBgLineView = NO;
+    _customView.scaleCount = 0;
+    _customView.waterBgColor = backgroundColor;
+    _customView.frontWaterColor = foregroundColor;
+    _customView.backWaterColor = color_clear;
+    _customView.lineBgColor = color_clear;
+    _customView.scaleColor = color_clear;
+    _customView.label = @"";//@"老湿的酒量";
+    
+    _customView.layer.cornerRadius = frame.size.width/2;
+    _customView.layer.borderWidth = borderWidth;
+    _customView.layer.borderColor = borderColor.CGColor;
+    _customView.scaleDivisionsWidth = 0;
+    _customView.scaleDivisionsLength = 0;
+    _customView.scaleMargin = 0;
+    _customView.waveMargin = 0;
+    
+    return _customView;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -56,11 +86,13 @@
     _waterBgColor = [UIColor colorWithRed:0.259 green:0.329 blue:0.506 alpha:1.00];
     _lineBgColor = [UIColor colorWithRed:0.694 green:0.745 blue:0.867 alpha:1.00];
     _scaleColor = [UIColor colorWithRed:0.969 green:0.937 blue:0.227 alpha:1.00];
-    _percent = 0.45;
+    _percent = 0.4f;
     
     _scaleMargin = 30;
-    _waveMargin = 18;
+    _waveMargin = 10;
     _showBgLineView = NO;
+    
+    _showPercent = YES;
     
     [self initDrawingRects];
 }
@@ -354,7 +386,8 @@
     [attriLabelText drawAtPoint:labelPoint];
     
     //推入
-    CGContextSaveGState(context);
+    if (_showPercent)
+        CGContextSaveGState(context);
 }
 
 /**
@@ -444,6 +477,10 @@
  *  @return 电量百分比文字参数
  */
 - (NSMutableAttributedString *) formatBatteryLevel:(NSInteger)percent {
+    if (!_showPercent) {
+        return nil;
+    }
+    
     UIColor *textColor = [UIColor whiteColor];
     NSMutableAttributedString *attrText;
     

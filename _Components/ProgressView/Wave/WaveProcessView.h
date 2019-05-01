@@ -20,68 +20,76 @@
 
 @interface WaveProcessView : UIView
 
++ (id)createForZhangHengWithFrame:(CGRect)frame
+                          percent:(CGFloat)percent
+                      borderWidth:(CGFloat)borderWidth
+                      borderColor:(UIColor *)borderColor
+                  foregroundColor:(UIColor *)foregroundColor
+                  backgroundColor:(UIColor *)backgroundColor;
+
 - (id)initWithFrame:(CGRect)frame animated:(BOOL)animated;
 
 /**
  *  比例尺长度
  */
-@property (nonatomic, readwrite, assign) CGFloat scaleDivisionsLength;
+@property (nonatomic, assign) CGFloat scaleDivisionsLength;
 /**
  *  比例次刻度宽度
  */
-@property (nonatomic, readwrite, assign) CGFloat scaleDivisionsWidth;
+@property (nonatomic, assign) CGFloat scaleDivisionsWidth;
 /**
  *  比例次到self边距
  */
-@property (nonatomic, readwrite, assign) CGFloat scaleMargin;
+@property (nonatomic, assign) CGFloat scaleMargin;
 /**
  *  比例尺的个数
  */
-@property (nonatomic, readwrite, assign) CGFloat scaleCount;
+@property (nonatomic, assign) CGFloat scaleCount;
 /**
  *  比例尺到圆形波纹的距离
  */
-@property (nonatomic, readwrite, assign) CGFloat waveMargin;
+@property (nonatomic, assign) CGFloat waveMargin;
 /**
  *  波长
  */
-@property (nonatomic, readwrite, assign) CGFloat waveLength;
+@property (nonatomic, assign) CGFloat waveLength;
 
 /**
  * 振幅
  */
-@property (nonatomic, readwrite, assign) CGFloat amplitude;
+@property (nonatomic, assign) CGFloat amplitude;
 /**
  *  百分比
  */
-@property (nonatomic, readwrite, assign) CGFloat percent;
+@property (nonatomic, assign) CGFloat percent;
+@property (nonatomic, assign) BOOL showPercent;
 /**
  *  百分比描述
  */
-@property (nonatomic, readwrite, strong) NSString *label;
+@property (nonatomic, strong) NSString *label;
 /**
  *  前波浪颜色
  */
-@property (nonatomic, readwrite, retain) UIColor *frontWaterColor;
+@property (nonatomic, readwrite, strong) UIColor *frontWaterColor;
 /**
  *  后波浪颜色
  */
-@property (nonatomic, readwrite, retain) UIColor *backWaterColor;
+@property (nonatomic, readwrite, strong) UIColor *backWaterColor;
 /**
  *  波浪的背景颜色
  */
-@property (nonatomic, readwrite, retain) UIColor *waterBgColor;
+@property (nonatomic, readwrite, strong) UIColor *waterBgColor;
 /**
  *  刻度线背景色
  */
-@property (nonatomic, readwrite, retain) UIColor *lineBgColor;
+@property (nonatomic, strong) UIColor *lineBgColor;
 /**
  *  刻度线颜色
  */
-@property (nonatomic, readwrite, retain) UIColor *scaleColor;
+@property (nonatomic, strong) UIColor *scaleColor;
 /**
  *  是否显示背景上的线条
  */
-@property (nonatomic, readwrite, assign) BOOL showBgLineView;
+@property (nonatomic, assign) BOOL showBgLineView;
 
 @end

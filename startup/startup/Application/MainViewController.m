@@ -102,4 +102,8 @@
     [self push:[CircleProgressViewController new]];
 }
 
+- (IBAction)onWaveProgressView:(id)sender {
+    [self push:[WaveProgressViewController new]];
+}
+
 @end

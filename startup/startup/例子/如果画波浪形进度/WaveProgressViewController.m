@@ -6,6 +6,7 @@
 //  Copyright © 2019 7. All rights reserved.
 //
 
+#import <_Components/WaveProcessView.h>
 #import "WaveProgressViewController.h"
 
 @interface WaveProgressViewController ()
@@ -16,7 +17,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    WaveProcessView *_customView =
+    [WaveProcessView createForZhangHengWithFrame:CGRectMake(0, 0, 40, 40)
+                                         percent:0.6
+                                     borderWidth:2
+                                     borderColor:color_with_hex(0xE6C289)
+                                 foregroundColor:color_with_hex(0xE6C289)
+                                 backgroundColor:color_white];
+
+    [self.view addSubview:_customView];
 }
 
 /*
