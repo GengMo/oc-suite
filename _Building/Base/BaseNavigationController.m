@@ -28,6 +28,23 @@ typedef void (^ _TransitionBlock)(void);
     return self;
 }
 
++ (void)initialize {
+    
+    if (@available(iOS 9.0, *)) {
+        UINavigationBar *bar = [UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[self class]]];
+        // 设置导航条前景色
+        [bar setTintColor:[UIColor blackColor]];
+        
+        
+//        UIBarButtonItem *item = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[self class]]];
+//        // 修改返回按钮标题的位置
+//        [item setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -900) forBarMetrics:UIBarMetricsDefault];
+    } else {
+        // Fallback on earlier versions
+    }
+}
+
+
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
     if (self = [super initWithNavigationBarClass:[BaseNavigationBar class] toolbarClass:nil]) {
         self.viewControllers = @[rootViewController];
