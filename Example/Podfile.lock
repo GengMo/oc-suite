@@ -1,0 +1,311 @@
+PODS:
+  - _Building (0.2.0)
+  - _Components/ActionSheetView (0.2.0)
+  - _Components/AlertView (0.2.0)
+  - _Components/BadgeView (0.2.0)
+  - _Components/BlankHolderView (0.2.0)
+  - _Components/CycleScrollView (0.2.0)
+  - _Components/DatePickerView (0.2.0)
+  - _Components/DropDownMenu (0.2.0)
+  - _Components/FiniteScrollView (0.2.0)
+  - _Components/FlatActionSheetView (0.2.0)
+  - _Components/IndicatorView (0.2.0)
+  - _Components/InfiniteScrollView (0.2.0)
+  - _Components/KeyboardControl (0.2.0)
+  - _Components/LaunchAdView (0.2.0)
+  - _Components/LoadableImageView (0.2.0)
+  - _Components/LocalImageBrowser (0.2.0)
+  - _Components/LocalImageEditableBrowserView (0.2.0)
+  - _Components/PopupView (0.2.0)
+  - _Components/PopViewController (0.2.0)
+  - _Components/ProgressHUD (0.2.0)
+  - _Components/ProgressView (0.2.0)
+  - _Components/RateView (0.2.0)
+  - _Components/RefreshView (0.2.0)
+  - _Components/SegmentControl (0.2.0)
+  - _Components/SegmentView (0.2.0)
+  - _Components/TagsView (0.2.0)
+  - _Components/UserGuideView (0.2.0)
+  - _Components/WaterFallView (0.2.0)
+  - _Foundation (0.5.0)
+  - _Modules/Application (0.4.0)
+  - _Modules/Components/Browser (0.4.0)
+  - _Modules/Components/Map (0.4.0):
+    - _Modules/Services/Map
+  - _Modules/Components/QRCode (0.4.0)
+  - _Modules/Services/APNS (0.4.0):
+    - JPush
+  - _Modules/Services/Assets (0.4.0)
+  - _Modules/Services/Growth (0.4.0)
+  - _Modules/Services/Location (0.4.0)
+  - _Modules/Services/Map (0.4.0):
+    - AMap3DMap
+    - AMapLocation
+    - AMapSearch
+  - _Modules/Services/SNS (0.4.0):
+    - UMengAnalytics-NO-IDFA (= 4.1.5)
+    - UMengFeedback (~> 2.3.4)
+    - UMengUShare/Core (= 6.4.8)
+    - UMengUShare/Plugin/IDFA
+    - UMengUShare/Social/AlipayShare
+    - UMengUShare/Social/DingDing
+    - UMengUShare/Social/Douban
+    - UMengUShare/Social/DropBox
+    - UMengUShare/Social/Email
+    - UMengUShare/Social/EverNote
+    - UMengUShare/Social/Facebook
+    - UMengUShare/Social/Flickr
+    - UMengUShare/Social/GooglePlus
+    - UMengUShare/Social/Instagram
+    - UMengUShare/Social/Kakao
+    - UMengUShare/Social/LaiWang
+    - UMengUShare/Social/Line
+    - UMengUShare/Social/Linkedin
+    - UMengUShare/Social/Pinterest
+    - UMengUShare/Social/Pocket
+    - UMengUShare/Social/QQ
+    - UMengUShare/Social/ReducedQQ
+    - UMengUShare/Social/ReducedSina
+    - UMengUShare/Social/ReducedWeChat
+    - UMengUShare/Social/Renren
+    - UMengUShare/Social/Sina
+    - UMengUShare/Social/SMS
+    - UMengUShare/Social/TencentWeibo
+    - UMengUShare/Social/Tumblr
+    - UMengUShare/Social/Twitter
+    - UMengUShare/Social/VKontakte
+    - UMengUShare/Social/WeChat
+    - UMengUShare/Social/WhatsApp
+    - UMengUShare/Social/YiXin
+    - UMengUShare/Social/YouDao
+    - UMengUShare/UI
+  - _Modules/Tools/Cache (0.4.0)
+  - _Modules/Tools/Chronograph (0.4.0)
+  - _Modules/Tools/CountDown (0.4.0)
+  - _Modules/Tools/Date (0.4.0)
+  - _Modules/Tools/DyDelegate (0.4.0)
+  - _Modules/Tools/HttpMock (0.4.0)
+  - _Modules/Tools/Network/Reachability (0.4.0)
+  - _Modules/Tools/NetworkLit (0.4.0)
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - AMap3DMap (6.8.1):
+    - AMapFoundation (~> 1.5)
+  - AMapFoundation (1.5.6)
+  - AMapLocation (2.6.2):
+    - AMapFoundation (~> 1.4)
+  - AMapSearch (6.6.0):
+    - AMapFoundation (~> 1.4)
+  - GTMBase64 (1.0.1)
+  - JCore (2.0.0)
+  - JPush (3.2.0):
+    - JCore (< 3.0.0, >= 2.0.0)
+  - Masonry (1.1.0)
+  - ReactiveObjC (3.1.1)
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
+  - TZImagePickerController (3.2.0)
+  - UMengAnalytics-NO-IDFA (4.1.5)
+  - UMengFeedback (2.3.4)
+  - UMengUShare/Core (6.4.8):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.8)
+  - UMengUShare/Plugin/IDFA (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/AlipayShare (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/DingDing (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Douban (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/DropBox (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Email (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/EverNote (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Facebook (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Flickr (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/GooglePlus (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Instagram (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Kakao (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/LaiWang (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Line (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Linkedin (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Pinterest (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Pocket (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/QQ (6.4.8):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedQQ
+  - UMengUShare/Social/ReducedQQ (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/ReducedSina (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/ReducedWeChat (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Renren (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Sina (6.4.8):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedSina
+  - UMengUShare/Social/SMS (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/TencentWeibo (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Tumblr (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/Twitter (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/VKontakte (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/WeChat (6.4.8):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedWeChat
+  - UMengUShare/Social/WhatsApp (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/YiXin (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/Social/YouDao (6.4.8):
+    - UMengUShare/Core
+  - UMengUShare/UI (6.4.8):
+    - UMengUShare/Core
+  - UnionPay (3.3.11)
+  - YYModel (1.0.4)
+
+DEPENDENCIES:
+  - _Building (from `../`)
+  - _Components/ActionSheetView (from `../`)
+  - _Components/AlertView (from `../`)
+  - _Components/BadgeView (from `../`)
+  - _Components/BlankHolderView (from `../`)
+  - _Components/CycleScrollView (from `../`)
+  - _Components/DatePickerView (from `../`)
+  - _Components/DropDownMenu (from `../`)
+  - _Components/FiniteScrollView (from `../`)
+  - _Components/FlatActionSheetView (from `../`)
+  - _Components/IndicatorView (from `../`)
+  - _Components/InfiniteScrollView (from `../`)
+  - _Components/KeyboardControl (from `../`)
+  - _Components/LaunchAdView (from `../`)
+  - _Components/LoadableImageView (from `../`)
+  - _Components/LocalImageBrowser (from `../`)
+  - _Components/LocalImageEditableBrowserView (from `../`)
+  - _Components/PopupView (from `../`)
+  - _Components/PopViewController (from `../`)
+  - _Components/ProgressHUD (from `../`)
+  - _Components/ProgressView (from `../`)
+  - _Components/RateView (from `../`)
+  - _Components/RefreshView (from `../`)
+  - _Components/SegmentControl (from `../`)
+  - _Components/SegmentView (from `../`)
+  - _Components/TagsView (from `../`)
+  - _Components/UserGuideView (from `../`)
+  - _Components/WaterFallView (from `../`)
+  - _Foundation (from `../`)
+  - _Modules/Application (from `../`)
+  - _Modules/Components/Browser (from `../`)
+  - _Modules/Components/Map (from `../`)
+  - _Modules/Components/QRCode (from `../`)
+  - _Modules/Services/APNS (from `../`)
+  - _Modules/Services/Assets (from `../`)
+  - _Modules/Services/Growth (from `../`)
+  - _Modules/Services/Location (from `../`)
+  - _Modules/Services/SNS (from `../`)
+  - _Modules/Tools/Cache (from `../`)
+  - _Modules/Tools/Chronograph (from `../`)
+  - _Modules/Tools/CountDown (from `../`)
+  - _Modules/Tools/Date (from `../`)
+  - _Modules/Tools/DyDelegate (from `../`)
+  - _Modules/Tools/HttpMock (from `../`)
+  - _Modules/Tools/Network/Reachability (from `../`)
+  - _Modules/Tools/NetworkLit (from `../`)
+  - AFNetworking (~> 3.0)
+  - GTMBase64
+  - Masonry
+  - ReactiveObjC
+  - SDWebImage (~> 4.0)
+  - TZImagePickerController
+  - UnionPay (from `../_Vendors/UnionPay`)
+  - YYModel
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - AMap3DMap
+    - AMapFoundation
+    - AMapLocation
+    - AMapSearch
+    - GTMBase64
+    - JCore
+    - JPush
+    - Masonry
+    - ReactiveObjC
+    - SDWebImage
+    - TZImagePickerController
+    - UMengAnalytics-NO-IDFA
+    - UMengFeedback
+    - UMengUShare
+    - YYModel
+
+EXTERNAL SOURCES:
+  _Building:
+    :path: "../"
+  _Components:
+    :path: "../"
+  _Foundation:
+    :path: "../"
+  _Modules:
+    :path: "../"
+  UnionPay:
+    :path: "../_Vendors/UnionPay"
+
+SPEC CHECKSUMS:
+  _Building: 517d73fc902dfd2ce789757acd867be34a987365
+  _Components: 6e6c2966eea6b521e509075f6f1f51605573c2c1
+  _Foundation: 20f51d177d0fe965064a245ecd941caf185d1131
+  _Modules: 508f8d131b8e382ef670c632ce6e80b2f64c0e52
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AMap3DMap: 9fa4ec6ab230bfbd3f0c0834f757fbd7038efe53
+  AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
+  AMapLocation: 89a7e4eb6040d32ba73c77a4966ecc66e46aa7c3
+  AMapSearch: def5983c8ca1a6d7430970046dc814f6e337621d
+  GTMBase64: f0f91be06a7a20b84c8e4fee30c0430395091d82
+  JCore: b962a2a1a61dc911ce5e79ba3ff21a95edaf5d23
+  JPush: 8459e7a709ad86f95884fcb49cbd57a6da24744e
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  TZImagePickerController: 7850b158d025065b162a1a963d445040b828abc9
+  UMengAnalytics-NO-IDFA: f1b08b540eba6ebad044a574cae6d988cf40cfda
+  UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817
+  UMengUShare: 7a0ab762ccd445ccfcf11bde8e7f81b29b9f5e1c
+  UnionPay: 6294ba89de917e0d0db30c0ff0fbaa4e9beef587
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+
+PODFILE CHECKSUM: e625ebac0876b01086d3be720fcdbc6650e47a97
+
+COCOAPODS: 1.7.0.beta.2
