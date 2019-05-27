@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  _DynamicDelegate is designed to be 'plug and play'.
  */
+
+
 @interface _DynamicDelegate : NSProxy
 
 /**
@@ -67,15 +69,10 @@ NS_ASSUME_NONNULL_BEGIN
  responding to classical delegate method implementations. */
 @property (nonatomic, weak, readonly, nullable) id realDelegate;
 
-/** @name Block Instance Method Implementations */
-
-/** The block that is to be fired when the specified
- selector is called on the reciever.
-
- @param selector An encoded selector. Must not be NULL.
- @return A code block, or nil if no block is assigned.
+/**
+ * @desc Block Instance Method Implementations 
  */
-- (nullable id)blockImplementationForMethod:(SEL)selector;
+- (nullable id)implFor:(SEL)selector;
 
 /** Assigns the given block to be fired when the specified
  selector is called on the reciever.
@@ -93,14 +90,14 @@ NS_ASSUME_NONNULL_BEGIN
  @param selector An encoded selector. Must not be NULL.
  @param block A code block with the same signature as selector.
  */
-- (void)implementMethod:(SEL)selector withBlock:(nullable id)block;
+- (void)impl:(SEL)selector with:(nullable id)block;
 
 /** Disassociates any block so that nothing will be fired
  when the specified selector is called on the reciever.
 
  @param selector An encoded selector. Must not be NULL.
  */
-- (void)removeBlockImplementationForMethod:(SEL)selector;
+- (void)removeImplFor:(SEL)selector;
 
 /** @name Block Class Method Implementations */
 
@@ -110,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param selector An encoded selector. Must not be NULL.
  @return A code block, or nil if no block is assigned.
  */
-- (id)blockImplementationForClassMethod:(SEL)selector;
+- (id)implsFor:(SEL)selector;
 
 /** Assigns the given block to be fired when the specified
  selector is called on the reciever.
@@ -123,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param selector An encoded selector. Must not be NULL.
  @param block A code block with the same signature as selector.
  */
-- (void)implementClassMethod:(SEL)selector withBlock:(nullable id)block;
+- (void)impls:(SEL)selector with:(nullable id)block;
 
 /** Disassociates any blocks so that nothing will be fired
  when the specified selector is called on the delegating
@@ -131,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param selector An encoded selector. Must not be NULL.
  */
-- (void)removeBlockImplementationForClassMethod:(SEL)selector;
+- (void)removeImplsFor:(SEL)selector;
 
 @end
 
