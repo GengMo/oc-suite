@@ -149,7 +149,7 @@
         self->_leftTime = time;
         if (self.currentBlock) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.currentBlock(time);
+                invoke_nullable_block(self.currentBlock, time)
             });
         }
     };

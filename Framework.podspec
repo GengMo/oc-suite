@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author           = { '7' => 'fengzilijie@qq.com' }
   s.source           = { :git => 'https://github.com/fallending/oc-suite.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '8.0'
   
   ### 基础库
   ###

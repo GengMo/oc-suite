@@ -35,6 +35,10 @@
     
     //////////////////////////////
     
+    /////////////////
+    
+    BaseViewController.backButtonImageName = @"New people-Return";
+    
     ////////////// 三方登录
     
     service.sns.wechat.config.key = @"";
