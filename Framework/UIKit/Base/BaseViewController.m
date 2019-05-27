@@ -149,6 +149,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.class.backButtonImageName = @"New people-Return";
     // 设置导航栏返回按钮
     if (![self isNavigationRootController] &&
         self.class.backButtonImageName) {

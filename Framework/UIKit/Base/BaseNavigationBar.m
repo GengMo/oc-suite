@@ -37,7 +37,7 @@
     
     UIColor *color = self.class.preferredForegroundColor;
     if (!color) {
-        color = [UIColor whiteColor];
+        color = [UIColor blackColor];
     }
     
     NSDictionary *attr = @{ NSForegroundColorAttributeName : color, NSFontAttributeName : font };
