@@ -9,11 +9,8 @@
 #import "AppDelegate.h"
 #import "AppDelegate+Usage.h"
 #import "MainViewController.h"
-#import "_Foundation.h"
-#import "_NetworkLit.h"
-// 登录、分享、支付
-#import <_Modules/SNService.h>
-#import <_Modules/_Cache.h>
+#import <Framework/SNService.h>
+#import <Framework/_Cache.h>
 
 @interface AppDelegate ()
 

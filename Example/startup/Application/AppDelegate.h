@@ -10,10 +10,10 @@
 
 // 这里引用大部分头文件依赖，所以其他页面代码，可以依赖 ‘AppDelegate.h’
 
-#import <_Foundation/_Foundation.h>
-#import <_Building/_Building.h>
-#import <_Modules/_NetworkLit.h>
-#import <_Modules/_Cache.h>
+#import <Framework/_Foundation.h>
+#import <Framework/_UIKit.h>
+#import <Framework/_NetworkLit.h>
+#import <Framework/_Cache.h>
 #import <YYModel/YYModel.h>
 #import <SDWebImage/SDWebImageManager.h>
 #import "UIImageView+WebCache.h"

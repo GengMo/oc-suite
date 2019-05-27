@@ -1,5 +1,5 @@
 
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Foundation.h>
 #import "MapConfig.h"
 
 @interface MapService : NSObject

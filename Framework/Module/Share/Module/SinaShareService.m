@@ -1,5 +1,5 @@
-#import <_Foundation/_Foundation.h>
-#import "ShareSina.h"
+#import <Framework/_Foundation.h>
+#import "SinaShareService.h"
 #import "WeiboSDK.h"
 #import "ShareHelper.h"
 

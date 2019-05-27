@@ -1,7 +1,5 @@
 
-#import <_Foundation/_Foundation.h>
-
-#import "Masonry.h"
+#import <Framework/_Foundation.h>
 
 // ----------------------------------
 // UI Layout
@@ -12,37 +10,9 @@
 #import "_Layout.h"
 
 // ----------------------------------
-// UI Animation
+// Extension
 // ----------------------------------
 
-#import "MovingNavigationBarManager.h" // 导航栏移动动画、特效处理
-#import "FadingNavigationBarManager.h" // 导航栏渐变动画、特效处理
-#import "BlurViewController.h" // 模糊背景弹出
-#import "_StatusBarController.h"
-
-// image
-
-#import "UIImage+Alpha.h"
-#import "UIImage+Capture.h"
-#import "UIImage+Compress.h"
-#import "UIImage+Crop.h"
-#import "UIImage+Effects.h"
-#import "UIImage+FileName.h"
-#import "UIImage+GIF.h"
-#import "UIImage+GImageExtension.h"
-#import "UIImage+Merge.h"
-#import "UIImage+Transform.h"
-#import "UIImage+Vector.h"
-#import "UIImageView+FaceDetect.h"
-
-// extension-view
-#import "UI3DTouchController.h"
-#import "UIRealTimeBlurView.h"
-#import "UIShapeView.h"
-#import "UITitleDisplayViewController.h"
-#import "UIToast.h"
-
-// extension
 #import "NSIndexPath+Extension.h"
 #import "NSIndexSet+Extension.h"
 #import "NSString+Size.h"
@@ -56,6 +26,7 @@
 #import "UIControl+Extension.h"
 #import "UIControl+Block.h"
 #import "UIFont+Extension.h"
+#import "UIImage+Extension.h"
 #import "UIImageView+Extension.h"
 #import "UILabel+Extension.h"
 #import "UINavigationBar+Extension.h"

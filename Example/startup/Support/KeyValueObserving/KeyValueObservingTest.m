@@ -6,8 +6,7 @@
 //  Copyright © 2018 7. All rights reserved.
 //
 
-//#import <_Tool/KeyValueObserving.h>
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Foundation.h>
 #import "KeyValueObservingTest.h"
 
 @interface Person : NSObject

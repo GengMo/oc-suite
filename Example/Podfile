@@ -31,8 +31,8 @@ target 'startup' do
     pod 'Framework/Module/Browser', :path => '../'
     pod 'Framework/Module/Map', :path => '../'
 
-#    pod 'Framework/Module/Image', :path => '../'
-#    pod 'Framework/Module/Share', :path => '../'
+    pod 'Framework/Module/Image', :path => '../'
+    pod 'Framework/Module/Share', :path => '../'
 
     ######################################
     # UI 组件

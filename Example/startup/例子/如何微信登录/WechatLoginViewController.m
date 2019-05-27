@@ -7,7 +7,7 @@
 //
 
 #import "WechatLoginViewController.h"
-#import <_Modules/SNService.h>
+#import <Framework/SNService.h>
 
 @interface WechatLoginViewController ()
 

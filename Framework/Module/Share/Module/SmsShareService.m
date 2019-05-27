@@ -1,7 +1,7 @@
 #import <MessageUI/MessageUI.h>
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Foundation.h>
 
-#import "ShareSms.h"
+#import "SmsShareService.h"
 
 @interface ShareSms () <MFMessageComposeViewControllerDelegate>
 

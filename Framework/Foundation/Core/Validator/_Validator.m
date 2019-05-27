@@ -1,4 +1,8 @@
+#import "_Encoding.h"
 #import "_Validator.h"
+#import "NSString+Extension.h"
+#import "NSObject+Extension.h"
+
 
 #pragma mark -
 

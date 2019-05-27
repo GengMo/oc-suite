@@ -5,7 +5,7 @@
 //  Copyright © 2015年 杨萧玉. All rights reserved.
 //
 
-#import "_Building.h"
+#import <Framework/_UIKit.h>
 #import "TBActionSheet.h"
 #import "UIImage+BoxBlur.h"
 #import "TBActionContainer.h"

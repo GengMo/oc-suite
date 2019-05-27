@@ -1,5 +1,5 @@
 
-#import "_Building.h"
+#import <Framework/_UIKit.h>
 #import "SegmentView.h"
 
 @interface JTSegmentView ()

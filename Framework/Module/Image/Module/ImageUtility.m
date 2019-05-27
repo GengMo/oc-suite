@@ -5,7 +5,7 @@
 //  Created by fallen.ink on 2019/3/29.
 //
 
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Foundation.h>
 #import "ImageUtility.h"
 
 @implementation ImageUtility
@@ -71,7 +71,7 @@
 }
     
 + (UIImage *)scaleImage:(UIImage*)image ratio:(CGFloat)ratio{
-    return [ImageUtil scaleToSize:image size:CGSizeMake(image.size.width * ratio, image.size.height *ratio)];
+    return [ImageUtility scaleToSize:image size:CGSizeMake(image.size.width * ratio, image.size.height *ratio)];
 }
     
     /*
@@ -82,7 +82,7 @@
     if (minImageSide <= minSide) {
         return image;
     }else{
-        return [ImageUtil scaleImage:image ratio:minSide / minImageSide];
+        return [ImageUtility scaleImage:image ratio:minSide / minImageSide];
     }
 }
     
@@ -97,7 +97,7 @@
 }
     
 + (NSData*)compressImageForUpload:(UIImage*)img{
-    return [ImageUtil compressQualityOfImage:img];
+    return [ImageUtility compressQualityOfImage:img];
 }
     
 + (NSData*)compressQualityOfImage:(UIImage*)img{
@@ -249,7 +249,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageview.frame)+30, screen_width, 20)];
     [vi addSubview:label];
     label.font = [UIFont systemFontOfSize:15];
-    label.textColor = [ImageUtil colorWithRgb:0x999999];
+    label.textColor = [ImageUtility colorWithRgb:0x999999];
     label.text = waringStr;
     label.textAlignment = 1;
     return vi;
@@ -288,7 +288,7 @@
 }
     // 根据view截图
 + (UIImage*)cutView:(UIView*)view {
-    return [ImageUtil cutView:view size:view.bounds.size];
+    return [ImageUtility cutView:view size:view.bounds.size];
 }
     
     // 根据view截图, 指定范围

@@ -1,6 +1,4 @@
-
-#import "_Foundation.h"
-#import "_Building.h"
+#import <Framework/_UIKit.h>
 #import "BlankholderView.h"
 
 @interface BlankholderView ()

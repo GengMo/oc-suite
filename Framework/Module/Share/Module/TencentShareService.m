@@ -1,9 +1,10 @@
 
+#import <Framework/ImageUtility.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentOAuthObject.h>
 #import <TencentOpenAPI/TencentApiInterface.h>
-#import "ShareQQ.h"
+#import "TencentShareService.h"
 #import "ShareHelper.h"
 
 
@@ -27,7 +28,7 @@
 
 - (BOOL)share:(ShareParamBuilder *)paramBuilder onViewController:(UIViewController *)viewController {
     if (![self supported]) {
-        [self showToastWithText:localized(@"分享.当前QQ的版本不支持.Toast提示")];
+//        [self showToastWithText:localized(@"分享.当前QQ的版本不支持.Toast提示")];
 
         return YES;
     }
@@ -35,9 +36,9 @@
     QQApiNewsObject *newsObj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:paramBuilder.url]
                                                         title:paramBuilder.title
                                                   description:paramBuilder.detail
-                                             previewImageData:[ImageUtil compressThumbImage:paramBuilder.image]];
+                                             previewImageData:[ImageUtility compressThumbImage:paramBuilder.image]];
     SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
-    if (paramBuilder.type == SNShareQQ_Friends) {
+    if (paramBuilder.type == ShareQQFriends) {
         QQApiSendResultCode sent = [QQApiInterface sendReq:req];
         [self handleSendResult:sent];
     } else {
@@ -75,29 +76,29 @@
     switch (sendResult) {
         case EQQAPIAPPNOTREGISTED:
         {
-            DDLogError(@"QQ分享错误：App未注册");
+//            DDLogError(@"QQ分享错误：App未注册");
             break;
         }
         case EQQAPIMESSAGECONTENTINVALID:
         case EQQAPIMESSAGECONTENTNULL:
         case EQQAPIMESSAGETYPEINVALID:
         {
-            DDLogError(@"QQ分享错误：发送参数错误");
+//            DDLogError(@"QQ分享错误：发送参数错误");
             break;
         }
         case EQQAPIQQNOTINSTALLED:
         {
-            DDLogError(@"QQ分享错误：未安装手Q");
+//            DDLogError(@"QQ分享错误：未安装手Q");
             break;
         }
         case EQQAPIQQNOTSUPPORTAPI:
         {
-            DDLogError(@"QQ分享错误：API接口不支持");
+//            DDLogError(@"QQ分享错误：API接口不支持");
             break;
         }
         case EQQAPISENDFAILD:
         {
-            DDLogError(@"QQ分享错误：发送失败");
+//            DDLogError(@"QQ分享错误：发送失败");
             break;
         }
         default:

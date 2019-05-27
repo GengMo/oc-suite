@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <_Building/_Building.h>
+#import <Framework/_UIKit.h>
 
 /**
  *  判断输入内容是否合法

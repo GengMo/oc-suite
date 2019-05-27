@@ -21,56 +21,58 @@ PODS:
     - AMapFoundation (~> 1.4)
   - AMapSearch (6.6.0):
     - AMapFoundation (~> 1.4)
-  - Framework/Component/ActionSheetView (0.5.0)
-  - Framework/Component/AlertView (0.5.0)
-  - Framework/Component/BadgeView (0.5.0)
-  - Framework/Component/BlankHolderView (0.5.0)
-  - Framework/Component/CycleScrollView (0.5.0)
-  - Framework/Component/DatePickerView (0.5.0)
-  - Framework/Component/DropDownMenu (0.5.0)
-  - Framework/Component/FiniteScrollView (0.5.0)
-  - Framework/Component/FlatActionSheetView (0.5.0)
-  - Framework/Component/IndicatorView (0.5.0)
-  - Framework/Component/InfiniteScrollView (0.5.0)
-  - Framework/Component/KeyboardControl (0.5.0)
-  - Framework/Component/LaunchAdView (0.5.0)
-  - Framework/Component/LoadableImageView (0.5.0)
-  - Framework/Component/LocalImageBrowser (0.5.0)
-  - Framework/Component/LocalImageEditableBrowserView (0.5.0)
-  - Framework/Component/PopupView (0.5.0)
-  - Framework/Component/PopViewController (0.5.0)
-  - Framework/Component/ProgressHUD (0.5.0)
-  - Framework/Component/ProgressView (0.5.0)
-  - Framework/Component/RateView (0.5.0)
-  - Framework/Component/RefreshView (0.5.0)
-  - Framework/Component/SegmentControl (0.5.0)
-  - Framework/Component/SegmentView (0.5.0)
-  - Framework/Component/TagsView (0.5.0)
-  - Framework/Component/UserGuideView (0.5.0)
-  - Framework/Component/WaterFallView (0.5.0)
-  - Framework/Core/Cache (0.5.0)
-  - Framework/Core/Chronograph (0.5.0)
-  - Framework/Core/CountDown (0.5.0)
-  - Framework/Core/Date (0.5.0)
-  - Framework/Core/Delegate (0.5.0)
-  - Framework/Core/HttpMock (0.5.0)
-  - Framework/Core/Modular (0.5.0)
-  - Framework/Core/Network/Reachability (0.5.0)
-  - Framework/Core/NetworkLit (0.5.0)
-  - Framework/Foundation (0.5.0)
-  - Framework/Module/APNS (0.5.0):
+  - Framework/Component/ActionSheetView (1.0.0)
+  - Framework/Component/AlertView (1.0.0)
+  - Framework/Component/BadgeView (1.0.0)
+  - Framework/Component/BlankHolderView (1.0.0)
+  - Framework/Component/CycleScrollView (1.0.0)
+  - Framework/Component/DatePickerView (1.0.0)
+  - Framework/Component/DropDownMenu (1.0.0)
+  - Framework/Component/FiniteScrollView (1.0.0)
+  - Framework/Component/FlatActionSheetView (1.0.0)
+  - Framework/Component/IndicatorView (1.0.0)
+  - Framework/Component/InfiniteScrollView (1.0.0)
+  - Framework/Component/KeyboardControl (1.0.0)
+  - Framework/Component/LaunchAdView (1.0.0)
+  - Framework/Component/LoadableImageView (1.0.0)
+  - Framework/Component/LocalImageBrowser (1.0.0)
+  - Framework/Component/LocalImageEditableBrowserView (1.0.0)
+  - Framework/Component/PopupView (1.0.0)
+  - Framework/Component/PopViewController (1.0.0)
+  - Framework/Component/ProgressHUD (1.0.0)
+  - Framework/Component/ProgressView (1.0.0)
+  - Framework/Component/RateView (1.0.0)
+  - Framework/Component/RefreshView (1.0.0)
+  - Framework/Component/SegmentControl (1.0.0)
+  - Framework/Component/SegmentView (1.0.0)
+  - Framework/Component/TagsView (1.0.0)
+  - Framework/Component/UserGuideView (1.0.0)
+  - Framework/Component/WaterFallView (1.0.0)
+  - Framework/Core/Cache (1.0.0)
+  - Framework/Core/Chronograph (1.0.0)
+  - Framework/Core/CountDown (1.0.0)
+  - Framework/Core/Date (1.0.0)
+  - Framework/Core/Delegate (1.0.0)
+  - Framework/Core/HttpMock (1.0.0)
+  - Framework/Core/Modular (1.0.0)
+  - Framework/Core/Network/Reachability (1.0.0)
+  - Framework/Core/NetworkLit (1.0.0)
+  - Framework/Foundation (1.0.0)
+  - Framework/Module/APNS (1.0.0):
     - JPush
-  - Framework/Module/App (0.5.0)
-  - Framework/Module/Assets (0.5.0)
-  - Framework/Module/Browser (0.5.0)
-  - Framework/Module/Growth (0.5.0)
-  - Framework/Module/Location (0.5.0)
-  - Framework/Module/Map (0.5.0):
+  - Framework/Module/App (1.0.0)
+  - Framework/Module/Assets (1.0.0)
+  - Framework/Module/Browser (1.0.0)
+  - Framework/Module/Growth (1.0.0)
+  - Framework/Module/Image (1.0.0)
+  - Framework/Module/Location (1.0.0)
+  - Framework/Module/Map (1.0.0):
     - AMap3DMap
     - AMapLocation
     - AMapSearch
-  - Framework/Module/QRCode (0.5.0)
-  - Framework/Module/SNS (0.5.0):
+  - Framework/Module/QRCode (1.0.0)
+  - Framework/Module/Share (1.0.0)
+  - Framework/Module/SNS (1.0.0):
     - UMengAnalytics-NO-IDFA (= 4.1.5)
     - UMengFeedback (~> 2.3.4)
     - UMengUShare/Core (= 6.4.8)
@@ -107,7 +109,7 @@ PODS:
     - UMengUShare/Social/YiXin
     - UMengUShare/Social/YouDao
     - UMengUShare/UI
-  - Framework/UIKit (0.5.0)
+  - Framework/UIKit (1.0.0)
   - GTMBase64 (1.0.1)
   - JCore (2.0.0)
   - JPush (3.2.0):
@@ -239,9 +241,11 @@ DEPENDENCIES:
   - Framework/Module/Assets (from `../`)
   - Framework/Module/Browser (from `../`)
   - Framework/Module/Growth (from `../`)
+  - Framework/Module/Image (from `../`)
   - Framework/Module/Location (from `../`)
   - Framework/Module/Map (from `../`)
   - Framework/Module/QRCode (from `../`)
+  - Framework/Module/Share (from `../`)
   - Framework/Module/SNS (from `../`)
   - Framework/UIKit (from `../`)
   - GTMBase64
@@ -283,7 +287,7 @@ SPEC CHECKSUMS:
   AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
   AMapLocation: 89a7e4eb6040d32ba73c77a4966ecc66e46aa7c3
   AMapSearch: def5983c8ca1a6d7430970046dc814f6e337621d
-  Framework: 7622048a08a4b300c6781d40923800954b3e094f
+  Framework: 034ab410426f164b82c3e52bdb3c03f9af3c6e0d
   GTMBase64: f0f91be06a7a20b84c8e4fee30c0430395091d82
   JCore: b962a2a1a61dc911ce5e79ba3ff21a95edaf5d23
   JPush: 8459e7a709ad86f95884fcb49cbd57a6da24744e
@@ -297,6 +301,6 @@ SPEC CHECKSUMS:
   UnionPay: 6294ba89de917e0d0db30c0ff0fbaa4e9beef587
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: c53994d350b7b159071e6ee4dd8c877f2b8082c1
+PODFILE CHECKSUM: 47ce94cdd579e0af349503b6bb54b2645fcb5f34
 
 COCOAPODS: 1.7.0.beta.2

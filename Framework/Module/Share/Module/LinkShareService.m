@@ -1,4 +1,4 @@
-#import "ShareLink.h"
+#import "LinkShareService.h"
 
 @implementation ShareLink
 

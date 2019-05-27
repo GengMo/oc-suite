@@ -6,7 +6,7 @@
 #import "GaoDeLocationServiceImpl.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 
-const int kUpdateLocationInterval = 1*60;//每1分钟刷新定位
+static const int kUpdateLocationInterval = 1*60;//每1分钟刷新定位
 
 @interface LocationService () <CLLocationManagerDelegate> {
     

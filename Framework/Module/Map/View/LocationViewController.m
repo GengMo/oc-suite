@@ -1,8 +1,7 @@
 
-#import <_Building/_Building.h>
+#import <Framework/_UIKit.h>
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-#import "_Validator.h"
 #import "_Application.h"
 #import "LocationViewController.h"
 #import "AddressInputHintViewController.h"

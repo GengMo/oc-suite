@@ -1,4 +1,4 @@
-#import <_Modules/ShareServiceDef.h>
+#import <Framework/ShareServiceDef.h>
 #import "ShareViewController.h"
 #import "CenterAlignView.h"
 #import "ABShareView.h"
@@ -137,27 +137,27 @@
 - (void)didClickOnCenterAlignViewTitle:(NSString *)title {
     void (^shareEventHandle)(void) = ^{
         if ([title isEqualToString:@"微信"]) {
-            self.paramBuilder.type = SNShareWechat_Friends;
+            self.paramBuilder.type = ShareWechatFriends;
             
-            [[SNShareService sharedInstance].wechat share:self.paramBuilder onViewController:self];
+//            [[SNShareService sharedInstance].wechat share:self.paramBuilder onViewController:self];
             
              [self dismissSharePopup];
         } else if ([title isEqualToString:@"朋友圈"]) {
-            self.paramBuilder.type = SNShareWechat_CircleFriends;
+            self.paramBuilder.type = ShareWechatCircleFriends;
             
-            [[SNShareService sharedInstance].wechat share:self.paramBuilder onViewController:self];
+//            [[SNShareService sharedInstance].wechat share:self.paramBuilder onViewController:self];
             
             [self dismissSharePopup];
         } else if ([title isEqualToString:@"QQ好友"]) {
-            self.paramBuilder.type = SNShareQQ_Friends;
+            self.paramBuilder.type = ShareQQFriends;
             
-            [[SNShareService sharedInstance].qq share:self.paramBuilder onViewController:self];
+//            [[SNShareService sharedInstance].qq share:self.paramBuilder onViewController:self];
             
             [self dismissSharePopup];
         } else if ([title isEqualToString:@"QQ空间"]) {
-            self.paramBuilder.type = SNShareQQ_Zone;
+            self.paramBuilder.type = ShareQQZone;
            
-            [[SNShareService sharedInstance].qq share:self.paramBuilder onViewController:self];
+//            [[SNShareService sharedInstance].qq share:self.paramBuilder onViewController:self];
             
             [self dismissSharePopup];
         } else if ([title isEqualToString:@"新浪微博"]) {
@@ -181,7 +181,7 @@
 #pragma mark - 新浪微博
 
 - (void)sendSinaWeiBoMessage {
-    [[SNShareService sharedInstance].sina share:self.paramBuilder onViewController:self];
+//    [[SNShareService sharedInstance].sina share:self.paramBuilder onViewController:self];
     
     [self dismissSharePopup];
 }
@@ -189,7 +189,7 @@
 #pragma mark - 短信
 
 - (void)sendSMS {
-    [[SNShareService sharedInstance].sms share:self.paramBuilder onViewController:self];
+//    [[SNShareService sharedInstance].sms share:self.paramBuilder onViewController:self];
     
     [self dismissSharePopup];
 }
@@ -197,7 +197,7 @@
 #pragma mark - 邮件
 
 - (void)sendEmail {
-    [[SNShareService sharedInstance].email share:self.paramBuilder onViewController:self];
+//    [[SNShareService sharedInstance].email share:self.paramBuilder onViewController:self];
 
     [self dismissSharePopup];
 }
@@ -205,7 +205,7 @@
 #pragma mark - 拷贝链接
 
 - (void)pasteboardCopy {
-    [[SNShareService sharedInstance].link share:self.paramBuilder onViewController:self];
+//    [[SNShareService sharedInstance].link share:self.paramBuilder onViewController:self];
     
     [self dismissSharePopup];
 }

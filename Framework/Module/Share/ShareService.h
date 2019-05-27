@@ -1,4 +1,4 @@
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Foundation.h>
 #import "ShareServiceConfig.h"
 #import "ShareParamBuilder.h"
 
@@ -7,7 +7,7 @@
 @class ShareEmail;
 @class ShareSina;
 @class ShareSms;
-@class ShareWechat;
+@class WechatShareService;
 
 typedef BOOL (^ ShareServiceConfigBlock)(ShareServiceConfig *config);
 
@@ -27,7 +27,7 @@ typedef BOOL (^ ShareServiceConfigBlock)(ShareServiceConfig *config);
 @prop_singleton( ShareEmail, email )
 @prop_singleton( ShareSina, sina )
 @prop_singleton( ShareSms, sms )
-@prop_singleton( ShareWechat, wechat )
+@prop_singleton( WechatShareService, wechat )
 
 #pragma mark - 统一配置接口
 

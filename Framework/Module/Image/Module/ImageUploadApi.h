@@ -6,9 +6,6 @@
 //
 //
 
-#import "_precompile.h"
-#import "_base_net_command.h"
-
 #if 0
 typedef enum : NSUInteger {
     UploadImageType_Big = 1,

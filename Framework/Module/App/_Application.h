@@ -1,6 +1,6 @@
 
-#import <_Foundation/_Precompile.h>
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Precompile.h>
+#import <Framework/_Foundation.h>
 
 /**
  *  @knowledge

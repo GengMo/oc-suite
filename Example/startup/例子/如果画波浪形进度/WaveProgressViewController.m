@@ -6,7 +6,7 @@
 //  Copyright © 2019 7. All rights reserved.
 //
 
-#import <_Components/WaveProcessView.h>
+#import <Framework/WaveProcessView.h>
 #import "WaveProgressViewController.h"
 
 @interface WaveProgressViewController ()

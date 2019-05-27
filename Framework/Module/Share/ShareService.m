@@ -69,12 +69,12 @@
  */
 
 #import "ShareService.h"
-#import "ShareLink.h"
-#import "ShareQQ.h"
-#import "ShareEmail.h"
-#import "ShareSms.h"
-#import "ShareSina.h"
-#import "ShareWechat.h"
+#import "LinkShareService.h"
+#import "TencentShareService.h"
+#import "EmailShareService.h"
+#import "SmsShareService.h"
+#import "SinaShareService.h"
+#import "WechatShareService.h"
 
 #pragma mark -
 
@@ -94,7 +94,7 @@
 @def_prop_singleton( ShareEmail, email )
 @def_prop_singleton( ShareSina, sina )
 @def_prop_singleton( ShareSms, sms )
-@def_prop_singleton( ShareWechat, wechat )
+@def_prop_singleton( WechatShareService, wechat )
 
 #pragma mark -
 
@@ -161,7 +161,7 @@
     }
     
     if (self.wechatConfig.supported) {
-        self.wechat.config = self.wechatConfig;
+//        self.wechat.config = self.wechatConfig;
         [self.wechat configure];
     }
 }
@@ -182,7 +182,7 @@
     [self.link parse:url application:application];
     [self.sina parse:url application:application];
     [self.sms parse:url application:application];
-    [self.wechat parse:url application:application];
+//    [self.wechat parse:url application:application];
 }
 
 @end

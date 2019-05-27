@@ -6,10 +6,10 @@
 //  Copyright © 2019 7. All rights reserved.
 //
 
-#import <_Components/CircleProgressView.h>
-#import <_Components/CircleProgress.h>
-#import <_Modules/_Chronograph.h>
-#import <_Modules/_CountDown.h>
+#import <Framework/CircleProgressView.h>
+//#import <Framework/CircleProgress.h>
+#import <Framework/_Chronograph.h>
+#import <Framework/_CountDown.h>
 #import "CircleProgressViewController.h"
 #import "AppDelegate.h"
 

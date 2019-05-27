@@ -5,7 +5,7 @@
 //  Copyright © 2015年 Tencent. All rights reserved.
 //
 
-#import "_Building.h"
+#import <Framework/_UIKit.h>
 #import "TBAlertController.h"
 #import <objc/runtime.h>
 

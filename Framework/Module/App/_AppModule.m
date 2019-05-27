@@ -1,7 +1,7 @@
 
-#import <_Modules/MapService.h>
-#import <_Modules/APNService.h>
-#import <_Modules/LocationService.h>
+#import <Framework/MapService.h>
+#import <Framework/APNService.h>
+#import <Framework/LocationService.h>
 
 #import "_AppModule.h"
 #import "_AppConfig.h"

@@ -5,8 +5,6 @@
 //  Created by fallen on 15/8/4.
 //
 
-#import "_greats.h"
-#import "_building_tools.h"
 #import "ImageUploader.h"
 #import "ImageUploadApi.h"
 

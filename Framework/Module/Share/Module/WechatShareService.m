@@ -2,6 +2,7 @@
 #import "WechatShareService.h"
 #import "WXApi.h"
 #import "ShareHelper.h"
+#import "ShareParamBuilder.h"
 
 @interface WechatShareService () <WXApiDelegate>
 
@@ -11,29 +12,30 @@
 
 @def_error( notSupportedError, ShareWechatNotSupportedError, @"当前不支持微信分享" )
 
-@def_singleton( ShareWechat )
+@def_singleton( WechatShareService )
 
 - (void)configure {
-    [WXApi registerApp:self.config.appId];
+//    [WXApi registerApp:self.config.appId];
 }
 
 - (BOOL)supported {
-    return [WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi] && self.config.supported;
+//    return [WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi] && self.config.supported;
+    return YES;
 }
 
 - (BOOL)share:(ShareParamBuilder *)paramBuilder onViewController:(UIViewController *)viewController {
     if (![self supported]) {
-        [self showToastWithText:localized(@"分享.当前微信的版本不支持.Toast提示")];
+//        [self showToastWithText:localized(@"分享.当前微信的版本不支持.Toast提示")];
         return NO;
     }
     
     int sceneType = 0;
     switch (paramBuilder.type) {
-        case ShareWechat_Friends: {
+        case ShareWechatFriends: {
             sceneType = WXSceneSession;
         }
             break;
-        case ShareWechat_CircleFriends: {
+        case ShareWechatCircleFriends: {
             sceneType = WXSceneTimeline;
         }
             break;
@@ -89,16 +91,16 @@
 
     BOOL ret = [WXApi sendReq:req];
     if (ret == NO) {
-        [self showToastWithText:localized(@"分享.分享失败.Toast提示")];
+//        [self showToastWithText:localized(@"分享.分享失败.Toast提示")];
     }
     
     return YES;
 }
 
 - (void)parse:(NSURL *)url application:(UIApplication *)application {
-    if ([[url scheme] isEqualToString:self.config.appId]) {
-        [WXApi handleOpenURL:url delegate:self];
-    }
+//    if ([[url scheme] isEqualToString:self.config.appId]) {
+//        [WXApi handleOpenURL:url delegate:self];
+//    }
 }
 
 #pragma mark - WXApiDelegate
@@ -148,4 +150,15 @@
 }
 
 
+@synthesize shareParam;
+
+
+- (void)shareWith:(id<_ShareParamProtocol>)param success:(ObjectBlock)successHandler failure:(ErrorBlock)failureHandler {
+    
+}
+    
++ (void)onLoad {
+    
+}
+    
 @end

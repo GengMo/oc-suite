@@ -1,4 +1,4 @@
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Foundation.h>
 #import "WaveProcessView.h"
 
 @implementation WaveProcessView {

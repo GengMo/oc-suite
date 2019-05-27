@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <_Components/SegmentControl.h>
+#import <Framework/SegmentControl.h>
 
 @interface ViewController ()
 

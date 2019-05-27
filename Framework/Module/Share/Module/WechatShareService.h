@@ -1,5 +1,5 @@
-#import <_Foundation/_Modular.h>
-#import <_Foundation/_Protocols.h>
+#import <Framework/_Modular.h>
+#import <Framework/_Protocols.h>
 
 typedef enum {
     ShareWechatFriends = 0,   // 微信好友

@@ -1,6 +1,5 @@
 
-#import <_Foundation/_Foundation.h>
-//#import "_AppRater.h"
+#import <Framework/_Foundation.h>
 
 // ----------------------------------
 // Macro

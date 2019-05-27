@@ -15,7 +15,7 @@
  
     保存图片，扫描二维码
  */
-#import "_Building.h"
+#import <Framework/_UIKit.h>
 
 @interface QRCodePresentVC : UIViewController
 

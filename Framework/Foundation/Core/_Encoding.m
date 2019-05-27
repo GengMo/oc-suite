@@ -1,5 +1,3 @@
-
-#import <objc/runtime.h>
 #import "_Encoding.h"
 #import "_Foundation.h"
 

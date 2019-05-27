@@ -1,4 +1,4 @@
-#import <_Foundation/_All.h>
+#import <Framework/_Foundation.h>
 #import "WechatSNService.h"
 
 @interface SNService : _Service <_SNSProtocol>

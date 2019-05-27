@@ -6,7 +6,7 @@
 //
 //  fallenink: 这个可以作为window实现弹出框的模板。
 
-#import "_Building.h"
+#import <Framework/_UIKit.h>
 
 #pragma mark -
 

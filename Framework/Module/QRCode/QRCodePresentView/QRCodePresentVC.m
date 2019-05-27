@@ -6,6 +6,7 @@
 //
 //
 
+#import <Masonry/Masonry.h>
 #import "QRCodePresentVC.h"
 #import "ActionSheetView.h"
 #import "FTIndicator.h"

@@ -6,7 +6,7 @@
 //  Copyright © 2016年 杨萧玉. All rights reserved.
 //
 
-#import "_Building.h"
+#import <Framework/_UIKit.h>
 #import "TBActionContainer.h"
 #import "TBActionSheet.h"
 #import "TBActionButton.h"

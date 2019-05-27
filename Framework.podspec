@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author           = { '7' => 'fengzilijie@qq.com' }
   s.source           = { :git => 'https://github.com/fallending/oc-suite.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   
   ### 基础库
   ###
@@ -23,8 +23,8 @@ Pod::Spec.new do |s|
   ### UI库 
   ###
   s.subspec 'UIKit' do |uikit|
-    uikit.frameworks = 'UIKit'
-    uikit.source_files = "Framework/UIKit/*.{h,m}"
+    # uikit.frameworks = 'UIKit'
+    uikit.source_files = "Framework/UIKit/**/*.{h,m}"
   end
 
   ### 工具库
@@ -273,6 +273,11 @@ Pod::Spec.new do |s|
   ### 组件库
   ###
   s.subspec 'Component' do |comp|
+
+    comp.subspec 'Animation' do |animation|
+      animation.source_files = "Framework/Component/Animation/**/*.{h,m}"
+    end
+
     comp.subspec 'ActionSheetView' do |actionSheetView|
       actionSheetView.source_files = "Framework/Component/ActionSheetView/**/*.{h,m}"
     end

@@ -5,7 +5,7 @@
 //  Created by fallen.ink on 9/5/16.
 //
 #import <UIKit/UIKit.h>
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Foundation.h>
 
 @interface BaseNavigationBar : UINavigationBar
 

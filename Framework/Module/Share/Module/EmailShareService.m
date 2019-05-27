@@ -1,4 +1,4 @@
-#import "ShareEmail.h"
+#import "EmailShareService.h"
 #import <MessageUI/MFMessageComposeViewController.h>
 #import <MessageUI/MFMailComposeViewController.h>
 

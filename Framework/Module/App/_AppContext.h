@@ -1,5 +1,5 @@
 
-#import <_Foundation/_Foundation.h>
+#import <Framework/_Foundation.h>
 #import "_AppInit.h"
 #import "_AppUninit.h"
 #import "_AppUser.h"

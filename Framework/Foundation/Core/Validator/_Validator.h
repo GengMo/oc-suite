@@ -1,5 +1,5 @@
-#import "_Precompile.h"
-#import "_Foundation.h"
+#import "_Property.h"
+#import "_Singleton.h"
 #import "NSString+Validation.h"
 
 // ----------------------------------

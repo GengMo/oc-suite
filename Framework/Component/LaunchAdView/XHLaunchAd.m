@@ -5,7 +5,8 @@
 //  Created by xiaohui on 16/6/13.
 //  Copyright © 2016年 qiantou. All rights reserved.
 
-#import "_Building.h"
+#import <Framework/_Foundation.h>
+#import <Framework/_UIKit.h>
 #import "XHLaunchAd.h"
 #import "XHImageCache.h"
 

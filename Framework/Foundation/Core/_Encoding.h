@@ -1,5 +1,6 @@
 
 #import <Foundation/Foundation.h>
+#import <objc/runtime.h>
 
 /**
  *  Get the type from a Type-Encoding string.
