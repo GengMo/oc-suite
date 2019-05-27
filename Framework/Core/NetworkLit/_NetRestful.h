@@ -19,6 +19,7 @@ typedef void * (^ _NetDismissHudBlock)(void);
 + (instancetype) new __attribute__((unavailable("new not available, call initWithHostname instead")));
 
 - (instancetype)initWithHostname:(NSString *)hostname paramEncoding:(NetRequestParameterEncoding)encoding secure:(BOOL)isSecure;
+- (instancetype)initWithHostname:(NSString *)hostname paramEncoding:(NetRequestParameterEncoding)encoding secure:(BOOL)isSecure timeout:(NSTimeInterval)timeout;
 
 @property (nonatomic, strong) _NetHeaderAppendBlock headerAppendHandler;
 @property (nonatomic, strong) _NetParameterAppendBlock parameterAppendHandler;

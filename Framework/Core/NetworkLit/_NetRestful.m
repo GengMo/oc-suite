@@ -13,12 +13,16 @@
 // MARK: -
 
 - (instancetype)initWithHostname:(NSString *)hostname paramEncoding:(NetRequestParameterEncoding)encoding secure:(BOOL)isSecure {
+    return [self initWithHostname:hostname paramEncoding:encoding secure:isSecure timeout:30];
+}
+- (instancetype)initWithHostname:(NSString *)hostname paramEncoding:(NetRequestParameterEncoding)encoding secure:(BOOL)isSecure timeout:(NSTimeInterval)timeout {
     if (self = [super init]) {
         self.host = [[_NetHost alloc] initWithHostName:hostname];
         
         self.host.defaultHeaders = [self defaultHeader];
         self.host.defaultParameterEncoding = encoding;
         self.host.secureHost = isSecure;
+        self.host.timeoutInterval = timeout;
     }
     
     return self;
