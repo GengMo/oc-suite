@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+#import <Framework/_Foundation.h>
 #import "_NetRequest.h"
 
 @class _NetHost;
@@ -13,6 +13,11 @@
 
 - (id)initWithHostName:(NSString *)hostName;
 
+/**
+ * @desc Session 的请求超时时间
+ * @impo for timeoutIntervalForRequest, not for timeoutIntervalForResource
+ */
+@prop_assign( NSTimeInterval, timeoutInterval ) // [default: 30s]
 @property NSString *hostName;
 @property NSString *path;
 @property NSUInteger port;

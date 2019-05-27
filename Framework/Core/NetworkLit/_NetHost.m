@@ -23,6 +23,7 @@
 @end
 
 @implementation _NetHost
+@def_prop_assign( NSTimeInterval, timeoutInterval )
 
 - (NSURLSession *)defaultSession {
     static dispatch_once_t onceToken;
@@ -30,6 +31,10 @@
     static NSURLSession *defaultSession;
     dispatch_once(&onceToken, ^{
         defaultSessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        
+        if (self.timeoutInterval > 0) {
+            [defaultSessionConfiguration setTimeoutIntervalForRequest:self.timeoutInterval];
+        }
         defaultSession = [NSURLSession sessionWithConfiguration:defaultSessionConfiguration
                                                       delegate:self
                                                  delegateQueue:[NSOperationQueue mainQueue]];
@@ -40,8 +45,8 @@
 
 - (instancetype)init {
     if(self = [super init]) {
-
-    self.runningTasksSynchronizingQueue = dispatch_queue_create("com.mknetworkkit.cachequeue", DISPATCH_QUEUE_SERIAL);
+        self.timeoutInterval = 30;
+        self.runningTasksSynchronizingQueue = dispatch_queue_create("com.fallenink.cachequeue", DISPATCH_QUEUE_SERIAL);
         dispatch_async(self.runningTasksSynchronizingQueue, ^{
           self.activeTasks = [NSMutableArray array];
         });
@@ -52,6 +57,7 @@
 
 - (instancetype)initWithHostName:(NSString *)hostName {
     _NetHost *engine = [[_NetHost alloc] init];
+    
     engine.hostName = hostName;
     
     return engine;

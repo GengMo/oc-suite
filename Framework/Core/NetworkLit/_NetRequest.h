@@ -1,5 +1,4 @@
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
+#import <Framework/_Foundation.h>
 
 typedef enum {
   NetRequestParameterEncodingURL = 0, // default
@@ -23,6 +22,12 @@ typedef enum {
 
 // MARK: - 请求
 @property (readonly) NSMutableURLRequest *request;
+
+/**
+ * @desc Session 的请求超时时间
+ * @impo for timeoutIntervalForRequest, not for timeoutIntervalForResource
+ */
+@prop_assign( NSTimeInterval, timeoutInterval ) // [default: 30s]
 
 @property NetRequestParameterEncoding parameterEncoding;
 @property (readonly) NetRequestState state;

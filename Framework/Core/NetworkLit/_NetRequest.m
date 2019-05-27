@@ -29,7 +29,8 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
 @end
 
 @implementation _NetRequest
-
+@def_prop_assign( NSTimeInterval, timeoutInterval ) // [default: 30s]
+    
 // MARK: - Designated Initializer
 
 - (instancetype)initWithURLString:(NSString *) aURLString
@@ -143,8 +144,12 @@ static NSString * kBoundary = @"0xKhTmLbOuNdArY";
           forHTTPHeaderField:@"Content-Length"];
     
   }
+    
+    if (self.timeoutInterval > 0) {
+        [createdRequest setTimeoutInterval:self.timeoutInterval];
+    }
   
-  return createdRequest;
+    return createdRequest;
 }
 
 #pragma mark - Multipart form data
