@@ -2,81 +2,76 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'startup' do
     # 基础层
-    pod '_Foundation', :path => '../' # pod '_Foundation', :git => 'https://github.com/fallending/oc-suite.git'
+    pod 'Framework/Foundation', :path => '../'
     # 视图层
-    pod '_Building', :path => '../'
+    pod 'Framework/UIKit', :path => '../'
   
-    ######################################
+    # 工具
+    pod 'Framework/Core/Modular', :path => '../'
+    pod 'Framework/Core/NetworkLit', :path => '../'
+    pod 'Framework/Core/Network/Reachability', :path => '../'
+    pod 'Framework/Core/Cache', :path => '../'
+    pod 'Framework/Core/Date', :path => '../'
+
+    pod 'Framework/Core/HttpMock', :path => '../'
+    pod 'Framework/Core/Chronograph', :path => '../'
+    pod 'Framework/Core/CountDown', :path => '../'
+    pod 'Framework/Core/Delegate', :path => '../'
+  
     # 模块
-    ######################################
-    
-    pod '_Modules/Application', :path => '../'
-    
-    pod '_Modules/Tools/NetworkLit', :path => '../'
-    pod '_Modules/Tools/Network/Reachability', :path => '../'
-    pod '_Modules/Tools/Cache', :path => '../'
-    pod '_Modules/Tools/Date', :path => '../'
-
-    pod '_Modules/Tools/HttpMock', :path => '../'
-    pod '_Modules/Tools/Chronograph', :path => '../'
-    pod '_Modules/Tools/CountDown', :path => '../'
-    pod '_Modules/Tools/DyDelegate', :path => '../'
-    
-    pod '_Modules/Services/Assets', :path => '../'
-    pod '_Modules/Services/Growth', :path => '../'
-    pod '_Modules/Services/Location', :path => '../'
-    pod '_Modules/Services/APNS', :path => '../'
-    
-    pod '_Modules/Services/SNS', :path => '../'
+    pod 'Framework/Module/App', :path => '../'
+    pod 'Framework/Module/Assets', :path => '../'
+    pod 'Framework/Module/Growth', :path => '../'
+    pod 'Framework/Module/Location', :path => '../'
+    pod 'Framework/Module/APNS', :path => '../'
+    pod 'Framework/Module/SNS', :path => '../'
 #    pod '_Modules/Services/Pay', :path => '../' # Need pod 'UnionPay', :path => '../_Vendors/UnionPay'
-    pod 'UnionPay', :path => '../_Vendors/UnionPay'
-#    pod '_Modules/Services/Share', :path => '../'
+    pod 'UnionPay', :path => '../Framework/Vendor/UnionPay'
+    pod 'Framework/Module/QRCode', :path => '../'
+    pod 'Framework/Module/Browser', :path => '../'
+    pod 'Framework/Module/Map', :path => '../'
 
-    pod '_Modules/Components/QRCode', :path => '../'
-    pod '_Modules/Components/Browser', :path => '../'
-    pod '_Modules/Components/Map', :path => '../'
-
-#    pod '_Modules/Components/Image', :path => '../'
-#    pod '_Modules/Components/Share', :path => '../'
+#    pod 'Framework/Module/Image', :path => '../'
+#    pod 'Framework/Module/Share', :path => '../'
 
     ######################################
     # UI 组件
     ######################################
     
-    pod '_Components/ActionSheetView', :path => '../'                   # 底部弹出选择器
-    pod '_Components/AlertView', :path => '../'                         # 弹框
-    pod '_Components/BadgeView', :path => '../'
-    pod '_Components/BlankHolderView', :path => '../'
-    pod '_Components/CycleScrollView', :path => '../'
-    pod '_Components/DatePickerView', :path => '../'
-    pod '_Components/DropDownMenu', :path => '../'
-    pod '_Components/FiniteScrollView', :path => '../'
-    pod '_Components/FlatActionSheetView', :path => '../'
-#    pod '_Components/ImageBrowserView', :path => '../'
-#    pod '_Components/ImagePicker', :path => '../'
-    pod '_Components/IndicatorView', :path => '../'
-    pod '_Components/InfiniteScrollView', :path => '../'
-    pod '_Components/KeyboardControl', :path => '../'
-    pod '_Components/LaunchAdView', :path => '../'
-    pod '_Components/LoadableImageView', :path => '../'
+    pod 'Framework/Component/ActionSheetView', :path => '../'
+    pod 'Framework/Component/AlertView', :path => '../'
+    pod 'Framework/Component/BadgeView', :path => '../'
+    pod 'Framework/Component/BlankHolderView', :path => '../'
+    pod 'Framework/Component/CycleScrollView', :path => '../'
+    pod 'Framework/Component/DatePickerView', :path => '../'
+    pod 'Framework/Component/DropDownMenu', :path => '../'
+    pod 'Framework/Component/FiniteScrollView', :path => '../'
+    pod 'Framework/Component/FlatActionSheetView', :path => '../'
+#    pod 'Framework/Component/ImageBrowserView', :path => '../'
+#    pod 'Framework/Component/ImagePicker', :path => '../'
+    pod 'Framework/Component/IndicatorView', :path => '../'
+    pod 'Framework/Component/InfiniteScrollView', :path => '../'
+    pod 'Framework/Component/KeyboardControl', :path => '../'
+    pod 'Framework/Component/LaunchAdView', :path => '../'
+    pod 'Framework/Component/LoadableImageView', :path => '../'
     
-    pod '_Components/LocalImageBrowser', :path => '../'
-    pod '_Components/LocalImageEditableBrowserView', :path => '../'
-    pod '_Components/PopupView', :path => '../'
-    pod '_Components/PopViewController', :path => '../'
-    pod '_Components/ProgressHUD', :path => '../'
-    pod '_Components/ProgressView', :path => '../'
+    pod 'Framework/Component/LocalImageBrowser', :path => '../'
+    pod 'Framework/Component/LocalImageEditableBrowserView', :path => '../'
+    pod 'Framework/Component/PopupView', :path => '../'
+    pod 'Framework/Component/PopViewController', :path => '../'
+    pod 'Framework/Component/ProgressHUD', :path => '../'
+    pod 'Framework/Component/ProgressView', :path => '../'
 
-#    pod '_Components/QRCodeReaderView', :path => '../'
+#    pod 'Framework/Component/QRCodeReaderView', :path => '../'
 
-    pod '_Components/PopViewController', :path => '../'
-    pod '_Components/RateView', :path => '../'
-    pod '_Components/RefreshView', :path => '../'
-    pod '_Components/SegmentControl', :path => '../'
-    pod '_Components/SegmentView', :path => '../'
-    pod '_Components/TagsView', :path => '../'
-    pod '_Components/UserGuideView', :path => '../'
-    pod '_Components/WaterFallView', :path => '../'
+    pod 'Framework/Component/PopViewController', :path => '../'
+    pod 'Framework/Component/RateView', :path => '../'
+    pod 'Framework/Component/RefreshView', :path => '../'
+    pod 'Framework/Component/SegmentControl', :path => '../'
+    pod 'Framework/Component/SegmentView', :path => '../'
+    pod 'Framework/Component/TagsView', :path => '../'
+    pod 'Framework/Component/UserGuideView', :path => '../'
+    pod 'Framework/Component/WaterFallView', :path => '../'
     
     ######################################
     # 其他依赖

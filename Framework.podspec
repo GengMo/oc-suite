@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'Framework'
-  s.version          = '0.5.0'
+  s.version          = '1.0.0'
   s.summary          = 'iOS 开发包 [Objective-C]'
   s.description      = <<-DESC
                        iOS 开发包 [Objective-C]
@@ -24,7 +24,6 @@ Pod::Spec.new do |s|
   ###
   s.subspec 'UIKit' do |uikit|
     uikit.frameworks = 'UIKit'
-
     uikit.source_files = "Framework/UIKit/*.{h,m}"
   end
 
@@ -118,6 +117,10 @@ Pod::Spec.new do |s|
       utility.libraries = "c++"
       utility.dependency "ZipArchive"
     end
+
+    core.subspec 'Modular' do |modular|
+      modular.source_files = "Framework/Core/Modular/**/*.{h,m,mm,c}"
+    end
   end
 
   ### 模块库
@@ -136,97 +139,89 @@ Pod::Spec.new do |s|
 
     #
     mod.subspec 'QRCode' do |qrcode|
-      qrcode.source_files = "_Modules/Components/QRCode/**/*.{h,m}"
-      qrcode.resources = "_Modules/Components/QRCode/Resource/*.png"
+      qrcode.source_files = "Framework/Module/QRCode/**/*.{h,m}"
+      qrcode.resources = "Framework/Module/Resource/*.png"
     end
 
     mod.subspec 'Browser' do |browser|
-      browser.source_files = "_Modules/Components/Browser/**/*.{h,m}"
-      browser.resources = "_Modules/Components/Browser/web.bundle"
+      browser.source_files = "Framework/Module/Browser/**/*.{h,m}"
+      browser.resources = "Framework/Module/Browser/web.bundle"
     end
 
     mod.subspec 'Transaction' do |transaction|
-      transaction.source_files = "_Modules/Components/Transaction/**/*.{h,m}"
-      transaction.resources = "_Modules/Components/Transaction/Resource/*.bundle"
+      transaction.source_files = "Framework/Module/Transaction/**/*.{h,m}"
+      transaction.resources = "Framework/Module/Transaction/Resource/*.bundle"
     end
 
     mod.subspec 'Map' do |map|
-      map.source_files = "_Modules/Components/Map/**/*.{h,m}"
-      # map.resources = "_Modules/Components/Map/Resources/*.png"
+      map.source_files = "Framework/Module/Map/**/*.{h,m}"
+      # map.resources = "Framework/Module/Map/Resources/*.png"
       map.resource_bundles = {
-        'MapImages' => ['_Modules/Components/Map/Resource/**/*.png'],
-        'MapXibs' => ['_Modules/Components/Map/View/*.xib']
+        'MapImages' => ['Framework/Module/Map/Resource/**/*.png'],
+        'MapXibs' => ['Framework/Module/Map/View/*.xib']
       }
-      map.dependency '_Modules/Services/Map'
-    end
-
-    mod.subspec 'Pay' do |pay|
-      pay.source_files = "_Modules/Components/Pay/**/*.{h,m}"
-      pay.resource_bundles = {
-        'PayImages' => ['_Modules/Components/Pay/Resource/**/*.png'],
-        'PayXibs' => ['_Modules/Components/Pay/View/*.xib']
-      }
-      pay.dependency '_Modules/Services/Pay'
-    end
-
-    mod.subspec 'Login' do |login|
-      login.source_files = "_Modules/Components/Login/**/*.{h,m}"
-      login.resource_bundles = {
-        'LoginImages' => ['_Modules/Components/Login/Resource/**/*.png'],
-        'LoginXibs' => ['_Modules/Components/Login/View/*.xib']
-      }
-      login.dependency '_Modules/Services/Pay'
-    end
-
-    mod.subspec 'Share' do |pay|
-      pay.source_files = "_Modules/Components/Share/**/*.{h,m}"
-      pay.resource_bundles = {
-        'ShareImages' => ['_Modules/Components/Share/Resource/**/*.png']
-      }
-      # pay.dependency '_Modules/Services/Pay'
-    end
-
-    services.subspec 'Assets' do |assets|
-      assets.source_files = "_Modules/Services/Assets/**/*.{h,m}"
-    end
-
-    services.subspec 'Growth' do |growth|
-      growth.source_files = "_Modules/Services/Growth/**/*.{h,m}"
-    end
-
-    services.subspec 'Image' do |image|
-      image.source_files = "_Modules/Services/Image/**/*.{h,m}"
-    end
-
-    services.subspec 'Location' do |location|
-      location.source_files = "_Modules/Services/Location/**/*.{h,m}"
-    end
-
-    
-
-    services.subspec 'Map' do |map|
-      map.source_files = "_Modules/Services/Map/**/*.{h,m}"
       map.dependency 'AMap3DMap'
       map.dependency 'AMapSearch'
       map.dependency 'AMapLocation'
     end
 
-    services.subspec 'Time' do |time|
-      time.source_files = "_Modules/Services/Time/**/*.{h,m}"
+    mod.subspec 'Pay' do |pay|
+      pay.source_files = "Framework/Module/Pay/**/*.{h,m}"
+      pay.resource_bundles = {
+        'PayImages' => ['Framework/Module/Pay/Resource/**/*.png'],
+        'PayXibs' => ['Framework/Module/Pay/View/*.xib']
+      }
+      pay.dependency 'AlipaySDK-iOS'
     end
 
-    services.subspec 'Rate' do |rate|
-      rate.source_files = "_Modules/Services/Rate/**/*.{h,m}"
-      rate.resources = "_Modules/Services/Rate/**/*.bundle"
+    mod.subspec 'Login' do |login|
+      login.source_files = "Framework/Module/Login/**/*.{h,m}"
+      login.resource_bundles = {
+        'LoginImages' => ['Framework/Module/Login/Resource/**/*.png'],
+        'LoginXibs' => ['Framework/Module/Login/View/*.xib']
+      }
     end
 
-    services.subspec 'Share' do |share|
-      share.source_files = "_Modules/Services/Share/**/*.{h,m}"
+    mod.subspec 'Share' do |pay|
+      pay.source_files = "Framework/Module/Share/**/*.{h,m}"
+      pay.resource_bundles = {
+        'ShareImages' => ['Framework/Module/Share/Resource/**/*.png']
+      }
+    end
+
+    mod.subspec 'Assets' do |assets|
+      assets.source_files = "Framework/Module/Assets/**/*.{h,m}"
+    end
+
+    mod.subspec 'Growth' do |growth|
+      growth.source_files = "Framework/Module/Growth/**/*.{h,m}"
+    end
+
+    mod.subspec 'Image' do |image|
+      image.source_files = "Framework/Module/Image/**/*.{h,m}"
+    end
+
+    mod.subspec 'Location' do |location|
+      location.source_files = "Framework/Module/Location/**/*.{h,m}"
+    end
+
+
+    mod.subspec 'Time' do |time|
+      time.source_files = "Framework/Module/Time/**/*.{h,m}"
+    end
+
+    mod.subspec 'Rate' do |rate|
+      rate.source_files = "Framework/Module/Rate/**/*.{h,m}"
+      rate.resources = "Framework/Module/Rate/**/*.bundle"
+    end
+
+    mod.subspec 'Share' do |share|
+      share.source_files = "Framework/Module/Share/**/*.{h,m}"
     end
 
     # Social Networking Services
-    services.subspec 'SNS' do |sns|
-      sns.source_files = "_Modules/Services/SNS/**/*.{h,m}"
+    mod.subspec 'SNS' do |sns|
+      sns.source_files = "Framework/Module/SNS/**/*.{h,m}"
 
       # 友盟 https://www.jianshu.com/p/1fcc6cb49cff
       sns.dependency 'UMengUShare/UI'
@@ -270,158 +265,143 @@ Pod::Spec.new do |s|
       sns.dependency 'UMengUShare/Social/VKontakte'  # 集成VKontakte
     end
 
-    services.subspec 'Version' do |version|
-      version.source_files = "_Modules/Services/Version/**/*.{h,m}"
+    mod.subspec 'Version' do |version|
+      version.source_files = "Framework/Module/Version/**/*.{h,m}"
     end
-
-    services.subspec 'Pay' do |pay|
-      pay.source_files = '_Modules/Services/Pay/**/*.{h,m}'
-      pay.dependency 'AlipaySDK-iOS'
-    end
-
-    services.subspec 'Login' do |login|
-      login.source_files = '_Modules/Services/Login/**/*.{h,m}'
-      # pay.dependency 'UnionPay'
-    end
-
-    
   end
 
   ### 组件库
   ###
   s.subspec 'Component' do |comp|
     comp.subspec 'ActionSheetView' do |actionSheetView|
-      actionSheetView.source_files = "_Components/ActionSheetView/**/*.{h,m}"
+      actionSheetView.source_files = "Framework/Component/ActionSheetView/**/*.{h,m}"
     end
 
-    # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     comp.subspec 'AlertView' do |alertView|
-      alertView.source_files = "_Components/AlertView/**/*.{h,m}"
+      alertView.source_files = "Framework/Component/AlertView/**/*.{h,m}"
     end
 
-    # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     comp.subspec 'BadgeView' do |badgeView|
-      badgeView.source_files = "_Components/BadgeView/**/*.{h,m}"
+      badgeView.source_files = "Framework/Component/BadgeView/**/*.{h,m}"
     end
 
-    # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-    s.subspec 'BlankHolderView' do |blankHolderView|
-      blankHolderView.source_files = "_Components/BlankHolderView/**/*.{h,m}"
+    comp.subspec 'BlankHolderView' do |blankHolderView|
+      blankHolderView.source_files = "Framework/Component/BlankHolderView/**/*.{h,m}"
     end
 
-    s.subspec 'CheckBoxView' do |checkBoxView|
-      checkBoxView.source_files = "_Components/CheckBoxView/**/*.{h,m}"
+    comp.subspec 'CheckBoxView' do |checkBoxView|
+      checkBoxView.source_files = "Framework/Component/CheckBoxView/**/*.{h,m}"
     end
 
-    s.subspec 'CycleScrollView' do |cycleScrollView|
-      cycleScrollView.source_files = "_Components/CycleScrollView/**/*.{h,m}"
+    comp.subspec 'CycleScrollView' do |cycleScrollView|
+      cycleScrollView.source_files = "Framework/Component/CycleScrollView/**/*.{h,m}"
     end
 
-    s.subspec 'DatePickerView' do |datePickerView|
-      datePickerView.source_files = "_Components/DatePickerView/**/*.{h,m}"
+    comp.subspec 'DatePickerView' do |datePickerView|
+      datePickerView.source_files = "Framework/Component/DatePickerView/**/*.{h,m}"
     end
 
-    s.subspec 'DropDownMenu' do |dropDownMenu|
-      dropDownMenu.source_files = "_Components/DropDownMenu/**/*.{h,m}"
-      dropDownMenu.resources = "_Components/DropDownMenu/DropDownMenu.bundle"
+    comp.subspec 'DropDownMenu' do |dropDownMenu|
+      dropDownMenu.source_files = "Framework/Component/DropDownMenu/**/*.{h,m}"
+      dropDownMenu.resources = "Framework/Component/DropDownMenu/DropDownMenu.bundle"
     end
 
-    s.subspec 'FiniteScrollView' do |finiteScrollView|
-      finiteScrollView.source_files = "_Components/FiniteScrollView/**/*.{h,m}"
-      finiteScrollView.resources = "_Components/FiniteScrollView/ZYBannerView.bundle"
+    comp.subspec 'FiniteScrollView' do |finiteScrollView|
+      finiteScrollView.source_files = "Framework/Component/FiniteScrollView/**/*.{h,m}"
+      finiteScrollView.resources = "Framework/Component/FiniteScrollView/ZYBannerView.bundle"
     end
 
-    s.subspec 'FlatActionSheetView' do |flatActionSheetView|
-      flatActionSheetView.source_files = "_Components/FlatActionSheetView/**/*.{h,m}"
+    comp.subspec 'FlatActionSheetView' do |flatActionSheetView|
+      flatActionSheetView.source_files = "Framework/Component/FlatActionSheetView/**/*.{h,m}"
     end
 
-    s.subspec 'ImageBrowserView' do |imageBrowserView|
-      imageBrowserView.source_files = "_Components/ImageBrowserView/**/*.{h,m}"
+    comp.subspec 'ImageBrowserView' do |imageBrowserView|
+      imageBrowserView.source_files = "Framework/Component/ImageBrowserView/**/*.{h,m}"
     end
 
-    s.subspec 'ImagePicker' do |imagePicker|
-      imagePicker.source_files = "_Components/ImagePicker/**/*.{h,m}"
-      imagePicker.resources = "_Components/ImagePicker/TZImagePickerController.bundle"
+    comp.subspec 'ImagePicker' do |imagePicker|
+      imagePicker.source_files = "Framework/Component/ImagePicker/**/*.{h,m}"
+      imagePicker.resources = "Framework/Component/ImagePicker/TZImagePickerController.bundle"
     end
 
-    s.subspec 'IndicatorView' do |indicatorView|
-      indicatorView.source_files = "_Components/IndicatorView/**/*.{h,m}"
+    comp.subspec 'IndicatorView' do |indicatorView|
+      indicatorView.source_files = "Framework/Component/IndicatorView/**/*.{h,m}"
     end
 
-    s.subspec 'InfiniteScrollView' do |infiniteScrollView|
-      infiniteScrollView.source_files = "_Components/InfiniteScrollView/**/*.{h,m}"
+    comp.subspec 'InfiniteScrollView' do |infiniteScrollView|
+      infiniteScrollView.source_files = "Framework/Component/InfiniteScrollView/**/*.{h,m}"
     end
 
-    s.subspec 'KeyboardControl' do |keyboardControl|
-      keyboardControl.source_files = "_Components/keyboardControl/**/*.{h,m}"
+    comp.subspec 'KeyboardControl' do |keyboardControl|
+      keyboardControl.source_files = "Framework/Component/keyboardControl/**/*.{h,m}"
     end
 
-    s.subspec 'LaunchAdView' do |launchAdView|
-      launchAdView.source_files = "_Components/LaunchAdView/**/*.{h,m}"
+    comp.subspec 'LaunchAdView' do |launchAdView|
+      launchAdView.source_files = "Framework/Component/LaunchAdView/**/*.{h,m}"
     end
 
-    s.subspec 'LoadableImageView' do |loadableImageView|
-      loadableImageView.source_files = "_Components/LoadableImageView/**/*.{h,m}"
+    comp.subspec 'LoadableImageView' do |loadableImageView|
+      loadableImageView.source_files = "Framework/Component/LoadableImageView/**/*.{h,m}"
     end
 
-    s.subspec 'LocalImageBrowser' do |localImageBrowser|
-      localImageBrowser.source_files = "_Components/LocalImageBrowser/**/*.{h,m}"
-      localImageBrowser.resources = "_Components/LocalImageBrowser/Resources/*.png"
+    comp.subspec 'LocalImageBrowser' do |localImageBrowser|
+      localImageBrowser.source_files = "Framework/Component/LocalImageBrowser/**/*.{h,m}"
+      localImageBrowser.resources = "Framework/Component/LocalImageBrowser/Resources/*.png"
     end
 
-    s.subspec 'LocalImageEditableBrowserView' do |localImageEditableBrowserView|
-      localImageEditableBrowserView.source_files = "_Components/LocalImageEditableBrowserView/**/*.{h,m}"
+    comp.subspec 'LocalImageEditableBrowserView' do |localImageEditableBrowserView|
+      localImageEditableBrowserView.source_files = "Framework/Component/LocalImageEditableBrowserView/**/*.{h,m}"
     end
 
-    s.subspec 'PlaceholdView' do |placeholdView|
-      placeholdView.source_files = "_Components/PlaceholdView/**/*.{h,m}"
+    comp.subspec 'PlaceholdView' do |placeholdView|
+      placeholdView.source_files = "Framework/Component/PlaceholdView/**/*.{h,m}"
     end
 
-    s.subspec 'PopupView' do |popupView|
-      popupView.source_files = "_Components/PopupView/**/*.{h,m}"
+    comp.subspec 'PopupView' do |popupView|
+      popupView.source_files = "Framework/Component/PopupView/**/*.{h,m}"
     end
 
-    s.subspec 'ProgressHUD' do |progressHUD|
-      progressHUD.source_files = "_Components/ProgressHUD/**/*.{h,m}"
-      progressHUD.resources = "_Components/ProgressHUD/**/*.bundle"
+    comp.subspec 'ProgressHUD' do |progressHUD|
+      progressHUD.source_files = "Framework/Component/ProgressHUD/**/*.{h,m}"
+      progressHUD.resources = "Framework/Component/ProgressHUD/**/*.bundle"
     end
 
-    s.subspec 'ProgressView' do |progressView|
-      progressView.source_files = "_Components/ProgressView/**/*.{h,m}"
-      # progressView.resources = "_Components/ProgressView/**/*.bundle"
+    comp.subspec 'ProgressView' do |progressView|
+      progressView.source_files = "Framework/Component/ProgressView/**/*.{h,m}"
+      # progressView.resources = "Framework/Component/ProgressView/**/*.bundle"
     end
 
-    s.subspec 'PopViewController' do |popViewController|
-      popViewController.source_files = "_Components/PopViewController/**/*.{h,m}"
+    comp.subspec 'PopViewController' do |popViewController|
+      popViewController.source_files = "Framework/Component/PopViewController/**/*.{h,m}"
     end
 
-    s.subspec 'RateView' do |rateView|
-      rateView.source_files = "_Components/RateView/**/*.{h,m}"
+    comp.subspec 'RateView' do |rateView|
+      rateView.source_files = "Framework/Component/RateView/**/*.{h,m}"
     end
 
-    s.subspec 'RefreshView' do |refreshView|
-      refreshView.source_files = "_Components/RefreshView/**/*.{h,m}"
-      refreshView.resources = "_Components/RefreshView/**/*.bundle"
+    comp.subspec 'RefreshView' do |refreshView|
+      refreshView.source_files = "Framework/Component/RefreshView/**/*.{h,m}"
+      refreshView.resources = "Framework/Component/RefreshView/**/*.bundle"
     end
 
-    s.subspec 'SegmentControl' do |segmentControl|
-      segmentControl.source_files = "_Components/SegmentControl/**/*.{h,m}"
+    comp.subspec 'SegmentControl' do |segmentControl|
+      segmentControl.source_files = "Framework/Component/SegmentControl/**/*.{h,m}"
     end
 
-    s.subspec 'SegmentView' do |segmentView|
-      segmentView.source_files = "_Components/SegmentView/**/*.{h,m}"
+    comp.subspec 'SegmentView' do |segmentView|
+      segmentView.source_files = "Framework/Component/SegmentView/**/*.{h,m}"
     end
 
-    s.subspec 'TagsView' do |tagsView|
-      tagsView.source_files = "_Components/TagsView/**/*.{h,m}"
+    comp.subspec 'TagsView' do |tagsView|
+      tagsView.source_files = "Framework/Component/TagsView/**/*.{h,m}"
     end
 
-    s.subspec 'UserGuideView' do |userGuideView|
-      userGuideView.source_files = "_Components/UserGuideView/**/*.{h,m}"
+    comp.subspec 'UserGuideView' do |userGuideView|
+      userGuideView.source_files = "Framework/Component/UserGuideView/**/*.{h,m}"
     end
 
-    s.subspec 'WaterFallView' do |waterFallView|
-      waterFallView.source_files = "_Components/WaterFallView/**/*.{h,m}"
+    comp.subspec 'WaterFallView' do |waterFallView|
+      waterFallView.source_files = "Framework/Component/WaterFallView/**/*.{h,m}"
     end
   end
 
