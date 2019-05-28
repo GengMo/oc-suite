@@ -46,24 +46,28 @@ Pod::Spec.new do |s|
       database.source_files = "Framework/Core/Database/**/*.{h,m}"
     end
 
-    core.subspec 'Date' do |date|
-      date.source_files = "Framework/Core/Date/**/*.{h,m}"
-    end
-
     core.subspec 'Delegate' do |del|
       del.source_files = 'Framework/Core/Delegate/**/*.{h,m}'
+    end
+
+    core.subspec 'HttpMock' do |httpmock|
+      httpmock.source_files = 'Framework/Core/HttpMock/**/*.{h,m}'
     end
 
     core.subspec 'Image' do |image|
       image.source_files = "Framework/Core/Image/**/*.{h,m}"
     end
 
+    core.subspec 'Loader' do |loader|
+      loader.source_files = "Framework/Core/Network/Loader/**/*.{h,m}"
+    end
+
     core.subspec 'Log' do |log|
       log.source_files = "Framework/Core/Log/**/*.{h,m}"
     end
 
-    core.subspec 'MJExtension' do |mj|
-      mj.source_files = "Framework/Core/MJExtension/**/*.{h,m}"
+    core.subspec 'Modular' do |modular|
+      modular.source_files = "Framework/Core/Modular/**/*.{h,m,mm,c}"
     end
 
     core.subspec 'Network' do |network|
@@ -96,10 +100,6 @@ Pod::Spec.new do |s|
       end
     end
 
-    core.subspec 'Loader' do |loader|
-      loader.source_files = "Framework/Core/Network/Loader/**/*.{h,m}"
-    end
-
     core.subspec 'NetworkLit' do |networklit|
       networklit.source_files = "Framework/Core/NetworkLit/**/*.{h,m}"
     end
@@ -108,18 +108,10 @@ Pod::Spec.new do |s|
       nosql.source_files = "Framework/Core/NoSQL/**/*.{h,m}"
     end
 
-    core.subspec 'HttpMock' do |httpmock|
-      httpmock.source_files = 'Framework/Core/HttpMock/**/*.{h,m}'
-    end
-
     core.subspec 'Utility' do |utility|
       utility.source_files = "Framework/Core/Utility/**/*.{h,m,mm,c}"
       utility.libraries = "c++"
       utility.dependency "ZipArchive"
-    end
-
-    core.subspec 'Modular' do |modular|
-      modular.source_files = "Framework/Core/Modular/**/*.{h,m,mm,c}"
     end
   end
 
