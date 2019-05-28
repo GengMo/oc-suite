@@ -4,70 +4,15 @@
 	- 其中的思想，与_Modules/Application, _Modules/Midwares, _Modules/Services, 以至于 _Foundation/Modular, _Modules/Components
 	- 类似
 
-# TODO
+## [Foundation 基础](Framework/Foundation/README.md)
 
-- [] pod接入百度地图，并导入业务component
+## [Core 工具核心库](Framework/Core/README.md)
 
-## 集成
+## [UIKit UI扩展库](Framework/UIKit)
 
-* [This block declaration is not a prototype.]
-    - Build Setting -> Warnings (All languages) -> Strict Prototypes -> NO
-* [Too many arguments to function call, expected 0, have 3]
-	- Build Setting -> Preprocessing -> Enable Strict Checking of objc_msgSend Call -> NO
-* [BITCODE link error]
-	- Build Setting -> Build Options -> Enable Bitcode -> NO
-* MRC
-    - 添加 '-fno-objc-arc'
-    - RACQueueScheduler.m, RACBacktrace.m, RegexKitLite.m, RACTargetQueueScheduler.m, RACObjCRuntime.m
+## [Component UI组件](Framework/Component)
 
-## [_Foundation 基础](_Foundation/README.md)
-
-* 依赖的系统库
-	- licucore.tbd
-* [提供模块机制](_Foundation/Modular/README.md)
-
-## [_Tool 工具](_Tool/README.md)
-
-* 依赖的框架
-	- _Foundation
-
-* 其他推荐
-	- [日志系统](https://github.com/CocoaLumberjack/CocoaLumberjack)，https://github.com/0xced/XCDLumberjackNSLogger，https://github.com/s4nchez/LogIO-CocoaLumberjack
-
-## [_Building 集成](_Building/README.md)
-
-* 依赖的框架
-	- _Foundation
-
-## [_Components UI组件](_Components/README.md)
-
-* 依赖的框架
-	- _Foundation
-	- _Building
-
-## [_Modules 模块组件](_Modules/README.md)
-
-* 依赖的框架
-	- _Foundation
-	- _Building
-	- _Tool
-
-## [_Hybrid 混合](_Hybrid/README.md)
-
-* 依赖的系统库
-  - WebKit.framework
-  - JavaScriptCore.framework
-
-## [_Monitor 监控](_Monitor/README.md)
-
-* 依赖的框架
-	- _Foundation
-	- _Tool
-
-## [_Test 测试](_Test/README.md)
-
-* 依赖的框架
-	- _Foundation
+## [Module 通用业务组件](Framework/Module/README.md)
 
 ## qy的iOS框架设计解读
 
