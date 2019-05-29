@@ -1,21 +1,9 @@
-//
-//  BaseViewModel.m
-// fallen.ink
-//
-//  Created by 李杰 on 6/6/15.
-//
-//
-
 #import "BaseViewModel.h"
 #import "BaseDataSource.h"
 
 #import <libkern/OSAtomic.h>
 #import <ReactiveObjC/RACEXTScope.h>
 #import <ReactiveObjC/ReactiveObjC.h>
-
-// The number of seconds by which signal events are throttled when using
-// -throttleSignalWhileInactive:.
-static const NSTimeInterval RVMViewModelInactiveThrottleInterval = 1;
 
 @interface BaseViewModel ()
 
@@ -30,36 +18,9 @@ static const NSTimeInterval RVMViewModelInactiveThrottleInterval = 1;
 
 - (instancetype)initWithParams:(NSDictionary *)params {
     if (self = [super init]) {
-        
-        [self setup];
     }
     
     return self;
-}
-
-- (instancetype)init {
-    if (self = [super init]) {
-        
-        [self setup];
-    }
-    
-    return self;
-}
-
-- (void)recover {
-    
-}
-
-- (void)prepare:(id)data {
-    
-}
-
-- (void)setup {
-    [self recover];
-}
-
-- (void)setdown:(id)data {
-    
 }
 
 // MARK: - 数据源

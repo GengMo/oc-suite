@@ -1,11 +1,3 @@
-//
-//  BaseTableViewCell.m
-//  consumer
-//
-//  Created by fallen on 16/9/23.
-//
-//
-
 #import "BaseTableViewCell.h"
 
 @implementation UITableViewCell (Template)

@@ -22,27 +22,6 @@
 - (instancetype)initWithParams:(NSDictionary *)params;
 
 /**
- *  Initialize self with cache.
- 
- *  No limit for cache strategy.
- */
-- (void)recover; // Load data from cache
-
-#pragma mark -
-
-/**
- *  刷新视图模型
- */
-- (void)setdown:(id)data;
-
-/**
- *  数据初始化
- */
-- (void)setup;
-
-// 如果支持ReactiveObjc
-
-/**
  * @brief 标识关联视图是否在最前，否则，可以取消低优先级、UI相关任务
  * @default NO
  */

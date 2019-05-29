@@ -1,13 +1,5 @@
-//
-//  TableModel.m
-//  QQing
-//
-//  Created by fallen.ink on 10/6/15.
-//
-//
-
+#import <Framework/_Foundation.h>
 #import "BaseTableModel.h"
-#import "_Foundation.h"
 
 #pragma mark - 上面可以合一，可以作为通用，如下
 

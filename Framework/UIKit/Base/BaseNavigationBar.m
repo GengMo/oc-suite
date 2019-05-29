@@ -1,4 +1,3 @@
-//
 #import "BaseNavigationBar.h"
 
 @interface BaseNavigationBar ()

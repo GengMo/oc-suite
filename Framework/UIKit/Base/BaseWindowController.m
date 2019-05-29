@@ -1,11 +1,3 @@
-//
-//  QQingWindowRootViewController.m
-//  QQingCommon
-//
-//  Created by Ben on 15/10/30.
-//  Copyright © 2015年 QQingiOSTeam. All rights reserved.
-//
-
 #import "BaseWindowController.h"
 
 @implementation BaseWindowController

@@ -7,58 +7,41 @@
 
 #pragma mark - 私有实现KVO的真实target类，每一个target对应了一个keyPath和监听该keyPath的所有block，当其KVO方法调用时，需要回调所有的block
 
-@interface _XWBlockTarget : NSObject
+@interface _BlockTarget : NSObject
 
-/**添加一个KVOBlock*/
-- (void)xw_addBlock:(void(^)(__weak id obj, id oldValue, id newValue))block;
-- (void)xw_addNotificationBlock:(void(^)(NSNotification *notification))block;
-
-- (void)xw_doNotification:(NSNotification*)notification;
+- (void)addBlock:(void(^)(__weak id obj, id oldValue, id newValue))block;
 
 @end
 
-@implementation _XWBlockTarget {
-    //保存所有的block
+@implementation _BlockTarget {
     NSMutableSet *_kvoBlockSet;
-    NSMutableSet *_notificationBlockSet;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         _kvoBlockSet = [NSMutableSet new];
-        _notificationBlockSet = [NSMutableSet new];
     }
     return self;
 }
 
-- (void)xw_addBlock:(void(^)(__weak id obj, id oldValue, id newValue))block{
+- (void)addBlock:(void(^)(__weak id obj, id oldValue, id newValue))block{
     [_kvoBlockSet addObject:[block copy]];
-}
-
-- (void)xw_addNotificationBlock:(void(^)(NSNotification *notification))block{
-    [_notificationBlockSet addObject:[block copy]];
-}
-
-- (void)xw_doNotification:(NSNotification*)notification{
-    if (!_notificationBlockSet.count) return;
-    [_notificationBlockSet enumerateObjectsUsingBlock:^(void (^block)(NSNotification *notification), BOOL * _Nonnull stop) {
-        block(notification);
-    }];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
     if (!_kvoBlockSet.count) return;
     BOOL prior = [[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue];
-    //只接受值改变时的消息
+    
     if (prior) return;
+    
     NSKeyValueChange changeKind = [[change objectForKey:NSKeyValueChangeKindKey] integerValue];
     if (changeKind != NSKeyValueChangeSetting) return;
     id oldVal = [change objectForKey:NSKeyValueChangeOldKey];
     if (oldVal == [NSNull null]) oldVal = nil;
     id newVal = [change objectForKey:NSKeyValueChangeNewKey];
     if (newVal == [NSNull null]) newVal = nil;
-    //执行该target下的所有block
+    
     [_kvoBlockSet enumerateObjectsUsingBlock:^(void (^block)(__weak id obj, id oldVal, id newVal), BOOL * _Nonnull stop) {
         block(object, oldVal, newVal);
     }];
@@ -68,87 +51,48 @@
 
 @implementation NSObject ( KVO )
 
-static void *const XWKVOBlockKey = "XWKVOBlockKey";
+static void *const __KVOBlockKey = "KVOBlockKey";
 
 - (void)observeForKeyPath:(NSString*)keyPath block:(void (^)(id obj, id oldVal, id newVal))block {
     if (!keyPath || !block) return;
     //取出存有所有KVOTarget的字典
-    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, XWKVOBlockKey);
+    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, __KVOBlockKey);
     if (!allTargets) {
         //没有则创建
         allTargets = [NSMutableDictionary new];
         //绑定在该对象中
-        objc_setAssociatedObject(self, XWKVOBlockKey, allTargets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, __KVOBlockKey, allTargets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     //获取对应keyPath中的所有target
-    _XWBlockTarget *targetForKeyPath = allTargets[keyPath];
+    _BlockTarget *targetForKeyPath = allTargets[keyPath];
     if (!targetForKeyPath) {
         //没有则创建
-        targetForKeyPath = [_XWBlockTarget new];
+        targetForKeyPath = [_BlockTarget new];
         //保存
         allTargets[keyPath] = targetForKeyPath;
         //如果第一次，则注册对keyPath的KVO监听
         [self addObserver:targetForKeyPath forKeyPath:keyPath options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
     }
-    [targetForKeyPath xw_addBlock:block];
+    [targetForKeyPath addBlock:block];
     //对第一次注册KVO的类进行dealloc方法调剂
-    [self _xw_swizzleDealloc];
+    [self _swizzleDealloc];
 }
 
 - (void)unobserveForKeyPath:(NSString *)keyPath{
     if (!keyPath.length) return;
-    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, XWKVOBlockKey);
+    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, __KVOBlockKey);
     if (!allTargets) return;
-    _XWBlockTarget *target = allTargets[keyPath];
+    _BlockTarget *target = allTargets[keyPath];
     if (!target) return;
     [self removeObserver:target forKeyPath:keyPath];
     [allTargets removeObjectForKey:keyPath];
 }
 
 - (void)unobserveForAllKeyPath {
-    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, XWKVOBlockKey);
+    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, __KVOBlockKey);
     if (!allTargets) return;
-    [allTargets enumerateKeysAndObjectsUsingBlock:^(id key, _XWBlockTarget *target, BOOL *stop) {
+    [allTargets enumerateKeysAndObjectsUsingBlock:^(id key, _BlockTarget *target, BOOL *stop) {
         [self removeObserver:target forKeyPath:key];
-    }];
-    [allTargets removeAllObjects];
-}
-
-static void *const XWNotificationBlockKey = "XWNotificationBlockKey";
-
-- (void)observeNotification:(NSString *)name block:(void (^)(NSNotification *notification))block {
-    if (!name || !block) return;
-    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, XWNotificationBlockKey);
-    if (!allTargets) {
-        allTargets = @{}.mutableCopy;
-        objc_setAssociatedObject(self, XWNotificationBlockKey, allTargets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    _XWBlockTarget *target = allTargets[name];
-    if (!target) {
-        target = [_XWBlockTarget new];
-        allTargets[name] = target;
-        [[NSNotificationCenter defaultCenter] addObserver:target selector:@selector(xw_doNotification:) name:name object:nil];
-    }
-    [target xw_addNotificationBlock:block];
-    [self _xw_swizzleDealloc];
-    
-}
-
-- (void)xw_removeNotificationForName:(NSString *)name {
-    if (!name) return;
-    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, XWNotificationBlockKey);
-    if (!allTargets.count) return;
-    _XWBlockTarget *target = allTargets[name];
-    if (!target) return;
-    [[NSNotificationCenter defaultCenter] removeObserver:target];
-    
-}
-
-- (void)xw_removeAllNotification{
-    NSMutableDictionary *allTargets = objc_getAssociatedObject(self, XWNotificationBlockKey);
-    if (!allTargets.count) return;
-    [allTargets enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, _XWBlockTarget *target, BOOL * _Nonnull stop) {
-        [[NSNotificationCenter defaultCenter] removeObserver:target];
     }];
     [allTargets removeAllObjects];
 }
@@ -158,7 +102,7 @@ static void * deallocHasSwizzledKey = "deallocHasSwizzledKey";
 /**
  *  调剂dealloc方法，由于无法直接使用运行时的swizzle方法对dealloc方法进行调剂，所以稍微麻烦一些
  */
-- (void)_xw_swizzleDealloc {
+- (void)_swizzleDealloc {
     //我们给每个类绑定上一个值来判断dealloc方法是否被调剂过，如果调剂过了就无需再次调剂了
     BOOL swizzled = [objc_getAssociatedObject(self.class, deallocHasSwizzledKey) boolValue];
     //如果调剂过则直接返回
@@ -171,11 +115,8 @@ static void * deallocHasSwizzledKey = "deallocHasSwizzledKey";
     __block void (*originalDealloc)(__unsafe_unretained id, SEL) = NULL;
     //实现我们自己的dealloc方法，通过block的方式
     id newDealloc = ^(__unsafe_unretained id objSelf){
-        //在这里我们移除所有的KVO
         [objSelf unobserveForAllKeyPath];
         
-        //移除所有通知
-        [objSelf xw_removeAllNotification];
         //根据原有的dealloc方法是否存在进行判断
         if (originalDealloc == NULL) {//如果不存在，说明本类没有实现dealloc方法，则需要向父类发送dealloc消息(objc_msgSendSuper)
             //构造objc_msgSendSuper所需要的参数，.receiver为方法的实际调用者，即为类本身，.super_class指向其父类

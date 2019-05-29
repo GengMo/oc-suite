@@ -1,11 +1,3 @@
-//
-//  TableModel.h
-//  QQing
-//
-//  Created by fallen.ink on 10/6/15.
-//
-//
-
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 

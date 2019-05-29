@@ -1,15 +1,7 @@
-//
-//  BaseTabBarController.m
-//  component
-//
-//  Created by fallen.ink on 4/28/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 #import "UIViewController+Extension.h"
 #import "BaseTabBarController.h"
-#import "_geometry.h"
-#import "_frame.h"
+#import "_Geometry.h"
+#import "_Frame.h"
 
 @interface BaseTabBarController ()
 
@@ -17,7 +9,7 @@
 
 @implementation BaseTabBarController
 
-#pragma mark - Life cycle
+// MARK: - Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,13 +38,13 @@
 //    [self.tabBar bringSubviewToFront:self.bottomToolView];
 }
 
-#pragma mark -
+// MARK: -
 
 - (void)onBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - Status style
+// MARK: - Status style
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;

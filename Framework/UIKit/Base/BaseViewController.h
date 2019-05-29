@@ -1,11 +1,3 @@
-//
-//  BaseViewController.h
-// fallen.ink
-//
-//  Created by 李杰 on 4/27/15.
-//
-//
-
 #import <Framework/_Foundation.h>
 
 #pragma mark -

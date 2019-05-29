@@ -1,11 +1,3 @@
-//
-//  BaseView.m
-//  kata
-//
-//  Created by fallen on 17/3/7.
-//  Copyright © 2017年 fallenink. All rights reserved.
-//
-
 #import "BaseView.h"
 #import "_pragma_push.h"
 
