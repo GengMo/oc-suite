@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'Framework'
-  s.version          = '1.0.0'
+  s.version          = '1.0.4'
   s.summary          = 'iOS 开发包 [Objective-C]'
   s.description      = <<-DESC
                        iOS 开发包 [Objective-C]

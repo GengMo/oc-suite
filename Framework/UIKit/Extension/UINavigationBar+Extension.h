@@ -1,12 +1,3 @@
-//
-//  UINavigationBar+Awesome.h
-//  LTNavigationBar
-//
-//  Created by ltebean on 15-2-15.
-//  Copyright (c) 2015 ltebean. All rights reserved.
-//
-//  inspired by UINavigationBar+Awesome.h
-
 #import <UIKit/UIKit.h>
 
 /** @knowledge http://blog.csdn.net/zww1984774346/article/details/51730357

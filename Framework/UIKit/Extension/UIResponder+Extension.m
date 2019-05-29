@@ -1,19 +1,7 @@
-//
-//  UIResponder+JKChain.m
-//  JKCategories (https://github.com/shaojiankui/JKCategories)
-//
-//  Created by Jakey on 14/12/30.
-//  Copyright (c) 2014年 www.skyfox.org. All rights reserved.
-//
-
 #import "UIResponder+Extension.h"
 
 @implementation UIResponder ( Chain )
-/**
- *  @brief  响应者链
- *
- *  @return  响应者链
- */
+
 - (NSString *)responderChainDescription {
     NSMutableArray *responderChainStrings = [NSMutableArray array];
     [responderChainStrings addObject:[self class]];
@@ -43,16 +31,12 @@
 
 @end
 
-#pragma mark - 
+// MARK: - 
 
 static __weak id __currentFirstResponder;
 
 @implementation UIResponder ( FirstResponder )
-/**
- *  @brief  当前第一响应者
- *
- *  @return 当前第一响应者
- */
+
 + (id)currentFirstResponder {
     __currentFirstResponder = nil;
     

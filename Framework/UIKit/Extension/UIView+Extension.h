@@ -1,11 +1,3 @@
-//
-//  UIView+Extension.h
-//  hairdresser
-//
-//  Created by fallen.ink on 6/8/16.
-//
-//
-
 #import <UIKit/UIKit.h>
 
 #pragma mark - 视图关系
@@ -182,11 +174,121 @@ typedef NS_ENUM(NSUInteger, EdgeStyle) {
 
 @end
 
-#pragma mark - 
+/**
+ * 视图添加边框
+ */
 
-@interface UIView ( Cookie )
+#import <UIKit/UIKit.h>
 
-@property (nonatomic, strong) id cookie;
+typedef NS_OPTIONS(NSUInteger, JKExcludePoint) {
+    JKExcludeStartPoint = 1 << 0,
+    JKExcludeEndPoint = 1 << 1,
+    JKExcludeAllPoint = ~0UL
+};
+
+
+@interface UIView ( CustomBorder )
+
+- (void)addTopBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth;
+- (void)addLeftBorderWithColor: (UIColor *) color width:(CGFloat) borderWidth;
+- (void)addBottomBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth;
+- (void)addRightBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth;
+
+- (void)removeTopBorder;
+- (void)removeLeftBorder;
+- (void)removeBottomBorder;
+- (void)removeRightBorder;
+
+
+- (void)addTopBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge;
+- (void)addLeftBorderWithColor: (UIColor *) color width:(CGFloat) borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge;
+- (void)addBottomBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge;
+- (void)addRightBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge;
+@end
+
+@interface UIView ( Recursion )
+
+/**
+ *  @brief  寻找子视图
+ *
+ *  @param recurse 回调
+ *
+ *  @return  Return YES from the block to recurse into the subview.
+ Set stop to YES to return the subview.
+ */
+- (UIView *)findViewRecursively:(BOOL(^)(UIView* subview, BOOL* stop))recurse;
+
+- (void)runBlockOnAllSubviews:(ObjectBlock)block;
+- (void)runBlockOnAllSuperviews:(ObjectBlock)block;
+- (void)enableAllControlsInViewHierarchy;
+- (void)disableAllControlsInViewHierarchy;
 
 @end
 
+
+@interface UIView ( Screenshot )
+/**
+ *  @brief  view截图
+ *
+ *  @return 截图
+ */
+- (UIImage *)screenshot;
+
+- (UIImage *)takeSnapshot;
+
+/**
+ *  @author Jakey
+ *
+ *  @brief  截图一个view中所有视图 包括旋转缩放效果
+ *
+ *  @param maxWidth 限制缩放的最大宽度 保持默认传0
+ *
+ *  @return 截图
+ */
+- (UIImage *)screenshot:(CGFloat)maxWidth;
+
+@end
+
+typedef void (^UIGestureActionBlock)(UIGestureRecognizer *gestureRecoginzer);
+
+@interface UIView (Action)
+
+/**
+ *  onXXXXXX: (UITapGestureRecognizer *)rec
+ */
+- (void)addTapGestureWithTarget:(id)target action:(SEL)action;
+
+- (void)addTapGestureWithTarget:(id)target action:(SEL)action acceptEventInterval:(NSTimeInterval)interval;
+
+/**
+ *  onXXXXXX: (UITapGestureRecognizer *)rec
+ */
+- (void)addDoubleTapGestureWithTarget:(id)target action:(SEL)action;
+
+/**
+ *  onXXXXXX: (UIPanGestureRecognizer *)rec
+ */
+- (void)addPanGestureWithTarget:(id)target action:(SEL)action;
+
+/**
+ *  onXXXXXX: (UILongPressGestureRecognizer *)rec
+ *
+ *  rec.state, UIGestureRecognizerStateBegan, UIGestureRecognizerStateChanged, UIGestureRecognizerStateEnded
+ */
+- (void)addLongPressGestureWithTarget:(id)target action:(SEL)action;
+
+/**
+ *  @brief  添加tap手势
+ *
+ *  @param block 代码块
+ */
+- (void)addTapActionWithBlock:(UIGestureActionBlock)block;
+
+/**
+ *  @brief  添加长按手势
+ *
+ *  @param block 代码块
+ */
+- (void)addLongPressActionWithBlock:(UIGestureActionBlock)block;
+
+@end

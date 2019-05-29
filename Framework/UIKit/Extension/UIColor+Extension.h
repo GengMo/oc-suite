@@ -1,11 +1,3 @@
-//
-//  UIColor+Extension.h
-//  hairdresser
-//
-//  Created by fallen.ink on 6/8/16.
-//
-//
-
 #import <UIKit/UIKit.h>
 
 @interface UIColor ( Extension )
@@ -44,7 +36,7 @@
  *
  *  @return 渐变颜色
  */
-+ (UIColor *)gradientFromColor:(UIColor*)c1 toColor:(UIColor*)c2 withHeight:(int)height;
++ (UIColor *)gradientFromColor:(UIColor *)c1 toColor:(UIColor *)c2 withHeight:(int)height;
 
 @end
 

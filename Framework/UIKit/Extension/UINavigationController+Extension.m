@@ -1,11 +1,3 @@
-//
-//  UINavigationController+AutomaticallyDismissKeyboard.m
-//  component
-//
-//  Created by fallen.ink on 4/7/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 #import "UINavigationController+Extension.h"
 #import "UIViewController+Extension.h"
 
@@ -27,9 +19,9 @@
     return self.viewControllers.lastObject.topmostViewController ?: self;
 }
 
-- (UIViewController *)viewControllerForClass:(Class)class_ {
+- (UIViewController *)viewControllerForClass:(Class)cls {
     for (id vc in self.viewControllers) {
-        if ([vc isKindOfClass:class_]) {
+        if ([vc isKindOfClass:cls]) {
             return vc;
         }
     }

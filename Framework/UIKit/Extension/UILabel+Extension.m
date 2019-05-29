@@ -1,16 +1,33 @@
-//
-//  UILabel+Extension.m
-//  component
-//
-//  Created by fallen.ink on 4/11/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
+#import <Framework/_Foundation.h>
 #import "UILabel+Extension.h"
-#import "NSString+Size.h"
-#import "_Foundation.h"
+#import "UIString+Extension.h"
 
-@implementation UILabel ( AttributeText )
+@implementation UILabel ( Convenience )
+
++ (instancetype)instance {
+    return [self instanceWithFont:font_normal_15 color:color_black];
+}
+
++ (instancetype)instanceWithFont:(UIFont *)font color:(UIColor *)color {
+    return [self instanceWithFont:font color:color alignment:NSTextAlignmentLeft];
+}
+
++ (instancetype)instanceWithFont:(UIFont *)font color:(UIColor *)color alignment:(NSTextAlignment)alignment {
+    UILabel *label = [UILabel new];
+    label.font = font;
+    label.textColor = color;
+    label.textAlignment = alignment;
+    label.numberOfLines = 0;
+    label.lineBreakMode = NSLineBreakByTruncatingTail; // Set left words '...'
+    
+    return label;
+}
+
++ (UILabel *)cornerLabel:(UIColor *)bgColor {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    return label;
+    
+}
 
 - (void)setAttributedText:(NSString *)originText
               withKeyText:(NSString *)keyText
@@ -45,31 +62,6 @@
     
     // Normal setting
     self.text   = originText;
-}
-
-@end
-
-#pragma mark -
-
-@implementation UILabel ( Instance )
-
-+ (instancetype)instance {
-    return [self instanceWithFont:font_normal_15 color:color_black];
-}
-
-+ (instancetype)instanceWithFont:(UIFont *)font color:(UIColor *)color {
-    return [self instanceWithFont:font color:color alignment:NSTextAlignmentLeft];
-}
-
-+ (instancetype)instanceWithFont:(UIFont *)font color:(UIColor *)color alignment:(NSTextAlignment)alignment {
-    UILabel *label = [UILabel new];
-    label.font = font;
-    label.textColor = color;
-    label.textAlignment = alignment;
-    label.numberOfLines = 0;
-    label.lineBreakMode = NSLineBreakByTruncatingTail; // Set left words '...'
-    
-    return label;
 }
 
 @end
@@ -205,16 +197,4 @@
     
 }
 
-@end
-
-#pragma mark - 
-
-@implementation UILabel (Corner)
-
-+(UILabel *) cornerLabel:(UIColor *) bgColor
-{
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    return label;
-    
-}
 @end

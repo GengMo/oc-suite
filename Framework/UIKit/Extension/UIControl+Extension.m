@@ -1,121 +1,125 @@
-//
-//  UIControl+Convenience.m
-//  component
-//
-//  Created by fallen.ink on 4/7/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 #import "UIControl+Extension.h"
-#import "_Precompile.h"
+#import <objc/runtime.h>
 
-@implementation UIControl ( Target_Action )
+@interface UIControlActionBlockWrapper : NSObject
 
-- (void)removeAllTargetActionEvents {
-    [self removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+@property (nonatomic, copy) UIControlActionBlock actionBlock;
+@property (nonatomic, assign) UIControlEvents controlEvents;
+
+- (void)invokeBlock:(id)sender;
+
+@end
+
+static const void *UIControlActionBlockArray = &UIControlActionBlockArray;
+
+@implementation UIControlActionBlockWrapper
+
+- (void)invokeBlock:(id)sender {
+    if (self.actionBlock) {
+        self.actionBlock(sender);
+    }
 }
 
 @end
 
-#pragma mark -
 
-@implementation UIControl ( Event )
+// UIControlEventTouchDown           = 1 <<  0,      // on all touch downs
+// UIControlEventTouchDownRepeat     = 1 <<  1,      // on multiple touchdowns
+// (tap count > 1)
+// UIControlEventTouchDragInside     = 1 <<  2,
+// UIControlEventTouchDragOutside    = 1 <<  3,
+// UIControlEventTouchDragEnter      = 1 <<  4,
+// UIControlEventTouchDragExit       = 1 <<  5,
+// UIControlEventTouchUpInside       = 1 <<  6,
+// UIControlEventTouchUpOutside      = 1 <<  7,
+// UIControlEventTouchCancel         = 1 <<  8,
+//
+// UIControlEventValueChanged        = 1 << 12,     // sliders, etc.
+//
+// UIControlEventEditingDidBegin     = 1 << 16,     // UITextField
+// UIControlEventEditingChanged      = 1 << 17,
+// UIControlEventEditingDidEnd       = 1 << 18,
+// UIControlEventEditingDidEndOnExit = 1 << 19,     // 'return key' ending
+// editing
+//
+// UIControlEventAllTouchEvents      = 0x00000FFF,  // for touch events
+// UIControlEventAllEditingEvents    = 0x000F0000,  // for UITextField
+// UIControlEventApplicationReserved = 0x0F000000,  // range available for
+// application use
+// UIControlEventSystemReserved      = 0xF0000000,  // range reserved for
+// internal framework use
+// UIControlEventAllEvents           = 0xFFFFFFFF
 
-+ (void)load {
-    Method a = class_getInstanceMethod(self, @selector(sendAction:to:forEvent:));
-    Method b = class_getInstanceMethod(self, @selector(_sendAction:to:forEvent:));
-    method_exchangeImplementations(a, b);
+#define UICONTROL_EVENT(methodName, eventName)                                  \
+- (void)methodName:(void (^)(void))eventBlock {                                 \
+    objc_setAssociatedObject(self, @selector(methodName:), eventBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);\
+    [self addTarget:self                                                        \
+             action:@selector(methodName##Action:)                              \
+   forControlEvents:UIControlEvent##eventName];                                 \
+}                                                                               \
+- (void)methodName##Action:(id)sender {                                         \
+    void (^block)(void) = objc_getAssociatedObject(self, @selector(methodName:));   \
+    if (block) {                                                                \
+        block();                                                                \
+    }                                                                           \
 }
 
-- (void)_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
-    if (self.ignoreEvent) {
-        LOG(@"acceptEventInterval triggered!");
-        
-        return;
-    }
-    
-    if (self.acceptEventInterval > 0) {
-        self.ignoreEvent = YES;
-        [self performSelector:@selector(setIgnoreEvent:) withObject:@(NO) afterDelay:self.acceptEventInterval];
-    }
-    
-    [self _sendAction:action to:target forEvent:event];
-}
-
-#pragma mark - Property
-
-- (NSTimeInterval)acceptEventInterval {
-    return [objc_getAssociatedObject(self, _cmd) doubleValue];
-}
-
-- (void)setAcceptEventInterval:(NSTimeInterval)acceptEventInterval {
-    objc_setAssociatedObject(self, @selector(acceptEventInterval), @(acceptEventInterval), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)ignoreEvent {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
-}
-
-- (void)setIgnoreEvent:(BOOL)ignoreEvent {
-    objc_setAssociatedObject(self, @selector(ignoreEvent), @(ignoreEvent), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+@interface UIControl ()
 
 @end
 
+@implementation UIControl ( Block )
+
+UICONTROL_EVENT(touchDown, TouchDown)
+UICONTROL_EVENT(touchDownRepeat, TouchDownRepeat)
+UICONTROL_EVENT(touchDragInside, TouchDragInside)
+UICONTROL_EVENT(touchDragOutside, TouchDragOutside)
+UICONTROL_EVENT(touchDragEnter, TouchDragEnter)
+UICONTROL_EVENT(touchDragExit, TouchDragExit)
+UICONTROL_EVENT(touchUpInside, TouchUpInside)
+UICONTROL_EVENT(touchUpOutside, TouchUpOutside)
+UICONTROL_EVENT(touchCancel, TouchCancel)
+UICONTROL_EVENT(valueChanged, ValueChanged)
+UICONTROL_EVENT(editingDidBegin, EditingDidBegin)
+UICONTROL_EVENT(editingChanged, EditingChanged)
+UICONTROL_EVENT(editingDidEnd, EditingDidEnd)
+UICONTROL_EVENT(editingDidEndOnExit, EditingDidEndOnExit)
+
 #pragma mark -
 
-@implementation UIControl (JKSound)
-
-- (void)setSoundNamed:(NSString *)name forControlEvent:(UIControlEvents)controlEvent {
-    // Remove the old UI sound.
-    NSString *oldSoundKey = [NSString stringWithFormat:@"%lu", controlEvent];
-    AVAudioPlayer *oldSound = [self sounds][oldSoundKey];
-    [self removeTarget:oldSound action:@selector(play) forControlEvents:controlEvent];
+- (void)handleControlEvents:(UIControlEvents)controlEvents withBlock:(UIControlActionBlock)actionBlock {
+    NSMutableArray *actionBlocksArray = [self actionBlocksArray];
     
-    // Set appropriate category for UI sounds.
-    // Do not mute other playing audio.
-    [[AVAudioSession sharedInstance] setCategory:@"AVAudioSessionCategoryAmbient" error:nil];
+    UIControlActionBlockWrapper *blockActionWrapper = [[UIControlActionBlockWrapper alloc] init];
+    blockActionWrapper.actionBlock = actionBlock;
+    blockActionWrapper.controlEvents = controlEvents;
+    [actionBlocksArray addObject:blockActionWrapper];
     
-    // Find the sound file.
-    NSString *file = [name stringByDeletingPathExtension];
-    NSString *extension = [name pathExtension];
-    NSURL *soundFileURL = [[NSBundle mainBundle] URLForResource:file withExtension:extension];
-    
-    NSError *error = nil;
-    
-    // Create and prepare the sound.
-    AVAudioPlayer *tapSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL error:&error];
-    NSString *controlEventKey = [NSString stringWithFormat:@"%lu", controlEvent];
-    NSMutableDictionary *sounds = [self sounds];
-    [sounds setObject:tapSound forKey:controlEventKey];
-    [tapSound prepareToPlay];
-    if (!tapSound) {
-        NSLog(@"Couldn't add sound - error: %@", error);
-        return;
-    }
-    
-    // Play the sound for the control event.
-    [self addTarget:tapSound action:@selector(play) forControlEvents:controlEvent];
+    [self addTarget:blockActionWrapper action:@selector(invokeBlock:) forControlEvents:controlEvents];
 }
 
-
-#pragma mark - Associated objects setters/getters
-
-- (void)setSounds:(NSMutableDictionary *)sounds {
-    objc_setAssociatedObject(self, @selector(setSounds:), sounds, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)removeActionBlocksForControlEvents:(UIControlEvents)controlEvents {
+    NSMutableArray *actionBlocksArray = [self actionBlocksArray];
+    NSMutableArray *wrappersToRemove = [NSMutableArray arrayWithCapacity:[actionBlocksArray count]];
+    
+    [actionBlocksArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UIControlActionBlockWrapper *wrapperTmp = obj;
+        if (wrapperTmp.controlEvents == controlEvents) {
+            [wrappersToRemove addObject:wrapperTmp];
+            [self removeTarget:wrapperTmp action:@selector(invokeBlock:) forControlEvents:controlEvents];
+        }
+    }];
+    
+    [actionBlocksArray removeObjectsInArray:wrappersToRemove];
 }
 
-- (NSMutableDictionary *)sounds {
-    NSMutableDictionary *sounds = objc_getAssociatedObject(self, @selector(setSounds:));
-    
-    // If sounds is not yet created, create it.
-    if (!sounds) {
-        sounds = [[NSMutableDictionary alloc] initWithCapacity:2];
-        // Save it for later.
-        [self setSounds:sounds];
+- (NSMutableArray *)actionBlocksArray {
+    NSMutableArray *actionBlocksArray = objc_getAssociatedObject(self, UIControlActionBlockArray);
+    if (!actionBlocksArray) {
+        actionBlocksArray = [NSMutableArray array];
+        objc_setAssociatedObject(self, UIControlActionBlockArray, actionBlocksArray, OBJC_ASSOCIATION_RETAIN);
     }
-    
-    return sounds;
+    return actionBlocksArray;
 }
 
 @end

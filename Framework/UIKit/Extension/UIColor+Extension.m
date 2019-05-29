@@ -1,16 +1,8 @@
-//
-//  UIColor+Extension.m
-//  hairdresser
-//
-//  Created by fallen.ink on 6/8/16.
-//
-//
-
 #import "UIColor+Extension.h"
 
 @implementation UIColor (Extension)
 
-#pragma mark Class methods
+// MARK: - Class methods
 
 + (UIColor *)colorWithRGBHex:(UInt32)hex {
     int r = (hex >> 16) & 0xFF;
@@ -75,7 +67,7 @@
 }
 
 
-#pragma mark -
+// MARK: -
 
 + (UIColor*) getPixelColorAtLocation:(CGPoint)point inImage:(UIImage *)image {
     UIColor* color = nil;
@@ -174,14 +166,8 @@
                                      
                                      (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
     
-    if (context == NULL)
-        
-    {
-        
+    if (context == NULL) {
         free (bitmapData);
-        
-        fprintf (stderr, "Context not created!");
-        
     }
     
     CGColorSpaceRelease( colorSpace );

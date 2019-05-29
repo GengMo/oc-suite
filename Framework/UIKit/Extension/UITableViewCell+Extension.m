@@ -1,11 +1,3 @@
-//
-//  UITableViewCell+Extension.m
-//  consumer
-//
-//  Created by fallen on 16/8/23.
-//
-//
-
 #import "UITableViewCell+Extension.h"
 
 @implementation UITableViewCell (Extension)

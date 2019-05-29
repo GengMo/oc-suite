@@ -1,50 +1,6 @@
-//
-//  UIButton+Adjust.h
-//  component
-//
-//  Created by fallen.ink on 4/9/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
-@interface UIButton (Adjust)
-
-/**
- *  重新布局按钮中的图片和文字
- 
- *  space 会保持绝对居中，fallenink：还没做到！
- */
-
-- (void)centerImageAndTitle:(float)space;
-- (void)centerImageAndTitle;
-
-/**
- *  图片水平居中、居上
- *
- *  @param space 图片与文字的间距
- */
-- (void)verticalCenterAndTopImageWithSpace:(CGFloat)space;
-
-/**
- *  图片垂直居中、居左
- *
- *  @param space 图片与文字间距
- */
-- (void)horizontalCenterAndLeftImageWithSpace:(CGFloat)space;
-
-/**
- *  图片垂直居中、题目局右
- *
- *  @param space 图片与文字间距
- */
-- (void)horizontalCenterAndLeftTitleWithSpace:(CGFloat)space;
-
-@end
-
-@interface UIButton ( Setting )
-
-#pragma mark - Setter
+@interface UIButton ( Convenience )
 
 /**
  * 设置颜色
@@ -109,11 +65,26 @@
 
 @end
 
-#pragma mark - 
+//https://github.com/Phelthas/Demo_ButtonImageTitleEdgeInsets
+// 用button的titleEdgeInsets和 imageEdgeInsets属性来实现button文字图片上下或者左右排列的
+#import <UIKit/UIKit.h>
 
-@interface UIButton ( CountDown )
+typedef NS_ENUM(NSInteger, UIButtonImagePosition) {
+    UIButtonImagePositionLeft = 0,              //图片在左，文字在右，默认
+    UIButtonImagePositionRight = 1,             //图片在右，文字在左
+    UIButtonImagePositionTop = 2,               //图片在上，文字在下
+    UIButtonImagePositionBottom = 3,            //图片在下，文字在上
+};
 
-- (void)startTime:(NSInteger )timeout title:(NSString *)tittle waitTittle:(NSString *)waitTittle;
+@interface UIButton ( ImagePosition )
+
+/**
+ *  利用UIButton的titleEdgeInsets和imageEdgeInsets来实现文字和图片的自由排列
+ *  注意：这个方法需要在设置图片和文字之后才可以调用，且button的大小要大于 图片大小+文字大小+spacing
+ *
+ *  @param spacing 图片和文字的间隔
+ */
+- (void)setImagePosition:(UIButtonImagePosition)postion spacing:(CGFloat)spacing;
 
 @end
 

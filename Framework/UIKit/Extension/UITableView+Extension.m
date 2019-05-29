@@ -1,21 +1,110 @@
-//
-//  UITableView+Extension.m
-//  component
-//
-//  Created by fallen.ink on 4/13/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 #import "UITableView+Extension.h"
-#import "NSIndexPath+Extension.h"
+#import "UIIndexPath+Extension.h"
 
-@implementation UITableView (Extension)
+@implementation UITableView ( Extension )
 
-- (void)performUpdate:(TBTableUpdate *)update {
++ (instancetype)instanceWithDelegate:(id<UITableViewDelegate>)delegate dataSource:(id<UITableViewDataSource>)dataSource background:(UIColor *)background {
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    tableView.delegate = delegate;
+    tableView.dataSource = dataSource;
+    tableView.backgroundColor = background;
+    tableView.tableFooterView = [[UIView alloc] init];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    return tableView;
+}
+
+- (void)normally {
+    [self trimBlankCells];
+    
+    [self noneSeparatorHeadingMarginSpace];
+    
+    [self noneScrollIndicator];
+    
+    self.backgroundColor = [UIColor clearColor];
+}
+
+- (void)setFixedRowHeight:(CGFloat)height {
+    self.rowHeight = height;
+}
+
+- (void)trimBlankCells {
+    self.tableFooterView = [UIView new];
+}
+
+- (void)noneSeparator {
+    self.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+- (void)noneScrollIndicator {
+    self.showsVerticalScrollIndicator = NO;
+    self.showsHorizontalScrollIndicator = NO;
+}
+
+- (void)rotateToHorizontalScrollable {
+    self.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    self.decelerationRate = UIScrollViewDecelerationRateFast;
+    
+    // 关闭其他属性
+    self.scrollsToTop = NO;
+}
+
+- (void)noneSeparatorHeadingMarginSpace {
+    if ([self respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+- (void)autoEstimateRowHeightWithPrefered:(CGFloat)height {
+    self.estimatedRowHeight = 68.0;
+    self.rowHeight = UITableViewAutomaticDimension;
+}
+
+/**
+ *  -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+ [tableView deselectRowAtIndexPath:indexPath animated:true];
+ UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+ UILabel *label = [cell.contentView viewWithTag:1000];
+ [tableView beginUpdates];
+ 
+ if (label.numberOfLines == 0) {
+ label.numberOfLines = 1;
+ }else{
+ label.numberOfLines = 0;
+ }
+ 
+ [tableView endUpdates];
+ }
+ */
+- (void)updateTableViewWithIndexPath:(NSIndexPath *)indexPath handlingBlock:(ObjectBlock)handlingBlock {
+    UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+    [self beginUpdates];
+    
+    if (handlingBlock) handlingBlock(cell);
+    
+    [self endUpdates];
+}
+
+- (void)updateTableViewWithHandlingBlock:(Block)handlingBlock {
+    [self beginUpdates];
+    
+    if (handlingBlock) handlingBlock();
+    
+    [self endUpdates];
+}
+
+// MARK: -
+
+- (void)performUpdate:(UITableUpdate *)update {
     [self performUpdate:update deleteAnimation:UITableViewRowAnimationLeft insertAnimation:UITableViewRowAnimationTop];
 }
 
-- (void)performUpdate:(TBTableUpdate *)update deleteAnimation:(UITableViewRowAnimation)deleteAnimation insertAnimation:(UITableViewRowAnimation)insertAnimation {
+- (void)performUpdate:(UITableUpdate *)update deleteAnimation:(UITableViewRowAnimation)deleteAnimation insertAnimation:(UITableViewRowAnimation)insertAnimation {
     [self beginUpdates];
     [self insertRowsAtIndexPaths:update.insert withRowAnimation:insertAnimation];
     [self deleteRowsAtIndexPaths:update.remove withRowAnimation:deleteAnimation];
@@ -55,11 +144,14 @@
 
 @end
 
-#pragma mark - UITableViewDiff
+// MARK: - UITableViewDiff
+
 @interface UITableViewDiff : NSObject
+
 @property (nonatomic, readonly) NSArray *moves;      // Array of `NSMoveIndexPath`s
 @property (nonatomic, readonly) NSArray *deletions;  // array of `NSIndexPath`s
 @property (nonatomic, readonly) NSArray *insertions; // Array of `NSIndexPath`s
+
 @end
 
 @implementation UITableViewDiff
@@ -154,12 +246,9 @@
 
 @end
 
-#pragma mark - TBTableUpdate
-#pragma mark -
+// MARK: - UITableUpdate
 
-@implementation TBTableUpdate
-
-#pragma mark Initializers
+@implementation UITableUpdate
 
 + (instancetype)firstSectionInsert:(NSIndexSet *)insert delete:(NSIndexSet *)delete  moveFrom:(NSIndexSet *)from moveTo:(NSIndexSet *)to reload:(NSIndexSet *)reload {
     NSArray *removals   = [NSIndexPath indexPathsInSection:0 withIndexes:delete];
@@ -168,7 +257,7 @@
     NSArray *moveTo     = [NSIndexPath indexPathsInSection:0 withIndexes:to];
     NSArray *refreshes  = [NSIndexPath indexPathsInSection:0 withIndexes:reload];
     
-    return [[TBTableUpdate alloc] initWithInsertions:insertions andDeletions:removals andRefreshes:refreshes moveFrom:moveFrom to:moveTo];
+    return [[UITableUpdate alloc] initWithInsertions:insertions andDeletions:removals andRefreshes:refreshes moveFrom:moveFrom to:moveTo];
 }
 
 + (instancetype)updateInsert:(NSArray *)insert delete:(NSArray *)delete moveFrom:(NSArray *)from moveTo:(NSArray *)to reload:(NSArray *)reload {
@@ -221,115 +310,8 @@
         _move   = [NSMoveIndexPath movesWithInitialIndexPaths:from andFinalIndexPaths:to];
         _reload = refreshes;
     }
-    
+
     return self;
-}
-
-@end
-
-#pragma mark - 
-
-@implementation UITableView ( Config )
-
-- (void)normally {
-    [self trimBlankCells];
-    
-    [self noneSeparatorHeadingMarginSpace];
-    
-    [self noneScrollIndicator];
-    
-    self.backgroundColor = [UIColor clearColor];
-}
-
-- (void)setFixedRowHeight:(CGFloat)height {
-    self.rowHeight = height;
-}
-
-- (void)trimBlankCells {
-    self.tableFooterView = [UIView new];
-}
-
-- (void)noneSeparator {
-    self.separatorStyle = UITableViewCellSeparatorStyleNone;
-}
-
-- (void)noneScrollIndicator {
-    self.showsVerticalScrollIndicator = NO;
-    self.showsHorizontalScrollIndicator = NO;
-}
-
-- (void)rotateToHorizontalScrollable {
-    self.transform = CGAffineTransformMakeRotation(-M_PI_2);
-    self.decelerationRate = UIScrollViewDecelerationRateFast;
-    
-    // 关闭其他属性
-    self.scrollsToTop = NO;
-}
-
-- (void)noneSeparatorHeadingMarginSpace {
-    if ([self respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    if ([self respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
-
-- (void)autoEstimateRowHeightWithPrefered:(CGFloat)height {
-    self.estimatedRowHeight = 68.0;
-    self.rowHeight = UITableViewAutomaticDimension;
-}
-
-/**
- *  -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
- [tableView deselectRowAtIndexPath:indexPath animated:true];
- UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
- UILabel *label = [cell.contentView viewWithTag:1000];
- [tableView beginUpdates];
- 
- if (label.numberOfLines == 0) {
- label.numberOfLines = 1;
- }else{
- label.numberOfLines = 0;
- }
- 
- [tableView endUpdates];
- }
- */
-- (void)updateTableViewWithIndexPath:(NSIndexPath *)indexPath handlingBlock:(ObjectBlock)handlingBlock {
-    UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-    [self beginUpdates];
-    
-    if (handlingBlock) handlingBlock(cell);
-    
-    [self endUpdates];
-}
-
-- (void)updateTableViewWithHandlingBlock:(Block)handlingBlock {
-    [self beginUpdates];
-    
-    if (handlingBlock) handlingBlock();
-    
-    [self endUpdates];
-}
-
-@end
-
-#pragma mark - 
-
-@implementation UITableView ( Instance )
-
-+ (instancetype)instanceWithDelegate:(id<UITableViewDelegate>)delegate dataSource:(id<UITableViewDataSource>)dataSource background:(UIColor *)background {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    tableView.delegate = delegate;
-    tableView.dataSource = dataSource;
-    tableView.backgroundColor = background;
-    tableView.tableFooterView = [[UIView alloc] init];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    return tableView;
 }
 
 @end

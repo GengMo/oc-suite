@@ -1,18 +1,9 @@
-//
-//  UIViewController+StatusBar.m
-//  component
-//
-//  Created by fallen.ink on 4/28/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
-#import "UIViewController+Extension.h"
-#import "_precompile.h"
-#import "_foundation.h"
-#import "_frame.h"
+#import <Framework/_Foundation.h>
+#import "_Frame.h"
 #import "UIView+Extension.h"
 #import "UIButton+Extension.h"
-#import "NSString+Size.h"
+#import "UIString+Extension.h"
+#import "UIViewController+Extension.h"
 
 #pragma mark -
 

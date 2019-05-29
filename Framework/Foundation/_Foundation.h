@@ -76,7 +76,6 @@
 #import "NSDictionary+Extension.h"
 #import "NSError+Extension.h"
 #import "NSException+Extension.h"
-#import "NSIndexSet+Extension.h"
 #import "NSInvocation+Extension.h"
 #import "NSMapTable+Extension.h"
 #import "NSMutableArray+Extension.h"

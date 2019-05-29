@@ -1,11 +1,3 @@
-//
-//  UINavigationController+AutomaticallyDismissKeyboard.h
-//  component
-//
-//  Created by fallen.ink on 4/7/16.
-//  Copyright © 2016 OpenTeam. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 @interface UINavigationController (AutomaticallyDismissKeyboard)
@@ -16,6 +8,6 @@
 
 @property (nonatomic, readonly) UIViewController *topmostViewController;
 
-- (UIViewController *)viewControllerForClass:(Class)class_;
+- (UIViewController *)viewControllerForClass:(Class)cls;
 
 @end

@@ -1,11 +1,3 @@
-//
-//  UIFont+Extension.m
-//  consumer
-//
-//  Created by fallen.ink on 10/7/16.
-//
-//
-
 #import "UIFont+Extension.h"
 
 @implementation UIFont (Extension)

@@ -1,16 +1,8 @@
-//
-//  UIView+Extension.m
-//  hairdresser
-//
-//  Created by fallen.ink on 6/8/16.
-//
-//
-
 #import <OpenGLES/ES1/glext.h>
-#import "_precompile.h"
-#import "_geometry.h"
-#import "_frame.h"
-#import "_foundation.h"
+#import <QuartzCore/QuartzCore.h>
+#import "_Geometry.h"
+#import "_Frame.h"
+#import "_Foundation.h"
 #import "UIView+Extension.h"
 
 #pragma mark - 视图关系
@@ -669,16 +661,517 @@
 
 @end
 
-#pragma mark - 
+typedef NS_ENUM(NSInteger, EdgeType) {
+    TopBorder = 10000,
+    LeftBorder = 20000,
+    BottomBorder = 30000,
+    RightBorder = 40000
+};
 
-@implementation UIView ( Cookie )
+@implementation UIView ( CustomBorder )
 
-- (id)cookie {
-    return [self getAssociatedObjectForKey:"cookie"];
+- (void)removeTopBorder {
+    [self.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
+        if (subView.tag == TopBorder) {
+            [subView removeFromSuperview];
+        }
+    }];
 }
 
-- (void)setCookie:(id)cookie {
-    [self assignAssociatedObject:cookie forKey:"cookie"];
+- (void)removeLeftBorder {
+    [self.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
+        if (subView.tag == LeftBorder) {
+            [subView removeFromSuperview];
+        }
+    }];
+}
+
+- (void)removeBottomBorder {
+    [self.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
+        if (subView.tag == BottomBorder) {
+            [subView removeFromSuperview];
+        }
+    }];
+}
+
+- (void)removeRightBorder {
+    [self.subviews enumerateObjectsUsingBlock:^(UIView *subView, NSUInteger idx, BOOL *stop) {
+        if (subView.tag == RightBorder) {
+            [subView removeFromSuperview];
+        }
+    }];
+}
+
+- (void)addTopBorderWithColor:(UIColor *)color width:(CGFloat)borderWidth {
+    [self addTopBorderWithColor:color width:borderWidth excludePoint:0 edgeType:0];
+}
+
+
+- (void)addLeftBorderWithColor:(UIColor *)color width:(CGFloat)borderWidth {
+    [self addLeftBorderWithColor:color width:borderWidth excludePoint:0 edgeType:0];
+}
+
+
+- (void)addBottomBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth {
+    [self addBottomBorderWithColor:color width:borderWidth excludePoint:0 edgeType:0];
+}
+
+
+- (void)addRightBorderWithColor:(UIColor *)color width:(CGFloat)borderWidth {
+    [self addRightBorderWithColor:color width:borderWidth excludePoint:0 edgeType:0];
+}
+
+
+- (void)addTopBorderWithColor:(UIColor *)color width:(CGFloat)borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge {
+    [self removeTopBorder];
+    
+    UIView *border = [[UIView alloc] init];
+    if (!self.translatesAutoresizingMaskIntoConstraints) {
+        border.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    
+    border.userInteractionEnabled = NO;
+    border.backgroundColor = color;
+    border.tag = TopBorder;
+    
+    [self addSubview:border];
+    
+    CGFloat startPoint = 0.0f;
+    CGFloat endPoint = 0.0f;
+    if (edge & JKExcludeStartPoint) {
+        startPoint += point;
+    }
+    
+    if (edge & JKExcludeEndPoint) {
+        endPoint += point;
+    }
+    
+    if (border.translatesAutoresizingMaskIntoConstraints) {
+        CGFloat borderLenght = self.bounds.size.width - endPoint - startPoint;
+        border.frame = CGRectMake(startPoint, 0.0, borderLenght, borderWidth);
+        return;
+    }
+    
+    // AutoLayout
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:startPoint]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:-endPoint]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:borderWidth]];
+}
+
+
+- (void)addLeftBorderWithColor:(UIColor *)color width:(CGFloat)borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge {
+    [self removeLeftBorder];
+    
+    UIView *border = [[UIView alloc] init];
+    if (!self.translatesAutoresizingMaskIntoConstraints) {
+        border.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    
+    border.userInteractionEnabled = NO;
+    border.backgroundColor = color;
+    border.tag = LeftBorder;
+    [self addSubview:border];
+    
+    CGFloat startPoint = 0.0f;
+    CGFloat endPoint = 0.0f;
+    if (edge & JKExcludeStartPoint) {
+        startPoint += point;
+    }
+    
+    if (edge & JKExcludeEndPoint) {
+        endPoint += point;
+    }
+    
+    if (border.translatesAutoresizingMaskIntoConstraints) {
+        CGFloat borderLength = self.bounds.size.height - startPoint - endPoint;
+        border.frame = CGRectMake(0.0, startPoint, borderWidth, borderLength);
+        return;
+    }
+    
+    // AutoLayout
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:startPoint]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-endPoint]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:borderWidth]];
+    
+}
+
+
+- (void)addBottomBorderWithColor:(UIColor *)color width:(CGFloat)borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge {
+    [self removeBottomBorder];
+    
+    UIView *border = [[UIView alloc] init];
+    if (!self.translatesAutoresizingMaskIntoConstraints) {
+        border.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    border.userInteractionEnabled = NO;
+    border.backgroundColor = color;
+    border.tag = BottomBorder;
+    [self addSubview:border];
+    
+    CGFloat startPoint = 0.0f;
+    CGFloat endPoint = 0.0f;
+    if (edge & JKExcludeStartPoint) {
+        startPoint += point;
+    }
+    
+    if (edge & JKExcludeEndPoint) {
+        endPoint += point;
+    }
+    
+    
+    if (border.translatesAutoresizingMaskIntoConstraints) {
+        CGFloat borderLength = self.bounds.size.width - startPoint - endPoint;
+        border.frame = CGRectMake(startPoint, self.bounds.size.height - borderWidth, borderLength, borderWidth);
+        return;
+    }
+    
+    // AutoLayout
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:startPoint]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:-endPoint]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:borderWidth]];
+}
+
+- (void)addRightBorderWithColor:(UIColor *)color width:(CGFloat)borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge {
+    [self removeRightBorder];
+    
+    UIView *border = [[UIView alloc] init];
+    if (!self.translatesAutoresizingMaskIntoConstraints) {
+        border.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    border.userInteractionEnabled = NO;
+    border.backgroundColor = color;
+    border.tag = RightBorder;
+    [self addSubview:border];
+    
+    CGFloat startPoint = 0.0f;
+    CGFloat endPoint = 0.0f;
+    if (edge & JKExcludeStartPoint) {
+        startPoint += point;
+    }
+    
+    if (edge & JKExcludeEndPoint) {
+        endPoint += point;
+    }
+    
+    if (border.translatesAutoresizingMaskIntoConstraints) {
+        CGFloat borderLength = self.bounds.size.height - startPoint - endPoint;
+        border.frame = CGRectMake(self.bounds.size.width - borderWidth, startPoint, borderWidth, borderLength);
+        return;
+    }
+    
+    // AutoLayout
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:startPoint]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-endPoint]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:border attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:borderWidth]];
+}
+
+
+@end
+
+@implementation UIView ( Recursion )
+
+/**
+ *  @brief  寻找子视图
+ *
+ *  @param recurse 回调
+ *
+ *  @return  Return YES from the block to recurse into the subview.
+ Set stop to YES to return the subview.
+ */
+- (UIView *)findViewRecursively:(BOOL(^)(UIView* subview, BOOL* stop))recurse {
+    for( UIView* subview in self.subviews ) {
+        BOOL stop = NO;
+        if( recurse( subview, &stop ) ) {
+            return [subview findViewRecursively:recurse];
+        } else if( stop ) {
+            return subview;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)runBlockOnAllSubviews:(ObjectBlock)block {
+    block(self);
+    for (UIView* view in [self subviews]) {
+        [view runBlockOnAllSubviews:block];
+    }
+}
+
+- (void)runBlockOnAllSuperviews:(ObjectBlock)block {
+    block(self);
+    if (self.superview) {
+        [self.superview runBlockOnAllSuperviews:block];
+    }
+}
+
+- (void)enableAllControlsInViewHierarchy {
+    [self runBlockOnAllSubviews:^(UIView *view) {
+        
+        if ([view isKindOfClass:[UIControl class]]) {
+            [(UIControl *)view setEnabled:YES];
+        } else if ([view isKindOfClass:[UITextView class]]) {
+            [(UITextView *)view setEditable:YES];
+        }
+    }];
+}
+
+- (void)disableAllControlsInViewHierarchy {
+    [self runBlockOnAllSubviews:^(UIView *view) {
+        
+        if ([view isKindOfClass:[UIControl class]]) {
+            [(UIControl *)view setEnabled:NO];
+        } else if ([view isKindOfClass:[UITextView class]]) {
+            [(UITextView *)view setEditable:NO];
+        }
+    }];
+}
+@end
+
+@implementation UIView ( Screenshot )
+/**
+ *  @brief  view截图
+ *
+ *  @return 截图
+ */
+- (UIImage *)screenshot {
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, [UIScreen mainScreen].scale);
+    if( [self respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+        [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:NO];
+    } else {
+        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    }
+    
+    UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return screenshot;
+}
+
+- (UIImage *)takeSnapshot {
+    
+    UIGraphicsBeginImageContext(self.bounds.size);
+    
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+
+/**
+ *  @author Jakey
+ *
+ *  @brief  截图一个view中所有视图 包括旋转缩放效果
+ *
+ *  @param maxWidth    一个view
+ *  @param limitWidth 限制缩放的最大宽度 保持默认传0
+ *
+ *  @return 截图
+ */
+- (UIImage *)screenshot:(CGFloat)maxWidth {
+    CGAffineTransform oldTransform = self.transform;
+    CGAffineTransform scaleTransform = CGAffineTransformIdentity;
+    
+    //    if (!isnan(scale)) {
+    //        CGAffineTransform transformScale = CGAffineTransformMakeScale(scale, scale);
+    //        scaleTransform = CGAffineTransformConcat(oldTransform, transformScale);
+    //    }
+    if (!isnan(maxWidth) && maxWidth>0) {
+        CGFloat maxScale = maxWidth/CGRectGetWidth(self.frame);
+        CGAffineTransform transformScale = CGAffineTransformMakeScale(maxScale, maxScale);
+        scaleTransform = CGAffineTransformConcat(oldTransform, transformScale);
+    }
+    
+    if(!CGAffineTransformEqualToTransform(scaleTransform, CGAffineTransformIdentity)){
+        self.transform = scaleTransform;
+    }
+    
+    CGRect actureFrame = self.frame; //已经变换过后的frame
+    CGRect actureBounds= self.bounds;//CGRectApplyAffineTransform();
+    
+    //begin
+    UIGraphicsBeginImageContextWithOptions(actureFrame.size, NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    //    CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1, -1);
+    CGContextTranslateCTM(context,actureFrame.size.width/2, actureFrame.size.height/2);
+    CGContextConcatCTM(context, self.transform);
+    CGPoint anchorPoint = self.layer.anchorPoint;
+    CGContextTranslateCTM(context,
+                          -actureBounds.size.width * anchorPoint.x,
+                          -actureBounds.size.height * anchorPoint.y);
+    if([self respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+        [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:NO];
+    } else {
+        [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    }
+    
+    UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //end
+    self.transform = oldTransform;
+    
+    return screenshot;
+}
+@end
+
+
+@interface UIView ()
+
+@property (nonatomic, assign) BOOL ignoreSingleTapEvent;
+@property (nonatomic, assign) NSTimeInterval acceptEventInterval;
+
+@property (nonatomic, strong) NSString *singleTapActionHandlerSelector;
+@property (nonatomic, strong, readonly) NSString *singleTapSwizzleActionHandlerSelector;
+
+@end
+
+@implementation UIView (Action)
+
+#pragma mark -
+
+- (void)addTapGestureWithTarget:(id)target action:(SEL)action {
+    UITapGestureRecognizer *recog = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
+    recog.numberOfTapsRequired = 1;
+    [self setUserInteractionEnabled:YES];
+    [self addGestureRecognizer:recog];
+}
+
+- (void)addTapGestureWithTarget:(id)target action:(SEL)action acceptEventInterval:(NSTimeInterval)interval {
+    // 第一个参数：给哪个类添加方法
+    // 第二个参数：添加方法的方法编号
+    // 第三个参数：添加方法的函数实现（函数地址）
+    // 第四个参数：函数的类型，(返回值+参数类型) v:void @:对象->self :表示SEL->_cmd
+    class_addMethod(((NSObject *)target).class, NSSelectorFromString(self.singleTapSwizzleActionHandlerSelector), (IMP)onSingleTap, "v@:@");
+    
+    UITapGestureRecognizer *recog = [[UITapGestureRecognizer alloc] initWithTarget:target action:NSSelectorFromString(self.singleTapSwizzleActionHandlerSelector)];
+    recog.numberOfTapsRequired = 1;
+    [self setUserInteractionEnabled:YES];
+    [self addGestureRecognizer:recog];
+    
+    // Back up real selector
+    self.singleTapActionHandlerSelector = NSStringFromSelector(action);
+}
+
+- (void)addDoubleTapGestureWithTarget:(id)target action:(SEL)action {
+    UITapGestureRecognizer *recog = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
+    recog.numberOfTapsRequired = 2;
+    [self setUserInteractionEnabled:YES];
+    [self addGestureRecognizer:recog];
+}
+
+- (void)addPanGestureWithTarget:(id)target action:(SEL)action {
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:action];
+    [self setUserInteractionEnabled:YES];
+    [self addGestureRecognizer:pan];
+}
+
+- (void)addLongPressGestureWithTarget:(id)target action:(SEL)action {
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:target action:action];
+    [self setUserInteractionEnabled:YES];
+    [self addGestureRecognizer:longPress];
+}
+
+#pragma mark -
+
+void onSingleTap(id self, SEL sel, UITapGestureRecognizer *recognizer) {
+    UIView *view = recognizer.view;
+    
+    if (view.ignoreSingleTapEvent) {
+        LOG(@"ignoreSingleTapEvent triggered!");
+        
+        return;
+    }
+    
+    view.ignoreSingleTapEvent = YES;
+    [view performSelector:@selector(setIgnoreSingleTapEvent:) withObject:@(NO) afterDelay:1.f];
+    
+    [self performSelector:NSSelectorFromString(view.singleTapActionHandlerSelector) withObject:recognizer];
+}
+
+#pragma mark -
+
+- (BOOL)ignoreSingleTapEvent {
+    return [objc_getAssociatedObject(self, _cmd) boolValue];
+}
+
+- (void)setIgnoreSingleTapEvent:(BOOL)ignoreSingleTapEvent {
+    objc_setAssociatedObject(self, @selector(ignoreSingleTapEvent), @(ignoreSingleTapEvent), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSTimeInterval)acceptEventInterval {
+    return [objc_getAssociatedObject(self, _cmd) doubleValue];
+}
+
+- (void)setAcceptEventInterval:(NSTimeInterval)acceptEventInterval {
+    objc_setAssociatedObject(self, @selector(acceptEventInterval), @(acceptEventInterval), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSString *)singleTapSwizzleActionHandlerSelector {
+    return @"onSingleTapActionHandler:";
+}
+
+- (NSString *)singleTapActionHandlerSelector {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setSingleTapActionHandlerSelector:(NSString *)singleTapActionHandlerSelector {
+    objc_setAssociatedObject(self, @selector(singleTapActionHandlerSelector), singleTapActionHandlerSelector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+#pragma mark -
+
+- (void)addTapActionWithBlock:(UIGestureActionBlock)block {
+    self.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *gesture = objc_getAssociatedObject(self, @selector(addTapActionWithBlock:));
+    if (!gesture) {
+        gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleActionForTapGesture:)];
+        [self addGestureRecognizer:gesture];
+        objc_setAssociatedObject(self, @selector(addTapActionWithBlock:), gesture, OBJC_ASSOCIATION_RETAIN);
+    }
+    
+    objc_setAssociatedObject(self, @selector(handleActionForTapGesture:), block, OBJC_ASSOCIATION_COPY);
+}
+
+- (void)handleActionForTapGesture:(UITapGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateRecognized) {
+        UIGestureActionBlock block = objc_getAssociatedObject(self, @selector(handleActionForTapGesture:));
+        if (block) {
+            block(gesture);
+        }
+    }
+}
+
+- (void)addLongPressActionWithBlock:(UIGestureActionBlock)block {
+    self.userInteractionEnabled = YES;
+    
+    UILongPressGestureRecognizer *gesture = objc_getAssociatedObject(self, @selector(addLongPressActionWithBlock:));
+    if (!gesture) {
+        gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleActionForLongPressGesture:)];
+        [self addGestureRecognizer:gesture];
+        objc_setAssociatedObject(self, @selector(addLongPressActionWithBlock:), gesture, OBJC_ASSOCIATION_RETAIN);
+    }
+    
+    objc_setAssociatedObject(self, @selector(handleActionForLongPressGesture:), block, OBJC_ASSOCIATION_COPY);
+}
+
+- (void)handleActionForLongPressGesture:(UITapGestureRecognizer*)gesture {
+    if (gesture.state == UIGestureRecognizerStateRecognized) {
+        UIGestureActionBlock block = objc_getAssociatedObject(self, @selector(handleActionForLongPressGesture:));
+        
+        if (block) {
+            block(gesture);
+        }
+    }
 }
 
 @end
