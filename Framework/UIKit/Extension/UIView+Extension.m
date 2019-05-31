@@ -7,7 +7,7 @@
 
 #pragma mark - 视图关系
 
-@implementation UIView ( Hierarchy )
+@implementation UIView ( Extension )
 
 - (NSUInteger)getSubviewIndex {
     return [self.superview.subviews indexOfObject:self];
@@ -214,6 +214,40 @@
     }
 }
 
+- (void)runBlockOnAllSubviews:(ObjectBlock)block {
+    block(self);
+    for (UIView *view in [self subviews]) {
+        [view runBlockOnAllSubviews:block];
+    }
+}
+
+- (void)runBlockOnAllSuperviews:(ObjectBlock)block {
+    block(self);
+    if (self.superview) {
+        [self.superview runBlockOnAllSuperviews:block];
+    }
+}
+
+- (void)enableAllControlsInViewHierarchy {
+    [self runBlockOnAllSubviews:^(UIView *view) {
+        if ([view isKindOfClass:[UIControl class]]) {
+            [(UIControl *)view setEnabled:YES];
+        } else if ([view isKindOfClass:[UITextView class]]) {
+            [(UITextView *)view setEditable:YES];
+        }
+    }];
+}
+
+- (void)disableAllControlsInViewHierarchy  {
+    [self runBlockOnAllSubviews:^(UIView *view) {
+        if ([view isKindOfClass:[UIControl class]]) {
+            [(UIControl *)view setEnabled:NO];
+        } else if ([view isKindOfClass:[UITextView class]]) {
+            [(UITextView *)view setEditable:NO];
+        }
+    }];
+}
+
 - (BOOL)findAndResignFirstResponder {
     if (self.isFirstResponder) {
         [self resignFirstResponder];
@@ -256,18 +290,6 @@
     return nil;
 }
 
-
-@end
-
-#pragma mark - 构造器
-
-@implementation UIView ( Construct )
-
-+ (instancetype)viewWithBackgroundColor:(UIColor *)color {
-    UIView *view = [UIView new];
-    view.backgroundColor = color;
-    return view;
-}
 
 @end
 
@@ -487,176 +509,6 @@
     self.layer.rasterizationScale = [UIScreen mainScreen].scale; // 设置抗锯齿边缘
     
     //    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath; // UICollectionViewCell 加上这段，有问题
-}
-
-@end
-
-#pragma mark - 视图递归操作
-
-@implementation UIView (ViewRecursion)
-
-- (void)runBlockOnAllSubviews:(SubviewBlock)block {
-    block(self);
-    for (UIView *view in [self subviews]) {
-        [view runBlockOnAllSubviews:block];
-    }
-}
-
-- (void)runBlockOnAllSuperviews:(SuperviewBlock)block {
-    block(self);
-    if (self.superview) {
-        [self.superview runBlockOnAllSuperviews:block];
-    }
-}
-
-- (void)enableAllControlsInViewHierarchy {
-    [self runBlockOnAllSubviews:^(UIView *view) {
-        if ([view isKindOfClass:[UIControl class]]) {
-            [(UIControl *)view setEnabled:YES];
-        } else if ([view isKindOfClass:[UITextView class]]) {
-            [(UITextView *)view setEditable:YES];
-        }
-    }];
-}
-
-- (void)disableAllControlsInViewHierarchy  {
-    [self runBlockOnAllSubviews:^(UIView *view) {
-        if ([view isKindOfClass:[UIControl class]]) {
-            [(UIControl *)view setEnabled:NO];
-        } else if ([view isKindOfClass:[UITextView class]]) {
-            [(UITextView *)view setEditable:NO];
-        }
-    }];
-}
-
-@end
-
-#pragma mark - 
-
-#import "Masonry.h"
-
-@implementation UIView ( Decorated )
-
-- (void)mas_addRectEdgeWithStyle:(NSUInteger)style
-                       thickness:(CGFloat)thickness
-                           color:(UIColor *)color {
-    if (style & kEdgeStyleTop) {
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, thickness)];
-        line.backgroundColor = color;
-        [self addSubview:line];
-        [line bringToFront];
-        
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top).with.offset(0.f);
-            make.leading.equalTo(self.mas_leading).with.offset(0.f);
-            make.trailing.equalTo(self.mas_trailing).with.offset(0.f);
-            make.height.mas_equalTo(thickness);
-        }];
-    }
-    
-    if (style & kEdgeStyleLeft) {
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, thickness, self.height)];
-        line.backgroundColor = color;
-        [self addSubview:line];
-        [line bringToFront];
-        
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top).with.offset(0.f);
-            make.leading.equalTo(self.mas_leading).with.offset(0.f);
-            make.bottom.equalTo(self.mas_bottom).with.offset(0.f);
-            make.width.mas_equalTo(thickness);
-        }];
-    }
-    
-    if (style & kEdgeStyleBottom) {
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, self.height-1, self.width, thickness)];
-        line.backgroundColor = color;
-        [self addSubview:line];
-        [line bringToFront];
-        
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.mas_bottom).with.offset(0.f);
-            make.leading.equalTo(self.mas_leading).with.offset(0.f);
-            make.trailing.equalTo(self.mas_trailing).with.offset(0.f);
-            make.height.mas_equalTo(thickness);
-        }];
-    }
-    
-    if (style & kEdgeStyleRight) {
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(self.width-1, 0, thickness, self.height)];
-        line.backgroundColor = color;
-        [self addSubview:line];
-        [line bringToFront];
-        
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top).with.offset(0.f);
-            make.bottom.equalTo(self.mas_bottom).with.offset(0.f);
-            make.trailing.equalTo(self.mas_trailing).with.offset(0.f);
-            make.width.mas_equalTo(thickness);
-        }];
-    }
-}
-
-- (void)drawDashLineWithLength:(CGFloat)lineLength height:(CGFloat)lineHeight spacing:(CGFloat)lineSpacing color:(UIColor *)lineColor {
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    CGRect actualLineRect = CGRectMake(self.bounds.origin.x,
-                                       self.bounds.origin.y,
-                                       self.bounds.size.width,
-                                       lineHeight);
-    
-    [shapeLayer setBounds:actualLineRect];
-    [shapeLayer setPosition:CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame))];
-    [shapeLayer setFillColor:[UIColor clearColor].CGColor];
-    [shapeLayer setStrokeColor:lineColor.CGColor]; // 设置虚线颜色为blackColor
-    [shapeLayer setLineWidth:CGRectGetHeight(self.frame)]; // 设置虚线宽度
-    [shapeLayer setLineJoin:kCALineJoinRound];
-    [shapeLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:lineLength], [NSNumber numberWithInt:lineSpacing], nil]]; // 设置线宽，线间距
-    
-    CGMutablePathRef path = CGPathCreateMutable(); // 设置路径
-    CGPathMoveToPoint(path, NULL, 0, 0);
-    CGPathAddLineToPoint(path, NULL,CGRectGetWidth(self.frame), 0);
-    [shapeLayer setPath:path];
-    CGPathRelease(path);
-    
-    [self.layer addSublayer:shapeLayer]; // 把绘制好的虚线添加上来
-}
-
-- (void)drawLineWithStartPoint:(CGPoint)start endPoint:(CGPoint)end lineWidth:(CGFloat)width gap:(CGFloat)gap sectionLength:(CGFloat)length color:(UIColor *)color isVirtual:(BOOL)isVirtual {
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    [shapeLayer setBounds:self.bounds];
-    [shapeLayer setPosition:self.center];
-    [shapeLayer setFillColor:[[UIColor clearColor] CGColor]];
-    [shapeLayer setStrokeColor:color.CGColor];
-    [shapeLayer setLineWidth:width];
-    [shapeLayer setLineJoin:kCALineJoinRound];
-    if (isVirtual) { // 如果是虚线
-        [shapeLayer setLineDashPattern: [NSArray arrayWithObjects:[NSNumber numberWithFloat:length], [NSNumber numberWithFloat:gap], nil]];
-    }
-    // Setup the path
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, start.x, start.y);
-    CGPathAddLineToPoint(path, NULL, end.x, end.y);
-    
-    [shapeLayer setPath:path];
-    CGPathRelease(path);
-    
-    [self.layer addSublayer:shapeLayer];
-}
-
-- (void)renderGradientWithDisplayFrame:(CGRect)frame startPoint:(CGPoint)start endPoint:(CGPoint)end colors:(NSArray<UIColor *> *)colors locations:(NSArray<NSNumber *> *)locations {
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = frame;
-    gradient.startPoint = start;
-    gradient.endPoint = end;
-    if (colors) {
-        NSMutableArray *temp = [[NSMutableArray alloc] init];
-        for (UIColor *color in colors) {
-            [temp addObject:(id)(color.CGColor)];
-        }
-        gradient.colors = temp;
-    }
-    gradient.locations = locations;
-    [self.layer insertSublayer:gradient atIndex:0];
 }
 
 @end
@@ -964,25 +816,10 @@ typedef NS_ENUM(NSInteger, EdgeType) {
     return image;
 }
 
-
-/**
- *  @author Jakey
- *
- *  @brief  截图一个view中所有视图 包括旋转缩放效果
- *
- *  @param maxWidth    一个view
- *  @param limitWidth 限制缩放的最大宽度 保持默认传0
- *
- *  @return 截图
- */
 - (UIImage *)screenshot:(CGFloat)maxWidth {
     CGAffineTransform oldTransform = self.transform;
     CGAffineTransform scaleTransform = CGAffineTransformIdentity;
     
-    //    if (!isnan(scale)) {
-    //        CGAffineTransform transformScale = CGAffineTransformMakeScale(scale, scale);
-    //        scaleTransform = CGAffineTransformConcat(oldTransform, transformScale);
-    //    }
     if (!isnan(maxWidth) && maxWidth>0) {
         CGFloat maxScale = maxWidth/CGRectGetWidth(self.frame);
         CGAffineTransform transformScale = CGAffineTransformMakeScale(maxScale, maxScale);

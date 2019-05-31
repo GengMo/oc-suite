@@ -1,6 +1,6 @@
 #import "UIResponder+Extension.h"
 
-@implementation UIResponder ( Chain )
+@implementation UIResponder ( Extension )
 
 - (NSString *)responderChainDescription {
     NSMutableArray *responderChainStrings = [NSMutableArray array];
@@ -27,15 +27,9 @@
                                                 tabCount++;
                                             }];
     return returnString;
-}
-
-@end
-
-// MARK: - 
+} 
 
 static __weak id __currentFirstResponder;
-
-@implementation UIResponder ( FirstResponder )
 
 + (id)currentFirstResponder {
     __currentFirstResponder = nil;

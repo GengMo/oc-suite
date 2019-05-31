@@ -1,16 +1,6 @@
 #import <UIKit/UIKit.h>
 
-#pragma mark - 
-
-@interface UIViewController ( TopMost )
-
-@property (nonatomic, readonly) UIViewController *topmostViewController;
-
-@end
-
-#pragma mark -
-
-@interface UIViewController ( UINavigationBar )
+@interface UIViewController ( Extension )
 
 @property (nonatomic, strong) NSString *navTitleString;
 @property (nonatomic, strong) UIView *navTitleView;
@@ -56,32 +46,4 @@
 - (void)setNavigationBarHeightDefault;
 
 @end
-
-#pragma mark - 
-
-@interface UIViewController ( Present )
-
-- (void)presentViewControllerTransparently:(UIViewController *)viewControllerToPresent completion:(void (^)(void))completion;
-
-@end
-
-#pragma mark - 
-
-@interface UIViewController ( RecursiveDescription )
-
-/**
- *  @brief  视图层级
- *
- *  @return 视图层级字符串
- */
-- (NSString *)recursiveDescription;
-
-@end
-
-@interface UIViewController (LJ_AlertViewController)
-
--(void)lj_alertViewController:(NSString*)title message:(NSString*)message cancle:(void (^ __nullable)(UIAlertAction *action))cancleHandler confirm:(void (^ __nullable)(UIAlertAction *action))confirmHandler;
-
-@end
-
 

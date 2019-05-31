@@ -5,26 +5,10 @@
 #import "UIString+Extension.h"
 #import "UIViewController+Extension.h"
 
-#pragma mark -
-
-@implementation UIViewController ( TopMost )
-
-- (UIViewController *)topmostViewController {
-    if (self.presentedViewController) {
-        return self.presentedViewController.topmostViewController;
-    }
-    
-    return self;
-}
-
-@end
-
-#pragma mark -
-
 static const CGFloat kNavigationItemFontSize = 16.0f;
 static CGFloat kNavigationBarDefaultHeight    = 0.f;
 
-@implementation UIViewController ( UINavigationBar )
+@implementation UIViewController ( Extension )
 
 + (void)initialize {
     kNavigationBarDefaultHeight = navigation_bar_height;
@@ -405,69 +389,3 @@ static CGFloat kNavigationBarDefaultHeight    = 0.f;
 }
 
 @end
-
-#pragma mark - 
-
-@implementation UIViewController ( Present )
-
-- (void)presentViewControllerTransparently:(UIViewController *)viewControllerToPresent completion:(void (^)(void))completion {
-    UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:viewControllerToPresent];
-    if (system_version_iOS8_or_later) {
-        na.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    } else {
-        self.modalPresentationStyle = UIModalPresentationCurrentContext;
-    }
-    
-    [self presentViewController:na animated:YES completion:completion];
-}
-
-@end
-
-#pragma mark - 
-
-@implementation UIViewController ( RecursiveDescription )
-
-/**
- *  @brief  视图层级
- *
- *  @return 视图层级字符串
- */
-- (NSString *)recursiveDescription {
-    NSMutableString *description = [NSMutableString stringWithFormat:@"\n"];
-    [self addDescriptionToString:description indentLevel:0];
-    return description;
-}
-
-- (void)addDescriptionToString:(NSMutableString*)string indentLevel:(NSInteger)indentLevel {
-    NSString *padding = [@"" stringByPaddingToLength:indentLevel withString:@" " startingAtIndex:0];
-    [string appendString:padding];
-    [string appendFormat:@"%@, %@",[self debugDescription],NSStringFromCGRect(self.view.frame)];
-    
-    for (UIViewController *childController in self.childViewControllers) {
-        [string appendFormat:@"\n%@>",padding];
-        [childController addDescriptionToString:string indentLevel:indentLevel + 1];
-    }
-}
-
-
-@end
-
-@implementation UIViewController (LJ_AlertViewController)
-
--(void)lj_alertViewController:(NSString*)title message:(NSString*)message cancle:(void (^ __nullable)(UIAlertAction *action))cancleHandler confirm:(void (^ __nullable)(UIAlertAction *action))confirmHandler {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancalAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        cancleHandler(action);
-    }];
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        confirmHandler(action);
-    }];
-    
-    [alertVC addAction:cancalAction];
-    [alertVC addAction:confirmAction];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
-
-
-@end
-

@@ -2,10 +2,9 @@
 //  ViewController -> ViewModel -> DataController
 //  ViewController -> ViewModel -> Service
 
-#import "_Foundation.h"
+#import <Framework/_Foundation.h>
 
-
-@class RACSignal;
+//@class RACSignal;
 
 /**
  *  fallenink:
@@ -31,13 +30,13 @@
  * @brief 监测 'active'，from NO to YES
  * @manual 在 ViewController's viewDidAppear 更新 ‘active’，在ViewModel中监测，并更新数据
  */
-@property (nonatomic, strong, readonly) RACSignal *didBecomeActiveSignal;
+//@property (nonatomic, strong, readonly) RACSignal *didBecomeActiveSignal;
 
 /**
  * @brief 监测 'active'，from YES to NO.
  * @manual 在 ViewController's viewDidDisappear 更新 ‘active’，在ViewModel中监测，并更新策略
  */
-@property (nonatomic, strong, readonly) RACSignal *didBecomeInactiveSignal;
+//@property (nonatomic, strong, readonly) RACSignal *didBecomeInactiveSignal;
 
 @end
 

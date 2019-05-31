@@ -1,9 +1,6 @@
+#import <libkern/OSAtomic.h>
 #import "BaseViewModel.h"
 #import "BaseDataSource.h"
-
-#import <libkern/OSAtomic.h>
-#import <ReactiveObjC/RACEXTScope.h>
-#import <ReactiveObjC/ReactiveObjC.h>
 
 @interface BaseViewModel ()
 
@@ -42,57 +39,57 @@
 
 // We create many, many view models, so these properties need to be as lazy and
 // memory-conscious as possible.
-@synthesize didBecomeActiveSignal = _didBecomeActiveSignal;
-@synthesize didBecomeInactiveSignal = _didBecomeInactiveSignal;
+//@synthesize didBecomeActiveSignal = _didBecomeActiveSignal;
+//@synthesize didBecomeInactiveSignal = _didBecomeInactiveSignal;
 
-- (void)setActive:(BOOL)active {
-    // Skip KVO notifications when the property hasn't actually changed. This is
-    // especially important because self.active can have very expensive
-    // observers attached.
-    if (active == _active) return;
+//- (void)setActive:(BOOL)active {
+//    // Skip KVO notifications when the property hasn't actually changed. This is
+//    // especially important because self.active can have very expensive
+//    // observers attached.
+//    if (active == _active) return;
+//
+//    [self willChangeValueForKey:@keypath(self.active)];
+//    _active = active;
+//    [self didChangeValueForKey:@keypath(self.active)];
+//}
 
-    [self willChangeValueForKey:@keypath(self.active)];
-    _active = active;
-    [self didChangeValueForKey:@keypath(self.active)];
-}
+//- (RACSignal *)didBecomeActiveSignal {
+//    if (_didBecomeActiveSignal == nil) {
+//        @weakify(self);
+//
+//        _didBecomeActiveSignal = [[[RACObserve(self, active)
+//            filter:^(NSNumber *active) {
+//                return active.boolValue;
+//            }]
+//            map:^(id _) {
+//                @strongify(self);
+//                return self;
+//            }]
+//            setNameWithFormat:@"%@ -didBecomeActiveSignal", self];
+//    }
+//
+//    return _didBecomeActiveSignal;
+//}
 
-- (RACSignal *)didBecomeActiveSignal {
-    if (_didBecomeActiveSignal == nil) {
-        @weakify(self);
+//- (RACSignal *)didBecomeInactiveSignal {
+//    if (_didBecomeInactiveSignal == nil) {
+//        @weakify(self);
+//
+//        _didBecomeInactiveSignal = [[[RACObserve(self, active)
+//            filter:^ BOOL (NSNumber *active) {
+//                return !active.boolValue;
+//            }]
+//            map:^(id _) {
+//                @strongify(self);
+//                return self;
+//            }]
+//            setNameWithFormat:@"%@ -didBecomeInactiveSignal", self];
+//    }
+//
+//    return _didBecomeInactiveSignal;
+//}
 
-        _didBecomeActiveSignal = [[[RACObserve(self, active)
-            filter:^(NSNumber *active) {
-                return active.boolValue;
-            }]
-            map:^(id _) {
-                @strongify(self);
-                return self;
-            }]
-            setNameWithFormat:@"%@ -didBecomeActiveSignal", self];
-    }
-
-    return _didBecomeActiveSignal;
-}
-
-- (RACSignal *)didBecomeInactiveSignal {
-    if (_didBecomeInactiveSignal == nil) {
-        @weakify(self);
-
-        _didBecomeInactiveSignal = [[[RACObserve(self, active)
-            filter:^ BOOL (NSNumber *active) {
-                return !active.boolValue;
-            }]
-            map:^(id _) {
-                @strongify(self);
-                return self;
-            }]
-            setNameWithFormat:@"%@ -didBecomeInactiveSignal", self];
-    }
-
-    return _didBecomeInactiveSignal;
-}
-
-#pragma mark NSKeyValueObserving
+// MARK: - NSKeyValueObserving
 
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
     // We'll generate notifications for this property manually.
@@ -106,7 +103,7 @@
 
 @end
 
-#pragma mark -
+// MARK: -
 
 @implementation UIViewController ( ViewModel )
 

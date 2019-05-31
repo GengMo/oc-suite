@@ -1,8 +1,9 @@
 #import <UIKit/UIKit.h>
+#import <Framework/_Foundation.h>
 
 #pragma mark - 视图关系
 
-@interface UIView ( Hierarchy )
+@interface UIView ( Extension )
 
 - (NSUInteger)getSubviewIndex;
 
@@ -30,22 +31,26 @@
 - (UIView *)firstSubviewOfClass:(Class)classObj; // 按类型取第一个子视图（所有层次，深度优先，不包含自身）
 - (NSMutableArray *)allViewOfClass:(Class)viewClass; // 按类型过滤所有视图（所有层次，深度优先，包含自身）
 
-- (UIViewController *)firstTopViewController;
-
-#pragma mark - 
-
+/**
+ *  @brief  寻找子视图
+ *
+ *  @param recurse 回调
+ *
+ *  @return  Return YES from the block to recurse into the subview.
+ Set stop to YES to return the subview.
+ */
+- (id)findViewRecursively:(BOOL(^)(UIView* subview, BOOL* stop))recurse;
 - (id)findSuperViewWithSuperViewClass:(Class)clazz; // 找到指定类名的SuperView对象
+
+- (void)runBlockOnAllSubviews:(ObjectBlock)block;
+- (void)runBlockOnAllSuperviews:(ObjectBlock)block;
+- (void)enableAllControlsInViewHierarchy;
+- (void)disableAllControlsInViewHierarchy;
+
 - (BOOL)findAndResignFirstResponder; // 找到并且resign第一响应者
 - (UIView *)findFirstResponder; // 找到第一响应者
+- (UIViewController *)firstTopViewController;
 @property (readonly) UIViewController *viewController; //找到当前view所在的viewcontroler
-
-@end
-
-#pragma mark - 构造器
-
-@interface UIView ( Construct )
-
-+ (instancetype)viewWithBackgroundColor:(UIColor *)color;
 
 @end
 
@@ -111,69 +116,6 @@
 
 @end
 
-#pragma mark - 视图递归操作
-
-typedef void (^SubviewBlock) (UIView *view);
-typedef void (^SuperviewBlock) (UIView *superview);
-
-@interface UIView (ViewRecursion)
-
-- (void)runBlockOnAllSubviews:(SubviewBlock)block;
-- (void)runBlockOnAllSuperviews:(SuperviewBlock)block;
-- (void)enableAllControlsInViewHierarchy;
-- (void)disableAllControlsInViewHierarchy;
-
-@end
-
-#pragma mark - 加特技
-
-typedef NS_ENUM(NSUInteger, EdgeStyle) {
-    kEdgeStyleTop       = 1,
-    kEdgeStyleLeft      = 2,
-    kEdgeStyleBottom    = 4,
-    kEdgeStyleRight     = 8,
-};
-
-@interface UIView ( Decorated )
-
-// 结合masonry自动布局，给UIView加边缘（单色，不支持渐变）
-- (void)mas_addRectEdgeWithStyle:(NSUInteger)style
-                       thickness:(CGFloat)thickness
-                           color:(UIColor *)color;
-
-/**
- * lineView:       需要绘制成虚线的view
- * lineLength:     虚线的宽度
- * lineSpacing:    虚线的间距
- * lineColor:      虚线的颜色
- */
-- (void)drawDashLineWithLength:(CGFloat)lineLength height:(CGFloat)lineHeight spacing:(CGFloat)lineSpacing color:(UIColor *)lineColor;
-
-/**
- *  在view上画线
- *
- *  @param start     起始点
- *  @param end       结束点
- *  @param width     宽度
- *  @param gap       虚线的间隔
- *  @param length    长度
- *  @param color     颜色
- *  @param isVirtual 是否虚线
- */
-- (void)drawLineWithStartPoint:(CGPoint)start endPoint:(CGPoint)end lineWidth:(CGFloat)width gap:(CGFloat)gap sectionLength:(CGFloat)length color:(UIColor *)color isVirtual:(BOOL)isVirtual;
-/**
- *  为view渲染渐变色背景
- *
- *  @param frame     显示的区域
- *  @param start     渐变起始点
- *  @param end       渐变结束点
- *  @param colors    颜色
- *  @param locations 渐变关键点
- */
-- (void)renderGradientWithDisplayFrame:(CGRect)frame startPoint:(CGPoint)start endPoint:(CGPoint)end colors:(NSArray<UIColor *> *)colors locations:(NSArray<NSNumber *> *)locations;
-
-@end
-
 /**
  * 视图添加边框
  */
@@ -205,26 +147,6 @@ typedef NS_OPTIONS(NSUInteger, JKExcludePoint) {
 - (void)addBottomBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge;
 - (void)addRightBorderWithColor:(UIColor *)color width:(CGFloat) borderWidth excludePoint:(CGFloat)point edgeType:(JKExcludePoint)edge;
 @end
-
-@interface UIView ( Recursion )
-
-/**
- *  @brief  寻找子视图
- *
- *  @param recurse 回调
- *
- *  @return  Return YES from the block to recurse into the subview.
- Set stop to YES to return the subview.
- */
-- (UIView *)findViewRecursively:(BOOL(^)(UIView* subview, BOOL* stop))recurse;
-
-- (void)runBlockOnAllSubviews:(ObjectBlock)block;
-- (void)runBlockOnAllSuperviews:(ObjectBlock)block;
-- (void)enableAllControlsInViewHierarchy;
-- (void)disableAllControlsInViewHierarchy;
-
-@end
-
 
 @interface UIView ( Screenshot )
 /**
@@ -279,15 +201,11 @@ typedef void (^UIGestureActionBlock)(UIGestureRecognizer *gestureRecoginzer);
 
 /**
  *  @brief  添加tap手势
- *
- *  @param block 代码块
  */
 - (void)addTapActionWithBlock:(UIGestureActionBlock)block;
 
 /**
  *  @brief  添加长按手势
- *
- *  @param block 代码块
  */
 - (void)addLongPressActionWithBlock:(UIGestureActionBlock)block;
 
