@@ -45,5 +45,7 @@
 - (void)setNavigationBarHeight:(CGFloat)height;
 - (void)setNavigationBarHeightDefault;
 
+@property (nonatomic, readonly) UIViewController *topMostViewController;
+
 @end
 

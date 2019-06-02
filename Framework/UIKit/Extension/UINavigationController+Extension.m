@@ -11,12 +11,12 @@
 
 @implementation UINavigationController (Finder)
 
-- (UIViewController *)topmostViewController {
+- (UIViewController *)topMostViewController {
     if (self.presentedViewController) {
-        return self.presentedViewController.topmostViewController;
+        return self.presentedViewController.topMostViewController;
     }
     
-    return self.viewControllers.lastObject.topmostViewController ?: self;
+    return self.viewControllers.lastObject.topMostViewController ?: self;
 }
 
 - (UIViewController *)viewControllerForClass:(Class)cls {

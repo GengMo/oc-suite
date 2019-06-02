@@ -1,14 +1,6 @@
-//
-//  ShareParamBuilder.m
-//  component
-//
-//  Created by fallen.ink on 12/21/15.
-//  Copyright © 2015 OpenTeam. All rights reserved.
-//
-
+#import <Framework/_Foundation.h>
 #import "ShareParamBuilder.h"
 #import "ShareHelper.h"
-#import "_date.h"
 
 @interface ShareParamBuilder ()
 

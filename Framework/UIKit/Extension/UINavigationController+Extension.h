@@ -6,7 +6,7 @@
 
 @interface UINavigationController (Finder)
 
-@property (nonatomic, readonly) UIViewController *topmostViewController;
+@property (nonatomic, readonly) UIViewController *topMostViewController;
 
 - (UIViewController *)viewControllerForClass:(Class)cls;
 

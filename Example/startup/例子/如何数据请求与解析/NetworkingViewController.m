@@ -12,7 +12,7 @@
 
 @interface NetworkingViewController ()
 
-@property (nonatomic, strong) _NetRestful *net;
+@property (nonatomic, strong) _NetJsonRPC *net;
 
 @end
 
@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.net = [[_NetRestful alloc] initWithHostname:@"daily.api-eyas.alisports.com" paramEncoding:NetRequestParameterEncodingJSON secure:NO];
+    self.net = [[_NetJsonRPC alloc] initWithHostname:@"daily.api-eyas.alisports.com" paramEncoding:NetRequestParameterEncodingJSON secure:NO];
     self.net.headerAppendHandler = ^NSDictionary *(NSString *apiname) {
         NSString *token = cacheInst[@"token"];
         NSString *uid = cacheInst[@"uid"];

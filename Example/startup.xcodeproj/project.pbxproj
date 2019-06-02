@@ -14,6 +14,9 @@
 		6A682489227989B500A37CCF /* CircleProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A682487227989B500A37CCF /* CircleProgressViewController.xib */; };
 		6A6824952279B61200A37CCF /* WaveProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6824932279B61200A37CCF /* WaveProgressViewController.m */; };
 		6A6824962279B61200A37CCF /* WaveProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6824942279B61200A37CCF /* WaveProgressViewController.xib */; };
+		6A75A20422A3A9EB00BE3E2B /* HtmlParseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A75A20222A3A9EB00BE3E2B /* HtmlParseViewController.m */; };
+		6A75A20522A3A9EB00BE3E2B /* HtmlParseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A75A20322A3A9EB00BE3E2B /* HtmlParseViewController.xib */; };
+		6A75A21122A3B6CB00BE3E2B /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A75A20F22A3B6CB00BE3E2B /* libxml2.tbd */; };
 		6AC7784C22427E680000F5B1 /* ImagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783422427E680000F5B1 /* ImagingViewController.m */; };
 		6AC7784D22427E680000F5B1 /* ImagingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AC7783522427E680000F5B1 /* ImagingViewController.xib */; };
 		6AC7784E22427E680000F5B1 /* NetworkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC7783A22427E680000F5B1 /* NetworkingViewController.m */; };
@@ -242,6 +245,10 @@
 		6A6824922279B61200A37CCF /* WaveProgressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveProgressViewController.h; sourceTree = "<group>"; };
 		6A6824932279B61200A37CCF /* WaveProgressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaveProgressViewController.m; sourceTree = "<group>"; };
 		6A6824942279B61200A37CCF /* WaveProgressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaveProgressViewController.xib; sourceTree = "<group>"; };
+		6A75A20122A3A9EB00BE3E2B /* HtmlParseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HtmlParseViewController.h; sourceTree = "<group>"; };
+		6A75A20222A3A9EB00BE3E2B /* HtmlParseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HtmlParseViewController.m; sourceTree = "<group>"; };
+		6A75A20322A3A9EB00BE3E2B /* HtmlParseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HtmlParseViewController.xib; sourceTree = "<group>"; };
+		6A75A20F22A3B6CB00BE3E2B /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		6AC7783422427E680000F5B1 /* ImagingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagingViewController.m; sourceTree = "<group>"; };
 		6AC7783522427E680000F5B1 /* ImagingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagingViewController.xib; sourceTree = "<group>"; };
 		6AC7783622427E680000F5B1 /* ImagingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagingViewController.h; sourceTree = "<group>"; };
@@ -502,6 +509,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A75A21122A3B6CB00BE3E2B /* libxml2.tbd in Frameworks */,
 				86C368B520D55AA200A6C5B9 /* CoreFoundation.framework in Frameworks */,
 				86C368B620D55AA200A6C5B9 /* Foundation.framework in Frameworks */,
 				86C368B720D55AA200A6C5B9 /* AVFoundation.framework in Frameworks */,
@@ -555,6 +563,16 @@
 			path = "如果画波浪形进度";
 			sourceTree = "<group>";
 		};
+		6A75A1FB22A3A9B200BE3E2B /* 如何在线解析HTML */ = {
+			isa = PBXGroup;
+			children = (
+				6A75A20122A3A9EB00BE3E2B /* HtmlParseViewController.h */,
+				6A75A20222A3A9EB00BE3E2B /* HtmlParseViewController.m */,
+				6A75A20322A3A9EB00BE3E2B /* HtmlParseViewController.xib */,
+			);
+			path = "如何在线解析HTML";
+			sourceTree = "<group>";
+		};
 		6AAB430222406BEB00953283 /* Module */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +583,7 @@
 		6AC7783222427E680000F5B1 /* 例子 */ = {
 			isa = PBXGroup;
 			children = (
+				6A75A1FB22A3A9B200BE3E2B /* 如何在线解析HTML */,
 				6A6824902279B5F200A37CCF /* 如果画波浪形进度 */,
 				6A6824832279898B00A37CCF /* 如何画圆形进度 */,
 				6A4F58302264AE8A00B7B104 /* 如何使用红点视图 */,
@@ -1109,6 +1128,7 @@
 		867128B31FEFE9C2004F2DC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A75A20F22A3B6CB00BE3E2B /* libxml2.tbd */,
 				863D3CC920D88AEB008275FE /* libc++.1.tbd */,
 				863D3CC620D88ACE008275FE /* libz.1.1.3.tbd */,
 				86C368B420D55AA200A6C5B9 /* AVFoundation.framework */,
@@ -1274,6 +1294,7 @@
 				862CB08C1FF110EC0059E3A9 /* ZSSfonts@2x.png in Resources */,
 				862CB0981FF110EC0059E3A9 /* ZSSh5@2x.png in Resources */,
 				862CAFD91FF0FCB80059E3A9 /* CYLoLi.png in Resources */,
+				6A75A20522A3A9EB00BE3E2B /* HtmlParseViewController.xib in Resources */,
 				862CB0BF1FF110ED0059E3A9 /* ZSSsuperscript.png in Resources */,
 				862CB0951FF110EC0059E3A9 /* ZSSh4.png in Resources */,
 				862CB0A01FF110EC0059E3A9 /* ZSSimageDevice@2x.png in Resources */,
@@ -1362,7 +1383,6 @@
 				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/../../Framework/Component/FiniteScrollView/ZYBannerView.bundle",
 				"${PODS_ROOT}/../../Framework/Component/ProgressHUD/SVProgressHUD.bundle",
-				"${PODS_ROOT}/../../Framework/Component/RefreshView/MJRefresh.bundle",
 				"${PODS_ROOT}/../../Framework/Module/Browser/web.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Framework/MapImages.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Framework/MapXibs.bundle",
@@ -1396,7 +1416,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZYBannerView.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/web.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MapImages.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MapXibs.bundle",
@@ -1458,6 +1477,7 @@
 				862CB0DD1FF110ED0059E3A9 /* HRColorCursor.m in Sources */,
 				862CB07B1FF110EC0059E3A9 /* ZSSColorViewController.m in Sources */,
 				862CAFA01FF0F7850059E3A9 /* TYImageCache.m in Sources */,
+				6A75A20422A3A9EB00BE3E2B /* HtmlParseViewController.m in Sources */,
 				6A6824952279B61200A37CCF /* WaveProgressViewController.m in Sources */,
 				862CAFE21FF0FCB80059E3A9 /* LinkTextViewController.m in Sources */,
 				862CB0E71FF1112D0059E3A9 /* RichTextEditorSampleVC.m in Sources */,
@@ -1668,6 +1688,23 @@
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/Framework\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMBase64\"",
+					"\"${PODS_ROOT}/Headers/Public/JPush\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/ReactiveObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/TZImagePickerController\"",
+					"\"${PODS_ROOT}/Headers/Public/UMengFeedback\"",
+					"\"${PODS_ROOT}/Headers/Public/UMengUShare\"",
+					"\"${PODS_ROOT}/Headers/Public/UnionPay\"",
+					"\"${PODS_ROOT}/Headers/Public/YYModel\"",
+					"${SDKROOT}/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = startup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1689,6 +1726,23 @@
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/Framework\"",
+					"\"${PODS_ROOT}/Headers/Public/GTMBase64\"",
+					"\"${PODS_ROOT}/Headers/Public/JPush\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/ReactiveObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/TZImagePickerController\"",
+					"\"${PODS_ROOT}/Headers/Public/UMengFeedback\"",
+					"\"${PODS_ROOT}/Headers/Public/UMengUShare\"",
+					"\"${PODS_ROOT}/Headers/Public/UnionPay\"",
+					"\"${PODS_ROOT}/Headers/Public/YYModel\"",
+					"${SDKROOT}/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = startup/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

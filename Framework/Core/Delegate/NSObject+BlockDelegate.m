@@ -264,7 +264,7 @@ typedef _DynamicDelegate *(^A2GetDynamicDelegateBlock)(NSObject *, BOOL);
 
 		IMP getterImplementation = imp_implementationWithBlock(^(NSObject *delegatingObject) {
 			_DynamicDelegate *delegate = getDynamicDelegate(delegatingObject, protocol, info, NO);
-			return [delegate blockImplementationForMethod:selector];
+			return [delegate implFor:selector];
 		});
 
 		if (!class_addMethod(self, getter, getterImplementation, "@@:")) {
@@ -273,7 +273,7 @@ typedef _DynamicDelegate *(^A2GetDynamicDelegateBlock)(NSObject *, BOOL);
 
 		IMP setterImplementation = imp_implementationWithBlock(^(NSObject *delegatingObject, id block) {
 			_DynamicDelegate *delegate = getDynamicDelegate(delegatingObject, protocol, info, YES);
-			[delegate implementMethod:selector withBlock:block];
+			[delegate impl:selector with:block];
 		});
 
 		if (!class_addMethod(self, setter, setterImplementation, "v@:@")) {

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'Framework'
-  s.version          = '1.0.4'
+  s.version          = '1.0.10'
   s.summary          = 'iOS 开发包 [Objective-C]'
   s.description      = <<-DESC
                        iOS 开发包 [Objective-C]
@@ -48,6 +48,12 @@ Pod::Spec.new do |s|
 
     core.subspec 'Delegate' do |del|
       del.source_files = 'Framework/Core/Delegate/**/*.{h,m}'
+    end
+
+    core.subspec 'HtmlParser' do |htmlparser|
+      htmlparser.source_files = 'Framework/Core/HtmlParser/**/*.{h,m}'
+      htmlparser.xcconfig = { 'HEADER_SEARCH_PATHS' => '"${SDKROOT}/usr/include/libxml2"' }
+      htmlparser.libraries = "iconv", "xml2"
     end
 
     core.subspec 'HttpMock' do |httpmock|
@@ -266,6 +272,9 @@ Pod::Spec.new do |s|
   ###
   s.subspec 'Component' do |comp|
 
+    comp.subspec 'AnimatedImage' do |animatedimage|
+      animatedimage.source_files = "Framework/Component/AnimatedImage/**/*.{h,m}"
+    end
     comp.subspec 'Animation' do |animation|
       animation.source_files = "Framework/Component/Animation/**/*.{h,m}"
     end

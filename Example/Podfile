@@ -13,12 +13,13 @@ target 'startup' do
     pod 'Framework/Core/NetworkLit', :path => '../'
     pod 'Framework/Core/Network/Reachability', :path => '../'
     pod 'Framework/Core/Cache', :path => '../'
-    pod 'Framework/Core/Date', :path => '../'
 
     pod 'Framework/Core/HttpMock', :path => '../'
     pod 'Framework/Core/Chronograph', :path => '../'
     pod 'Framework/Core/CountDown', :path => '../'
     pod 'Framework/Core/Delegate', :path => '../'
+    pod 'Framework/Core/HtmlParser', :path => '../'
+    
   
     # 模块
     pod 'Framework/Module/App', :path => '../'
@@ -40,6 +41,7 @@ target 'startup' do
     # UI 组件
     ######################################
     
+    pod 'Framework/Component/AnimatedImage', :path => '../'
     pod 'Framework/Component/ActionSheetView', :path => '../'
     pod 'Framework/Component/AlertView', :path => '../'
     pod 'Framework/Component/BadgeView', :path => '../'

@@ -388,4 +388,12 @@ static CGFloat kNavigationBarDefaultHeight    = 0.f;
     [self setNavItem:navRightButtonItem.customView hidden:hidden animate:animate];
 }
 
+- (UIViewController *)topMostViewController {
+    if (self.presentedViewController) {
+        return self.presentedViewController.topMostViewController;
+    }
+    
+    return self;
+}
+
 @end

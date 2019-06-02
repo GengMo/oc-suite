@@ -19,6 +19,7 @@
 #import "BadgeViewController.h"
 #import "CircleProgressViewController.h"
 #import "WaveProgressViewController.h"
+#import "HtmlParseViewController.h"
 
 @interface MainViewController () <TZImagePickerControllerDelegate>
 
@@ -104,6 +105,10 @@
 
 - (IBAction)onWaveProgressView:(id)sender {
     [self push:[WaveProgressViewController new]];
+}
+
+- (IBAction)onHTMLParseView:(id)sender {
+    [self push:[HtmlParseViewController new]];
 }
 
 @end

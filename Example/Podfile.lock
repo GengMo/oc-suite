@@ -21,58 +21,59 @@ PODS:
     - AMapFoundation (~> 1.4)
   - AMapSearch (6.6.0):
     - AMapFoundation (~> 1.4)
-  - Framework/Component/ActionSheetView (1.0.0)
-  - Framework/Component/AlertView (1.0.0)
-  - Framework/Component/BadgeView (1.0.0)
-  - Framework/Component/BlankHolderView (1.0.0)
-  - Framework/Component/CycleScrollView (1.0.0)
-  - Framework/Component/DatePickerView (1.0.0)
-  - Framework/Component/DropDownMenu (1.0.0)
-  - Framework/Component/FiniteScrollView (1.0.0)
-  - Framework/Component/FlatActionSheetView (1.0.0)
-  - Framework/Component/IndicatorView (1.0.0)
-  - Framework/Component/InfiniteScrollView (1.0.0)
-  - Framework/Component/KeyboardControl (1.0.0)
-  - Framework/Component/LaunchAdView (1.0.0)
-  - Framework/Component/LoadableImageView (1.0.0)
-  - Framework/Component/LocalImageBrowser (1.0.0)
-  - Framework/Component/LocalImageEditableBrowserView (1.0.0)
-  - Framework/Component/PopupView (1.0.0)
-  - Framework/Component/PopViewController (1.0.0)
-  - Framework/Component/ProgressHUD (1.0.0)
-  - Framework/Component/ProgressView (1.0.0)
-  - Framework/Component/RateView (1.0.0)
-  - Framework/Component/RefreshView (1.0.0)
-  - Framework/Component/SegmentControl (1.0.0)
-  - Framework/Component/SegmentView (1.0.0)
-  - Framework/Component/TagsView (1.0.0)
-  - Framework/Component/UserGuideView (1.0.0)
-  - Framework/Component/WaterFallView (1.0.0)
-  - Framework/Core/Cache (1.0.0)
-  - Framework/Core/Chronograph (1.0.0)
-  - Framework/Core/CountDown (1.0.0)
-  - Framework/Core/Date (1.0.0)
-  - Framework/Core/Delegate (1.0.0)
-  - Framework/Core/HttpMock (1.0.0)
-  - Framework/Core/Modular (1.0.0)
-  - Framework/Core/Network/Reachability (1.0.0)
-  - Framework/Core/NetworkLit (1.0.0)
-  - Framework/Foundation (1.0.0)
-  - Framework/Module/APNS (1.0.0):
+  - Framework/Component/ActionSheetView (1.0.8)
+  - Framework/Component/AlertView (1.0.8)
+  - Framework/Component/AnimatedImage (1.0.8)
+  - Framework/Component/BadgeView (1.0.8)
+  - Framework/Component/BlankHolderView (1.0.8)
+  - Framework/Component/CycleScrollView (1.0.8)
+  - Framework/Component/DatePickerView (1.0.8)
+  - Framework/Component/DropDownMenu (1.0.8)
+  - Framework/Component/FiniteScrollView (1.0.8)
+  - Framework/Component/FlatActionSheetView (1.0.8)
+  - Framework/Component/IndicatorView (1.0.8)
+  - Framework/Component/InfiniteScrollView (1.0.8)
+  - Framework/Component/KeyboardControl (1.0.8)
+  - Framework/Component/LaunchAdView (1.0.8)
+  - Framework/Component/LoadableImageView (1.0.8)
+  - Framework/Component/LocalImageBrowser (1.0.8)
+  - Framework/Component/LocalImageEditableBrowserView (1.0.8)
+  - Framework/Component/PopupView (1.0.8)
+  - Framework/Component/PopViewController (1.0.8)
+  - Framework/Component/ProgressHUD (1.0.8)
+  - Framework/Component/ProgressView (1.0.8)
+  - Framework/Component/RateView (1.0.8)
+  - Framework/Component/RefreshView (1.0.8)
+  - Framework/Component/SegmentControl (1.0.8)
+  - Framework/Component/SegmentView (1.0.8)
+  - Framework/Component/TagsView (1.0.8)
+  - Framework/Component/UserGuideView (1.0.8)
+  - Framework/Component/WaterFallView (1.0.8)
+  - Framework/Core/Cache (1.0.8)
+  - Framework/Core/Chronograph (1.0.8)
+  - Framework/Core/CountDown (1.0.8)
+  - Framework/Core/Delegate (1.0.8)
+  - Framework/Core/HtmlParser (1.0.8)
+  - Framework/Core/HttpMock (1.0.8)
+  - Framework/Core/Modular (1.0.8)
+  - Framework/Core/Network/Reachability (1.0.8)
+  - Framework/Core/NetworkLit (1.0.8)
+  - Framework/Foundation (1.0.8)
+  - Framework/Module/APNS (1.0.8):
     - JPush
-  - Framework/Module/App (1.0.0)
-  - Framework/Module/Assets (1.0.0)
-  - Framework/Module/Browser (1.0.0)
-  - Framework/Module/Growth (1.0.0)
-  - Framework/Module/Image (1.0.0)
-  - Framework/Module/Location (1.0.0)
-  - Framework/Module/Map (1.0.0):
+  - Framework/Module/App (1.0.8)
+  - Framework/Module/Assets (1.0.8)
+  - Framework/Module/Browser (1.0.8)
+  - Framework/Module/Growth (1.0.8)
+  - Framework/Module/Image (1.0.8)
+  - Framework/Module/Location (1.0.8)
+  - Framework/Module/Map (1.0.8):
     - AMap3DMap
     - AMapLocation
     - AMapSearch
-  - Framework/Module/QRCode (1.0.0)
-  - Framework/Module/Share (1.0.0)
-  - Framework/Module/SNS (1.0.0):
+  - Framework/Module/QRCode (1.0.8)
+  - Framework/Module/Share (1.0.8)
+  - Framework/Module/SNS (1.0.8):
     - UMengAnalytics-NO-IDFA (= 4.1.5)
     - UMengFeedback (~> 2.3.4)
     - UMengUShare/Core (= 6.4.8)
@@ -109,7 +110,7 @@ PODS:
     - UMengUShare/Social/YiXin
     - UMengUShare/Social/YouDao
     - UMengUShare/UI
-  - Framework/UIKit (1.0.0)
+  - Framework/UIKit (1.0.8)
   - GTMBase64 (1.0.1)
   - JCore (2.0.1)
   - JPush (3.2.0):
@@ -201,6 +202,7 @@ DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - Framework/Component/ActionSheetView (from `../`)
   - Framework/Component/AlertView (from `../`)
+  - Framework/Component/AnimatedImage (from `../`)
   - Framework/Component/BadgeView (from `../`)
   - Framework/Component/BlankHolderView (from `../`)
   - Framework/Component/CycleScrollView (from `../`)
@@ -229,8 +231,8 @@ DEPENDENCIES:
   - Framework/Core/Cache (from `../`)
   - Framework/Core/Chronograph (from `../`)
   - Framework/Core/CountDown (from `../`)
-  - Framework/Core/Date (from `../`)
   - Framework/Core/Delegate (from `../`)
+  - Framework/Core/HtmlParser (from `../`)
   - Framework/Core/HttpMock (from `../`)
   - Framework/Core/Modular (from `../`)
   - Framework/Core/Network/Reachability (from `../`)
@@ -287,7 +289,7 @@ SPEC CHECKSUMS:
   AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
   AMapLocation: 89a7e4eb6040d32ba73c77a4966ecc66e46aa7c3
   AMapSearch: def5983c8ca1a6d7430970046dc814f6e337621d
-  Framework: 8479d5dd7f4625089c982fd83d53a73bdcfe6eb8
+  Framework: 834f03c3e74b77091460b48f6812dec90e875d58
   GTMBase64: f0f91be06a7a20b84c8e4fee30c0430395091d82
   JCore: 8425fb3f85f1400f9bc8ccf8121cd5694a790f3b
   JPush: 8459e7a709ad86f95884fcb49cbd57a6da24744e
@@ -301,6 +303,6 @@ SPEC CHECKSUMS:
   UnionPay: 6294ba89de917e0d0db30c0ff0fbaa4e9beef587
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: ae5ca77802ff10a7aede6b3b4e6ee841adcb38af
+PODFILE CHECKSUM: 93587ced1e8dd5e3bb918458b95b3981690ab166
 
 COCOAPODS: 1.7.0.beta.2

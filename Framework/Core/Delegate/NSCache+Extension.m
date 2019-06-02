@@ -16,7 +16,7 @@
 	if (realDelegate && [realDelegate respondsToSelector:@selector(cache:willEvictObject:)])
 		[realDelegate cache:cache willEvictObject:obj];
 
-	void (^orig)(NSCache *, id) = [self blockImplementationForMethod:_cmd];
+	void (^orig)(NSCache *, id) = [self implFor:_cmd];
 	if (orig) orig(cache, obj);
 }
 

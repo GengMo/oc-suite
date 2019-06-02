@@ -6,11 +6,11 @@
 //  Copyright © 2019 7. All rights reserved.
 //
 
-#import "_NetRestful.h"
+#import "_NetJsonRPC.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ApiClient : _NetRestful
+@interface ApiClient : _NetJsonRPC
 
 @end
 
