@@ -2,11 +2,11 @@
 #import <Foundation/Foundation.h>
 #import "NSDictionary+Extension.h"
 
-#pragma mark -
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableDictionary (Extension)
 
-+ (NSMutableDictionary *)nonRetainingDictionary;
++ (NSMutableDictionary *_Nullable)nonRetainingDictionary;
 + (NSMutableDictionary *)keyValues:(id)first, ...;
 
 - (BOOL)setObject:(NSObject *)obj atPath:(NSString *)path;
@@ -19,10 +19,6 @@
 //- (NSString *)stringForOneOfKeys:(NSArray *)array remove:(BOOL)flag;
 
 @end
-
-#pragma mark -
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface __GENERICS(NSMutableDictionary, KeyType, ObjectType) (Function)
 

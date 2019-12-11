@@ -75,3 +75,13 @@ typedef enum {
 
 - (void)flush;
 @end
+
+// MARK: - 打印辅助
+
+@interface NSDictionary ( Logger )
+- (NSString *)descriptionWithLocale:(nullable id)locale indent:(NSUInteger)level;
+@end
+
+@interface NSArray ( Logger )
+- (NSString *)descriptionWithLocale:(nullable id)locale indent:(NSUInteger)level;
+@end

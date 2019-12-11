@@ -156,16 +156,13 @@ void dumpClass(Class cls) {
     
     baseClass = baseClass ?: [NSObject class];
     
-    while ( NULL != thisClass )
-    {
+    while ( NULL != thisClass ) {
         unsigned int	methodCount = 0;
         Method *		methodList = class_copyMethodList( thisClass, &methodCount );
         
-        for ( unsigned int i = 0; i < methodCount; ++i )
-        {
+        for ( unsigned int i = 0; i < methodCount; ++i ) {
             SEL selector = method_getName( methodList[i] );
-            if ( selector )
-            {
+            if ( selector ) {
                 const char * cstrName = sel_getName(selector);
                 if ( NULL == cstrName )
                     continue;
@@ -182,8 +179,7 @@ void dumpClass(Class cls) {
         
         thisClass = class_getSuperclass( thisClass );
         
-        if ( nil == thisClass || baseClass == thisClass )
-        {
+        if ( nil == thisClass || baseClass == thisClass ) {
             break;
         }
     }
@@ -474,28 +470,29 @@ void dumpClass(Class cls) {
     return array;
 }
 
+/**
+ * 相关数据结构：Method, IMP, SEL, NSMethodSignature
+ */
 + (NSArray *)methodsInfo {
     u_int               count;
     NSMutableArray *methodList = [NSMutableArray array];
-    Method *methods= class_copyMethodList([self class], &count);
+    Method *methods = class_copyMethodList([self class], &count);
     for (int i = 0; i < count ; i++) {
         NSMutableDictionary *info = [NSMutableDictionary dictionary];
         
         Method method = methods[i];
-        //        IMP imp = method_getImplementation(method);
-        SEL name = method_getName(method);
-        // 返回方法的参数的个数
-        int argumentsCount = method_getNumberOfArguments(method);
-        //获取描述方法参数和返回值类型的字符串
-        const char *encoding =method_getTypeEncoding(method);
-        //取方法的返回值类型的字符串
-        const char *returnType =method_copyReturnType(method);
         
+        IMP imp = method_getImplementation(method); // 方法实现
+        SEL name = method_getName(method); // 方法名
+        const char *nameAddr = (void *)name;
+        int argumentsCount = method_getNumberOfArguments(method); // 方法参数个数
+        const char *encoding = method_getTypeEncoding(method); // 方法入参描述
+        const char *returnType = method_copyReturnType(method); // 方法出参描述
+
         NSMutableArray *arguments = [NSMutableArray array];
         for (int index=0; index<argumentsCount; index++) {
-            // 获取方法的指定位置参数的类型字符串
-            char *arg =   method_copyArgumentType(method,index);
-            //            NSString *argString = [NSString stringWithCString:arg encoding:NSUTF8StringEncoding];
+            char *arg = method_copyArgumentType(method,index);
+            NSString *argString = [NSString stringWithCString:arg encoding:NSUTF8StringEncoding];
             [arguments addObject:[[self class] decodeType:arg]];
         }
         
@@ -508,7 +505,8 @@ void dumpClass(Class cls) {
         [info setObject:returnTypeString forKey:@"returnType"];
         [info setObject:encodeString forKey:@"encode"];
         [info setObject:nameString forKey:@"name"];
-        //        [info setObject:imp_f forKey:@"imp"];
+        [info setObject:@((int64_t)nameAddr) forKey:@"nameAddr"];
+//        [info setObject:imp forKey:@"imp"];
         [methodList addObject:info];
     }
     free(methods);
