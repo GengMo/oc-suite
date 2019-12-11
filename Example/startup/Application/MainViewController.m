@@ -20,6 +20,7 @@
 #import "CircleProgressViewController.h"
 #import "WaveProgressViewController.h"
 #import "HtmlParseViewController.h"
+#import "CategoryVC.h"
 
 @interface MainViewController () <TZImagePickerControllerDelegate>
 
@@ -109,6 +110,10 @@
 
 - (IBAction)onHTMLParseView:(id)sender {
     [self push:[HtmlParseViewController new]];
+}
+
+- (IBAction)onTestCategory:(id)sender {
+    [self push:[CategoryVC new]];
 }
 
 @end

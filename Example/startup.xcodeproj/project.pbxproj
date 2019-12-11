@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A30444B239F4B0700C02F04 /* CategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A304449239F4B0700C02F04 /* CategoryVC.m */; };
+		6A30444C239F4B0700C02F04 /* CategoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A30444A239F4B0700C02F04 /* CategoryVC.xib */; };
 		6A4F58352264AEAB00B7B104 /* BadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F58332264AEAB00B7B104 /* BadgeViewController.m */; };
 		6A4F58362264AEAB00B7B104 /* BadgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4F58342264AEAB00B7B104 /* BadgeViewController.xib */; };
 		6A515BD52251E9D400A56F8D /* WechatLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A515BD42251E9D400A56F8D /* WechatLoginViewController.m */; };
@@ -234,6 +236,9 @@
 
 /* Begin PBXFileReference section */
 		187BC9D8B69BAE8514205CE2 /* Pods-startup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-startup.release.xcconfig"; path = "Pods/Target Support Files/Pods-startup/Pods-startup.release.xcconfig"; sourceTree = "<group>"; };
+		6A304448239F4B0700C02F04 /* CategoryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryVC.h; sourceTree = "<group>"; };
+		6A304449239F4B0700C02F04 /* CategoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryVC.m; sourceTree = "<group>"; };
+		6A30444A239F4B0700C02F04 /* CategoryVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryVC.xib; sourceTree = "<group>"; };
 		6A4F58322264AEAB00B7B104 /* BadgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BadgeViewController.h; sourceTree = "<group>"; };
 		6A4F58332264AEAB00B7B104 /* BadgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BadgeViewController.m; sourceTree = "<group>"; };
 		6A4F58342264AEAB00B7B104 /* BadgeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BadgeViewController.xib; sourceTree = "<group>"; };
@@ -524,6 +529,104 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A30443B239F4AE300C02F04 /* 研究 */ = {
+			isa = PBXGroup;
+			children = (
+				6A30443C239F4AE300C02F04 /* 音视频 */,
+				6A30443D239F4AE300C02F04 /* 锁 */,
+				6A30443E239F4AE300C02F04 /* 方法交换 */,
+				6A30443F239F4AE300C02F04 /* 离屏渲染 */,
+				6A304440239F4AE300C02F04 /* 分类 */,
+				6A304441239F4AE300C02F04 /* 事件循环 */,
+				6A304442239F4AE300C02F04 /* 自动释放池 */,
+				6A304443239F4AE300C02F04 /* 定时器 */,
+				6A304444239F4AE300C02F04 /* 图形图像 */,
+				6A304445239F4AE300C02F04 /* 操作序列 */,
+				6A304446239F4AE300C02F04 /* 对象内存模型 */,
+			);
+			path = "研究";
+			sourceTree = "<group>";
+		};
+		6A30443C239F4AE300C02F04 /* 音视频 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "音视频";
+			sourceTree = "<group>";
+		};
+		6A30443D239F4AE300C02F04 /* 锁 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "锁";
+			sourceTree = "<group>";
+		};
+		6A30443E239F4AE300C02F04 /* 方法交换 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "方法交换";
+			sourceTree = "<group>";
+		};
+		6A30443F239F4AE300C02F04 /* 离屏渲染 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "离屏渲染";
+			sourceTree = "<group>";
+		};
+		6A304440239F4AE300C02F04 /* 分类 */ = {
+			isa = PBXGroup;
+			children = (
+				6A304448239F4B0700C02F04 /* CategoryVC.h */,
+				6A304449239F4B0700C02F04 /* CategoryVC.m */,
+				6A30444A239F4B0700C02F04 /* CategoryVC.xib */,
+			);
+			path = "分类";
+			sourceTree = "<group>";
+		};
+		6A304441239F4AE300C02F04 /* 事件循环 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "事件循环";
+			sourceTree = "<group>";
+		};
+		6A304442239F4AE300C02F04 /* 自动释放池 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "自动释放池";
+			sourceTree = "<group>";
+		};
+		6A304443239F4AE300C02F04 /* 定时器 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "定时器";
+			sourceTree = "<group>";
+		};
+		6A304444239F4AE300C02F04 /* 图形图像 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "图形图像";
+			sourceTree = "<group>";
+		};
+		6A304445239F4AE300C02F04 /* 操作序列 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "操作序列";
+			sourceTree = "<group>";
+		};
+		6A304446239F4AE300C02F04 /* 对象内存模型 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "对象内存模型";
+			sourceTree = "<group>";
+		};
 		6A4F58302264AE8A00B7B104 /* 如何使用红点视图 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1181,7 @@
 		86711C6B1FECF8E2004F2DC0 /* startup */ = {
 			isa = PBXGroup;
 			children = (
+				6A30443B239F4AE300C02F04 /* 研究 */,
 				6AC7783222427E680000F5B1 /* 例子 */,
 				6AAB430222406BEB00953283 /* Module */,
 				866974E620F743130094C32B /* Support */,
@@ -1293,6 +1397,7 @@
 				862CB0D21FF110ED0059E3A9 /* 76.png in Resources */,
 				862CB08C1FF110EC0059E3A9 /* ZSSfonts@2x.png in Resources */,
 				862CB0981FF110EC0059E3A9 /* ZSSh5@2x.png in Resources */,
+				6A30444C239F4B0700C02F04 /* CategoryVC.xib in Resources */,
 				862CAFD91FF0FCB80059E3A9 /* CYLoLi.png in Resources */,
 				6A75A20522A3A9EB00BE3E2B /* HtmlParseViewController.xib in Resources */,
 				862CB0BF1FF110ED0059E3A9 /* ZSSsuperscript.png in Resources */,
@@ -1499,6 +1604,7 @@
 				862CAF861FF0F7850059E3A9 /* AttributeLabelSampleVC.m in Sources */,
 				862CAFA51FF0F7850059E3A9 /* TYTextStorage.m in Sources */,
 				862CAFD51FF0FCB80059E3A9 /* TYTextStorageParser.m in Sources */,
+				6A30444B239F4B0700C02F04 /* CategoryVC.m in Sources */,
 				86711C901FECFA89004F2DC0 /* AppDelegate.m in Sources */,
 				862CB0821FF110EC0059E3A9 /* ZSSSelectiveViewController.m in Sources */,
 				862CAFE31FF0FCB80059E3A9 /* ParseTextViewController.m in Sources */,
